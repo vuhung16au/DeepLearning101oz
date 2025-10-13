@@ -3,6 +3,19 @@
 \section{Numerical Stability and Conditioning}
 \label{sec:numerical-stability}
 
+\subsection{Intuition: The Butterfly Effect in Computation}
+
+Imagine a house of cards. A tiny breeze can cause the entire structure to collapse. In numerical computation, we have a similar problem: small errors can grow into large ones.
+
+This is especially problematic in deep learning because:
+\begin{itemize}
+    \item \textbf{Deep networks} have many layers - errors compound
+    \item \textbf{Matrix operations} can amplify small errors
+    \item \textbf{Gradient computation} requires precise derivatives
+\end{itemize}
+
+The \textbf{condition number} tells us how "sensitive" a computation is to small changes. A high condition number means small input errors become large output errors.
+
 \subsection{Condition Number}
 
 The \textbf{condition number} of matrix $\mat{A}$ is:
@@ -18,6 +31,33 @@ For symmetric matrices with eigenvalues $\lambda_i$:
 \end{equation}
 
 High condition numbers indicate numerical instability: small changes in input lead to large changes in output.
+
+\subsubsection{Example: Well-Conditioned vs Ill-Conditioned Matrices}
+
+Consider two matrices:
+\begin{align}
+\mat{A}_1 &= \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix} \quad \text{(well-conditioned)} \\
+\mat{A}_2 &= \begin{bmatrix} 1 & 0.99 \\ 0.99 & 1 \end{bmatrix} \quad \text{(ill-conditioned)}
+\end{align}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={Input Error},
+    ylabel={Output Error},
+    width=10cm,
+    height=6cm,
+    legend pos=north west
+]
+\addplot[blue, thick] {x};
+\addplot[red, thick] {10*x};
+\legend{Well-conditioned, Ill-conditioned}
+\end{axis}
+\end{tikzpicture}
+\caption{Error amplification for well-conditioned vs ill-conditioned matrices}
+\label{fig:condition-number}
+\end{figure}
 
 \subsection{Ill-Conditioned Matrices}
 

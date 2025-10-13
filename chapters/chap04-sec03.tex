@@ -3,6 +3,24 @@
 \section{Constrained Optimization}
 \label{sec:constrained-optimization}
 
+\subsection{Intuition: Optimization with Rules}
+
+Imagine you're trying to find the best location for a new store, but you have constraints:
+\begin{itemize}
+    \item Must be within 5 miles of the city center
+    \item Must have parking for at least 50 cars
+    \item Budget cannot exceed \$1 million
+\end{itemize}
+
+You can't just pick any location - you must follow these rules while still optimizing your objective (like maximizing customer traffic).
+
+In deep learning, we often have similar constraints:
+\begin{itemize}
+    \item \textbf{Weight constraints}: Keep weights small to prevent overfitting
+    \item \textbf{Probability constraints}: Outputs must sum to 1 (like softmax)
+    \item \textbf{Fairness constraints}: Model must treat different groups equally
+\end{itemize}
+
 Many problems require optimizing a function subject to constraints.
 
 \subsection{Lagrange Multipliers}
