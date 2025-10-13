@@ -1,16 +1,18 @@
 # Makefile for Deep Learning 101 Book
 
-.PHONY: help pdf pdf-a4 pdf-a5 all clean
+.PHONY: help pdf pdf-a4 pdf-a5 all clean glossary index
 
 # Default target
 help:
 	@echo "Deep Learning 101 Book - Build targets:"
-	@echo "  make help    - Show this help"
-	@echo "  make pdf     - Build the complete book PDF (A5 paper)"
-	@echo "  make pdf-a4  - Build the complete book PDF (A4 paper)"
-	@echo "  make pdf-a5  - Build the complete book PDF (A5 paper)"
-	@echo "  make all     - Clean and build both A4 and A5 versions"
-	@echo "  make clean   - Remove build artifacts"
+	@echo "  make help     - Show this help"
+	@echo "  make pdf      - Build the complete book PDF (A5 paper)"
+	@echo "  make pdf-a4   - Build the complete book PDF (A4 paper)"
+	@echo "  make pdf-a5   - Build the complete book PDF (A5 paper)"
+	@echo "  make all      - Clean and build both A4 and A5 versions"
+	@echo "  make glossary - Update the glossary"
+	@echo "  make index    - Update the index"
+	@echo "  make clean    - Remove build artifacts"
 
 # Default PDF target (A5)
 pdf: pdf-a5
@@ -52,6 +54,20 @@ main-a5.pdf: main.tex chapters/*.tex
 	@echo "Pass 6: Final compilation..."
 	@pdflatex -interaction=nonstopmode -halt-on-error -jobname=main-a5 "\def\papersize{a5paper}\input{main.tex}" > /dev/null || (cat main-a5.log && exit 1)
 	@echo "Book compiled successfully: main-a5.pdf"
+
+# Update glossary
+glossary:
+	@echo "Updating glossary..."
+	@makeglossaries main-a4 > /dev/null || true
+	@makeglossaries main-a5 > /dev/null || true
+	@echo "Glossary updated successfully!"
+
+# Update index
+index:
+	@echo "Updating index..."
+	@makeindex main-a4 > /dev/null || true
+	@makeindex main-a5 > /dev/null || true
+	@echo "Index updated successfully!"
 
 # Build both versions
 all: clean pdf-a4 pdf-a5
