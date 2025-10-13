@@ -3,56 +3,168 @@
 \section{Linear Regression}
 \label{sec:linear-regression}
 
-\textbf{Linear regression} models the relationship between input features and a continuous output.
+\textbf{Linear regression} is one of the most fundamental and widely-used machine learning algorithms. It models the relationship between input features and a continuous output by finding the best linear function that minimizes prediction errors.
+
+\subsection{Intuition and Motivation}
+
+Imagine you're trying to predict house prices based on features like size, number of bedrooms, and location. Linear regression assumes that the price can be expressed as a weighted sum of these features plus a base price (bias). The algorithm learns the optimal weights that best explain the relationship between features and prices in your training data.
+
+The key insight is that linear relationships are often sufficient for many real-world problems, and they have several advantages:
+\begin{itemize}
+    \item \textbf{Interpretability:} Each weight tells us how much the output changes when a feature increases by one unit
+    \item \textbf{Computational efficiency:} Fast training and prediction
+    \item \textbf{Statistical properties:} Well-understood theoretical guarantees
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+    xlabel={House Size (sq ft)},
+    ylabel={Price (\$1000s)},
+    title={Linear Regression Example: House Price Prediction},
+    grid=major,
+    width=10cm,
+    height=6cm
+]
+% Generate some sample data points
+\addplot[only marks, mark=*, mark size=2pt, color=bookpurple] coordinates {
+    (1000, 200) (1200, 250) (1400, 300) (1600, 350) (1800, 400)
+    (2000, 450) (2200, 500) (2400, 550) (2600, 600) (2800, 650)
+};
+% Add regression line
+\addplot[thick, color=bookred, domain=800:3000] {0.2*x + 50};
+\node at (axis cs:2500,400) [anchor=west] {$\hat{y} = 0.2x + 50$};
+\end{axis}
+\end{tikzpicture}
+\caption{Linear regression finds the best line that fits the data points, minimizing the sum of squared errors.}
+\label{fig:linear-regression-example}
+\end{figure}
 
 \subsection{Model Formulation}
 
-For input $\vect{x} \in \mathbb{R}^d$ and output $y \in \mathbb{R}$:
+For input $\vect{x} \in \mathbb{R}^d$ and output $y \in \mathbb{R}$, linear regression models the relationship as:
 
 \begin{equation}
 \hat{y} = \vect{w}^\top \vect{x} + b
 \end{equation}
 
-where $\vect{w}$ are weights and $b$ is the bias.
+where:
+\begin{itemize}
+    \item $\vect{w} \in \mathbb{R}^d$ are the \textbf{weights} (regression coefficients)
+    \item $b \in \mathbb{R}$ is the \textbf{bias} (intercept term)
+    \item $\hat{y}$ is the predicted output
+\end{itemize}
 
 \subsection{Ordinary Least Squares}
 
-The \textbf{mean squared error} (MSE) loss is:
+The goal is to find parameters that minimize the prediction error. We use the \textbf{mean squared error} (MSE) as our loss function:
 
 \begin{equation}
-L(\vect{w}, b) = \frac{1}{n} \sum_{i=1}^{n} (y^{(i)} - \hat{y}^{(i)})^2
+L(\vect{w}, b) = \frac{1}{n} \sum_{i=1}^{n} (y^{(i)} - \hat{y}^{(i)})^2 = \frac{1}{n} \sum_{i=1}^{n} (y^{(i)} - \vect{w}^\top \vect{x}^{(i)} - b)^2
 \end{equation}
 
-The closed-form solution (using matrix form with bias absorbed) is:
+\subsubsection{Matrix Formulation}
+
+For computational efficiency, we can absorb the bias into the weight vector by adding a constant feature of 1 to each input. Let $\mat{X} \in \mathbb{R}^{n \times (d+1)}$ be the design matrix with an additional column of ones, and $\vect{w} \in \mathbb{R}^{d+1}$ include the bias term.
+
+The closed-form solution (normal equation) is:
 
 \begin{equation}
 \vect{w}^* = (\mat{X}^\top \mat{X})^{-1} \mat{X}^\top \vect{y}
 \end{equation}
 
+\begin{remark}
+The normal equation requires $\mat{X}^\top \mat{X}$ to be invertible. This condition is satisfied when the features are linearly independent and we have at least as many training examples as features.
+\end{remark}
+
 \subsection{Regularized Regression}
 
-\textbf{Ridge regression} (L2 regularization) adds a penalty:
+When we have many features or when features are correlated, the normal equation can become unstable. Regularization helps by adding a penalty term to prevent overfitting.
+
+\subsubsection{Ridge Regression (L2 Regularization)}
+
+\textbf{Ridge regression} adds an L2 penalty to the loss function:
 
 \begin{equation}
 L(\vect{w}) = \|\mat{X}\vect{w} - \vect{y}\|^2 + \lambda \|\vect{w}\|^2
 \end{equation}
 
-Solution:
+The solution becomes:
 \begin{equation}
 \vect{w}^* = (\mat{X}^\top \mat{X} + \lambda \mat{I})^{-1} \mat{X}^\top \vect{y}
 \end{equation}
 
-\textbf{Lasso regression} (L1 regularization) promotes sparsity:
+where $\lambda > 0$ is the regularization strength.
+
+\begin{example}
+For a simple 2D case with features $x_1$ and $x_2$, ridge regression finds:
+$$\hat{y} = w_1 x_1 + w_2 x_2 + b$$
+The L2 penalty $\lambda(w_1^2 + w_2^2)$ encourages smaller weights, leading to a smoother, more stable solution.
+\end{example}
+
+\subsubsection{Lasso Regression (L1 Regularization)}
+
+\textbf{Lasso regression} uses L1 regularization, which promotes sparsity:
 
 \begin{equation}
 L(\vect{w}) = \|\mat{X}\vect{w} - \vect{y}\|^2 + \lambda \|\vect{w}\|_1
 \end{equation}
 
+Unlike ridge regression, lasso can drive some weights to exactly zero, effectively performing automatic feature selection.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.7]
+\begin{axis}[
+    xlabel={Regularization Strength ($\lambda$)},
+    ylabel={Weight Magnitude},
+    title={Regularization Effect on Weights},
+    grid=major,
+    width=10cm,
+    height=6cm,
+    legend pos=north east
+]
+% Ridge regression path
+\addplot[thick, color=bookpurple, domain=0:2] {1/(1+x)};
+\addplot[thick, color=bookred, domain=0:2] {max(0, 1-x)};
+\legend{Ridge (L2), Lasso (L1)}
+\end{axis}
+\end{tikzpicture}
+\caption{Comparison of L1 and L2 regularization effects. L1 can drive weights to zero, while L2 shrinks them smoothly.}
+\label{fig:regularization-comparison}
+\end{figure}
+
 \subsection{Gradient Descent Solution}
 
-For large datasets, we use iterative optimization:
+For large datasets, computing the inverse of $\mat{X}^\top \mat{X}$ can be computationally expensive. Gradient descent provides an iterative alternative:
 
 \begin{equation}
-\vect{w}_{t+1} = \vect{w}_t - \alpha \frac{2}{n} \mat{X}^\top (\mat{X}\vect{w}_t - \vect{y})
+\vect{w}_{t+1} = \vect{w}_t - \alpha \nabla_{\vect{w}} L(\vect{w}_t)
 \end{equation}
+
+where the gradient is:
+\begin{equation}
+\nabla_{\vect{w}} L(\vect{w}) = \frac{2}{n} \mat{X}^\top (\mat{X}\vect{w} - \vect{y})
+\end{equation}
+
+\subsubsection{Stochastic Gradient Descent}
+
+For very large datasets, we can use stochastic gradient descent (SGD), which updates weights using only a subset of the data at each iteration:
+
+\begin{equation}
+\vect{w}_{t+1} = \vect{w}_t - \alpha \nabla_{\vect{w}} L_i(\vect{w}_t)
+\end{equation}
+
+where $L_i$ is the loss for a single training example or a small batch.
+
+\subsection{Geometric Interpretation}
+
+Linear regression can be understood geometrically as finding the projection of the target vector $\vect{y}$ onto the column space of the design matrix $\mat{X}$. The residual vector $\vect{y} - \mat{X}\vect{w}^*$ is orthogonal to the column space of $\mat{X}$.
+
+\begin{theorem}[Orthogonality Principle]
+The optimal solution $\vect{w}^*$ satisfies:
+$$\mat{X}^\top(\vect{y} - \mat{X}\vect{w}^*) = \vect{0}$$
+This means the residual vector is orthogonal to all feature vectors.
+\end{theorem}
 

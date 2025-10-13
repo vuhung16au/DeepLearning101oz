@@ -3,7 +3,50 @@
 \section{Support Vector Machines}
 \label{sec:svm}
 
-\textbf{Support Vector Machines} (SVMs) find the maximum-margin hyperplane separating classes.
+\textbf{Support Vector Machines} (SVMs) are powerful classification algorithms that find the optimal hyperplane that maximally separates different classes. The key insight is to maximize the margin between classes, leading to better generalization performance.
+
+\subsection{Intuition and Motivation}
+
+Imagine you have two groups of points on a plane that you want to separate with a line. There are many possible lines that could separate them, but SVM finds the line that maximizes the distance to the nearest points from each class. This "maximum margin" approach leads to better generalization because the decision boundary is as far as possible from both classes.
+
+The key concepts are:
+\begin{itemize}
+    \item \textbf{Support vectors:} The training examples closest to the decision boundary
+    \item \textbf{Margin:} The distance between the decision boundary and the nearest support vectors
+    \item \textbf{Maximum margin principle:} Choose the hyperplane that maximizes this margin
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+    xlabel={Feature 1},
+    ylabel={Feature 2},
+    title={SVM: Maximum Margin Classification},
+    grid=major,
+    width=10cm,
+    height=8cm
+]
+% Generate some sample data
+\addplot[only marks, mark=*, mark size=3pt, color=bookpurple] coordinates {
+    (1,1) (1.5,1.5) (2,1) (2.5,2) (3,1.5)
+};
+\addplot[only marks, mark=square*, mark size=3pt, color=bookred] coordinates {
+    (2,3) (2.5,3.5) (3,3) (3.5,3.5) (4,3)
+};
+% Add decision boundary and margins
+\addplot[thick, color=bookblack, domain=0:5] {3-x};
+\addplot[dashed, color=bookpurple, domain=0:5] {3-x+1};
+\addplot[dashed, color=bookred, domain=0:5] {3-x-1};
+\node at (axis cs:2.5,2.5) [anchor=west] {Decision boundary};
+\node at (axis cs:2.5,3.5) [anchor=west] {Margin};
+\node at (axis cs:2.5,1.5) [anchor=west] {Margin};
+\legend{Class -1, Class +1, Decision boundary, Margins}
+\end{axis}
+\end{tikzpicture}
+\caption{SVM finds the hyperplane (line in 2D) that maximizes the margin between classes. The support vectors are the points closest to the decision boundary.}
+\label{fig:svm-margin}
+\end{figure}
 
 \subsection{Linear SVM}
 
@@ -13,15 +56,36 @@ For binary classification with labels $y \in \{-1, +1\}$, the decision boundary 
 \vect{w}^\top \vect{x} + b = 0
 \end{equation}
 
-The \textbf{margin} is $\frac{2}{\|\vect{w}\|}$. Maximizing the margin is equivalent to minimizing $\|\vect{w}\|^2$ subject to:
+The \textbf{margin} is the distance between the decision boundary and the nearest support vectors. For a point $\vect{x}^{(i)}$, the distance to the hyperplane is:
+
+\begin{equation}
+\text{distance} = \frac{|y^{(i)}(\vect{w}^\top \vect{x}^{(i)} + b)|}{\|\vect{w}\|}
+\end{equation}
+
+Since we want to maximize the margin, we can set the margin to be $\frac{2}{\|\vect{w}\|}$ by requiring:
 
 \begin{equation}
 y^{(i)}(\vect{w}^\top \vect{x}^{(i)} + b) \geq 1 \quad \forall i
 \end{equation}
 
+\subsubsection{Optimization Problem}
+
+Maximizing the margin is equivalent to minimizing $\|\vect{w}\|^2$ subject to the constraints:
+
+\begin{equation}
+\min_{\vect{w}, b} \frac{1}{2}\|\vect{w}\|^2
+\end{equation}
+
+subject to:
+\begin{equation}
+y^{(i)}(\vect{w}^\top \vect{x}^{(i)} + b) \geq 1 \quad \forall i
+\end{equation}
+
+This is a quadratic programming problem that can be solved using Lagrange multipliers.
+
 \subsection{Soft Margin SVM}
 
-To handle non-separable data, we introduce slack variables $\xi_i$:
+In practice, data is rarely linearly separable. The \textbf{soft margin SVM} allows some training examples to be misclassified by introducing slack variables $\xi_i$:
 
 \begin{equation}
 \min_{\vect{w}, b, \boldsymbol{\xi}} \frac{1}{2}\|\vect{w}\|^2 + C \sum_{i=1}^{n} \xi_i
@@ -32,21 +96,126 @@ subject to:
 y^{(i)}(\vect{w}^\top \vect{x}^{(i)} + b) \geq 1 - \xi_i, \quad \xi_i \geq 0
 \end{equation}
 
-$C$ controls the trade-off between margin size and training errors.
-
-\subsection{Kernel Trick}
-
-For non-linear decision boundaries, we map inputs to a higher-dimensional space using a \textbf{kernel function} $k(\vect{x}, \vect{x}')$:
-
-\textbf{Common kernels:}
+The parameter $C$ controls the trade-off between:
 \begin{itemize}
-    \item \textbf{Linear:} $k(\vect{x}, \vect{x}') = \vect{x}^\top \vect{x}'$
-    \item \textbf{Polynomial:} $k(\vect{x}, \vect{x}') = (\vect{x}^\top \vect{x}' + c)^d$
-    \item \textbf{RBF (Gaussian):} $k(\vect{x}, \vect{x}') = \exp(-\gamma \|\vect{x} - \vect{x}'\|^2)$
+    \item \textbf{Large margin:} Small $C$ allows more slack, larger margin
+    \item \textbf{Training accuracy:} Large $C$ penalizes misclassifications more heavily
 \end{itemize}
+
+\subsection{Dual Formulation}
+
+The SVM optimization problem can be reformulated in its dual form, which reveals the support vectors and enables the kernel trick:
+
+\begin{equation}
+\max_{\boldsymbol{\alpha}} \sum_{i=1}^{n} \alpha_i - \frac{1}{2} \sum_{i=1}^{n} \sum_{j=1}^{n} \alpha_i \alpha_j y^{(i)} y^{(j)} \vect{x}^{(i)} \cdot \vect{x}^{(j)}
+\end{equation}
+
+subject to:
+\begin{equation}
+\sum_{i=1}^{n} \alpha_i y^{(i)} = 0, \quad 0 \leq \alpha_i \leq C
+\end{equation}
 
 The decision function becomes:
 \begin{equation}
+f(\vect{x}) = \sum_{i=1}^{n} \alpha_i y^{(i)} \vect{x}^{(i)} \cdot \vect{x} + b
+\end{equation}
+
+Only examples with $\alpha_i > 0$ are support vectors.
+
+\subsection{Kernel Trick}
+
+For non-linear decision boundaries, we can map inputs to a higher-dimensional space using a \textbf{kernel function} $k(\vect{x}, \vect{x}')$:
+
+\begin{equation}
 f(\vect{x}) = \sum_{i=1}^{n} \alpha_i y^{(i)} k(\vect{x}^{(i)}, \vect{x}) + b
 \end{equation}
+
+\subsubsection{Common Kernels}
+
+\textbf{Linear kernel:}
+\begin{equation}
+k(\vect{x}, \vect{x}') = \vect{x}^\top \vect{x}'
+\end{equation}
+
+\textbf{Polynomial kernel:}
+\begin{equation}
+k(\vect{x}, \vect{x}') = (\vect{x}^\top \vect{x}' + c)^d
+\end{equation}
+
+\textbf{RBF (Gaussian) kernel:}
+\begin{equation}
+k(\vect{x}, \vect{x}') = \exp(-\gamma \|\vect{x} - \vect{x}'\|^2)
+\end{equation}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+    xlabel={Feature 1},
+    ylabel={Feature 2},
+    title={SVM with RBF Kernel: Non-linear Decision Boundary},
+    grid=major,
+    width=10cm,
+    height=8cm
+]
+% Generate some sample data in a circular pattern
+\addplot[only marks, mark=*, mark size=3pt, color=bookpurple] coordinates {
+    (1,1) (1.5,1.5) (2,1) (2.5,2) (3,1.5) (1,2) (1.5,2.5) (2,2) (2.5,3) (3,2.5)
+};
+\addplot[only marks, mark=square*, mark size=3pt, color=bookred] coordinates {
+    (2,3) (2.5,3.5) (3,3) (3.5,3.5) (4,3) (2,4) (2.5,4.5) (3,4) (3.5,4.5) (4,4)
+};
+% Add a non-linear decision boundary (circle)
+\addplot[thick, color=bookblack, domain=0:5] {sqrt(6.25-(x-2.5)^2)+2.5};
+\addplot[thick, color=bookblack, domain=0:5] {-sqrt(6.25-(x-2.5)^2)+2.5};
+\node at (axis cs:3.5,3.5) [anchor=west] {Non-linear boundary};
+\legend{Class -1, Class +1, Decision boundary}
+\end{axis}
+\end{tikzpicture}
+\caption{SVM with RBF kernel can learn non-linear decision boundaries. The decision boundary here is approximately circular.}
+\label{fig:svm-rbf-kernel}
+\end{figure}
+
+\subsection{Kernel Properties}
+
+A function $k(\vect{x}, \vect{x}')$ is a valid kernel if and only if it is:
+\begin{itemize}
+    \item \textbf{Symmetric:} $k(\vect{x}, \vect{x}') = k(\vect{x}', \vect{x})$
+    \item \textbf{Positive semi-definite:} For any set of points $\{\vect{x}^{(1)}, \ldots, \vect{x}^{(n)}\}$, the kernel matrix $K_{ij} = k(\vect{x}^{(i)}, \vect{x}^{(j)})$ is positive semi-definite
+\end{itemize}
+
+\subsection{Advantages and Limitations}
+
+\textbf{Advantages:}
+\begin{itemize}
+    \item Effective in high-dimensional spaces
+    \item Memory efficient (only stores support vectors)
+    \item Versatile (different kernel functions)
+    \item Strong theoretical foundation
+    \item Works well with small to medium datasets
+\end{itemize}
+
+\textbf{Limitations:}
+\begin{itemize}
+    \item Poor performance on large datasets
+    \item Sensitive to feature scaling
+    \item No probabilistic output
+    \item Kernel selection can be tricky
+    \item Computationally expensive for very large datasets
+\end{itemize}
+
+\subsection{SVM for Regression}
+
+SVM can also be extended to regression problems (Support Vector Regression, SVR). Instead of finding a hyperplane that separates classes, SVR finds a hyperplane that fits the data within an $\epsilon$-tube:
+
+\begin{equation}
+\min_{\vect{w}, b, \boldsymbol{\xi}, \boldsymbol{\xi}^*} \frac{1}{2}\|\vect{w}\|^2 + C \sum_{i=1}^{n} (\xi_i + \xi_i^*)
+\end{equation}
+
+subject to:
+\begin{align}
+y^{(i)} - \vect{w}^\top \vect{x}^{(i)} - b &\leq \epsilon + \xi_i \\
+\vect{w}^\top \vect{x}^{(i)} + b - y^{(i)} &\leq \epsilon + \xi_i^* \\
+\xi_i, \xi_i^* &\geq 0
+\end{align}
 
