@@ -3,6 +3,18 @@
 \section{Long Short-Term Memory (LSTM)}
 \label{sec:lstm}
 
+\subsection*{Intuition}
+
+The LSTM adds a highway for information (the cell state) that can pass signals forward with minimal modification. Gates act like valves to forget unhelpful information, write new content, and reveal outputs, which preserves gradients over long spans \cite{Hochreiter1997,GoodfellowEtAl2016}.
+
+\subsection*{Historical Context}
+
+Introduced in the 1990s to address vanishing gradients \cite{Hochreiter1997}, LSTMs unlocked practical sequence learning across speech, language, and time-series tasks before attention-based Transformers became dominant \cite{Vaswani2017}.
+
+% Index and glossary
+\index{long short-term memory}
+\glsadd{long-short-term-memory}
+
 \subsection{Architecture}
 
 LSTM uses \textbf{gating mechanisms} to control information flow:
@@ -37,5 +49,24 @@ LSTM uses \textbf{gating mechanisms} to control information flow:
     \item Can learn long-term dependencies
     \item Gradients flow more easily through cell state
     \item Widely used for sequential tasks
+
+\paragraph{Visual aid.} A compact LSTM cell diagram:
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[>=stealth, node distance=1.8cm]
+        \tikzstyle{gate}=[draw, rounded corners, minimum width=1.5cm, minimum height=0.9cm]
+        \node[gate] (ft) {$\vect{f}_t$};
+        \node[gate, below of=ft] (it) {$\vect{i}_t$};
+        \node[gate, below of=it] (ot) {$\vect{o}_t$};
+        \node[right of=it, xshift=2.2cm] (ct1) {$\vect{c}_{t-1}$};
+        \node[right of=ct1, xshift=1.2cm] (sum) {$+$};
+        \node[right of=sum, xshift=1.2cm] (ct) {$\vect{c}_t$};
+        \draw[->] (ct1) -- node[midway, above] {$\odot\,\vect{f}_t$} (sum);
+        \draw[->] (it) -- node[midway, above] {$\odot\,\tilde{\vect{c}}_t$} (sum);
+        \draw[->] (sum) -- (ct);
+        \draw[->] (ot) |- ++(1.2,1.8) node[pos=0.55, right] {$\odot\,\tanh(\vect{c}_t)$} -| ++(0,0);
+    \end{tikzpicture}
+    \caption{Illustrative LSTM flow with forget, input, and output gates.}
+\end{figure}
 \end{itemize}
 

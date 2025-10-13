@@ -1,0 +1,15 @@
+% Chapter 10, Section 7
+
+\section*{Key Takeaways}
+\label{sec:ch10-key-takeaways}
+
+\begin{itemize}
+    \item \textbf{RNNs model temporal dependencies} by maintaining a hidden state that propagates through time; vanilla RNNs struggle with long-term dependencies due to vanishing/exploding gradients \cite{GoodfellowEtAl2016}.
+    \item \textbf{BPTT and truncated BPTT} enable gradient-based training of sequence models; gradient clipping mitigates exploding gradients \cite{GoodfellowEtAl2016,Rumelhart1986}.
+    \item \textbf{LSTM and GRU} use gating to preserve and control information flow, greatly improving learning of long-term dependencies \cite{Hochreiter1997,Cho2014}.
+    \item \textbf{Seq2seq with attention} overcomes fixed-bottleneck limitations by learning alignments and dynamic context vectors \cite{Bahdanau2014}.
+    \item \textbf{Advanced variants} such as bidirectional RNNs, teacher forcing, and beam search improve context utilization, training stability, and decoding quality.
+    \item \textbf{Practical considerations} include careful initialization, clipping, architecture choice (GRU vs. LSTM), and appropriate decoding strategies for the task.
+\end{itemize}
+
+

@@ -1,0 +1,114 @@
+% Chapter 10, Section 8
+
+\section{Problems}
+\label{sec:ch10-problems}
+
+This section provides exercises to reinforce your understanding of sequence models. Problems are categorized by difficulty and include hints.
+
+\subsection{Easy Problems (6 problems)}
+
+\begin{problem}[Sequence Types]
+Classify the following tasks as one-to-one, one-to-many, many-to-one, or many-to-many: sentiment classification, speech recognition, image captioning, machine translation, next-word prediction, time-series forecasting.
+
+\textbf{Hint:} Consider input/output sequence lengths.
+\end{problem}
+
+\begin{problem}[Hidden State Intuition]
+Explain in your own words what the hidden state in an RNN represents and why it is necessary.
+
+\textbf{Hint:} Think of it as a compressed summary of the past.
+\end{problem}
+
+\begin{problem}[Exploding vs. Vanishing]
+Describe the difference between exploding and vanishing gradients in RNNs and one practical mitigation for each.
+
+\textbf{Hint:} Clipping vs. gating/initialization.
+\end{problem}
+
+\begin{problem}[Gate Roles]
+List the roles of the LSTM's forget, input, and output gates.
+
+\textbf{Hint:} Control what to remember, write, and reveal.
+\end{problem}
+
+\begin{problem}[Attention Benefit]
+Why does attention often improve seq2seq performance compared to a fixed context vector?
+
+\textbf{Hint:} Per-step, content-based context.
+\end{problem}
+
+\begin{problem}[Bidirectionality]
+When is a bidirectional RNN appropriate, and when is it not?
+
+\textbf{Hint:} Availability of future context at inference time.
+\end{problem}
+
+\subsection{Medium Problems (5 problems)}
+
+\begin{problem}[BPTT Derivative]
+Derive the recursive relation for $\frac{\partial L}{\partial \vect{h}_t}$ in a vanilla RNN with $\vect{h}_t = \sigma(\mat{W}_{hh}\vect{h}_{t-1}+\mat{W}_{xh}\vect{x}_t+\vect{b}_h)$.
+
+\textbf{Hint:} Apply the chain rule through time and sum contributions.
+\end{problem}
+
+\begin{problem}[Truncated BPTT Trade-off]
+Discuss the trade-offs in choosing the truncation window $k$ for truncated BPTT.
+
+\textbf{Hint:} Memory/compute vs. long-range dependencies.
+\end{problem}
+
+\begin{problem}[GRU vs. LSTM]
+Compare GRU and LSTM in terms of parameter count, training speed, and ability to model long-term dependencies. When might you prefer each?
+
+\textbf{Hint:} Simplicity vs. expressiveness; dataset size and sequence length.
+\end{problem}
+
+\begin{problem}[Teacher Forcing]
+Explain teacher forcing and describe exposure bias. Propose a mitigation strategy.
+
+\textbf{Hint:} Scheduled sampling; sequence-level training.
+\end{problem}
+
+\begin{problem}[Beam Search]
+Explain how beam size affects quality and speed in sequence decoding.
+
+\textbf{Hint:} Larger beams approximate global search but increase computation.
+\end{problem}
+
+\subsection{Hard Problems (5 problems)}
+
+\begin{problem}[Gradient Dynamics]
+Analyze conditions on $\mat{W}_{hh}$ and $\sigma'$ under which gradients vanish or explode in a vanilla RNN. Relate to spectral radius.
+
+\textbf{Hint:} Consider products of Jacobians and eigenvalues.
+\end{problem}
+
+\begin{problem}[Attention Mechanisms]
+Derive additive (Bahdanau) attention scores and compare with multiplicative (dot-product) attention. Discuss computational trade-offs.
+
+\textbf{Hint:} Parameterized MLP vs. dot products; complexity in sequence length.
+\end{problem}
+
+\begin{problem}[Alignment Visualization]
+Propose a method to visualize attention alignments for a translation model and how to interpret them.
+
+\textbf{Hint:} Heatmaps over source–target positions.
+\end{problem}
+
+\begin{problem}[Exposure Bias Remedies]
+Formulate scheduled sampling and discuss its pros/cons. Compare with sequence-level training (e.g., REINFORCE, minimum risk training).
+
+\textbf{Hint:} Train–test mismatch vs. optimization variance.
+\end{problem}
+
+\begin{problem}[Design a Seq2Seq System]
+For speech recognition on 1k-hour dataset, design a system: feature extraction, encoder–decoder choice (GRU/LSTM), attention type, regularization, decoding strategy. Justify choices.
+
+\textbf{Hint:} Compute budget, sequence length, latency constraints, language model integration.
+\end{problem}
+
+% Index entries
+\index{problems!sequence modeling}
+\index{exercises!sequence modeling}
+
+

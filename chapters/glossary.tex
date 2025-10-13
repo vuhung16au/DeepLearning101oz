@@ -147,6 +147,32 @@
     description={A type of neural network designed for sequential data, where connections form directed cycles.}
 }
 
+% Chapter 10 terms
+\newglossaryentry{backpropagation-through-time}{
+    name={backpropagation through time},
+    description={Training method for RNNs that backpropagates gradients through the unrolled computation graph across time steps.}
+}
+\newglossaryentry{gated-recurrent-unit}{
+    name={gated recurrent unit},
+    description={A simplified gated RNN architecture that combines state and gating, often competitive with fewer parameters.}
+}
+\newglossaryentry{sequence-to-sequence}{
+    name={sequence-to-sequence},
+    description={An encoder–decoder framework mapping an input sequence to an output sequence, often with attention.}
+}
+\newglossaryentry{teacher-forcing}{
+    name={teacher forcing},
+    description={A training strategy for autoregressive decoders that feeds ground-truth tokens as inputs instead of model predictions.}
+}
+\newglossaryentry{beam-search}{
+    name={beam search},
+    description={A heuristic decoding algorithm that keeps the top-$k$ partial sequences at each step to balance quality and speed.}
+}
+\newglossaryentry{bidirectional-rnn}{
+    name={bidirectional RNN},
+    description={An architecture that processes sequences in both forward and backward directions and concatenates the states.}
+}
+
 \newglossaryentry{supervised-learning}{
     name={supervised learning},
     description={A machine learning approach where models learn from labeled training data.}
