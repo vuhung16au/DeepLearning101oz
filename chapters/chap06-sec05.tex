@@ -3,6 +3,18 @@
 \section{Design Choices}
 \label{sec:design-choices}
 
+\subsection{Intuition: Building the Right Network}
+
+Designing a neural network is like designing a building:
+\begin{itemize}
+    \item \textbf{Depth (layers):} Like floors in a building - more floors can house more complex functions, but they're harder to build and maintain
+    \item \textbf{Width (neurons per layer):} Like rooms per floor - more rooms give more space, but you need to fill them efficiently
+    \item \textbf{Initialization:} Like the foundation - if it's wrong, the whole building might collapse
+    \item \textbf{Training:} Like the construction process - you need the right tools and techniques
+\end{itemize}
+
+The key is finding the right balance for your specific task and data.
+
 \subsection{Network Depth and Width}
 
 \textbf{Depth} (number of layers):
@@ -42,3 +54,11 @@ W_{ij} \sim \mathcal{N}\left(0, \frac{2}{n_{\text{in}}}\right)
     \item Enables efficient parallel computation
     \item Balances between SGD and full-batch GD
 \end{itemize}
+
+% Index entries
+\index{network design!depth}
+\index{network design!width}
+\index{weight initialization!Xavier}
+\index{weight initialization!He}
+\index{mini-batch!training}
+\index{gradient descent!mini-batch}

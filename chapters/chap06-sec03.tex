@@ -3,6 +3,18 @@
 \section{Output Units and Loss Functions}
 \label{sec:output-loss}
 
+\subsection{Intuition: Matching Output to Task}
+
+Think of the output layer as the "final decision maker" in your network. Just like different jobs require different tools, different machine learning tasks require different output formats:
+
+\begin{itemize}
+    \item \textbf{Regression (predicting prices):} You want a real number. "This house costs \$250,000"
+    \item \textbf{Binary Classification (spam detection):} You want a probability. "This email is 95\% likely to be spam"
+    \item \textbf{Multiclass Classification (image recognition):} You want probabilities for each class. "This image is 80\% cat, 15\% dog, 5\% bird"
+\end{itemize}
+
+The loss function is like a "teacher" that tells the network how wrong it is. A good teacher gives clear, helpful feedback that guides learning in the right direction.
+
 The choice of output layer and loss function depends on the task.
 
 \subsection{Linear Output for Regression}
@@ -40,4 +52,12 @@ with categorical cross-entropy loss:
 \begin{equation}
 L = -\frac{1}{n} \sum_{i=1}^{n} \sum_{k=1}^{K} y_k^{(i)} \log \hat{y}_k^{(i)}
 \end{equation}
+
+% Index entries
+\index{output layer!regression}
+\index{output layer!classification}
+\index{loss function!MSE}
+\index{loss function!cross-entropy}
+\index{softmax!multiclass classification}
+\index{sigmoid!binary classification}
 

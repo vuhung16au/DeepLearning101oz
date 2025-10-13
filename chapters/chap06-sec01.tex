@@ -3,6 +3,18 @@
 \section{Introduction to Feedforward Networks}
 \label{sec:intro-feedforward}
 
+\subsection{Intuition: What is a Feedforward Network?}
+
+Imagine you're trying to recognize handwritten digits. A feedforward neural network is like having a team of experts, each specialized in detecting different features:
+
+\begin{itemize}
+    \item \textbf{First layer experts} look for basic patterns like edges, curves, and lines
+    \item \textbf{Middle layer experts} combine these basic patterns to detect more complex shapes like loops, corners, and curves
+    \item \textbf{Final layer experts} combine these complex shapes to make the final decision: "This is a 3" or "This is a 7"
+\end{itemize}
+
+The key insight is that each layer builds upon the previous one, creating increasingly sophisticated representations. This hierarchical approach mirrors how our own visual system works, from detecting simple edges to recognizing complex objects.
+
 A \textbf{feedforward neural network} approximates a function $f^*$. For input $\vect{x}$, the network computes $y = f(\vect{x}; \vect{\theta})$ and learns parameters $\vect{\theta}$ such that $f \approx f^*$.
 
 \subsection{Network Architecture}
@@ -13,6 +25,50 @@ A feedforward network consists of layers:
     \item \textbf{Hidden layers:} intermediate representations $\vect{h}^{(1)}, \vect{h}^{(2)}, \ldots$
     \item \textbf{Output layer:} produces predictions $\hat{y}$
 \end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Input layer
+    \foreach \i in {1,2,3}
+        \node[circle, draw, fill=blue!20, minimum size=0.8cm] (x\i) at (0,-\i*1.2) {$x_\i$};
+    
+    % Hidden layer 1
+    \foreach \i in {1,2,3,4}
+        \node[circle, draw, fill=green!20, minimum size=0.8cm] (h1\i) at (3,-\i*1.2) {$h_1^{(\i)}$};
+    
+    % Hidden layer 2
+    \foreach \i in {1,2,3}
+        \node[circle, draw, fill=green!20, minimum size=0.8cm] (h2\i) at (6,-\i*1.2) {$h_2^{(\i)}$};
+    
+    % Output layer
+    \foreach \i in {1,2}
+        \node[circle, draw, fill=red!20, minimum size=0.8cm] (y\i) at (9,-\i*1.2) {$\hat{y}_\i$};
+    
+    % Connections from input to hidden1
+    \foreach \i in {1,2,3}
+        \foreach \j in {1,2,3,4}
+            \draw[->] (x\i) -- (h1\j);
+    
+    % Connections from hidden1 to hidden2
+    \foreach \i in {1,2,3,4}
+        \foreach \j in {1,2,3}
+            \draw[->] (h1\i) -- (h2\j);
+    
+    % Connections from hidden2 to output
+    \foreach \i in {1,2,3}
+        \foreach \j in {1,2}
+            \draw[->] (h2\i) -- (y\j);
+    
+    % Labels
+    \node at (0, 0.5) {\textbf{Input Layer}};
+    \node at (3, 0.5) {\textbf{Hidden Layer 1}};
+    \node at (6, 0.5) {\textbf{Hidden Layer 2}};
+    \node at (9, 0.5) {\textbf{Output Layer}};
+\end{tikzpicture}
+\caption{Architecture of a feedforward neural network with 2 hidden layers. Each circle represents a neuron, and arrows show the flow of information from input to output.}
+\label{fig:feedforward-architecture}
+\end{figure}
 
 For a network with $L$ layers:
 
@@ -34,9 +90,45 @@ The computation proceeds from input to output:
 \hat{y} &= \vect{h}^{(L)}
 \end{align}
 
+\begin{example}[Simple Forward Pass]
+\label{ex:forward-pass}
+
+Consider a simple network with 2 inputs, 2 hidden neurons, and 1 output for binary classification:
+
+\begin{itemize}
+    \item Input: $\vect{x} = [1, 0.5]$
+    \item Weights to hidden layer: $\mat{W}^{(1)} = \begin{bmatrix} 0.5 & -0.3 \\ 0.8 & 0.2 \end{bmatrix}$
+    \item Bias: $\vect{b}^{(1)} = [0.1, -0.2]$
+    \item Activation: ReLU
+\end{itemize}
+
+\textbf{Step 1:} Compute pre-activation
+\begin{align}
+\vect{z}^{(1)} &= \mat{W}^{(1)} \vect{x} + \vect{b}^{(1)} \\
+&= \begin{bmatrix} 0.5 & -0.3 \\ 0.8 & 0.2 \end{bmatrix} \begin{bmatrix} 1 \\ 0.5 \end{bmatrix} + \begin{bmatrix} 0.1 \\ -0.2 \end{bmatrix} \\
+&= \begin{bmatrix} 0.5 \cdot 1 + (-0.3) \cdot 0.5 + 0.1 \\ 0.8 \cdot 1 + 0.2 \cdot 0.5 + (-0.2) \end{bmatrix} \\
+&= \begin{bmatrix} 0.45 \\ 0.7 \end{bmatrix}
+\end{align}
+
+\textbf{Step 2:} Apply activation function
+\begin{align}
+\vect{h}^{(1)} &= \text{ReLU}(\vect{z}^{(1)}) = \begin{bmatrix} \max(0, 0.45) \\ \max(0, 0.7) \end{bmatrix} = \begin{bmatrix} 0.45 \\ 0.7 \end{bmatrix}
+\end{align}
+
+The hidden layer has learned to represent the input in a transformed space where both neurons are active (positive values).
+\end{example}
+
 \subsection{Universal Approximation}
 
 The \textbf{universal approximation theorem} states that a feedforward network with a single hidden layer containing a finite number of neurons can approximate any continuous function on a compact subset of $\mathbb{R}^n$, given appropriate activation functions.
 
 However, deeper networks often learn more efficiently.
+
+% Index entries
+\index{feedforward network!introduction}
+\index{neural network!feedforward}
+\index{multilayer perceptron}
+\index{forward propagation}
+\index{universal approximation theorem}
+\index{network architecture}
 
