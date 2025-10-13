@@ -3,6 +3,12 @@
 \section{Adaptive Learning Rate Methods}
 \label{sec:adaptive-methods}
 
+\subsection{Intuition: Per-Parameter Step Sizes}
+
+Different parameters learn at different speeds: some directions are steep, others are flat. \textbf{Adaptive methods} adjust the step size per parameter based on recent gradient information, allowing faster progress on rarely-updated or low-variance dimensions while stabilizing steps on highly-volatile ones.\index{adaptive optimization}\index{AdaGrad}\index{RMSProp}\index{Adam}
+
+Historical note: AdaGrad emerged for sparse problems; RMSProp stabilized AdaGrad's decay; Adam blended momentum with RMSProp-style adaptation and became a widely used default in deep learning \cite{Duchi2011,Tieleman2012,Kingma2014,GoodfellowEtAl2016}.
+
 \subsection{AdaGrad}
 
 Adapts learning rate per parameter based on historical gradients:
@@ -33,9 +39,9 @@ Combines momentum and adaptive learning rates:
 \vect{\theta}_{t+1} &= \vect{\theta}_t - \frac{\alpha \hat{\vect{m}}_t}{\sqrt{\hat{\vect{v}}_t} + \epsilon}
 \end{align}
 
-Default hyperparameters: $\beta_1 = 0.9$, $\beta_2 = 0.999$, $\epsilon = 10^{-8}$, $\alpha = 0.001$.
+Default hyperparameters: $\beta_1 = 0.9$, $\beta_2 = 0.999$, $\epsilon = 10^{-8}$, $\alpha = 0.001$ \cite{Kingma2014}.
 
-\subsection{Learning Rate Schedules}
+\subsection{Learning Rate Schedules}\index{learning rate schedule}
 
 \textbf{Step Decay:}
 \begin{equation}

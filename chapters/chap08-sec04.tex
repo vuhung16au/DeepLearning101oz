@@ -3,6 +3,12 @@
 \section{Second-Order Methods}
 \label{sec:second-order}
 
+\subsection{Intuition: Curvature-Aware Steps}
+
+First-order methods follow the slope; second-order methods also consider the \textit{curvature} of the landscape to choose better-scaled steps. If the valley is sharply curved in one direction and flat in another, curvature-aware steps shorten strides along the sharp direction and lengthen them along the flat one.\index{second-order methods}
+
+Historical note: Classical optimization popularized Newton and quasi-Newton methods; in deep learning, memory and compute constraints motivated approximations like L-BFGS and natural gradient \cite{LiuNocedal1989,Amari1998,GoodfellowEtAl2016,Bishop2006}.
+
 \subsection{Newton's Method}
 
 Uses second-order Taylor expansion:
@@ -12,14 +18,14 @@ Uses second-order Taylor expansion:
 
 where $\mat{H}$ is the Hessian matrix.
 
-Challenges:
+Challenges:\index{Newton's method}
 \begin{itemize}
     \item Computing Hessian is $O(n^2)$ in parameters
     \item Inverting Hessian is $O(n^3)$
     \item Infeasible for large neural networks
 \end{itemize}
 
-\subsection{Quasi-Newton Methods}
+\subsection{Quasi-Newton Methods}\index{L-BFGS}
 
 Approximate the Hessian inverse:
 
@@ -30,7 +36,7 @@ Approximate the Hessian inverse:
     \item Used for smaller networks or specific applications
 \end{itemize}
 
-\subsection{Natural Gradient}
+\subsection{Natural Gradient}\index{natural gradient}
 
 Uses Fisher information matrix instead of Hessian:
 \begin{equation}
