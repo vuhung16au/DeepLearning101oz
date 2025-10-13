@@ -5,6 +5,10 @@
 
 \textbf{Early stopping} monitors validation performance and stops training when it begins to degrade.
 
+\subsection{Intuition: Stop Before You Memorize}
+
+Imagine studying for an exam. Initially, practice improves your understanding (training and validation improve). If you keep cramming the exact same questions, you start memorizing answers that don't help with new questions (training improves, validation worsens). Early stopping is the principle of stopping at the point of best validation performance to avoid memorization.
+
 \subsection{Algorithm}
 
 \begin{enumerate}
@@ -13,6 +17,32 @@
     \item If no improvement for $p$ epochs (patience), stop
     \item Return model with best validation performance
 \end{enumerate}
+
+\begin{algorithm}[Early stopping meta-algorithm]
+Let $n$ be the number of steps between evaluations.\\
+Let $p$ be the patience (number of worsened validations before stopping).\\
+Let $\vect{\theta}_0$ be the initial parameters.
+
+\begin{enumerate}[leftmargin=*]
+    \item $\vect{\theta} \leftarrow \vect{\theta}_0$, $i \leftarrow 0$, $j \leftarrow 0$, $v \leftarrow \infty$
+    \item $\vect{\theta}^* \leftarrow \vect{\theta}$, $i^* \leftarrow i$
+    \item \textbf{while} $j < p$ \textbf{do}
+    \begin{enumerate}
+        \item Update $\vect{\theta}$ by running the training algorithm for $n$ steps
+        \item $i \leftarrow i + n$
+        \item $v' \leftarrow \text{ValidationSetError}(\vect{\theta})$
+        \item \textbf{if} $v' < v$ \textbf{then}
+        \begin{enumerate}
+            \item $j \leftarrow 0$
+            \item $\vect{\theta}^* \leftarrow \vect{\theta}$, $i^* \leftarrow i$, $v \leftarrow v'$
+        \end{enumerate}
+        \item \textbf{else} $j \leftarrow j + 1$
+        \item \textbf{end if}
+    \end{enumerate}
+    \item \textbf{end while}
+    \item Return best parameters $\vect{\theta}^*$ and best step $i^*$
+\end{enumerate}
+\end{algorithm}
 
 \subsection{Benefits}
 
@@ -30,4 +60,8 @@
     \item Choice of patience hyperparameter
     \item Can interact with learning rate schedules
 \end{itemize}
+
+% Index entries
+\index{early stopping}
+\index{validation set}
 

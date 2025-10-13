@@ -1,0 +1,114 @@
+% Chapter 7, Section 7
+
+\section{Problems}
+\label{sec:ch7-problems}
+
+This section provides exercises to reinforce your understanding of regularization techniques. Problems are categorized by difficulty and include hints.
+
+\subsection{Easy Problems (6 problems)}
+
+\begin{problem}[Identify Regularization]
+List whether each technique primarily reduces variance, bias, or both: L2, L1, dropout, data augmentation, early stopping, batch normalization.
+
+\textbf{Hint:} Consider effect on model capacity and training dynamics.
+\end{problem}
+
+\begin{problem}[Weight Decay Update]
+Given learning rate $\alpha$ and L2 coefficient $\lambda$, write the update rule for weights with gradient $g$.
+
+\textbf{Hint:} Combine gradient step with multiplicative shrinkage.
+\end{problem}
+
+\begin{problem}[L1 vs L2]
+Explain when L1 is preferred over L2, and vice versa.
+
+\textbf{Hint:} Sparsity, feature selection, stability, and correlated features.
+\end{problem}
+
+\begin{problem}[Early Stopping Curve]
+Sketch training and validation loss over epochs showing overfitting and stopping point.
+
+\textbf{Hint:} Validation loss reaches minimum before training loss.
+\end{problem}
+
+\begin{problem}[Augmentation Invariance]
+For image classification, list three invariances augmentation can teach and one risk.
+
+\textbf{Hint:} Rotation/translation invariance vs. label leakage or distribution shift.
+\end{problem}
+
+\begin{problem}[BatchNorm Inference]
+Explain why running averages are used at test time for batch normalization.
+
+\textbf{Hint:} Mini-batch statistics are noisy and unavailable at inference.
+\end{problem}
+
+\subsection{Medium Problems (5 problems)}
+
+\begin{problem}[Elastic Net Penalty]
+Derive the gradient of $\lambda_1 \|\vect{w}\|_1 + \frac{\lambda_2}{2}\|\vect{w}\|_2^2$ with respect to $\vect{w}$.
+
+\textbf{Hint:} Subgradient for L1; standard gradient for L2.
+\end{problem}
+
+\begin{problem}[Dropout Scaling]
+Show equivalence between scaling activations at test time by $p$ and scaling at training by $1/p$ (inverted dropout).
+
+\textbf{Hint:} Match expected activations across train/test.
+\end{problem}
+
+\begin{problem}[Early Stopping as Regularization]
+Argue how early stopping can mimic an L2 constraint under gradient descent.
+
+\textbf{Hint:} Consider that weights remain small when training halts early.
+\end{problem}
+
+\begin{problem}[Label Smoothing and Confidence]
+For $\epsilon>0$, show how label smoothing affects cross-entropy gradients.
+
+\textbf{Hint:} Replace one-hot $y$ by $(1-\epsilon)\,y + \epsilon/K$.
+\end{problem}
+
+\begin{problem}[Mixup Geometry]
+Explain how mixup encourages linear behavior between classes in representation space.
+
+\textbf{Hint:} Consider convex combinations and linear decision boundaries.
+\end{problem}
+
+\subsection{Hard Problems (5 problems)}
+
+\begin{problem}[Generalization Bound Intuition]
+Discuss how norm constraints relate to capacity control (e.g., Rademacher complexity) and generalization.
+
+\textbf{Hint:} Smaller norms can reduce hypothesis class complexity.
+\end{problem}
+
+\begin{problem}[Adversarial Training Trade-offs]
+Analyze how adversarial training affects robustness, clean accuracy, and optimization.
+
+\textbf{Hint:} Robust features vs. gradient masking and compute cost.
+\end{problem}
+
+\begin{problem}[BatchNorm and Optimization]
+Provide a theoretical or empirical argument for why batch normalization enables higher learning rates.
+
+\textbf{Hint:} Consider conditioning of the optimization problem.
+\end{problem}
+
+\begin{problem}[Stochastic Depth in Deep Nets]
+Model the expected depth under stochastic depth and discuss gradient flow implications.
+
+\textbf{Hint:} Consider per-layer survival probabilities.
+\end{problem}
+
+\begin{problem}[Design a Regularization Suite]
+Given a 100-class image dataset with 50k images, design a regularization suite (penalties, augmentation, normalization, schedules). Justify choices.
+
+\textbf{Hint:} Balance data, model size, compute budget, and desired robustness.
+\end{problem}
+
+% Index entries
+\index{problems!regularization}
+\index{exercises!regularization}
+
+
