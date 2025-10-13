@@ -1,0 +1,18 @@
+% Chapter 8, Section 6
+
+\section{Key Takeaways}
+\label{sec:ch8-key-takeaways}
+
+\begin{itemize}
+    \item \textbf{Mini-batch SGD is the workhorse:} balances speed and stability; pair with momentum and schedules.
+    \item \textbf{Momentum and Nesterov reduce oscillations:} accelerate along consistent directions and dampen noise.
+    \item \textbf{Adaptive methods ease tuning:} Adam often works out-of-the-box; consider switching to SGD+momentum late for best generalization.
+    \item \textbf{Curvature matters:} second-order ideas inspire preconditioning; full Hessians are usually impractical in deep nets.
+    \item \textbf{Schedules are critical:} cosine or step decay often yield large gains; warmup stabilizes early training.
+    \item \textbf{Mitigate pathologies:} use proper initialization, normalization, and gradient clipping to handle vanishing/exploding gradients and plateaus.
+\end{itemize}
+
+% Index entries
+\index{optimization!key takeaways}
+
+

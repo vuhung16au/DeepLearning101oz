@@ -3,9 +3,13 @@
 \section{Optimization Challenges}
 \label{sec:challenges}
 
+\subsection{Intuition: Why Training Gets Stuck}
+
+Deep networks combine nonlinearity and depth, creating landscapes with flat plateaus, narrow valleys, and saddle points. Noise (SGD), momentum, and schedules act like navigational aids to keep moving and avoid getting stuck.\index{optimization!challenges}
+
 \subsection{Vanishing and Exploding Gradients}
 
-In deep networks, gradients can become exponentially small or large.
+In deep networks, gradients can become exponentially small or large. See \gls{vanishing-gradient} and \gls{exploding-gradient}.
 
 \textbf{Vanishing gradients:}
 \begin{itemize}
@@ -19,12 +23,12 @@ In deep networks, gradients can become exponentially small or large.
     \item Mitigated by gradient clipping, careful initialization
 \end{itemize}
 
-\textbf{Gradient clipping:}
+\textbf{Gradient clipping:}\index{gradient clipping}
 \begin{equation}
 \vect{g} \leftarrow \frac{\vect{g}}{\max(1, \|\vect{g}\| / \theta)}
 \end{equation}
 
-\subsection{Local Minima and Saddle Points}
+\subsection{Local Minima and Saddle Points}\index{saddle point}
 
 In high dimensions, saddle points are more common than local minima.
 
@@ -36,7 +40,7 @@ Saddle points have:
 
 Momentum and noise help escape saddle points.
 
-\subsection{Plateaus}
+\subsection{Plateaus}\index{plateau}
 
 Flat regions with small gradients slow convergence. Adaptive methods and learning rate schedules help navigate plateaus.
 
@@ -44,6 +48,6 @@ Flat regions with small gradients slow convergence. Adaptive methods and learnin
 
 \textbf{Recommended approach:}
 \begin{enumerate}
-    \item Start with Adam optimizer
+    \item Start with Adam optimizer \cite{Kingma2014}
     \item Learning rate: try 0.001, 0.0003, 0.0001
 \end{enumerate}

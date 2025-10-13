@@ -213,7 +213,7 @@ miktex/
 
 # Project specific files
 TODO/
-refs/
+refs*/
 Prompt.md
 SUMMARY.txt
 *.pdf

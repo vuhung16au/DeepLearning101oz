@@ -3,6 +3,12 @@
 \section{Momentum-Based Methods}
 \label{sec:momentum}
 
+\subsection{Intuition: Rolling a Ball Down a Valley}
+
+Plain SGD can wobble like a marble on a bumpy path. \textbf{Momentum} acts like mass: it carries velocity so you keep moving in consistently good directions and smooth out small bumps. \textbf{Nesterov acceleration} adds anticipation by peeking where the momentum will take you before correcting, often yielding crisper steps in curved valleys.\index{momentum}\index{Nesterov}
+
+Historical note: Momentum has deep roots in convex optimization and was popularized in early neural network training; Nesterov's variant provided stronger theoretical guarantees in convex settings and inspired practical variants in deep learning \cite{Polyak1964,Nesterov1983,GoodfellowEtAl2016,Bishop2006}.
+
 \subsection{Momentum}
 
 Accumulates gradients over time:
@@ -13,14 +19,14 @@ Accumulates gradients over time:
 
 where $\beta \in [0, 1)$ is the momentum coefficient (typically 0.9).
 
-Benefits:
+Benefits:\index{optimization!momentum}
 \begin{itemize}
     \item Accelerates convergence in relevant directions
     \item Dampens oscillations
     \item Helps escape local minima and saddle points
 \end{itemize}
 
-\subsection{Nesterov Accelerated Gradient (NAG)}
+\subsection{Nesterov Accelerated Gradient (NAG)}\index{optimization!Nesterov}
 
 "Look-ahead" version of momentum:
 \begin{align}

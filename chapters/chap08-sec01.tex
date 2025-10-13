@@ -3,6 +3,12 @@
 \section{Gradient Descent Variants}
 \label{sec:gd-variants}
 
+\subsection{Intuition: Following the Steepest Downhill Direction}
+
+Imagine standing on a foggy hillside trying to reach the valley. You feel the slope under your feet and take a step downhill. \textbf{Batch gradient descent} measures the average slope using the whole landscape (dataset) before each step: accurate but slow to gauge. \textbf{Stochastic gradient descent (SGD)} feels the slope at a single point: fast, but noisy. \textbf{Mini-batch} is a compromise: feel the slope at a handful of nearby points to get a reliable yet efficient direction. This trade-off underlies most practical training regimes.\index{optimization!gradient descent}\index{mini-batch}\gls{mini-batch}
+
+Historical note: Early neural network training widely used batch gradient descent, but the rise of large datasets and GPUs made mini-batch SGD the de facto standard \cite{GoodfellowEtAl2016,Prince2023}.
+
 \subsection{Batch Gradient Descent}
 
 Computes gradient using entire training set:
@@ -10,14 +16,14 @@ Computes gradient using entire training set:
 \vect{\theta}_{t+1} = \vect{\theta}_t - \alpha \nabla_{\vect{\theta}} \frac{1}{n} \sum_{i=1}^{n} L(\vect{\theta}, \vect{x}^{(i)}, y^{(i)})
 \end{equation}
 
-Characteristics:
+Characteristics:\index{gradient descent!batch}
 \begin{itemize}
     \item Guaranteed convergence to global minimum (convex) or local minimum (non-convex)
     \item Very slow for large datasets
     \item Deterministic updates
 \end{itemize}
 
-\subsection{Stochastic Gradient Descent (SGD)}
+\subsection{Stochastic Gradient Descent (SGD)}\index{SGD@stochastic gradient descent}
 
 Uses a single random example per update:
 \begin{equation}
@@ -32,7 +38,7 @@ Characteristics:
     \item May not converge to exact minimum
 \end{itemize}
 
-\subsection{Mini-Batch Gradient Descent}
+\subsection{Mini-Batch Gradient Descent}\index{gradient descent!mini-batch}
 
 Balances batch and stochastic approaches:
 \begin{equation}

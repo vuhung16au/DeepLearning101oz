@@ -1,0 +1,114 @@
+% Chapter 8, Section 7
+
+\section{Problems}
+\label{sec:ch8-problems}
+
+This section provides exercises to reinforce your understanding of optimization. Problems are categorized by difficulty and include hints.
+
+\subsection{Easy Problems (6 problems)}
+
+\begin{problem}[Batch vs. Mini-batch]
+List two pros and two cons of batch GD vs. mini-batch SGD for large-scale training.
+
+\textbf{Hint:} Consider gradient variance, compute efficiency, and convergence behavior.
+\end{problem}
+
+\begin{problem}[Learning Rate Intuition]
+Describe qualitatively what happens if the learning rate is too small or too large.
+
+\textbf{Hint:} Look for slow progress vs. divergence/oscillation.
+\end{problem}
+
+\begin{problem}[Momentum Update]
+Write the momentum update for parameters and explain the role of $\beta$.
+
+\textbf{Hint:} Velocity accumulates an EMA of past gradients.
+\end{problem}
+
+\begin{problem}[AdaGrad Scaling]
+Explain why AdaGrad reduces step sizes over time and when this helps.
+
+\textbf{Hint:} Accumulated squared gradients grow; sparse features benefit.
+\end{problem}
+
+\begin{problem}[Adam Defaults]
+State Adam's common default hyperparameters and what each controls.
+
+\textbf{Hint:} $\beta_1,\beta_2,\epsilon,\alpha$.
+\end{problem}
+
+\begin{problem}[Gradient Clipping]
+Give a reason to clip gradients and one potential downside.
+
+\textbf{Hint:} Stabilization vs. biasing the update direction.
+\end{problem}
+
+\subsection{Medium Problems (5 problems)}
+
+\begin{problem}[Nesterov Look-ahead]
+Derive the Nesterov update by evaluating the gradient at the look-ahead point and compare to classical momentum.
+
+\textbf{Hint:} Replace $\nabla L(\theta_t)$ by $\nabla L(\theta_t+\beta v_{t-1})$.
+\end{problem}
+
+\begin{problem}[RMSProp vs. AdaGrad]
+Show how RMSProp's EMA avoids AdaGrad's overly aggressive decay and discuss hyperparameter $\rho$.
+
+\textbf{Hint:} Replace cumulative sum with exponential moving average.
+\end{problem}
+
+\begin{problem}[Adam Bias Correction]
+Derive the bias-corrected moments $\hat m_t, \hat v_t$ and explain why correction matters early in training.
+
+\textbf{Hint:} Compute $\mathbb{E}[m_t]$ under zero initialization.
+\end{problem}
+
+\begin{problem}[Plateaus and Schedules]
+Explain why cosine annealing or step decay can help escape plateaus compared to a fixed learning rate.
+
+\textbf{Hint:} Larger steps at the right time.
+\end{problem}
+
+\begin{problem}[L-BFGS Memory]
+Describe how L-BFGS maintains a low-rank inverse Hessian approximation using recent curvature pairs.
+
+\textbf{Hint:} Limited history of $(s_t, y_t)$ updates.
+\end{problem}
+
+\subsection{Hard Problems (5 problems)}
+
+\begin{problem}[Natural Gradient Rationale]
+Argue why the Fisher information provides a geometry suited for probabilistic models and yields reparameterization-invariant updates.
+
+\textbf{Hint:} Consider KL divergence as the local distance measure.
+\end{problem}
+
+\begin{problem}[Saddle Points in High Dimensions]
+Provide an argument for why saddle points are more prevalent than local minima in high-dimensional non-convex problems.
+
+\textbf{Hint:} Random matrix spectra and sign patterns of eigenvalues.
+\end{problem}
+
+\begin{problem}[Warmup Heuristics]
+Justify learning rate warmup in the presence of normalization layers and large batch sizes.
+
+\textbf{Hint:} Stabilize early updates before full-strength steps.
+\end{problem}
+
+\begin{problem}[SGD vs. Adam Generalization]
+Discuss hypotheses for why SGD with momentum can outperform Adam on final generalization despite slower early progress.
+
+\textbf{Hint:} Implicit regularization and noise structure.
+\end{problem}
+
+\begin{problem}[Design an Optimization Plan]
+For training a ResNet-50 on a new 100-class dataset, propose an end-to-end optimization plan (initializer, optimizer, schedule, batch size, clipping, regularization) and justify choices.
+
+\textbf{Hint:} Consider compute budget, stability, and expected generalization.
+\end{problem}
+
+% Index entries
+\index{problems!optimization}
+\index{exercises!optimization}
+
+
