@@ -3,6 +3,20 @@
 \section{Advanced Topics}
 \label{sec:rnn-advanced}
 
+\subsection*{Intuition}
+
+Variants extend context (bidirectional), depth (stacked layers), supervision signals (teacher forcing), and search quality (beam search). These choices trade training stability, inference latency, and quality depending on the task.
+
+\subsection*{Historical Context}
+
+Bidirectional RNNs improved context use for labeling tasks; teacher forcing stabilized decoder training but highlighted exposure bias; beam search became standard for autoregressive decoding in translation and speech.
+
+% Index and glossary
+\index{bidirectional RNN}
+\index{teacher forcing}
+\index{beam search}
+\glsadd{attention-mechanism}
+
 \subsection{Bidirectional RNNs}
 
 Process sequence in both directions:
@@ -30,6 +44,7 @@ During training, use ground truth as decoder input (not model's prediction):
     \item Faster convergence
     \item Stable training
     \item May cause exposure bias at test time
+\glsadd{backpropagation}
 \end{itemize}
 
 \subsection{Beam Search}

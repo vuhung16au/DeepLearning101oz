@@ -3,6 +3,19 @@
 \section{Backpropagation Through Time}
 \label{sec:bptt}
 
+\subsection*{Intuition}
+
+BPTT treats the unrolled RNN as a deep network across time and applies backpropagation through each time slice. Gradients flow backward along temporal edges, accumulating effects from future steps. Truncation limits how far signals propagate to balance cost and dependency length \cite{GoodfellowEtAl2016}.
+
+\subsection*{Historical Context}
+
+The backpropagation algorithm \cite{Rumelhart1986} enabled efficient training of deep networks; applying it to unrolled RNNs became known as BPTT. Awareness of vanishing/exploding gradients led to clipping and gated architectures \cite{GoodfellowEtAl2016,Hochreiter1997}.
+
+% Index and glossary
+\index{backpropagation through time}
+\glsadd{vanishing-gradient}
+\glsadd{exploding-gradient}
+
 \subsection{BPTT Algorithm}
 
 Gradients are computed by unrolling the network and applying backpropagation:
@@ -32,7 +45,7 @@ If eigenvalues of $\mat{W}$ are:
 
 \textbf{Solutions:}
 \begin{itemize}
-    \item Gradient clipping (for explosion)
+    \item Gradient clipping (for explosion) \glsadd{gradient-clipping}
     \item Careful initialization
     \item ReLU activation
     \item LSTM/GRU architectures
@@ -42,7 +55,7 @@ If eigenvalues of $\mat{W}$ are:
 
 For very long sequences, truncate gradient computation:
 \begin{itemize}
-    \item Only backpropagate through $k$ time steps
+    \item Only backpropagate through $k$ time steps (window size $k$)
     \item Reduces memory and computation
     \item Trade-off: cannot capture long-term dependencies
 \end{itemize}
