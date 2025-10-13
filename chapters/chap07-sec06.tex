@@ -3,6 +3,10 @@
 \section{Other Regularization Techniques}
 \label{sec:other-regularization}
 
+\subsection{Intuition: Many Small Guards Against Overfitting}
+
+Beyond penalties and normalization, there are practical techniques that act like small guards during training. Each introduces a mild constraint or noise that nudges the model away from brittle solutions and encourages smoother decision boundaries.
+
 \subsection{Label Smoothing}
 
 Replace hard targets with smoothed distributions:
@@ -47,3 +51,9 @@ Add adversarially perturbed examples to training:
 \vect{x}_{\text{adv}} = \vect{x} + \epsilon \cdot \text{sign}(\nabla_{\vect{x}} L(\vect{x}, y))
 \end{equation}
 
+% Index entries
+\index{label smoothing}
+\index{gradient clipping}
+\index{stochastic depth}
+\index{mixup}
+\index{adversarial training}

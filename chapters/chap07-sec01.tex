@@ -5,6 +5,10 @@
 
 \textbf{Parameter norm penalties} constrain model capacity by penalizing large weights.
 
+\subsection{Intuition: Shrinking the Model's "Complexity"}
+
+Think of a model as a musical band with many instruments (parameters). If every instrument plays loudly (large weights), the result can be noisy and overfit to the training song. Norm penalties are like asking the band to lower the volume uniformly (L2) or mute many instruments entirely (L1) so the melody (true signal) stands out. This discourages memorization and encourages simpler patterns that generalize.
+
 \subsection{L2 Regularization (Weight Decay)}
 
 Add squared L2 norm of weights to the loss:
@@ -33,6 +37,11 @@ L1 regularization:
     \item Useful for feature selection
     \item Gradient: $\text{sign}(\vect{w})$
 \end{itemize}
+
+% Index entries
+\index{regularization!L2}
+\index{regularization!L1}
+\index{elastic net}
 
 \subsection{Elastic Net}
 

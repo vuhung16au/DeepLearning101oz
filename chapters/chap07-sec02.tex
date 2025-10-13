@@ -5,6 +5,10 @@
 
 \textbf{Data augmentation} artificially increases training set size by applying transformations that preserve labels.
 
+\subsection{Intuition: Seeing the Same Thing in Many Ways}
+
+Humans recognize an object despite different viewpoints, lighting, or small occlusions. Augmentation teaches models the same robustness by showing multiple, label-preserving variations of each example. This reduces overfitting by making spurious correlations less useful and forcing the model to focus on invariant structure.
+
 \subsection{Image Augmentation}
 
 Common transformations:
@@ -40,4 +44,48 @@ For speech/audio:
     \item Adding background noise
     \item SpecAugment (masking frequency/time regions)
 \end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+    % Original image placeholder
+    \draw[fill=gray!10] (0,0) rectangle (3,2);
+    \node at (1.5,1) {Original};
+    % Rotated
+    \begin{scope}[xshift=120]
+        \draw[fill=gray!10,rotate=10] (0,0) rectangle (3,2);
+        \node at (1.5,1) {Rotate};
+    \end{scope}
+    % Flipped
+    \begin{scope}[xshift=240]
+        \draw[fill=gray!10] (0,0) rectangle (3,2);
+        \node at (1.5,1) {Flip};
+    \end{scope}
+    % Cropped
+    \begin{scope}[yshift=-80]
+        \draw[fill=gray!10] (0,0) rectangle (3,2);
+        \draw[red,thick] (0.5,0.5) rectangle (2.5,1.5);
+        \node at (1.5,1) {Crop};
+    \end{scope}
+    % Color jitter
+    \begin{scope}[xshift=120,yshift=-80]
+        \shade[left color=blue!10,right color=yellow!20] (0,0) rectangle (3,2);
+        \node at (1.5,1) {Color};
+    \end{scope}
+    % Cutout
+    \begin{scope}[xshift=240,yshift=-80]
+        \draw[fill=gray!10] (0,0) rectangle (3,2);
+        \draw[fill=black!60] (1,0.7) rectangle (2,1.3);
+        \node at (1.5,1) {Cutout};
+    \end{scope}
+\end{tikzpicture}
+\caption{Illustration of common image augmentations. Variants preserve labels while encouraging invariances.}
+\label{fig:augmentation-examples}
+\end{figure}
+
+% Index entries
+\index{data augmentation}
+\index{augmentation!vision}
+\index{augmentation!text}
+\index{augmentation!audio}
 

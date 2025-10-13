@@ -5,6 +5,10 @@
 
 \textbf{Batch normalization} normalizes layer inputs across the batch dimension.
 
+\subsection{Intuition: Keeping Scales Stable}
+
+Training can become unstable if the distribution of activations shifts as earlier layers update (internal covariate shift). Batch normalization re-centers and re-scales activations, keeping them in a predictable range so downstream layers see a more stable input distribution. This allows larger learning rates and speeds up training.
+
 \subsection{Algorithm}
 
 For mini-batch $\mathcal{B}$ with activations $\vect{x}$:
@@ -42,4 +46,9 @@ y = \gamma \frac{x - \mu_{\text{running}}}{\sqrt{\sigma^2_{\text{running}} + \ep
 \textbf{Group Normalization:} normalize within groups of channels
 
 \textbf{Instance Normalization:} normalize each sample independently (used in style transfer)
+
+% Index entries
+\index{batch normalization}
+\index{normalization layers}
+\index{internal covariate shift}
 
