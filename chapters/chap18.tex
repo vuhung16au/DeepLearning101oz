@@ -6,7 +6,31 @@
 This chapter addresses computational challenges in probabilistic models arising from intractable partition functions.
 
 
+\section*{Learning Objectives}
+\addcontentsline{toc}{section}{Learning Objectives}
+
+After studying this chapter, you will be able to:
+
+\begin{enumerate}
+    \item Explain why partition functions are hard and where they arise.
+    \item Compare strategies like importance sampling, AIS, and contrastive methods.
+    \item Analyze bias/variance trade-offs in partition function estimation.
+    \item Implement practical estimators under compute constraints.
+\end{enumerate}
+
+\difficulty{advanced}
+
+\section*{Intuition}
+\addcontentsline{toc}{section}{Intuition}
+
+Partition functions normalize probabilities by summing over exponentially many states. Estimators navigate this space by focusing effort on high-probability regions without exhaustive enumeration.
+
+
 \input{chapters/chap18-sec01}
 \input{chapters/chap18-sec02}
 \input{chapters/chap18-sec03}
 \input{chapters/chap18-sec04}
+
+% Chapter summary and problems
+\input{chapters/chap18-key-takeaways}
+\input{chapters/chap18-problems}

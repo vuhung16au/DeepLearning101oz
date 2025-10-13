@@ -1,0 +1,89 @@
+% Problems (Exercises) for Chapter 16
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+\begin{problem}[DAG vs. MRF]
+List differences between directed and undirected models.
+\textbf{Hint:} Factorization, semantics of edges.
+\end{problem}
+
+\begin{problem}[d-separation]
+Give an example of conditional independence via d-separation.
+\textbf{Hint:} Chain, fork, collider.
+\end{problem}
+
+\begin{problem}[CRF Use-cases]
+Name two tasks where CRFs are helpful.
+\textbf{Hint:} Sequence labeling, segmentation.
+\end{problem}
+
+\begin{problem}[Message Passing]
+What is belief propagation computing?
+\textbf{Hint:} Marginals on trees.
+\end{problem}
+
+\begin{problem}[Graph Design]
+Why add edges in a graphical model?
+\textbf{Hint:} Capture dependencies.
+\end{problem}
+
+\begin{problem}[Neural Potentials]
+How do neural nets parameterize potentials?
+\textbf{Hint:} Learnable feature maps.
+\end{problem}
+
+\subsection*{Medium}
+\begin{problem}[BP on Trees]
+Prove BP is exact on trees.
+\textbf{Hint:} Induction on leaves.
+\end{problem}
+
+\begin{problem}[Loopy BP]
+Discuss when loopy BP works in practice.
+\textbf{Hint:} Weak loops, damping.
+\end{problem}
+
+\begin{problem}[Structured Prediction]
+Formulate loss-augmented inference for a CRF.
+\textbf{Hint:} Add task loss to potentials.
+\end{problem}
+
+\begin{problem}[Neural-CRF Training]
+Outline end-to-end training with backprop through inference.
+\textbf{Hint:} Unrolled iterations or implicit gradients.
+\end{problem}
+
+\begin{problem}[Approximation]
+Compare mean-field with BP in accuracy and speed.
+\textbf{Hint:} Factorization vs. messages.
+\end{problem}
+
+\subsection*{Hard}
+\begin{problem}[Convexity]
+Show conditions under which CRF parameter learning is convex.
+\textbf{Hint:} Log-linear models.
+\end{problem}
+
+\begin{problem}[Higher-order Factors]
+Design a factor for long-range consistency.
+\textbf{Hint:} Pattern-based or pooled potentials.
+\end{problem}
+
+\begin{problem}[Implicit Differentiation]
+Differentiate through MAP inference.
+\textbf{Hint:} KKT or envelope theorem.
+\end{problem}
+
+\begin{problem}[Amortized Inference]
+Propose amortized inference for a structured model.
+\textbf{Hint:} Neural proposal networks.
+\end{problem}
+
+\begin{problem}[Calibration]
+Evaluate calibration of marginal probabilities.
+\textbf{Hint:} Reliability diagrams, temperature scaling.
+\end{problem}
+
+

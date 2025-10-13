@@ -1,0 +1,89 @@
+% Problems (Exercises) for Chapter 17
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+\begin{problem}[MC Estimator]
+Write the MC estimator for $\mathbb{E}[f(X)]$ and its variance.
+\textbf{Hint:} Sample mean; variance scales as $1/n$.
+\end{problem}
+
+\begin{problem}[Importance Weights]
+Define normalized importance weights.
+\textbf{Hint:} $w_i \propto p(x_i)/q(x_i)$.
+\end{problem}
+
+\begin{problem}[Autocorrelation]
+How does autocorrelation affect effective sample size?
+\textbf{Hint:} ESS decreases with correlation.
+\end{problem}
+
+\begin{problem}[Burn-in]
+Why discard burn-in samples?
+\textbf{Hint:} Remove initialization bias.
+\end{problem}
+
+\begin{problem}[Proposal Scale]
+Effect of proposal step size on MH acceptance?
+\textbf{Hint:} Trade-off between move size and acceptance.
+\end{problem}
+
+\begin{problem}[Gibbs]
+When is Gibbs sampling easy to implement?
+\textbf{Hint:} Conditional distributions tractable.
+\end{problem}
+
+\subsection*{Medium}
+\begin{problem}[AIS]
+Outline annealed importance sampling and its benefit.
+\textbf{Hint:} Bridging distributions reduce weight variance.
+\end{problem}
+
+\begin{problem}[HMC Intuition]
+Explain how Hamiltonian dynamics improve exploration.
+\textbf{Hint:} Momentum reduces random walk.
+\end{problem}
+
+\begin{problem}[Variance Reduction]
+Propose two variance reduction techniques.
+\textbf{Hint:} Control variates, antithetic sampling.
+\end{problem}
+
+\begin{problem}[Convergence]
+Suggest diagnostics to assess chain convergence.
+\textbf{Hint:} R-hat, ESS, trace plots.
+\end{problem}
+
+\begin{problem}[Gradient Estimates]
+How to estimate gradients with MC in latent-variable models?
+\textbf{Hint:} REINFORCE or reparameterization.
+\end{problem}
+
+\subsection*{Hard}
+\begin{problem}[Detailed Balance]
+Prove MH satisfies detailed balance.
+\textbf{Hint:} Show $\pi(x)T(x\to x')=\pi(x')T(x'\to x)$.
+\end{problem}
+
+\begin{problem}[ESS Formula]
+Derive ESS for an AR(1) autocorrelation model.
+\textbf{Hint:} Sum of autocorrelations.
+\end{problem}
+
+\begin{problem}[Optimal Scaling]
+Derive optimal acceptance rate for random-walk MH in high dimensions.
+\textbf{Hint:} Asymptotic results near 0.234.
+\end{problem}
+
+\begin{problem}[Weight Degeneracy]
+Analyze degeneracy in importance sampling and remedies.
+\textbf{Hint:} Resampling, proposal adaptation.
+\end{problem}
+
+\begin{problem}[Pseudo-marginal]
+Explain pseudo-marginal MCMC and conditions for correctness.
+\textbf{Hint:} Unbiased likelihood estimates.
+\end{problem}
+
+

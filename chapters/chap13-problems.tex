@@ -1,0 +1,108 @@
+% Problems (Exercises) for Chapter 13
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+
+\begin{problem}[PPCA vs PCA]
+Contrast PCA and probabilistic PCA in assumptions and outputs.
+
+\textbf{Hint:} Deterministic vs. probabilistic view; noise model; likelihood.
+\end{problem}
+
+\begin{problem}[Dimensionality Choice]
+List two heuristics to select latent dimensionality.
+
+\textbf{Hint:} Explained variance, information criteria.
+\end{problem}
+
+\begin{problem}[Gaussian Conditionals]
+Recall the conditional of a joint Gaussian and its role in E-steps.
+
+\textbf{Hint:} Use block-partitioned mean and covariance formulas.
+\end{problem}
+
+\begin{problem}[Rotation Ambiguity]
+Explain why factor loadings are identifiable only up to rotation.
+
+\textbf{Hint:} Orthogonal transforms preserve latent covariance.
+\end{problem}
+
+\begin{problem}[Missing Data]
+Briefly describe how EM handles missing entries in linear-Gaussian models.
+
+\textbf{Hint:} Expectation under observed mask.
+\end{problem}
+
+\begin{problem}[Whitening]
+Define whitening and its relationship to PCA.
+
+\textbf{Hint:} Diagonalize covariance and rescale.
+\end{problem}
+
+\subsection*{Medium}
+
+\begin{problem}[PPCA Likelihood]
+Derive the log-likelihood of PPCA and the M-step for $\sigma^2$.
+
+\textbf{Hint:} Marginalize latents; differentiate w.r.t. variance.
+\end{problem}
+
+\begin{problem}[EM for FA]
+Write the E and M steps for Factor Analysis with diagonal noise.
+
+\textbf{Hint:} Use expected sufficient statistics of latents.
+\end{problem}
+
+\begin{problem}[Model Selection]
+Compare AIC and BIC for choosing number of factors. Which tends to be more conservative?
+
+\textbf{Hint:} Penalty strength differs.
+\end{problem}
+
+\begin{problem}[Sparse Loadings]
+Propose a modification to encourage sparse factor loadings.
+
+\textbf{Hint:} L1 penalties or spike-and-slab priors.
+\end{problem}
+
+\begin{problem}[Identifiability Constraints]
+Suggest constraints to fix rotation/scaling without harming fit.
+
+\textbf{Hint:} Upper-triangular loadings; orthonormal columns.
+\end{problem}
+
+\subsection*{Hard}
+
+\begin{problem}[Equivalence of PPCA Solution]
+Show that the MLE loading matrix spans the top-$k$ eigenvectors of the sample covariance.
+
+\textbf{Hint:} Use spectral decomposition of covariance.
+\end{problem}
+
+\begin{problem}[FA vs. PPCA]
+Demonstrate conditions where FA reduces to PPCA.
+
+\textbf{Hint:} Isotropic noise and constrained loadings.
+\end{problem}
+
+\begin{problem}[Missing-not-at-random]
+Discuss pitfalls when data are MNAR and how to adapt EM.
+
+\textbf{Hint:} Model the missingness mechanism.
+\end{problem}
+
+\begin{problem}[Nonlinear Extension]
+Sketch how to generalize linear factor models to VAEs.
+
+\textbf{Hint:} Replace linear-Gaussian with neural encoder/decoder.
+\end{problem}
+
+\begin{problem}[Online EM]
+Derive an online EM scheme for streaming data.
+
+\textbf{Hint:} Maintain exponential moving averages of sufficient statistics.
+\end{problem}
+
+

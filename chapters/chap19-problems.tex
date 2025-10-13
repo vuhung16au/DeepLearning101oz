@@ -1,0 +1,89 @@
+% Problems (Exercises) for Chapter 19
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+\begin{problem}[ELBO]
+Define the ELBO and its relation to KL divergence.
+\textbf{Hint:} $\log p(x) = \text{ELBO} + \mathrm{KL}(q\|p)$.
+\end{problem}
+
+\begin{problem}[Mean-field]
+What is mean-field factorization and its limitation?
+\textbf{Hint:} Ignores posterior correlations.
+\end{problem}
+
+\begin{problem}[Reparameterization]
+State the reparameterization trick.
+\textbf{Hint:} Push randomness outside the network.
+\end{problem}
+
+\begin{problem}[Amortization]
+Define amortized inference and one benefit.
+\textbf{Hint:} Share parameters across data points.
+\end{problem}
+
+\begin{problem}[KL Direction]
+Contrast $\mathrm{KL}(q\|p)$ vs. $\mathrm{KL}(p\|q)$.
+\textbf{Hint:} Mode-covering vs. mode-seeking.
+\end{problem}
+
+\begin{problem}[Black-box VI]
+What is black-box VI?
+\textbf{Hint:} Gradient estimators for generic models.
+\end{problem}
+
+\subsection*{Medium}
+\begin{problem}[CAVI]
+Derive coordinate updates for conjugate exponential family models.
+\textbf{Hint:} Expected natural parameters.
+\end{problem}
+
+\begin{problem}[Diagnostics]
+Suggest two diagnostics for VI quality.
+\textbf{Hint:} Posterior predictive checks, IW-ELBO gaps.
+\end{problem}
+
+\begin{problem}[Normalizing Flows]
+Explain how flows enrich variational families.
+\textbf{Hint:} Invertible transforms with Jacobian corrections.
+\end{problem}
+
+\begin{problem}[IWAE Bound]
+Show IW-ELBO tightens with more samples.
+\textbf{Hint:} Jensen on importance weights.
+\end{problem}
+
+\begin{problem}[Amortization Gap]
+Define and propose a method to reduce it.
+\textbf{Hint:} Local refinement or auxiliary losses.
+\end{problem}
+
+\subsection*{Hard}
+\begin{problem}[Variance Analysis]
+Compare gradient variance: REINFORCE vs. reparameterization.
+\textbf{Hint:} Baselines, control variates.
+\end{problem}
+
+\begin{problem}[Non-conjugacy]
+Handle non-conjugate likelihoods in VI.
+\textbf{Hint:} Quadrature, variational bounds, stochastic VI.
+\end{problem}
+
+\begin{problem}[Tempered VI]
+Derive temperature-annealed VI and its effect.
+\textbf{Hint:} Smooth objectives, explore modes.
+\end{problem}
+
+\begin{problem}[KL Alternatives]
+Propose alternative divergences and implications.
+\textbf{Hint:} Reverse KL, $\alpha$-divergences.
+\end{problem}
+
+\begin{problem}[Structured VI]
+Design a structured variational family for a simple HMM.
+\textbf{Hint:} Preserve Markov dependencies.
+\end{problem}
+
+

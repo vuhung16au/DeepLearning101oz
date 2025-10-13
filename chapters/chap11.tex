@@ -6,8 +6,34 @@
 This chapter provides practical guidelines for successfully applying deep learning to real-world problems.
 
 
+\section*{Learning Objectives}
+\addcontentsline{toc}{section}{Learning Objectives}
+
+After studying this chapter, you will be able to:
+
+\begin{enumerate}
+    \item \textbf{Scope a deep learning project}: define objectives, constraints, and success metrics.
+    \item \textbf{Design data pipelines}: split datasets, manage leakage, and ensure reproducibility.
+    \item \textbf{Select architectures and baselines}: choose strong baselines and iterate systematically.
+    \item \textbf{Tune hyperparameters}: apply principled search and learning-rate schedules.
+    \item \textbf{Diagnose failures}: use loss curves, ablations, and sanity checks to debug.
+    \item \textbf{Deploy responsibly}: monitor drift, handle distribution shift, and document models.
+\end{enumerate}
+
+\difficulty{intermediate}
+
+\section*{Intuition}
+\addcontentsline{toc}{section}{Intuition}
+
+Practical deep learning succeeds when we reduce uncertainty early and iterate quickly. Start with \emph{simple, auditable baselines} to validate data and objectives, then progressively add complexity only when it measurably helps. Prefer experiments that answer the biggest unknowns first (e.g., data quality vs. model capacity). Treat metrics, validation splits, and ablations as your instrumentation layer; they convert intuition into evidence. See also \textcite{GoodfellowEtAl2016} for methodology patterns.
+
+
 \input{chapters/chap11-sec01}
 \input{chapters/chap11-sec02}
 \input{chapters/chap11-sec03}
 \input{chapters/chap11-sec04}
 \input{chapters/chap11-sec05}
+
+% Chapter summary and problems
+\input{chapters/chap11-key-takeaways}
+\input{chapters/chap11-problems}

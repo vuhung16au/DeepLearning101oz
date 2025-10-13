@@ -6,7 +6,31 @@
 This chapter explores autoencoders, neural networks designed for unsupervised learning through data reconstruction.
 
 
+\section*{Learning Objectives}
+\addcontentsline{toc}{section}{Learning Objectives}
+
+After studying this chapter, you will be able to:
+
+\begin{enumerate}
+    \item Describe the autoencoder framework and common variants (denoising, sparse, contractive).
+    \item Explain the role of bottlenecks and regularization in learning useful representations.
+    \item Implement training objectives and evaluate reconstruction vs. downstream utility.
+    \item Understand the connection between autoencoders and generative models.
+\end{enumerate}
+
+\difficulty{intermediate}
+
+\section*{Intuition}
+\addcontentsline{toc}{section}{Intuition}
+
+Autoencoders compress input data into a compact code that retains salient information for reconstruction. Constraining capacity (via architecture or penalties) encourages the model to discard noise and redundancies, surfacing structure that transfers to other tasks.
+
+
 \input{chapters/chap14-sec01}
 \input{chapters/chap14-sec02}
 \input{chapters/chap14-sec03}
 \input{chapters/chap14-sec04}
+
+% Chapter summary and problems
+\input{chapters/chap14-key-takeaways}
+\input{chapters/chap14-problems}

@@ -1,0 +1,89 @@
+% Problems (Exercises) for Chapter 15
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+\begin{problem}[Linear Probe]
+Define a linear probe and why it’s useful.
+\textbf{Hint:} Fixed features, simple classifier.
+\end{problem}
+
+\begin{problem}[Invariance]
+Give two examples of desired invariances.
+\textbf{Hint:} Translation, color shifts.
+\end{problem}
+
+\begin{problem}[Negative Sampling]
+Why are negatives needed in contrastive learning?
+\textbf{Hint:} Avoid collapse.
+\end{problem}
+
+\begin{problem}[Augmentations]
+Name two augmentations that preserve labels in vision.
+\textbf{Hint:} Crops, flips.
+\end{problem}
+
+\begin{problem}[Embedding Norm]
+What does normalizing embeddings change?
+\textbf{Hint:} Cosine vs. Euclidean.
+\end{problem}
+
+\begin{problem}[Info Perspective]
+Relate MI maximization to contrastive losses.
+\textbf{Hint:} Lower bounds on MI.
+\end{problem}
+
+\subsection*{Medium}
+\begin{problem}[NT-Xent]
+Derive gradient of contrastive loss for a positive pair.
+\textbf{Hint:} Softmax over similarities.
+\end{problem}
+
+\begin{problem}[BYOL Collapse]
+Explain mechanisms preventing collapse without negatives.
+\textbf{Hint:} Predictor asymmetry, EMA target.
+\end{problem}
+
+\begin{problem}[Probe Protocol]
+Design a fair protocol to compare two representations.
+\textbf{Hint:} Same compute, seeds, hyperparameters.
+\end{problem}
+
+\begin{problem}[Transfer Gap]
+Probe accuracy high, downstream low. Diagnose.
+\textbf{Hint:} Domain mismatch, label granularity.
+\end{problem}
+
+\begin{problem}[Geometry]
+Show how temperature affects cluster tightness.
+\textbf{Hint:} Softmax sharpness.
+\end{problem}
+
+\subsection*{Hard}
+\begin{problem}[Mutual Information]
+Relate InfoNCE to MI bounds and assumptions.
+\textbf{Hint:} Noise-contrastive estimation.
+\end{problem}
+
+\begin{problem}[Adversarial Transfer]
+Analyze robustness of learned features to adversarial examples.
+\textbf{Hint:} Margin and local smoothness.
+\end{problem}
+
+\begin{problem}[Cluster Assumptions]
+When do cluster-based methods fail?
+\textbf{Hint:} Non-clustered manifolds.
+\end{problem}
+
+\begin{problem}[Probe Capacity]
+Study effect of probe depth on conclusions.
+\textbf{Hint:} Under/over-estimation of quality.
+\end{problem}
+
+\begin{problem}[Scaling Laws]
+Predict representation quality vs. data/model size.
+\textbf{Hint:} Empirical scaling trends.
+\end{problem}
+
+

@@ -1,0 +1,89 @@
+% Problems (Exercises) for Chapter 18
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+\begin{problem}[Why Hard?]
+Explain why computing Z is difficult in large models.
+\textbf{Hint:} Exponential state spaces.
+\end{problem}
+
+\begin{problem}[Self-normalized IS]
+State the SNIS estimator for expectations.
+\textbf{Hint:} Weighted average normalized by sum of weights.
+\end{problem}
+
+\begin{problem}[Energy Models]
+How does contrastive divergence sidestep Z?
+\textbf{Hint:} Gradient difference of data vs. model samples.
+\end{problem}
+
+\begin{problem}[Proposals]
+What properties make a good proposal?
+\textbf{Hint:} Support overlap, low variance weights.
+\end{problem}
+
+\begin{problem}[Temperature]
+Role of temperature in AIS?
+\textbf{Hint:} Bridges between easy and target distributions.
+\end{problem}
+
+\begin{problem}[Bias vs. Variance]
+Provide an example where a biased estimator is preferable.
+\textbf{Hint:} Lower MSE under budget.
+\end{problem}
+
+\subsection*{Medium}
+\begin{problem}[Weight Variance]
+Derive variance of IS weights under mismatch.
+\textbf{Hint:} Dependence on $p^2/q$ moments.
+\end{problem}
+
+\begin{problem}[AIS Scheduling]
+Design a schedule for intermediate distributions.
+\textbf{Hint:} Geometric temperature spacing.
+\end{problem}
+
+\begin{problem}[CD-k]
+Discuss trade-offs in choosing $k$ for contrastive divergence.
+\textbf{Hint:} Bias vs. compute.
+\end{problem}
+
+\begin{problem}[Score Matching]
+Relate score matching to partition function avoidance.
+\textbf{Hint:} Gradients of log-density.
+\end{problem}
+
+\begin{problem}[Estimator Comparison]
+Compare AIS and thermodynamic integration.
+\textbf{Hint:} Paths and numerical stability.
+\end{problem}
+
+\subsection*{Hard}
+\begin{problem}[Optimal Proposals]
+Show optimal $q$ minimizing variance for a given $f$.
+\textbf{Hint:} Proportional to $|f|p$.
+\end{problem}
+
+\begin{problem}[LogZ Bounds]
+Derive upper/lower bounds on $\log Z$ via Jensen and AIS.
+\textbf{Hint:} Convexity and unbiasedness of weight estimators.
+\end{problem}
+
+\begin{problem}[Persistent Chains]
+Analyze convergence of persistent CD.
+\textbf{Hint:} Ergodicity and mixing assumptions.
+\end{problem}
+
+\begin{problem}[Variance Control]
+Propose adaptive schemes to control IS variance.
+\textbf{Hint:} Adaptive proposals, resampling.
+\end{problem}
+
+\begin{problem}[High-dimensional Z]
+Discuss curse of dimensionality in Z estimation.
+\textbf{Hint:} Concentration and rare-event sampling.
+\end{problem}
+
+
