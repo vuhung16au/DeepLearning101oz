@@ -1,0 +1,60 @@
+% Chapter 9, Section 6
+
+\section{Problems}
+\label{sec:cnn-problems}
+
+\subsection*{Instructions}
+Attempt the following problems in order. Hints are provided to guide your reasoning.
+
+\subsection*{Easy}
+\begin{enumerate}[label=E\arabic*.,leftmargin=*]
+    \item Output Size Basics: For input $32\times32$, kernel $5\times5$, stride $1$, padding $2$, what is the output size?\\
+    Hint: Use $\left\lfloor\frac{n-k+2p}{s}\right\rfloor+1$.
+    \item Parameter Count: For a conv layer with $C_{in}=3$, $C_{out}=16$, kernel $3\times3$, how many weights and biases?\\
+    Hint: Weights $=3\cdot3\cdot C_{in}\cdot C_{out}$; biases $=C_{out}$.
+    \item Receptive Field Growth: Two stacked $3\times3$ convs (stride 1, same padding). What is the effective receptive field?\\
+    Hint: Add $k-1$ per layer.
+    \item Pooling Downsampling: How many $2\times2$ max-pooling layers (stride 2) reduce $128\times128$ to $8\times8$?\\
+    Hint: Halve per layer.
+    \item Cross-Correlation vs Convolution: What is the difference?\\
+    Hint: Kernel flip vs no flip.
+    \item GAP Head: Why does global average pooling reduce parameters compared to FC?\\
+    Hint: Eliminates dense connections over spatial maps.
+\end{enumerate}
+
+\subsection*{Medium}
+\begin{enumerate}[label=M\arabic*.,leftmargin=*]
+    \item Strided Convolution Shape: Input $64\times64\times64$, $3\times3$ conv, $C_{out}=128$, stride 2, padding 1. What is the output shape?\\
+    Hint: Apply formula per spatial dimension.
+    \item FLOPs Estimate: Estimate multiply-accumulate ops for the above layer.\\
+    Hint: $H'W'\cdot k^2\cdot C_{in}\cdot C_{out}$.
+    \item Residual Block Gradient: Explain why adding identity improves gradient flow.\\
+    Hint: Jacobian adds $\mat{I}$.
+    \item Depthwise Separable Savings: Compare parameters of standard vs depthwise+pointwise for $C_{in}=C_{out}=256$, $k=3$.\\
+    Hint: Standard $=k^2 C_{in}C_{out}$; separable $=k^2 C_{in}+C_{in}C_{out}$.
+    \item VGG vs Inception: Contrast design philosophies.\\
+    Hint: Small uniform filters vs multi-branch multi-scale with $1\times1$ bottlenecks.
+\end{enumerate}
+
+\subsection*{Hard}
+\begin{enumerate}[label=H\arabic*.,leftmargin=*]
+    \item Derive Backprop for Conv: Starting from $S=I\star K$, derive $\partial \mathcal{L}/\partial K$ and $\partial \mathcal{L}/\partial I$.\\
+    Hint: Use index notation and chain rule with shifts.
+    \item Receptive Field in ResNet Stage: For a stage of $N$ residual blocks each with $3\times3$ convs, stride 1, what is the receptive field increase relative to input?\\
+    Hint: Each $3\times3$ adds 2; consider two per block.
+    \item Alias and Stride: Discuss when strided conv without pre-filtering can alias features.\\
+    Hint: Nyquist; low-pass before downsampling.
+    \item Effective Stride and Dilation: Show how dilation increases receptive field without increasing parameters.\\
+    Hint: Holes in kernels; spacing factor.
+    \item Designing a Lightweight Backbone: Propose a backbone achieving $<300$ MFLOPs at $224\times224$ with competitive accuracy.\\
+    Hint: Depthwise separable convs, squeeze-expansion, or compound scaling.
+\end{enumerate}
+
+\subsection*{Key Takeaways}
+\begin{itemize}
+    \item Start with simple conv-pool stacks; add residuals and normalization as depth grows.
+    \item Prefer small kernels and learn downsampling where appropriate; consider efficiency via separable convs.
+    \item Choose heads tailored to the task (classification/detection/segmentation) and ensure shapes match.
+\end{itemize}
+
+

@@ -5,6 +5,9 @@
 
 \textbf{Pooling} reduces spatial dimensions and provides translation invariance.
 
+\subsection*{Intuition}
+Pooling summarizes nearby activations so that small translations of the input do not significantly change the summary. Max pooling keeps the strongest response, while average pooling smooths responses. Modern designs sometimes prefer strided convolutions to make downsampling learnable \cite{GoodfellowEtAl2016}.
+
 \subsection{Max Pooling}
 
 Takes maximum value in each pooling region:
@@ -29,9 +32,9 @@ Pools over entire spatial dimensions:
     \item \textbf{Global Max Pooling:} maximum over all spatial locations
 \end{itemize}
 
-Useful for reducing parameters before fully connected layers.
+Useful for reducing parameters before fully connected layers and for connecting convolutional backbones to classification heads (e.g., GAP before softmax).
 
 \subsection{Alternative: Strided Convolutions}
 
-Modern architectures sometimes replace pooling with strided convolutions to learn downsampling.
+Modern architectures sometimes replace pooling with strided convolutions to learn downsampling (e.g., in ResNet stages) \cite{He2016}.
 

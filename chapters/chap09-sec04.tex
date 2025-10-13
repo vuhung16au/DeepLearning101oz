@@ -3,6 +3,8 @@
 \section{Applications of CNNs}
 \label{sec:cnn-applications}
 
+\subsection*{Intuition}
+Backbones of stacked convolutions extract spatially local features that become increasingly abstract with depth. Task-specific heads (classification, detection, segmentation) transform backbone features into outputs appropriate to the problem \cite{GoodfellowEtAl2016,Prince2023}.
 \subsection{Image Classification}
 
 Task: Assign label to entire image.
@@ -35,7 +37,7 @@ Task: Localize and classify objects in images.
 
 \subsection{Semantic Segmentation}
 
-Task: Assign class label to each pixel.
+Task: Assign class label to each pixel. U-Net popularized encoder-decoder with skip connections for biomedical images \cite{Ronneberger2015}.
 
 \textbf{FCN (Fully Convolutional Networks):}
 \begin{itemize}
