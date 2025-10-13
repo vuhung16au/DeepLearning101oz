@@ -3,40 +3,240 @@
 \section{k-Nearest Neighbors}
 \label{sec:knn}
 
-\textbf{k-Nearest Neighbors} (k-NN) is a non-parametric instance-based method.
+\textbf{k-Nearest Neighbors} (k-NN) is a simple yet powerful non-parametric algorithm that makes predictions based on the similarity to training examples. It's called "lazy learning" because it doesn't build a model during training—all computation happens at prediction time.
+
+\subsection{Intuition and Motivation}
+
+The k-NN algorithm is based on a simple principle: "similar things are close to each other." If you want to predict whether someone will like a movie, look at what movies similar people (with similar tastes) liked. If you want to predict house prices, look at prices of similar houses in the neighborhood.
+
+The key insight is that we can make good predictions by finding the most similar examples in our training data and using their outcomes as a guide.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+    xlabel={Feature 1},
+    ylabel={Feature 2},
+    title={k-NN Classification Example (k=3)},
+    grid=major,
+    width=10cm,
+    height=8cm
+]
+% Generate some sample data
+\addplot[only marks, mark=*, mark size=3pt, color=bookpurple] coordinates {
+    (1,1) (1.5,1.5) (2,1) (2.5,2) (3,1.5)
+};
+\addplot[only marks, mark=square*, mark size=3pt, color=bookred] coordinates {
+    (2,3) (2.5,3.5) (3,3) (3.5,3.5) (4,3)
+};
+% Add query point
+\addplot[only marks, mark=triangle*, mark size=4pt, color=bookblack] coordinates {
+    (2.5,2.5)
+};
+% Add circles around query point
+\draw[thick, color=bookblack, dashed] (2.5,2.5) circle (1.2);
+\node at (axis cs:2.5,2.5) [anchor=south] {Query point};
+\node at (axis cs:2.5,1.3) [anchor=west] {k=3 neighbors};
+\legend{Class 0, Class 1, Query point, Neighbors}
+\end{axis}
+\end{tikzpicture}
+\caption{k-NN finds the k nearest neighbors to a query point and makes predictions based on their labels. Here, with k=3, the query point would be classified as class 0 (2 out of 3 neighbors are class 0).}
+\label{fig:knn-example}
+\end{figure}
 
 \subsection{Algorithm}
 
 For a query point $\vect{x}$:
+
 \begin{enumerate}
-    \item Find the $k$ closest training examples
-    \item For classification: return the majority class
-    \item For regression: return the average of their values
+    \item Find the $k$ closest training examples based on a distance metric
+    \item For classification: return the majority class among the $k$ neighbors
+    \item For regression: return the average of the target values of the $k$ neighbors
 \end{enumerate}
+
+\subsubsection{Mathematical Formulation}
+
+For classification, the predicted class is:
+\begin{equation}
+\hat{y} = \arg\max_{c} \sum_{i=1}^{k} \mathbb{I}(y^{(i)} = c)
+\end{equation}
+
+For regression, the predicted value is:
+\begin{equation}
+\hat{y} = \frac{1}{k} \sum_{i=1}^{k} y^{(i)}
+\end{equation}
+
+where $y^{(i)}$ are the target values of the $k$ nearest neighbors.
 
 \subsection{Distance Metrics}
 
-Common distance metrics:
+The choice of distance metric significantly affects k-NN performance. Here are the most common ones:
+
+\subsubsection{Euclidean Distance}
+
+\begin{equation}
+d(\vect{x}, \vect{x}') = \sqrt{\sum_{i=1}^{d} (x_i - x_i')^2}
+\end{equation}
+
+This is the most common choice, measuring the straight-line distance between points.
+
+\subsubsection{Manhattan Distance}
+
+\begin{equation}
+d(\vect{x}, \vect{x}') = \sum_{i=1}^{d} |x_i - x_i'|
+\end{equation}
+
+Also known as L1 distance, it measures the sum of absolute differences. Useful when features have different scales.
+
+\subsubsection{Minkowski Distance}
+
+\begin{equation}
+d(\vect{x}, \vect{x}') = \left(\sum_{i=1}^{d} |x_i - x_i'|^p\right)^{1/p}
+\end{equation}
+
+This is a generalization where:
 \begin{itemize}
-    \item \textbf{Euclidean:} $d(\vect{x}, \vect{x}') = \sqrt{\sum_i (x_i - x_i')^2}$
-    \item \textbf{Manhattan:} $d(\vect{x}, \vect{x}') = \sum_i |x_i - x_i'|$
-    \item \textbf{Minkowski:} $d(\vect{x}, \vect{x}') = \left(\sum_i |x_i - x_i'|^p\right)^{1/p}$
+    \item $p = 1$: Manhattan distance
+    \item $p = 2$: Euclidean distance
+    \item $p \to \infty$: Chebyshev distance (maximum coordinate difference)
 \end{itemize}
 
 \subsection{Choosing k}
 
+The choice of $k$ is crucial and involves a bias-variance trade-off:
+
 \begin{itemize}
-    \item Small $k$: flexible decision boundary but sensitive to noise
-    \item Large $k$: smoother decision boundary but may miss local structure
-    \item Typically chosen by cross-validation
+    \item \textbf{Small $k$ (e.g., k=1):}
+    \begin{itemize}
+        \item Low bias, high variance
+        \item Flexible decision boundary
+        \item Sensitive to noise and outliers
+        \item May overfit to training data
+    \end{itemize}
+    \item \textbf{Large $k$ (e.g., k=n):}
+    \begin{itemize}
+        \item High bias, low variance
+        \item Smooth decision boundary
+        \item May miss local patterns
+        \item Underfits the data
+    \end{itemize}
 \end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+    xlabel={k value},
+    ylabel={Error Rate},
+    title={Effect of k on k-NN Performance},
+    grid=major,
+    width=10cm,
+    height=6cm,
+    xmin=1, xmax=20
+]
+% Generate a U-shaped curve
+\addplot[thick, color=bookpurple, domain=1:20] {0.1 + 0.05*(x-5)^2/25};
+\node at (axis cs:5,0.1) [anchor=south] {Optimal k};
+\node at (axis cs:1,0.15) [anchor=east] {High variance};
+\node at (axis cs:20,0.15) [anchor=west] {High bias};
+\end{axis}
+\end{tikzpicture}
+\caption{The effect of k on k-NN performance. Small k leads to high variance (overfitting), while large k leads to high bias (underfitting). The optimal k is typically found through cross-validation.}
+\label{fig:knn-k-selection}
+\end{figure}
+
+\subsection{Weighted k-NN}
+
+Instead of giving equal weight to all $k$ neighbors, we can weight them by their distance:
+
+\begin{equation}
+\hat{y} = \frac{\sum_{i=1}^{k} w_i y^{(i)}}{\sum_{i=1}^{k} w_i}
+\end{equation}
+
+where $w_i = \frac{1}{d(\vect{x}, \vect{x}^{(i)})}$ is the weight based on distance.
 
 \subsection{Computational Considerations}
 
-k-NN requires:
+k-NN has several computational characteristics:
+
+\subsubsection{Training Time}
 \begin{itemize}
-    \item No training time (lazy learning)
-    \item $O(n)$ prediction time for $n$ training examples
-    \item Can be accelerated using KD-trees or ball trees
+    \item \textbf{No training time:} k-NN is a lazy learner
+    \item \textbf{Memory usage:} Must store all training examples
+    \item \textbf{Scalability:} Performance degrades with large datasets
+\end{itemize}
+
+\subsubsection{Prediction Time}
+\begin{itemize}
+    \item \textbf{Naive approach:} $O(n \cdot d)$ for each prediction
+    \item \textbf{Optimized approaches:} Can be reduced using data structures
+\end{itemize}
+
+\subsubsection{Speedup Techniques}
+
+\textbf{KD-Trees:}
+\begin{itemize}
+    \item Partition space into regions
+    \item Reduce search time to $O(\log n)$ in low dimensions
+    \item Less effective in high dimensions
+\end{itemize}
+
+\textbf{Ball Trees:}
+\begin{itemize}
+    \item Use hyperspheres instead of hyperplanes
+    \item Better for high-dimensional data
+    \item More complex to implement
+\end{itemize}
+
+\textbf{Locality Sensitive Hashing (LSH):}
+\begin{itemize}
+    \item Approximate nearest neighbor search
+    \item Significant speedup for very large datasets
+    \item May sacrifice some accuracy
+\end{itemize}
+
+\subsection{Advantages and Limitations}
+
+\textbf{Advantages:}
+\begin{itemize}
+    \item \textbf{Simple:} Easy to understand and implement
+    \item \textbf{No assumptions:} Works with any data type
+    \item \textbf{Non-parametric:} No model to fit
+    \item \textbf{Local patterns:} Can capture complex decision boundaries
+    \item \textbf{Incremental:} Easy to add new training examples
+\end{itemize}
+
+\textbf{Limitations:}
+\begin{itemize}
+    \item \textbf{Computational cost:} Slow for large datasets
+    \item \textbf{Memory usage:} Must store all training data
+    \item \textbf{Sensitive to irrelevant features:} All features are treated equally
+    \item \textbf{Curse of dimensionality:} Performance degrades in high dimensions
+    \item \textbf{No interpretability:} Hard to understand why a prediction was made
+\end{itemize}
+
+\subsection{Curse of Dimensionality}
+
+In high-dimensional spaces, k-NN faces the \textbf{curse of dimensionality}:
+
+\begin{itemize}
+    \item \textbf{Distance concentration:} All points become roughly equidistant
+    \item \textbf{Empty space:} Most of the space is empty
+    \item \textbf{Irrelevant features:} Performance degrades with irrelevant features
+\end{itemize}
+
+\begin{example}
+In a 1000-dimensional space, even if only 10 features are relevant, the 990 irrelevant features can dominate the distance calculations, making k-NN ineffective.
+\end{example}
+
+\subsection{Feature Selection and Scaling}
+
+To improve k-NN performance:
+
+\begin{itemize}
+    \item \textbf{Feature selection:} Remove irrelevant features
+    \item \textbf{Feature scaling:} Normalize features to the same scale
+    \item \textbf{Dimensionality reduction:} Use PCA or other techniques
+    \item \textbf{Distance weighting:} Weight features by importance
 \end{itemize}
 

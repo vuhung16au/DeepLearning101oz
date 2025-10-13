@@ -3,22 +3,99 @@
 \section{Decision Trees and Ensemble Methods}
 \label{sec:decision-trees}
 
-\subsection{Decision Trees}
+\textbf{Decision trees} are intuitive, interpretable models that make predictions by asking a series of yes/no questions about the input features. While individual trees can be prone to overfitting, combining multiple trees through ensemble methods often leads to much better performance.
 
-A \textbf{decision tree} recursively partitions the input space based on feature values.
+\subsection{Intuition and Motivation}
 
-\textbf{Splitting criteria:}
+Think of a decision tree as a flowchart for making decisions. For example, to classify whether someone will buy a product, you might ask: "Is their income > \$50k?" If yes, ask "Are they under 30?" If no, ask "Do they have children?" Each question splits the data into smaller, more homogeneous groups.
+
+The key advantages of decision trees are:
 \begin{itemize}
-    \item \textbf{Gini impurity:} $1 - \sum_{k} p_k^2$
-    \item \textbf{Entropy:} $-\sum_{k} p_k \log p_k$
-    \item \textbf{MSE} (for regression): variance of target values
+    \item \textbf{Interpretability:} Easy to understand and explain
+    \item \textbf{No feature scaling:} Works with mixed data types
+    \item \textbf{Handles missing values:} Can deal with incomplete data
+    \item \textbf{Non-parametric:} No assumptions about data distribution
 \end{itemize}
 
-where $p_k$ is the proportion of class $k$ examples in a node.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.7]
+\node[draw, rectangle, fill=bookpurple!20] (root) at (0,0) {Income > \$50k?};
+\node[draw, rectangle, fill=bookpurple!20] (left) at (-3,-2) {Age < 30?};
+\node[draw, rectangle, fill=bookpurple!20] (right) at (3,-2) {Has children?};
+\node[draw, rectangle, fill=bookred!20] (ll) at (-4.5,-4) {Buy};
+\node[draw, rectangle, fill=bookred!20] (lr) at (-1.5,-4) {Don't buy};
+\node[draw, rectangle, fill=bookred!20] (rl) at (1.5,-4) {Buy};
+\node[draw, rectangle, fill=bookred!20] (rr) at (4.5,-4) {Don't buy};
+
+\draw[->] (root) -- (left) node[midway, left] {Yes};
+\draw[->] (root) -- (right) node[midway, right] {No};
+\draw[->] (left) -- (ll) node[midway, left] {Yes};
+\draw[->] (left) -- (lr) node[midway, right] {No};
+\draw[->] (right) -- (rl) node[midway, left] {Yes};
+\draw[->] (right) -- (rr) node[midway, right] {No};
+\end{tikzpicture}
+\caption{A simple decision tree for predicting product purchases. Each internal node represents a decision, and leaf nodes represent the final prediction.}
+\label{fig:decision-tree-example}
+\end{figure}
+
+\subsection{Decision Trees}
+
+A \textbf{decision tree} recursively partitions the input space based on feature values. The algorithm works by:
+
+\begin{enumerate}
+    \item Starting with all training examples at the root
+    \item Finding the best feature and threshold to split on
+    \item Creating child nodes for each split
+    \item Repeating recursively until a stopping criterion is met
+    \item Assigning a prediction to each leaf node
+\end{enumerate}
+
+\subsubsection{Splitting Criteria}
+
+The key question is: "Which feature and threshold should we use to split the data?" We want splits that create the most homogeneous child nodes.
+
+\textbf{For classification:}
+
+\textbf{Gini impurity:}
+\begin{equation}
+\text{Gini} = 1 - \sum_{k=1}^{K} p_k^2
+\end{equation}
+
+\textbf{Entropy:}
+\begin{equation}
+\text{Entropy} = -\sum_{k=1}^{K} p_k \log p_k
+\end{equation}
+
+\textbf{For regression:}
+\begin{equation}
+\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y^{(i)} - \bar{y})^2
+\end{equation}
+
+where $p_k$ is the proportion of class $k$ examples in a node, and $\bar{y}$ is the mean target value.
+
+\subsubsection{Information Gain}
+
+The \textbf{information gain} measures how much a split reduces impurity:
+
+\begin{equation}
+\text{IG} = \text{Impurity(parent)} - \sum_{j} \frac{n_j}{n} \text{Impurity(child}_j\text{)}
+\end{equation}
+
+We choose the split that maximizes information gain.
 
 \subsection{Random Forests}
 
-\textbf{Random forests} combine multiple decision trees trained on bootstrap samples with random feature subsets at each split.
+\textbf{Random forests} address the overfitting problem of individual trees by combining multiple trees trained on different subsets of the data.
+
+\subsubsection{Bootstrap Aggregating (Bagging)}
+
+Random forests use two sources of randomness:
+
+\begin{enumerate}
+    \item \textbf{Bootstrap sampling:} Each tree is trained on a random sample (with replacement) of the training data
+    \item \textbf{Random feature selection:} At each split, only a random subset of features is considered
+\end{enumerate}
 
 Prediction is made by averaging (regression) or voting (classification):
 
@@ -28,16 +105,133 @@ Prediction is made by averaging (regression) or voting (classification):
 
 where $B$ is the number of trees.
 
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+% Draw multiple trees
+\foreach \x in {0,2,4,6} {
+    \node[draw, rectangle, fill=bookpurple!20] (root\x) at (\x,0) {Tree \pgfmathparse{int(\x/2+1)}\pgfmathresult};
+    \node[draw, rectangle, fill=bookred!20] (leaf1\x) at (\x-0.5,-1.5) {Leaf 1};
+    \node[draw, rectangle, fill=bookred!20] (leaf2\x) at (\x+0.5,-1.5) {Leaf 2};
+    \draw[->] (root\x) -- (leaf1\x);
+    \draw[->] (root\x) -- (leaf2\x);
+}
+
+% Add ensemble prediction
+\node[draw, rectangle, fill=bookred!40] (ensemble) at (3,-3) {Final Prediction};
+\draw[->] (leaf10) -- (ensemble);
+\draw[->] (leaf12) -- (ensemble);
+\draw[->] (leaf14) -- (ensemble);
+\draw[->] (leaf16) -- (ensemble);
+
+\node at (3,-4) {Average/Vote};
+\end{tikzpicture}
+\caption{Random forests combine multiple decision trees. Each tree is trained on a different bootstrap sample and makes its own prediction. The final prediction is the average (regression) or majority vote (classification) of all trees.}
+\label{fig:random-forest}
+\end{figure}
+
+\subsubsection{Advantages of Random Forests}
+
+\begin{itemize}
+    \item \textbf{Reduced overfitting:} Multiple trees reduce variance
+    \item \textbf{Feature importance:} Can measure which features are most important
+    \item \textbf{Robust to outliers:} Bootstrap sampling reduces outlier impact
+    \item \textbf{Parallelizable:} Trees can be trained independently
+    \item \textbf{No feature scaling needed:} Works with mixed data types
+\end{itemize}
+
 \subsection{Gradient Boosting}
 
-\textbf{Gradient boosting} builds an ensemble sequentially, where each tree corrects errors of the previous ensemble.
+\textbf{Gradient boosting} builds an ensemble sequentially, where each new tree corrects the errors of the previous ensemble. Unlike random forests, trees are trained one after another.
+
+\subsubsection{Algorithm}
 
 For iteration $m$:
 \begin{enumerate}
     \item Compute residuals: $r_i^{(m)} = y^{(i)} - \hat{y}^{(m-1)}(\vect{x}^{(i)})$
     \item Fit tree $f_m$ to residuals
-    \item Update: $\hat{y}^{(m)} = \hat{y}^{(m-1)} + \nu f_m$
+    \item Update: $\hat{y}^{(m)} = \hat{y}^{(m-1)} + \nu f_m(\vect{x}^{(i)})$
 \end{enumerate}
 
-where $\nu$ is the learning rate.
+where $\nu$ is the learning rate (shrinkage parameter).
+
+\subsubsection{Intuition}
+
+Gradient boosting works by:
+\begin{enumerate}
+    \item Start with a simple model (e.g., mean for regression)
+    \item Calculate the errors (residuals) of the current model
+    \item Train a new model to predict these errors
+    \item Add the new model to the ensemble (with a small weight)
+    \item Repeat until convergence
+\end{enumerate}
+
+\begin{example}
+For regression with target values $[10, 20, 30, 40]$:
+\begin{enumerate}
+    \item Initial prediction: $\hat{y}^{(0)} = 25$ (mean)
+    \item Residuals: $[-15, -5, 5, 15]$
+    \item Train tree on residuals
+    \item Add tree to ensemble: $\hat{y}^{(1)} = 25 + \nu \cdot \text{tree}_1(\vect{x})$
+    \item Repeat with new residuals
+\end{enumerate}
+\end{example}
+
+\subsection{Advanced Ensemble Methods}
+
+\subsubsection{AdaBoost}
+
+\textbf{AdaBoost} (Adaptive Boosting) is an early boosting algorithm that:
+\begin{itemize}
+    \item Assigns higher weights to misclassified examples
+    \item Combines weak learners with weights based on their performance
+    \item Focuses on the hardest examples
+\end{itemize}
+
+\subsubsection{XGBoost and LightGBM}
+
+Modern gradient boosting implementations like XGBoost and LightGBM add:
+\begin{itemize}
+    \item \textbf{Regularization:} L1 and L2 penalties
+    \item \textbf{Pruning:} Remove splits that don't improve performance
+    \item \textbf{Feature subsampling:} Random feature selection at each split
+    \item \textbf{Efficient implementation:} Optimized for speed and memory
+\end{itemize}
+
+\subsection{Comparison of Ensemble Methods}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{lccc}
+\toprule
+Method & Bias & Variance & Interpretability \\
+\midrule
+Single Tree & Low & High & High \\
+Random Forest & Low & Medium & Medium \\
+Gradient Boosting & Low & Low & Low \\
+\bottomrule
+\end{tabular}
+\caption{Comparison of tree-based methods. Random forests reduce variance through averaging, while gradient boosting reduces both bias and variance through sequential learning.}
+\label{tab:ensemble-comparison}
+\end{table}
+
+\subsection{Advantages and Limitations}
+
+\textbf{Advantages:}
+\begin{itemize}
+    \item \textbf{Interpretable:} Easy to understand and explain
+    \item \textbf{Flexible:} Handles mixed data types and missing values
+    \item \textbf{No assumptions:} Works with any data distribution
+    \item \textbf{Feature importance:} Can identify important features
+    \item \textbf{Robust:} Less sensitive to outliers than linear methods
+\end{itemize}
+
+\textbf{Limitations:}
+\begin{itemize}
+    \item \textbf{Overfitting:} Individual trees can overfit easily
+    \item \textbf{Instability:} Small changes in data can lead to very different trees
+    \item \textbf{Computational cost:} Ensemble methods can be slow to train
+    \item \textbf{Memory usage:} Storing many trees requires significant memory
+    \item \textbf{Less effective with high-dimensional data:} Performance can degrade with many features
+\end{itemize}
 

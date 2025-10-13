@@ -3,42 +3,187 @@
 \section{Logistic Regression}
 \label{sec:logistic-regression}
 
-\textbf{Logistic regression} is used for binary classification.
+\textbf{Logistic regression} is a fundamental classification algorithm that models the probability of class membership using a logistic (sigmoid) function. Despite its name, it's actually a classification method, not a regression method.
+
+\subsection{Intuition and Motivation}
+
+Logistic regression extends linear regression to handle classification problems. Instead of predicting continuous values, it predicts probabilities that an input belongs to a particular class. The key insight is to use a sigmoid function to map linear combinations of features to probabilities between 0 and 1.
+
+Think of logistic regression as answering: "Given these features, what's the probability that this example belongs to the positive class?" For example, given a patient's symptoms, what's the probability they have a particular disease?
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+    xlabel={Linear Score ($z = \vect{w}^\top \vect{x} + b$)},
+    ylabel={Probability $P(y=1|\vect{x})$},
+    title={Sigmoid Function: Mapping Linear Scores to Probabilities},
+    grid=major,
+    width=10cm,
+    height=6cm,
+    xmin=-6, xmax=6,
+    ymin=0, ymax=1
+]
+\addplot[thick, color=bookpurple, domain=-6:6] {1/(1+exp(-x))};
+\node at (axis cs:2,0.8) [anchor=west] {$\sigma(z) = \frac{1}{1 + e^{-z}}$};
+\addplot[dashed, color=bookred] coordinates {(-6,0.5) (6,0.5)};
+\node at (axis cs:0,0.6) [anchor=east] {Decision boundary at 0.5};
+\end{axis}
+\end{tikzpicture}
+\caption{The sigmoid function smoothly maps any real number to a probability between 0 and 1. The decision boundary is typically at 0.5.}
+\label{fig:sigmoid-function}
+\end{figure}
 
 \subsection{Binary Classification}
 
-The model uses the sigmoid function:
+For binary classification with classes $\{0, 1\}$, logistic regression models the probability of the positive class using the sigmoid function:
 
 \begin{equation}
 \sigma(z) = \frac{1}{1 + e^{-z}}
 \end{equation}
 
-Prediction:
+The prediction probability is:
 \begin{equation}
-P(y=1|\vect{x}) = \sigma(\vect{w}^\top \vect{x} + b)
+P(y=1|\vect{x}) = \sigma(\vect{w}^\top \vect{x} + b) = \frac{1}{1 + e^{-(\vect{w}^\top \vect{x} + b)}}
 \end{equation}
+
+\subsubsection{Properties of the Sigmoid Function}
+
+The sigmoid function has several important properties:
+\begin{itemize}
+    \item \textbf{Range:} $\sigma(z) \in (0, 1)$ for all $z \in \mathbb{R}$
+    \item \textbf{Monotonic:} $\sigma'(z) = \sigma(z)(1-\sigma(z)) > 0$ for all $z$
+    \item \textbf{Symmetric:} $\sigma(-z) = 1 - \sigma(z)$
+    \item \textbf{Asymptotic:} $\lim_{z \to \infty} \sigma(z) = 1$ and $\lim_{z \to -\infty} \sigma(z) = 0$
+\end{itemize}
 
 \subsection{Cross-Entropy Loss}
 
-The loss function (negative log-likelihood) is:
+Unlike linear regression, we can't use mean squared error for classification because the sigmoid function is non-linear. Instead, we use the \textbf{cross-entropy loss} (negative log-likelihood):
 
 \begin{equation}
 L(\vect{w}, b) = -\frac{1}{n} \sum_{i=1}^{n} \left[y^{(i)} \log \hat{y}^{(i)} + (1-y^{(i)}) \log(1-\hat{y}^{(i)})\right]
 \end{equation}
 
-\subsection{Multiclass Classification}
+where $\hat{y}^{(i)} = P(y=1|\vect{x}^{(i)})$.
 
-For $K$ classes, we use \textbf{softmax regression}:
+\subsubsection{Derivation of Cross-Entropy Loss}
+
+The cross-entropy loss comes from maximum likelihood estimation. For a single example, the likelihood is:
+$$L_i = P(y^{(i)}|\vect{x}^{(i)}) = (\hat{y}^{(i)})^{y^{(i)}} (1-\hat{y}^{(i)})^{1-y^{(i)}}$$
+
+Taking the negative log-likelihood:
+$$-\log L_i = -y^{(i)} \log \hat{y}^{(i)} - (1-y^{(i)}) \log(1-\hat{y}^{(i)})$$
+
+\subsection{Gradient Descent for Logistic Regression}
+
+The gradient of the cross-entropy loss with respect to the weights is:
 
 \begin{equation}
-P(y=k|\vect{x}) = \frac{\exp(\vect{w}_k^\top \vect{x})}{\sum_{j=1}^{K} \exp(\vect{w}_j^\top \vect{x})}
+\nabla_{\vect{w}} L = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}^{(i)} - y^{(i)}) \vect{x}^{(i)}
 \end{equation}
 
-The loss is the categorical cross-entropy:
+The weight update rule becomes:
+\begin{equation}
+\vect{w}_{t+1} = \vect{w}_t - \alpha \frac{1}{n} \sum_{i=1}^{n} (\hat{y}^{(i)} - y^{(i)}) \vect{x}^{(i)}
+\end{equation}
+
+\begin{remark}
+The gradient has a simple form: it's the average of the prediction errors multiplied by the input features. This makes logistic regression particularly efficient to train.
+\end{remark}
+
+\subsection{Multiclass Classification}
+
+For $K$ classes, we extend logistic regression to \textbf{softmax regression} (also called multinomial logistic regression). Instead of a single sigmoid function, we use the softmax function:
+
+\begin{equation}
+P(y=k|\vect{x}) = \frac{\exp(\vect{w}_k^\top \vect{x} + b_k)}{\sum_{j=1}^{K} \exp(\vect{w}_j^\top \vect{x} + b_j)}
+\end{equation}
+
+\subsubsection{Properties of Softmax}
+
+The softmax function has several key properties:
+\begin{itemize}
+    \item \textbf{Probability distribution:} $\sum_{k=1}^{K} P(y=k|\vect{x}) = 1$
+    \item \textbf{Non-negative:} $P(y=k|\vect{x}) \geq 0$ for all $k$
+    \item \textbf{Monotonic:} Higher scores lead to higher probabilities
+    \item \textbf{Scale invariant:} Adding a constant to all scores doesn't change probabilities
+\end{itemize}
+
+\subsection{Categorical Cross-Entropy Loss}
+
+For multiclass classification, we use the categorical cross-entropy loss:
 
 \begin{equation}
 L = -\frac{1}{n} \sum_{i=1}^{n} \sum_{k=1}^{K} y_k^{(i)} \log \hat{y}_k^{(i)}
 \end{equation}
 
-where $y_k^{(i)}$ is 1 if example $i$ belongs to class $k$, and 0 otherwise.
+where $y_k^{(i)}$ is 1 if example $i$ belongs to class $k$, and 0 otherwise (one-hot encoding).
+
+\subsection{Decision Boundaries}
+
+Logistic regression creates linear decision boundaries. For binary classification, the decision boundary is the hyperplane where $P(y=1|\vect{x}) = 0.5$, which occurs when $\vect{w}^\top \vect{x} + b = 0$.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.8]
+\begin{axis}[
+    xlabel={Feature 1},
+    ylabel={Feature 2},
+    title={Logistic Regression Decision Boundary},
+    grid=major,
+    width=10cm,
+    height=8cm
+]
+% Generate some sample data
+\addplot[only marks, mark=*, mark size=3pt, color=bookpurple] coordinates {
+    (1,1) (1.5,1.5) (2,1) (2.5,2) (3,1.5)
+};
+\addplot[only marks, mark=square*, mark size=3pt, color=bookred] coordinates {
+    (2,3) (2.5,3.5) (3,3) (3.5,3.5) (4,3)
+};
+% Add decision boundary
+\addplot[thick, color=bookblack, domain=0:5] {3-x};
+\node at (axis cs:2.5,2.5) [anchor=west] {Decision boundary: $x_1 + x_2 = 3$};
+\legend{Class 0, Class 1, Decision boundary}
+\end{axis}
+\end{tikzpicture}
+\caption{Logistic regression finds a linear decision boundary that separates the two classes. Points on one side are classified as class 0, points on the other side as class 1.}
+\label{fig:logistic-decision-boundary}
+\end{figure}
+
+\subsection{Regularization in Logistic Regression}
+
+Just like linear regression, logistic regression can benefit from regularization to prevent overfitting:
+
+\subsubsection{L2 Regularization (Ridge)}
+
+\begin{equation}
+L(\vect{w}) = -\frac{1}{n} \sum_{i=1}^{n} \left[y^{(i)} \log \hat{y}^{(i)} + (1-y^{(i)}) \log(1-\hat{y}^{(i)})\right] + \lambda \|\vect{w}\|^2
+\end{equation}
+
+\subsubsection{L1 Regularization (Lasso)}
+
+\begin{equation}
+L(\vect{w}) = -\frac{1}{n} \sum_{i=1}^{n} \left[y^{(i)} \log \hat{y}^{(i)} + (1-y^{(i)}) \log(1-\hat{y}^{(i)})\right] + \lambda \|\vect{w}\|_1
+\end{equation}
+
+\subsection{Advantages and Limitations}
+
+\textbf{Advantages:}
+\begin{itemize}
+    \item Simple and interpretable
+    \item Fast training and prediction
+    \item Provides probability estimates
+    \item Works well with small datasets
+    \item No assumptions about feature distributions
+\end{itemize}
+
+\textbf{Limitations:}
+\begin{itemize}
+    \item Assumes linear relationship between features and log-odds
+    \item Sensitive to outliers
+    \item May not work well with highly correlated features
+    \item Limited to linear decision boundaries
+\end{itemize}
 
