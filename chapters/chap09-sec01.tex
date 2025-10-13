@@ -3,6 +3,9 @@
 \section{The Convolution Operation}
 \label{sec:convolution}
 
+\subsection*{Intuition}
+Convolution extracts local patterns by sliding small filters across the input, producing feature maps that respond strongly where patterns occur. Parameter sharing means the same filter detects the same pattern anywhere, yielding translation equivariance \index{equivariance} and dramatic parameter efficiency \cite{GoodfellowEtAl2016,Prince2023}.
+
 \subsection{Definition}
 
 The \textbf{convolution} operation applies a filter (kernel) across an input:
@@ -12,7 +15,7 @@ For discrete 2D convolution:
 S(i,j) = (I * K)(i,j) = \sum_m \sum_n I(i-m, j-n) K(m, n)
 \end{equation}
 
-where $I$ is the input and $K$ is the kernel.
+where $I$ is the input and $K$ is the kernel. In deep learning libraries, the implemented operation is often cross-correlation (no kernel flip).
 
 In practice, we often use \textbf{cross-correlation}:
 \begin{equation}
@@ -21,13 +24,13 @@ S(i,j) = (I * K)(i,j) = \sum_m \sum_n I(i+m, j+n) K(m, n)
 
 \subsection{Properties}
 
-\textbf{Parameter sharing:} Same kernel applied across spatial locations
+\textbf{Parameter sharing:} Same kernel applied across spatial locations\index{parameter sharing}
 \begin{itemize}
     \item Reduces parameters compared to fully connected layers
     \item Enables translation equivariance
 \end{itemize}
 
-\textbf{Local connectivity:} Each output depends on local input region
+\textbf{Local connectivity:} Each output depends on local input region (\gls{receptive-field})\index{receptive field}
 \begin{itemize}
     \item Exploits spatial locality in images
     \item Hierarchically builds complex features
@@ -42,14 +45,14 @@ S_{c_{\text{out}}}(i,j) = \sum_{c_{\text{in}}=1}^{C_{\text{in}}} (I_{c_{\text{in
 
 \subsection{Hyperparameters}
 
-\textbf{Kernel size:} Typically $3 \times 3$ or $5 \times 5$
+\textbf{Kernel size:} Typically $3 \times 3$ or $5 \times 5$ (stacked $3\times3$ often preferred over a single $5\times5$ as in VGG \cite{GoodfellowEtAl2016})
 
-\textbf{Stride:} Step size for sliding kernel (stride $s$):
+\textbf{Stride:} Step size for sliding kernel (stride $s$)\index{stride}:
 \begin{equation}
 \text{Output size} = \left\lfloor \frac{n - k}{s} \right\rfloor + 1
 \end{equation}
 
-\textbf{Padding:} Add zeros around input
+\textbf{Padding:} Add zeros around input\index{padding}
 \begin{itemize}
     \item \textbf{Valid:} no padding
     \item \textbf{Same:} padding to preserve spatial size
@@ -60,4 +63,19 @@ For "same" padding with stride 1:
 \begin{equation}
 p = \left\lfloor \frac{k-1}{2} \right\rfloor
 \end{equation}
+
+\subsection{Visual Aid}
+\begin{figure}[h]
+    \centering
+    % illustrative kernel sliding grid using TikZ
+    \begin{tikzpicture}[scale=0.5]
+        % input grid 5x5
+        \foreach \i in {0,...,5} {\draw (0,\i) -- (5,\i);}
+        \foreach \j in {0,...,5} {\draw (\j,0) -- (\j,5);}
+        % kernel window 3x3 at (1,1)
+        \draw[red,very thick] (1,1) rectangle (4,4);
+    \end{tikzpicture}
+    \caption{A $3\times3$ kernel sliding over a $5\times5$ input highlights local pattern extraction.}
+    \label{fig:conv-sliding-window}
+\end{figure}
 

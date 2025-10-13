@@ -3,10 +3,28 @@
 \chapter{Convolutional Networks}
 \label{chap:convolutional-networks}
 
-This chapter introduces convolutional neural networks (CNNs), which are particularly effective for processing grid-structured data like images.
+This chapter introduces convolutional neural networks (CNNs), which are particularly effective for processing grid-structured data like images. We build intuition first, then progressively add mathematical detail and modern algorithms, with historical context and key takeaways throughout \cite{GoodfellowEtAl2016,Prince2023}.
+
+\section*{Learning Objectives}
+\label{sec:ch9-learning-objectives}
+
+After completing this chapter, you will be able to:
+
+\begin{enumerate}
+    \item \textbf{Explain the intuition of convolution, pooling, and receptive fields} and how they induce translation equivariance and parameter sharing.
+    \item \textbf{Derive output shapes and parameter counts} for common layer configurations (kernel size, stride, padding, channels).
+    \item \textbf{Implement core CNN algorithms}: convolution/cross-correlation, pooling, backpropagation through convolution, and residual connections.
+    \item \textbf{Compare classic architectures} (LeNet, AlexNet, VGG, Inception, ResNet, MobileNet/EfficientNet) and their design trade-offs.
+    \item \textbf{Apply CNNs to key tasks} in vision: classification, detection, and segmentation, and choose appropriate heads and losses.
+    \item \textbf{Cite historical milestones} that motivated CNN advances and understand why techniques were developed \cite{LeCun1989,Krizhevsky2012,He2016,Ronneberger2015}.
+\end{enumerate}
+
+\difficulty{intermediate}
 
 
 \input{chapters/chap09-sec01}
 \input{chapters/chap09-sec02}
 \input{chapters/chap09-sec03}
 \input{chapters/chap09-sec04}
+\input{chapters/chap09-sec05}
+\input{chapters/chap09-sec06}

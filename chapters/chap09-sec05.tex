@@ -1,0 +1,38 @@
+% Chapter 9, Section 5
+
+\section{Core CNN Algorithms}
+\label{sec:cnn-algorithms}
+
+We introduce algorithms progressively, starting from basic cross-correlation to residual learning.
+
+\subsection{Cross-Correlation and Convolution}
+Given input $I\in\mathbb{R}^{H\times W\times C_{\text{in}}}$ and kernel $K\in\mathbb{R}^{k\times k\times C_{\text{in}}\times C_{\text{out}}}$, the output feature map $S\in\mathbb{R}^{H'\times W'\times C_{\text{out}}}$ under stride $s$ and padding $p$ is computed by cross-correlation as in \cref{sec:convolution}. Libraries often refer to this as "convolution" \cite{GoodfellowEtAl2016}.
+
+\subsection{Backpropagation Through Convolution}
+For loss $\mathcal{L}$ and pre-activation output $S = I * K$, the gradients are:
+\begin{align}
+\frac{\partial \mathcal{L}}{\partial K} &= I \star \frac{\partial \mathcal{L}}{\partial S},\\
+\frac{\partial \mathcal{L}}{\partial I} &= \frac{\partial \mathcal{L}}{\partial S} * K^\text{rot},
+\end{align}
+where $\star$ denotes cross-correlation, $*$ denotes convolution, and $K^\text{rot}$ is the kernel rotated by $180^{\circ}$. Implementations use efficient im2col/FFT variants \cite{GoodfellowEtAl2016}.
+
+\subsection{Pooling Backpropagation}
+For max pooling, the upstream gradient is routed to the maximal input in each region; for average pooling, it is evenly divided among elements.
+
+\subsection{Residual Connections}
+In a residual block with input $\vect{x}$ and residual mapping $\mathcal{F}$, the output is $\vect{y}=\mathcal{F}(\vect{x})+\vect{x}$. Backpropagation yields $\frac{\partial \mathcal{L}}{\partial \vect{x}}=\frac{\partial \mathcal{L}}{\partial \vect{y}}\left(\frac{\partial \mathcal{F}}{\partial \vect{x}}+\mat{I}\right)$, stabilizing gradients and enabling very deep nets \cite{He2016}.
+
+\subsection{Progressive Complexity: Depthwise Separable Convolutions}
+Depthwise separable convolution factors standard convolution into depthwise (per-channel) and pointwise ($1\times1$) operations, reducing FLOPs and parameters (used by MobileNet). This keeps representational power while improving efficiency.
+
+\subsection{Normalization and Activation}
+Batch normalization \cite{Ioffe2015} and ReLU-family activations improve optimization and generalization by smoothing the loss landscape and mitigating covariate shift.
+
+\subsection*{Key Takeaways}
+\begin{itemize}
+    \item Cross-correlation is the practical "convolution" in deep learning; parameter sharing and locality are core.
+    \item Residual connections preserve gradient flow, enabling very deep networks.
+    \item Efficient convolutions (depthwise separable) trade compute for accuracy with strong Pareto gains.
+\end{itemize}
+
+

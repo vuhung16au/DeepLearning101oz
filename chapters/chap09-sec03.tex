@@ -3,9 +3,11 @@
 \section{CNN Architectures}
 \label{sec:cnn-architectures}
 
+\subsection*{Historical Context}
+CNNs evolved from early biologically inspired work to practical systems. \textbf{LeNet-5} established the template for digit recognition \cite{LeCun1989}. \textbf{AlexNet} showed large-scale training with ReLU, dropout, and data augmentation could dominate ImageNet \cite{Krizhevsky2012}. \textbf{VGG} emphasized simplicity via small filters, while \textbf{Inception} exploited multi-scale processing with $1\times1$ dimension reduction. \textbf{ResNet} enabled very deep networks via residual connections \cite{He2016}. Efficiency-driven families like \textbf{MobileNet} and \textbf{EfficientNet} target edge devices and compound scaling.
 \subsection{LeNet-5 (1998)}
 
-Early CNN for digit recognition:
+Early CNN for digit recognition \cite{LeCun1989}:
 \begin{itemize}
     \item Conv $\to$ Pool $\to$ Conv $\to$ Pool $\to$ FC $\to$ FC
     \item Used sigmoid/tanh activations
@@ -14,7 +16,7 @@ Early CNN for digit recognition:
 
 \subsection{AlexNet (2012)}
 
-Breakthrough on ImageNet:
+Breakthrough on ImageNet \cite{Krizhevsky2012}:
 \begin{itemize}
     \item 8 layers (5 conv, 3 FC)
     \item ReLU activation
@@ -35,7 +37,7 @@ Simplified architecture with small filters:
 
 \subsection{ResNet (2015)}
 
-Introduced \textbf{residual connections}:
+Introduced \textbf{residual connections} \cite{He2016}:
 
 \begin{equation}
 \vect{y} = \mathcal{F}(\vect{x}, \{\mat{W}_i\}) + \vect{x}
