@@ -1,0 +1,89 @@
+% Problems (Exercises) for Chapter 14
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+\begin{problem}[Undercomplete AE]
+Explain why undercomplete AEs can avoid trivial identity mapping.
+\textbf{Hint:} Bottleneck limits capacity.
+\end{problem}
+
+\begin{problem}[Denoising Noise]
+How does noise type affect learned features?
+\textbf{Hint:} Gaussian vs. masking vs. salt-and-pepper.
+\end{problem}
+
+\begin{problem}[Sparse Codes]
+List benefits of sparsity in latent codes.
+\textbf{Hint:} Interpretability, robustness, compression.
+\end{problem}
+
+\begin{problem}[Contractive Penalty]
+What does a Jacobian penalty encourage?
+\textbf{Hint:} Local invariance.
+\end{problem}
+
+\begin{problem}[Tied Weights]
+Why tie encoder/decoder weights?
+\textbf{Hint:} Parameter sharing, symmetry.
+\end{problem}
+
+\begin{problem}[Overfitting]
+Name two signs your AE overfits.
+\textbf{Hint:} Gap in reconstruction; poor transfer.
+\end{problem}
+
+\subsection*{Medium}
+\begin{problem}[Loss Choices]
+Compare MSE vs. cross-entropy for images.
+\textbf{Hint:} Data scale/likelihood assumptions.
+\end{problem}
+
+\begin{problem}[Regularization Trade-offs]
+Contrast denoising vs. contractive penalties.
+\textbf{Hint:} Noise robustness vs. local smoothing.
+\end{problem}
+
+\begin{problem}[Linear AE]
+Show linear AE with MSE learns PCA subspace.
+\textbf{Hint:} Equivalence under constraints.
+\end{problem}
+
+\begin{problem}[Code Dimensionality]
+Propose a method to choose latent dimension.
+\textbf{Hint:} Validation on downstream task.
+\end{problem}
+
+\begin{problem}[Metric Learning]
+Relate AE objectives to contrastive learning.
+\textbf{Hint:} Geometry of embeddings.
+\end{problem}
+
+\subsection*{Hard}
+\begin{problem}[Jacobian Penalty]
+Derive gradient of contractive loss w.r.t. encoder parameters.
+\textbf{Hint:} Chain rule through Jacobian norm.
+\end{problem}
+
+\begin{problem}[Denoising Bound]
+Connect denoising training to score matching.
+\textbf{Hint:} Small-noise limit.
+\end{problem}
+
+\begin{problem}[Regularization Failure]
+Construct a case where regularization harms downstream performance.
+\textbf{Hint:} Remove task-relevant fine detail.
+\end{problem}
+
+\begin{problem}[Generative Link]
+Explain links between AEs and VAEs/flows.
+\textbf{Hint:} Likelihood vs. reconstruction objectives.
+\end{problem}
+
+\begin{problem}[Visualization]
+Design a LaTeX figure showing encoder–decoder with bottleneck.
+\textbf{Hint:} Use tikz boxes and arrows.
+\end{problem}
+
+

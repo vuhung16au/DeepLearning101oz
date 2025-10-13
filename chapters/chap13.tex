@@ -6,7 +6,31 @@
 This chapter introduces probabilistic models with linear structure, which form the foundation for many unsupervised learning methods.
 
 
+\section*{Learning Objectives}
+\addcontentsline{toc}{section}{Learning Objectives}
+
+After studying this chapter, you will be able to:
+
+\begin{enumerate}
+    \item Explain probabilistic PCA and factor analysis and their relationships to PCA.
+    \item Derive EM updates for latent variable models with linear-Gaussian structure.
+    \item Compare identifiability and rotation issues in factor models.
+    \item Connect linear latent models to modern representation learning.
+\end{enumerate}
+
+\difficulty{intermediate}
+
+\section*{Intuition}
+\addcontentsline{toc}{section}{Intuition}
+
+Linear factor models posit a small set of hidden sources generating observed data through linear mixing plus noise. The learning problem is to recover those hidden coordinates that best explain variance while respecting uncertainty.
+
+
 \input{chapters/chap13-sec01}
 \input{chapters/chap13-sec02}
 \input{chapters/chap13-sec03}
 \input{chapters/chap13-sec04}
+
+% Chapter summary and problems
+\input{chapters/chap13-key-takeaways}
+\input{chapters/chap13-problems}

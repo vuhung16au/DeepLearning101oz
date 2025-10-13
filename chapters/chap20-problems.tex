@@ -1,0 +1,89 @@
+% Problems (Exercises) for Chapter 20
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+\begin{problem}[VAE Objective]
+Write the VAE loss and explain its terms.
+\textbf{Hint:} Reconstruction + KL regularization.
+\end{problem}
+
+\begin{problem}[GAN Instability]
+List two reasons GANs can be unstable.
+\textbf{Hint:} Gradient saturation, mode collapse.
+\end{problem}
+
+\begin{problem}[Flow Jacobian]
+Why must flows use invertible transforms?
+\textbf{Hint:} Change of variables formula.
+\end{problem}
+
+\begin{problem}[Diffusion Intuition]
+Describe forward and reverse processes in diffusion models.
+\textbf{Hint:} Noise addition then denoising.
+\end{problem}
+
+\begin{problem}[Metrics]
+Name two metrics for generative models and caveats.
+\textbf{Hint:} FID, NLL; sensitivity, calibration.
+\end{problem}
+
+\begin{problem}[Conditioning]
+How to condition generative models on labels?
+\textbf{Hint:} Classifier guidance, conditional inputs.
+\end{problem}
+
+\subsection*{Medium}
+\begin{problem}[GAN Loss Variants]
+Compare non-saturating vs. Wasserstein losses.
+\textbf{Hint:} Gradient properties, Lipschitz constraints.
+\end{problem}
+
+\begin{problem}[VAE Posterior]
+Discuss posterior collapse and remedies.
+\textbf{Hint:} KL annealing, expressive decoders.
+\end{problem}
+
+\begin{problem}[Flow Design]
+Design an affine coupling layer and compute log-det.
+\textbf{Hint:} Block-splitting with triangular Jacobian.
+\end{problem}
+
+\begin{problem}[Diffusion Training]
+Derive simplified training objective for denoising score matching.
+\textbf{Hint:} Noise-prediction loss.
+\end{problem}
+
+\begin{problem}[Evaluation]
+Propose a robust evaluation suite for text generation.
+\textbf{Hint:} Diversity, factuality, human eval.
+\end{problem}
+
+\subsection*{Hard}
+\begin{problem}[ELBO Decomposition]
+Decompose ELBO into mutual information and marginal KL terms.
+\textbf{Hint:} Use expected KL identities.
+\end{problem}
+
+\begin{problem}[Mode Coverage]
+Analyze mode dropping in GANs and mitigation strategies.
+\textbf{Hint:} Minibatch discrimination, unrolled GANs.
+\end{problem}
+
+\begin{problem}[Flow Expressivity]
+Discuss expressivity vs. invertibility constraints.
+\textbf{Hint:} Trade-offs in architecture depth and coupling.
+\end{problem}
+
+\begin{problem}[Diffusion Samplers]
+Compare DDPM vs. DDIM sampling.
+\textbf{Hint:} Stochastic vs. deterministic paths.
+\end{problem}
+
+\begin{problem}[Safety]
+Outline safety considerations for image generation at scale.
+\textbf{Hint:} Content filters, misuse prevention, watermarking.
+\end{problem}
+
+

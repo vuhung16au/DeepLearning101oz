@@ -1,0 +1,108 @@
+% Problems (Exercises) for Chapter 12
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+
+\begin{problem}[Vision Metrics]
+Choose between accuracy, AUROC, and mAP for object detection. Justify.
+
+\textbf{Hint:} Class imbalance and localization vs. classification.
+\end{problem}
+
+\begin{problem}[NLP Tokenization]
+Explain implications of BPE vs. WordPiece for rare words.
+
+\textbf{Hint:} Subword frequency, OOV handling, sequence length.
+\end{problem}
+
+\begin{problem}[Tabular Baselines]
+Why can tree ensembles outperform deep nets on small tabular datasets?
+
+\textbf{Hint:} Inductive bias, feature interactions, sample efficiency.
+\end{problem}
+
+\begin{problem}[Speech Sampling]
+Describe how sampling rate affects model design and compute.
+
+\textbf{Hint:} Nyquist, receptive field, stride.
+\end{problem}
+
+\begin{problem}[Data Privacy]
+List two privacy risks when deploying medical models and mitigations.
+
+\textbf{Hint:} Re-identification, membership inference; anonymization, DP.
+\end{problem}
+
+\begin{problem}[Latency Budgets]
+State two architectural tactics to meet mobile latency budgets.
+
+\textbf{Hint:} Quantization, pruning, distillation.
+\end{problem}
+
+\subsection*{Medium}
+
+\begin{problem}[Dataset Shift]
+Design a test to detect covariate shift between training and production.
+
+\textbf{Hint:} Train a domain classifier; compare feature distributions.
+\end{problem}
+
+\begin{problem}[Active Learning]
+Propose an acquisition strategy for labeling a limited budget.
+
+\textbf{Hint:} Uncertainty sampling, diversity, class balance.
+\end{problem}
+
+\begin{problem}[Weak Supervision]
+Combine multiple noisy labeling functions into training signals.
+
+\textbf{Hint:} Generative label models, noise-aware loss.
+\end{problem}
+
+\begin{problem}[Evaluation Leakage]
+Your leaderboard rises with hyperparameter tuning. How to avoid leakage?
+
+\textbf{Hint:} Create a holdout; minimize trials on public test.
+\end{problem}
+
+\begin{problem}[Human-in-the-loop]
+Design an interface to collect high-quality corrections efficiently.
+
+\textbf{Hint:} Uncertainty surfaces and batched review workflows.
+\end{problem}
+
+\subsection*{Hard}
+
+\begin{problem}[Cost-aware Serving]
+Formalize an objective trading accuracy vs. compute cost and latency.
+
+\textbf{Hint:} Multi-objective optimization; constrained maximization.
+\end{problem}
+
+\begin{problem}[Safety Case]
+Draft a risk assessment for an LLM summarizer in healthcare.
+
+\textbf{Hint:} Hallucination, bias, privacy, oversight, audit trails.
+\end{problem}
+
+\begin{problem}[Data Valuation]
+Propose a method to estimate marginal utility of new data batches.
+
+\textbf{Hint:} Shapley approximations, influence functions.
+\end{problem}
+
+\begin{problem}[Benchmark Robustness]
+Show how spurious cues can inflate benchmark scores; propose fixes.
+
+\textbf{Hint:} Counterfactuals, adversarial splits, robust metrics.
+\end{problem}
+
+\begin{problem}[Ethical Deployment]
+Specify post-deployment monitoring and escalation for high-stakes tasks.
+
+\textbf{Hint:} Thresholds, audits, rollback, human oversight.
+\end{problem}
+
+

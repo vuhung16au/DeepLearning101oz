@@ -6,8 +6,32 @@
 This chapter examines modern approaches to generating new data samples using deep learning.
 
 
+\section*{Learning Objectives}
+\addcontentsline{toc}{section}{Learning Objectives}
+
+After studying this chapter, you will be able to:
+
+\begin{enumerate}
+    \item Compare VAEs, GANs, and flow/diffusion models conceptually and practically.
+    \item Write training objectives and sampling procedures for each class.
+    \item Evaluate generative models with proper metrics and qualitative checks.
+    \item Discuss trade-offs in likelihood, sample quality, and mode coverage.
+\end{enumerate}
+
+\difficulty{advanced}
+
+\section*{Intuition}
+\addcontentsline{toc}{section}{Intuition}
+
+Generative models learn data distributions in complementary ways: explicit likelihoods, implicit adversarial training, or score-based diffusion. Each chooses a tractable learning signal that captures structure while managing complexity.
+
+
 \input{chapters/chap20-sec01}
 \input{chapters/chap20-sec02}
 \input{chapters/chap20-sec03}
 \input{chapters/chap20-sec04}
 \input{chapters/chap20-sec05}
+
+% Chapter summary and problems
+\input{chapters/chap20-key-takeaways}
+\input{chapters/chap20-problems}

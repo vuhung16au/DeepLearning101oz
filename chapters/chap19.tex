@@ -6,7 +6,31 @@
 This chapter explores methods for tractable inference in complex probabilistic models.
 
 
+\section*{Learning Objectives}
+\addcontentsline{toc}{section}{Learning Objectives}
+
+After studying this chapter, you will be able to:
+
+\begin{enumerate}
+    \item Differentiate variational inference and sampling-based approaches.
+    \item Derive ELBO objectives and coordinate ascent updates for simple models.
+    \item Understand amortized inference and its benefits/limitations.
+    \item Evaluate approximation quality using diagnostics and bounds.
+\end{enumerate}
+
+\difficulty{advanced}
+
+\section*{Intuition}
+\addcontentsline{toc}{section}{Intuition}
+
+Exact posteriors are rare. We instead optimize over a family of tractable distributions or draw dependent samples, trading bias and variance to approximate expectations we care about.
+
+
 \input{chapters/chap19-sec01}
 \input{chapters/chap19-sec02}
 \input{chapters/chap19-sec03}
 \input{chapters/chap19-sec04}
+
+% Chapter summary and problems
+\input{chapters/chap19-key-takeaways}
+\input{chapters/chap19-problems}

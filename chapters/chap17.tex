@@ -6,7 +6,31 @@
 This chapter introduces sampling-based approaches for probabilistic inference and learning.
 
 
+\section*{Learning Objectives}
+\addcontentsline{toc}{section}{Learning Objectives}
+
+After studying this chapter, you will be able to:
+
+\begin{enumerate}
+    \item Describe Monte Carlo estimation and variance reduction techniques.
+    \item Explain MCMC algorithms (Metropolis–Hastings, Gibbs) and their diagnostics.
+    \item Apply sampling to approximate expectations and gradients.
+    \item Identify pitfalls such as poor mixing and autocorrelation.
+\end{enumerate}
+
+\difficulty{advanced}
+
+\section*{Intuition}
+\addcontentsline{toc}{section}{Intuition}
+
+When exact integrals are intractable, we approximate them with random samples. The art is to sample efficiently from complicated posteriors and to estimate uncertainty from finite chains.
+
+
 \input{chapters/chap17-sec01}
 \input{chapters/chap17-sec02}
 \input{chapters/chap17-sec03}
 \input{chapters/chap17-sec04}
+
+% Chapter summary and problems
+\input{chapters/chap17-key-takeaways}
+\input{chapters/chap17-problems}
