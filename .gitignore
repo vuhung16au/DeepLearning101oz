@@ -1,0 +1,218 @@
+# LaTeX build artifacts and temporary files
+# ==========================================
+
+# Auxiliary files
+*.aux
+*.auxlock
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdy
+
+# Bibliography files
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+
+# Glossary files
+*.glo
+*.gls
+*.glg
+
+# Index files
+*.idx
+*.ilg
+*.ind
+*.ist
+
+# LaTeX build directories
+*.auxfiles/
+*.build/
+
+# PDF output (uncomment if you don't want to track PDFs)
+# *.pdf
+
+# LaTeX editor specific files
+# ============================
+
+# TeXstudio
+*.tui
+
+# TeXnicCenter
+*.tcp
+*.tps
+
+# WinEdt
+*.bak
+*.sav
+
+# Kile
+*.backup
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# IDE and Editor files
+# ====================
+
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Atom
+.atom/
+
+# Temporary files
+# ===============
+
+# General temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+*.rej
+*.swp
+*.swo
+
+# LaTeX specific temporary files
+*.nav
+*.snm
+*.vrb
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.pdfsync
+
+# Build system files
+# ==================
+
+# Makefile targets (if using make)
+build/
+dist/
+*.dvi
+*.ps
+
+# Package manager files
+# =====================
+
+# TeX Live
+texmf-var/
+texmf-config/
+
+# MiKTeX
+miktex/
+
+# Project specific
+# ================
+
+# Keep important files but ignore build artifacts
+!main.tex
+!chapters/
+!references.bib
+!refs/
+!README.md
+!CONTRIBUTING.md
+!STRUCTURE.md
+!SUMMARY.txt
+!TODO/
+!Makefile
+!Prompt.md
+
+# Ignore specific build outputs but keep source
+!*.tex
+!*.bib
+!*.md
+!*.txt
+!*.md
+
+
+# Project specific files
+TODO/
+refs/
+Prompt.md
+SUMMARY.txt
