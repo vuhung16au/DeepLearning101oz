@@ -3,6 +3,19 @@
 \section{Activation Functions}
 \label{sec:activation-functions}
 
+\subsection{Intuition: Why Do We Need Activation Functions?}
+
+Imagine you're building a house with only straight lines and right angles. No matter how many rooms you add, you can only create rectangular spaces. But what if you want curved walls, arches, or domes? You need curved tools!
+
+Similarly, without activation functions, neural networks can only learn linear relationships, no matter how many layers you add. Activation functions are the "curved tools" that allow networks to learn non-linear patterns.
+
+Think of an activation function as a decision maker:
+\begin{itemize}
+    \item \textbf{Input:} A weighted sum of information from other neurons
+    \item \textbf{Decision:} How much should this neuron "fire" or contribute to the next layer?
+    \item \textbf{Output:} A transformed value that becomes input to the next layer
+\end{itemize}
+
 Activation functions introduce non-linearity, enabling networks to learn complex patterns.
 
 \subsection{Sigmoid}
@@ -79,4 +92,54 @@ z & \text{if } z > 0 \\
 \text{GELU}(z) = z \cdot \Phi(z)
 \end{equation}
 where $\Phi$ is the Gaussian CDF. Used in modern transformers.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.7]
+    \begin{axis}[
+        axis lines = center,
+        xlabel = $z$,
+        ylabel = $\sigma(z)$,
+        xmin = -4, xmax = 4,
+        ymin = -1.5, ymax = 2,
+        legend pos = north west,
+        grid = both,
+        grid style = {line width=.1pt, draw=gray!10},
+        major grid style = {line width=.2pt, draw=gray!50},
+    ]
+    
+    % Sigmoid
+    \addplot[domain=-4:4, samples=100, color=blue, thick] {1/(1+exp(-x))};
+    \addlegendentry{Sigmoid}
+    
+    % Tanh
+    \addplot[domain=-4:4, samples=100, color=red, thick] {tanh(x)};
+    \addlegendentry{Tanh}
+    
+    % ReLU
+    \addplot[domain=-4:4, samples=100, color=green, thick] {max(0,x)};
+    \addlegendentry{ReLU}
+    
+    % Leaky ReLU
+    \addplot[domain=-4:4, samples=100, color=orange, thick] {max(0.1*x, x)};
+    \addlegendentry{Leaky ReLU}
+    
+    % Swish
+    \addplot[domain=-4:4, samples=100, color=purple, thick] {x/(1+exp(-x))};
+    \addlegendentry{Swish}
+    
+    \end{axis}
+\end{tikzpicture}
+\caption{Comparison of common activation functions. Each function has different properties: sigmoid and tanh saturate at extreme values, ReLU is simple but can "die", while Swish provides smooth gradients.}
+\label{fig:activation-functions}
+\end{figure}
+
+% Index entries
+\index{activation function!sigmoid}
+\index{activation function!tanh}
+\index{activation function!ReLU}
+\index{activation function!Leaky ReLU}
+\index{activation function!Swish}
+\index{activation function!GELU}
+\index{non-linearity!activation functions}
 

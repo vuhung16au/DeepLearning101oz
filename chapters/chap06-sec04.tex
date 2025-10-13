@@ -3,6 +3,24 @@
 \section{Backpropagation}
 \label{sec:backpropagation}
 
+\subsection{Intuition: Learning from Mistakes}
+
+Imagine you're learning to play basketball. After each shot, you need to know:
+\begin{itemize}
+    \item How far off was your shot? (the error)
+    \item Which part of your technique needs adjustment? (which parameters to change)
+    \item How much should you adjust each part? (how much to change each parameter)
+\end{itemize}
+
+Backpropagation is like having a coach who watches your shot and tells you exactly what to adjust:
+\begin{itemize}
+    \item "Your elbow was too high" (gradient for elbow angle)
+    \item "You need to follow through more" (gradient for follow-through)
+    \item "Your timing was off" (gradient for release timing)
+\end{itemize}
+
+The key insight is that we can efficiently compute how much each parameter contributed to the final error by working backwards through the network.
+
 \textbf{Backpropagation} efficiently computes gradients using the chain rule.
 
 \subsection{The Chain Rule}
@@ -41,4 +59,11 @@ Modern frameworks use automatic differentiation on computational graphs:
     \item \textbf{Forward mode:} efficient when outputs $\gg$ inputs
     \item \textbf{Reverse mode (backprop):} efficient when inputs $\gg$ outputs
 \end{itemize}
+
+% Index entries
+\index{backpropagation!algorithm}
+\index{chain rule!backpropagation}
+\index{gradient!computation}
+\index{computational graph}
+\index{automatic differentiation}
 

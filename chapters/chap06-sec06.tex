@@ -1,0 +1,208 @@
+% Chapter 6, Section 6
+
+\section{Problems}
+\label{sec:problems}
+
+This section provides exercises to reinforce your understanding of feedforward networks. Problems are categorized by difficulty level, and hints are provided for each problem.
+
+\subsection{Easy Problems (6 problems)}
+
+\begin{problem}[Forward Pass Calculation]
+\label{prob:forward-pass}
+
+Consider a simple neural network with:
+\begin{itemize}
+    \item Input layer: 2 neurons with values $x_1 = 1$, $x_2 = -0.5$
+    \item Hidden layer: 2 neurons with weights $\mat{W} = \begin{bmatrix} 0.5 & -0.3 \\ 0.8 & 0.2 \end{bmatrix}$ and bias $\vect{b} = [0.1, -0.2]$
+    \item Activation function: ReLU
+\end{itemize}
+
+Calculate the output of the hidden layer.
+
+\textbf{Hint:} Apply the formula $\vect{h} = \text{ReLU}(\mat{W}\vect{x} + \vect{b})$ step by step.
+\end{problem}
+
+\begin{problem}[Activation Function Properties]
+\label{prob:activation-properties}
+
+For each activation function, state whether it is:
+\begin{enumerate}
+    \item Bounded or unbounded
+    \item Monotonic or non-monotonic
+    \item Zero-centered or not zero-centered
+\end{enumerate}
+
+Functions: (a) Sigmoid, (b) Tanh, (c) ReLU, (d) Leaky ReLU
+
+\textbf{Hint:} Consider the mathematical properties and plot each function to understand their behavior.
+\end{problem}
+
+\begin{problem}[Loss Function Selection]
+\label{prob:loss-selection}
+
+Match each task with the appropriate loss function:
+\begin{enumerate}
+    \item Predicting house prices
+    \item Classifying emails as spam/not spam
+    \item Recognizing digits 0-9
+    \item Predicting stock market direction (up/down)
+\end{enumerate}
+
+Loss functions: MSE, Binary Cross-entropy, Categorical Cross-entropy
+
+\textbf{Hint:} Consider the output format needed for each task and the mathematical properties of each loss function.
+\end{problem}
+
+\begin{problem}[Network Architecture]
+\label{prob:architecture}
+
+Design a neural network architecture for each task:
+\begin{enumerate}
+    \item Binary classification with 10 input features
+    \item Regression with 5 input features
+    \item 3-class classification with 8 input features
+\end{enumerate}
+
+Specify the number of layers, neurons per layer, and activation functions.
+
+\textbf{Hint:} Consider the complexity of each task and the output requirements.
+\end{problem}
+
+\begin{problem}[Gradient Calculation]
+\label{prob:gradient-calc}
+
+For the function $f(x, y) = x^2 + 2xy + y^2$, calculate:
+\begin{enumerate}
+    \item $\frac{\partial f}{\partial x}$
+    \item $\frac{\partial f}{\partial y}$
+    \item The gradient vector $\nabla f$
+\end{enumerate}
+
+\textbf{Hint:} Use the power rule and product rule for differentiation.
+\end{problem}
+
+\begin{problem}[Chain Rule Application]
+\label{prob:chain-rule}
+
+Given $f(x) = (x^2 + 1)^3$, find $\frac{df}{dx}$ using the chain rule.
+
+\textbf{Hint:} Let $u = x^2 + 1$, then $f = u^3$. Apply the chain rule: $\frac{df}{dx} = \frac{df}{du} \cdot \frac{du}{dx}$.
+\end{problem}
+
+\subsection{Medium Problems (5 problems)}
+
+\begin{problem}[Backpropagation Derivation]
+\label{prob:backprop-derivation}
+
+Derive the backpropagation equations for a 2-layer network with:
+\begin{itemize}
+    \item Input: $\vect{x} \in \mathbb{R}^d$
+    \item Hidden layer: $\vect{h} = \sigma(\mat{W}_1 \vect{x} + \vect{b}_1)$
+    \item Output: $\hat{y} = \mat{W}_2 \vect{h} + \vect{b}_2$
+    \item Loss: $L = \frac{1}{2}(\hat{y} - y)^2$
+\end{itemize}
+
+Find $\frac{\partial L}{\partial \mat{W}_1}$, $\frac{\partial L}{\partial \mat{W}_2}$, $\frac{\partial L}{\partial \vect{b}_1}$, and $\frac{\partial L}{\partial \vect{b}_2}$.
+
+\textbf{Hint:} Use the chain rule systematically, starting from the loss and working backwards through each layer.
+\end{problem}
+
+\begin{problem}[Vanishing Gradient Analysis]
+\label{prob:vanishing-gradient}
+
+Consider a deep network with sigmoid activation functions. Show that the gradient can vanish exponentially with depth.
+
+\textbf{Hint:} The derivative of sigmoid is $\sigma'(z) = \sigma(z)(1-\sigma(z))$. Since $\sigma(z) \in (0,1)$, the derivative is bounded by $\frac{1}{4}$. What happens when you multiply many such terms?
+\end{problem}
+
+\begin{problem}[Weight Initialization]
+\label{prob:weight-init}
+
+Derive the Xavier initialization for a layer with $n_{\text{in}}$ inputs and $n_{\text{out}}$ outputs, assuming the weights are drawn from a normal distribution.
+
+\textbf{Hint:} Consider the variance of the output when inputs have unit variance. For the output to also have unit variance, what should be the variance of the weights?
+\end{problem}
+
+\begin{problem}[Universal Approximation]
+\label{prob:universal-approx}
+
+Explain why a single hidden layer with sigmoid activation can approximate any continuous function, but in practice, deeper networks are often preferred.
+
+\textbf{Hint:} Consider the difference between theoretical capacity and practical learnability. What are the computational and optimization challenges?
+\end{problem}
+
+\begin{problem}[Activation Function Comparison]
+\label{prob:activation-comparison}
+
+Compare ReLU and sigmoid activation functions in terms of:
+\begin{enumerate}
+    \item Computational efficiency
+    \item Gradient flow
+    \item Saturation behavior
+    \item Zero-centering
+\end{enumerate}
+
+When would you choose each one?
+
+\textbf{Hint:} Consider the mathematical properties, training dynamics, and practical considerations for each activation function.
+\end{problem}
+
+\subsection{Hard Problems (5 problems)}
+
+\begin{problem}[Deep Network Optimization]
+\label{prob:deep-optimization}
+
+Analyze why very deep networks are difficult to train and discuss modern solutions (residual connections, batch normalization, etc.).
+
+\textbf{Hint:} Consider the relationship between network depth, gradient flow, and optimization landscape. How do modern techniques address these challenges?
+\end{problem}
+
+\begin{problem}[Loss Function Design]
+\label{prob:loss-design}
+
+Design a custom loss function for a multi-task learning problem where you need to:
+\begin{enumerate}
+    \item Classify images into 10 categories
+    \item Predict bounding boxes for objects
+    \item Estimate object confidence scores
+\end{enumerate}
+
+\textbf{Hint:} Consider how to combine different loss functions, handle different scales, and balance the importance of each task.
+\end{problem}
+
+\begin{problem}[Network Capacity Analysis]
+\label{prob:capacity-analysis}
+
+Analyze the relationship between network capacity (number of parameters) and generalization. When does more capacity help, and when does it hurt?
+
+\textbf{Hint:} Consider the bias-variance tradeoff, the role of regularization, and the relationship between model complexity and data size.
+\end{problem}
+
+\begin{problem}[Gradient Flow Analysis]
+\label{prob:gradient-flow}
+
+Derive the gradient flow equations for a network with skip connections (residual blocks) and analyze how they help with training.
+
+\textbf{Hint:} Consider how skip connections affect the gradient computation and what this means for the optimization dynamics.
+\end{problem}
+
+\begin{problem}[Architecture Search]
+\label{prob:architecture-search}
+
+Design a systematic approach to find the optimal network architecture for a given dataset and task. Consider:
+\begin{enumerate}
+    \item Search space definition
+    \item Evaluation strategy
+    \item Computational constraints
+    \item Generalization considerations
+\end{enumerate}
+
+\textbf{Hint:} Consider automated machine learning (AutoML) techniques, neural architecture search (NAS), and the tradeoffs between search efficiency and architecture quality.
+\end{problem}
+
+% Index entries for problems
+\index{problems!feedforward networks}
+\index{exercises!neural networks}
+\index{backpropagation!exercises}
+\index{activation functions!exercises}
+\index{gradient descent!exercises}

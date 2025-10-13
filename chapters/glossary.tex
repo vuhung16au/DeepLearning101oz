@@ -264,3 +264,104 @@
     name={bias-variance tradeoff},
     description={The fundamental tradeoff in machine learning between model bias (underfitting) and variance (overfitting).}
 }
+
+% Feedforward Network Terms
+\newglossaryentry{feedforward-network}{
+    name={feedforward network},
+    description={A neural network architecture where information flows in one direction from input to output, with no cycles or feedback connections.}
+}
+
+\newglossaryentry{multilayer-perceptron}{
+    name={multilayer perceptron},
+    description={A type of feedforward neural network with multiple layers of neurons, also known as MLP.}
+}
+
+\newglossaryentry{hidden-layer}{
+    name={hidden layer},
+    description={An intermediate layer in a neural network that is not directly connected to the input or output.}
+}
+
+\newglossaryentry{forward-propagation}{
+    name={forward propagation},
+    description={The process of computing the output of a neural network by passing input data through each layer sequentially.}
+}
+
+\newglossaryentry{backpropagation-algorithm}{
+    name={backpropagation algorithm},
+    description={An algorithm for training neural networks that computes gradients by propagating errors backward through the network using the chain rule.}
+}
+
+\newglossaryentry{universal-approximation}{
+    name={universal approximation theorem},
+    description={A theorem stating that a feedforward network with a single hidden layer can approximate any continuous function given appropriate activation functions.}
+}
+
+\newglossaryentry{relu}{
+    name={ReLU},
+    description={Rectified Linear Unit, an activation function defined as $\text{ReLU}(x) = \max(0, x)$, widely used in modern neural networks.}
+}
+
+\newglossaryentry{sigmoid-activation}{
+    name={sigmoid activation},
+    description={An activation function defined as $\sigma(x) = \frac{1}{1 + e^{-x}}$, which maps inputs to the range (0,1).}
+}
+
+\newglossaryentry{tanh-activation}{
+    name={tanh activation},
+    description={Hyperbolic tangent activation function defined as $\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}$, which maps inputs to the range (-1,1).}
+}
+
+\newglossaryentry{leaky-relu}{
+    name={Leaky ReLU},
+    description={A variant of ReLU that allows small negative values, defined as $\text{LeakyReLU}(x) = \max(\alpha x, x)$ where $\alpha$ is a small positive constant.}
+}
+
+\newglossaryentry{swish-activation}{
+    name={Swish activation},
+    description={A smooth activation function defined as $\text{Swish}(x) = x \cdot \sigma(x)$, where $\sigma$ is the sigmoid function.}
+}
+
+\newglossaryentry{gelu}{
+    name={GELU},
+    description={Gaussian Error Linear Unit, an activation function defined as $\text{GELU}(x) = x \cdot \Phi(x)$ where $\Phi$ is the Gaussian CDF.}
+}
+
+\newglossaryentry{softmax}{
+    name={softmax},
+    description={An activation function that converts a vector of real numbers into a probability distribution, defined as $\text{softmax}(x_i) = \frac{e^{x_i}}{\sum_j e^{x_j}}$.}
+}
+
+\newglossaryentry{mean-squared-error}{
+    name={mean squared error},
+    description={A loss function for regression tasks that measures the average squared difference between predicted and actual values.}
+}
+
+\newglossaryentry{vanishing-gradient}{
+    name={vanishing gradient problem},
+    description={A problem in deep networks where gradients become exponentially small as they propagate backward, making training difficult.}
+}
+
+\newglossaryentry{exploding-gradient}{
+    name={exploding gradient problem},
+    description={A problem in deep networks where gradients become exponentially large as they propagate backward, causing unstable training.}
+}
+
+\newglossaryentry{xavier-initialization}{
+    name={Xavier initialization},
+    description={A weight initialization method that sets weights according to a normal distribution with variance $\frac{2}{n_{\text{in}} + n_{\text{out}}}$.}
+}
+
+\newglossaryentry{he-initialization}{
+    name={He initialization},
+    description={A weight initialization method designed for ReLU networks, setting weights according to a normal distribution with variance $\frac{2}{n_{\text{in}}}$.}
+}
+
+\newglossaryentry{mini-batch}{
+    name={mini-batch},
+    description={A small subset of the training data used in each iteration of gradient descent, typically containing 32-256 examples.}
+}
+
+\newglossaryentry{computational-graph}{
+    name={computational graph},
+    description={A directed graph representing the flow of computations in a neural network, used for automatic differentiation.}
+}
