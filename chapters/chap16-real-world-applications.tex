@@ -1,0 +1,61 @@
+% Chapter 16: Real World Applications
+
+\section{Real World Applications}
+\label{sec:structured-prob-real-world}
+\difficulty{beginner}
+
+Structured probabilistic models capture dependencies and uncertainties in complex systems. These models enable reasoning under uncertainty and provide principled frameworks for decision-making in real-world applications.
+
+\subsection{Autonomous Vehicle Decision Making}
+
+Safe navigation requires reasoning about uncertainties:
+
+\begin{itemize}
+    \item \textbf{Predicting pedestrian behavior:} Will that person step into the street or wait? Probabilistic models capture uncertainty about pedestrian intentions based on their position, posture, and gaze direction. The vehicle uses these probability distributions to make conservative decisions—slowing down when a pedestrian might cross, rather than assuming they won't.
+    
+    \item \textbf{Sensor fusion with uncertainty:} Self-driving cars combine cameras, radar, and lidar, each with different strengths and noise characteristics. Probabilistic graphical models integrate these sensors, weighing each according to reliability in current conditions (cameras work poorly in fog; radar penetrates fog better). This provides robust perception despite individual sensor limitations.
+    
+    \item \textbf{Planning under uncertainty:} Routes to destinations involve uncertain travel times due to traffic, weather, and road conditions. Structured probabilistic models help vehicles plan routes considering these uncertainties, balancing expected arrival time with reliability and providing realistic time estimates.
+\end{itemize}
+
+\subsection{Medical Diagnosis and Treatment}
+
+Healthcare requires careful uncertainty quantification:
+
+\begin{itemize}
+    \item \textbf{Bayesian diagnosis systems:} Medical diagnosis involves uncertainty—symptoms might indicate multiple diseases with different probabilities. Structured probabilistic models encode relationships between symptoms, diseases, and test results, computing probability distributions over possible diagnoses. This helps doctors order appropriate tests and consider differential diagnoses systematically.
+    
+    \item \textbf{Personalized treatment planning:} Cancer treatment response varies by patient. Probabilistic models integrate genetic markers, tumor characteristics, and treatment histories to estimate probability distributions over treatment outcomes. Doctors use these to discuss risks and benefits with patients, making informed shared decisions about treatment options.
+    
+    \item \textbf{Drug interaction modeling:} Patients taking multiple medications face interaction risks. Structured models capture dependencies between drugs, considering individual patient factors (age, kidney function, genetics) to estimate risk probabilities. This enables safer prescribing, especially for elderly patients on many medications.
+\end{itemize}
+
+\subsection{Natural Language Understanding}
+
+Language has inherent ambiguity and structure:
+
+\begin{itemize}
+    \item \textbf{Machine translation quality:} Translation systems use probabilistic models to capture ambiguity—words have multiple possible translations depending on context. Structured models representing sentence structure help select appropriate translations, providing confidence estimates for different interpretations. This enables highlighting uncertain translations for human review.
+    
+    \item \textbf{Information extraction:} Extracting structured information (who did what to whom, when, where) from text requires understanding relationships between entities. Probabilistic graphical models capture these dependencies, providing uncertainty estimates about extracted information. News aggregators use these to reconcile potentially conflicting reports from multiple sources.
+    
+    \item \textbf{Voice assistant intent recognition:} "Book a table for two" could mean restaurant reservations or furniture arrangements. Structured models use conversation context and user history to estimate intent probabilities, asking clarifying questions when uncertainty is high rather than guessing incorrectly.
+\end{itemize}
+
+\subsection{Value of Structured Models}
+
+Why explicit structure matters:
+\begin{itemize}
+    \item \textbf{Interpretability:} Model structure reflects domain knowledge and causal relationships
+    \item \textbf{Uncertainty quantification:} Provides principled probability estimates
+    \item \textbf{Data efficiency:} Structure reduces parameters and sample complexity
+    \item \textbf{Reasoning:} Enables inference, prediction, and decision-making under uncertainty
+\end{itemize}
+
+These applications show how structured probabilistic models provide principled frameworks for dealing with uncertainty in safety-critical and high-stakes applications.
+
+% Index entries
+\index{applications!autonomous vehicles}
+\index{applications!medical diagnosis}
+\index{applications!natural language understanding}
+\index{structured probabilistic models!applications}

@@ -93,6 +93,15 @@ make pdf      # Complete compilation process
 - Include practical examples and applications
 - Maintain consistent terminology throughout
 
+### Deep Learning Chapters Requirements
+- **All deep learning chapters (6-20) must include a "Real World Applications" section**
+- This section should:
+  - Use `\difficulty{beginner}` to make it accessible
+  - Provide at least 3 concrete, practical examples
+  - Focus on less technical, easy-to-understand explanations
+  - Show how techniques solve real-world problems
+  - Include proper index entries for applications
+
 ### Cross-Reference Management
 - Use descriptive labels: `\label{sec:neural-networks}`
 - Create meaningful references: `\ref{sec:neural-networks}`
