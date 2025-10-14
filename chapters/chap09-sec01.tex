@@ -1,6 +1,6 @@
 % Chapter 9, Section 1
 
-\section{The Convolution Operation}
+\section{The Convolution Operation\index{convolution}\index{cross-correlation}}
 \label{sec:convolution}
 
 \subsection*{Intuition}
@@ -24,17 +24,33 @@ S(i,j) = (I * K)(i,j) = \sum_m \sum_n I(i+m, j+n) K(m, n)
 
 \subsection{Properties}
 
-\textbf{Parameter sharing:} Same kernel applied across spatial locations\index{parameter sharing}
+\textbf{Parameter sharing:} same kernel applied across spatial locations\index{parameter sharing}
 \begin{itemize}
-    \item Reduces parameters compared to fully connected layers
-    \item Enables translation equivariance
+    \item Dramatically reduces parameters compared to fully connected layers acting on flattened images.
+    \item Yields \emph{translation equivariance}: if the input shifts, the feature map shifts in the same way \cite{GoodfellowEtAl2016,Prince2023}. Formally, letting \(T_\delta\) denote a spatial shift, we have \((T_\delta I) * K = T_\delta (I * K)\) under appropriate boundary conditions.
 \end{itemize}
 
-\textbf{Local connectivity:} Each output depends on local input region (\gls{receptive-field})\index{receptive field}
+\textbf{Local connectivity:} each output depends on a local input region (\gls{receptive-field})\index{receptive field}
 \begin{itemize}
-    \item Exploits spatial locality in images
-    \item Hierarchically builds complex features
+    \item Exploits spatial locality: nearby pixels are statistically dependent in natural images.
+    \item \emph{Compositionality}: stacking layers grows the effective receptive field, enabling detection of increasingly complex patterns (edges \(\to\) corners \(\to\) object parts) \cite{GoodfellowEtAl2016}.
 \end{itemize}
+
+\textbf{Linearity and nonlinearity:}
+\begin{itemize}
+    \item A single convolution is linear; CNNs interleave it with pointwise nonlinearities (e.g., ReLU) to model complex functions.
+    \item With stride and padding fixed, convolution is a sparse matrix multiplication with a Toeplitz structure \cite{GoodfellowEtAl2016}.
+\end{itemize}
+
+\textbf{Padding and boundary effects}\index{padding}: padding preserves spatial size and mitigates edge shrinkage. Without padding (``valid''), repeated convolutions rapidly reduce feature map size and bias features toward the center.
+
+\textbf{Stride and downsampling}\index{stride}: stride \(s>1\) reduces spatial resolution. While efficient, aggressive striding early can remove fine detail; many designs delay downsampling to later stages (e.g., \textit{conv stem} then stride) \cite{Krizhevsky2012,He2016}.
+
+\textbf{Dilation (atrous convolutions)}\index{dilation}: inserting \emph{holes} between kernel elements increases receptive field without increasing parameters, useful for dense prediction (e.g., segmentation) \cite{GoodfellowEtAl2016}.
+
+\textbf{Invariance via pooling:} convolution is equivariant to translation; combining it with pooling or global aggregation introduces partial \emph{translation invariance} in the representation \cite{GoodfellowEtAl2016}.
+
+\textbf{Multi-channel mixing:} kernels of shape \(k\times k\times C_{\text{in}}\) learn both spatial and cross-channel interactions, while $1\times1$ convolutions mix channels without spatial coupling (used for bottlenecks and dimension reduction in Inception/ResNet).
 
 \subsection{Multi-Channel Convolution}
 

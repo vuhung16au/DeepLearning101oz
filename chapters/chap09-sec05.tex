@@ -16,6 +16,8 @@ For loss $\mathcal{L}$ and pre-activation output $S = I * K$, the gradients are:
 \end{align}
 where $\star$ denotes cross-correlation, $*$ denotes convolution, and $K^\text{rot}$ is the kernel rotated by $180^{\circ}$. Implementations use efficient im2col/FFT variants \cite{GoodfellowEtAl2016}.
 
+\paragraph{Example (shape-aware):} For $I\in\mathbb{R}^{32\times32\times 64}$ and $K\in\mathbb{R}^{3\times3\times64\times128}$ with stride 1 and same padding, $S\in\mathbb{R}^{32\times32\times128}$. The gradient w.r.t. $K$ accumulates over spatial locations and batch.
+
 \subsection{Pooling Backpropagation}
 For max pooling, the upstream gradient is routed to the maximal input in each region; for average pooling, it is evenly divided among elements.
 
@@ -25,14 +27,28 @@ In a residual block with input $\vect{x}$ and residual mapping $\mathcal{F}$, th
 \subsection{Progressive Complexity: Depthwise Separable Convolutions}
 Depthwise separable convolution factors standard convolution into depthwise (per-channel) and pointwise ($1\times1$) operations, reducing FLOPs and parameters (used by MobileNet). This keeps representational power while improving efficiency.
 
+\paragraph{Parameter comparison.} For $C_{\text{in}}=C_{\text{out}}=c$ and kernel $k\times k$:
+\begin{align}
+\text{standard} &= k^2 c^2,\\
+\text{depthwise separable} &= k^2 c + c^2,\quad \text{saving} \approx 1 - \frac{k^2 c + c^2}{k^2 c^2}.
+\end{align}
+
 \subsection{Normalization and Activation}
 Batch normalization \cite{Ioffe2015} and ReLU-family activations improve optimization and generalization by smoothing the loss landscape and mitigating covariate shift.
+
+\subsection{Other Useful Variants}
+\begin{itemize}
+    \item \textbf{Group/Layer Normalization:} alternatives when batch sizes are small.
+    \item \textbf{Dilated Convolutions:} expand receptive field without pooling; effective in segmentation.
+    \item \textbf{Anti-aliased Downsampling:} blur pooling or low-pass before stride to reduce aliasing artifacts in features.
+\end{itemize}
 
 \subsection*{Key Takeaways}
 \begin{itemize}
     \item Cross-correlation is the practical "convolution" in deep learning; parameter sharing and locality are core.
     \item Residual connections preserve gradient flow, enabling very deep networks.
     \item Efficient convolutions (depthwise separable) trade compute for accuracy with strong Pareto gains.
+    \item Normalization and careful downsampling are critical for stable optimization and preserving information.
 \end{itemize}
 
 
