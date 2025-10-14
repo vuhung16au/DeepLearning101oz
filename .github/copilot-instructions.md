@@ -3,6 +3,22 @@
 ## Project Overview
 This is a comprehensive LaTeX book on Deep Learning with advanced features including glossary, index, and difficulty levels. The book is structured as a complete educational resource with 20 chapters covering fundamentals to advanced research topics.
 
+## Language and Locale Policies
+
+### Language Style
+- **Use British English** for all content, comments, and documentation (not American English)
+- Examples of British English spelling:
+  - Use "colour" not "color"
+  - Use "optimise" not "optimize"
+  - Use "behaviour" not "behavior"
+  - Use "centre" not "center"
+  - Use "analyse" not "analyze"
+
+### Locale and Date Formatting
+- **Locale**: Use `en-GB` as the standard locale
+- **Date Format**: Use English date format: `14 Oct 2025` (day-month-year with abbreviated month)
+- **LaTeX Configuration**: The document uses `\usepackage[en-GB]{datetime2}` and `\DTMsetstyle{en-GB}` for consistent date formatting
+
 ## Key Features to Maintain
 
 ### 1. Glossary and Index System

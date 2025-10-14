@@ -3,6 +3,22 @@
 ## Project Context
 Deep Learning 101 is a comprehensive LaTeX educational book with advanced features including automated glossary, subject index, and difficulty level indicators. The project uses a sophisticated build system with multiple compilation passes.
 
+## Language and Locale Policies
+
+### Language Style
+- **Use British English** for all content, comments, and documentation (not American English)
+- Examples of British English spelling:
+  - Use "colour" not "color"
+  - Use "optimise" not "optimize"
+  - Use "behaviour" not "behavior"
+  - Use "centre" not "center"
+  - Use "analyse" not "analyze"
+
+### Locale and Date Formatting
+- **Locale**: Use `en-GB` as the standard locale
+- **Date Format**: Use English date format: `14 Oct 2025` (day-month-year with abbreviated month)
+- **LaTeX Configuration**: The document uses `\usepackage[en-GB]{datetime2}` and `\DTMsetstyle{en-GB}` for consistent date formatting
+
 ## Core Architecture
 
 ### Document Structure
