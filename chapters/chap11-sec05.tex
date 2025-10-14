@@ -6,20 +6,20 @@
 \subsection{Model Deployment}
 
 \begin{itemize}
-    \item Model compression (pruning, quantization)
-    \item Model serving infrastructure
-    \item Latency requirements
-    \item Batch vs. online inference
+    \item Model compression (pruning, quantization) to meet latency/size budgets
+    \item Model serving infrastructure (A/B testing, canary deploys)
+    \item Latency budgets and tail performance (p95/p99)
+    \item Batch vs. online inference and feature freshness
 \end{itemize}
 
 \subsection{Monitoring}
 
 Track in production:
 \begin{itemize}
-    \item Prediction distribution shifts
-    \item Model performance metrics
-    \item System latency and throughput
-    \item Error analysis
+    \item Prediction distribution shifts (covariate/label shift) \index{distribution shift}
+    \item Model performance metrics and calibration drift
+    \item System latency and throughput; autoscaling behavior
+    \item Error analysis with human-in-the-loop review
 \end{itemize}
 
 \subsection{Iterative Improvement}
@@ -31,3 +31,24 @@ Track in production:
     \item Retrain and improve
     \item A/B test new models
 \end{enumerate}
+
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (production)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,height=0.36\textwidth,
+      xlabel={Day}, ylabel={KS statistic}, grid=both]
+      \addplot[bookpurple,very thick] coordinates{(1,0.05) (2,0.06) (3,0.07) (4,0.09) (5,0.14) (6,0.22) (7,0.28)};
+      \addplot[bookred,dashed,very thick] coordinates{(1,0.2) (7,0.2)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Simple drift monitor: KS statistic over time with an alert threshold.}
+  \label{fig:drift-monitor}
+\end{figure}
+
+\subsection{Applications and context}
+
+Compression and low-latency serving are crucial in mobile vision, speech on device, and recommender systems; calibration and post-deployment monitoring are critical in healthcare and finance \textcite{Ronneberger2015,Prince2023}.

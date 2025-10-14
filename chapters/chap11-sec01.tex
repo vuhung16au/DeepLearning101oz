@@ -5,48 +5,177 @@
 
 \subsection{Classification Metrics}
 
-\textbf{Accuracy:}
+Robust model evaluation depends on selecting metrics aligned with task requirements and operational costs \index{metrics}. Accuracy alone can be misleading under class imbalance \index{class imbalance}; prefer precision/recall, AUC, PR-AUC, calibration, and cost-sensitive metrics when appropriate \textcite{GoodfellowEtAl2016,Prince2023}.
+
+\paragraph{Confusion matrix} For binary classification with positive/negative classes, define true positives (TP), false positives (FP), true negatives (TN), and false negatives (FN). The confusion matrix \index{confusion matrix} summarizes counts:
+
+\begin{center}
+\begin{tabular}{@{}lcc@{}}\toprule
+ & \textbf{Predicted +} & \textbf{Predicted --} \\
+\midrule
+\textbf{Actual +} & TP & FN \\
+\textbf{Actual --} & FP & TN \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[x=1.8cm,y=1.8cm]
+    % Axes labels
+    \node at (1,2.3) {Predicted};
+    \node[rotate=90] at (-0.3,1) {Actual};
+    % Grid and cells (values: TP=100, FP=15, FN=10, TN=875)
+    % Normalize colors roughly by mapping value/ max
+    \definecolor{cellA}{RGB}{50,120,200}  % TP
+    \definecolor{cellB}{RGB}{200,80,80}   % FP
+    \definecolor{cellC}{RGB}{200,80,80}   % FN
+    \definecolor{cellD}{RGB}{20,160,60}   % TN
+    % Draw borders
+    \draw[black] (0,0) rectangle (2,2);
+    \draw[black] (1,0) -- (1,2);
+    \draw[black] (0,1) -- (2,1);
+    % Fill cells
+    \fill[cellA] (0,1) rectangle (1,2);
+    \fill[cellB] (1,1) rectangle (2,2);
+    \fill[cellC] (0,0) rectangle (1,1);
+    \fill[cellD] (1,0) rectangle (2,1);
+    % Ticks and labels
+    \node at (0.5,-0.25) {$-$};
+    \node at (1.5,-0.25) {$+$};
+    \node at (-0.25,0.5) {$-$};
+    \node at (-0.25,1.5) {$+$};
+    % Counts
+    \node[white] at (0.5,1.5) {100};
+    \node[white] at (1.5,1.5) {15};
+    \node[white] at (0.5,0.5) {10};
+    \node[white] at (1.5,0.5) {875};
+  \end{tikzpicture}
+  \caption{Confusion matrix heatmap (example counts). High diagonal values indicate good performance.}
+  \label{fig:confusion-heatmap}
+\end{figure}
+
+\paragraph{Accuracy} \gls{accuracy} \index{accuracy} measures overall correctness but can obscure minority-class performance:
 \begin{equation}
-\text{Accuracy} = \frac{\text{Correct predictions}}{\text{Total predictions}}
+\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{FP} + \text{TN} + \text{FN}}.
 \end{equation}
 
-\textbf{Precision and Recall:}
+\paragraph{Precision and recall} \gls{precision} and \gls{recall} quantify quality on the positive class:
 \begin{align}
-\text{Precision} &= \frac{\text{TP}}{\text{TP} + \text{FP}} \\
-\text{Recall} &= \frac{\text{TP}}{\text{TP} + \text{FN}}
+\text{Precision} &= \frac{\text{TP}}{\text{TP} + \text{FP}}, \\
+\text{Recall} &= \frac{\text{TP}}{\text{TP} + \text{FN}}.
 \end{align}
 
-\textbf{F1 Score:} Harmonic mean of precision and recall
+\paragraph{F1 score} The harmonic mean balances precision and recall:
 \begin{equation}
-F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}.
 \end{equation}
 
-\textbf{ROC Curve and AUC:} Trade-off between true positive rate and false positive rate
+\paragraph{ROC and AUC} The ROC curve \index{ROC curve} plots TPR vs. FPR as the decision threshold varies; AUC summarizes ranking quality and is threshold-independent.
+\begin{align}
+\text{TPR} &= \frac{\text{TP}}{\text{TP} + \text{FN}}, & \text{FPR} &= \frac{\text{FP}}{\text{FP} + \text{TN}}.
+\end{align}
 
-\textbf{Confusion Matrix:} Visualizes prediction performance across classes
+\paragraph{Precision--Recall (PR) curve} Under heavy class imbalance, the PR curve \index{precision--recall curve} and average precision (AP) are often more informative than ROC \textcite{Prince2023}.
+
+\paragraph{Calibration} A calibrated classifier's predicted probabilities match observed frequencies. Use reliability diagrams and expected calibration error (ECE) \index{calibration}. Calibration matters in risk-sensitive applications \textcite{GoodfellowEtAl2016}.
+
+\subsubsection*{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (classification)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,
+      height=0.36\textwidth,
+      xlabel={False Positive Rate}, ylabel={True Positive Rate},
+      xmin=0,xmax=1,ymin=0,ymax=1,
+      legend pos=south east, grid=both]
+      \addplot[very thick,bookpurple] coordinates {(0,0) (0.1,0.6) (0.2,0.78) (0.4,0.9) (1,1)};\addlegendentry{Model A}
+      \addplot[very thick,bookred,dashed] coordinates {(0,0) (0.2,0.55) (0.5,0.8) (0.8,0.9) (1,1)};\addlegendentry{Model B}
+      \addplot[gray] coordinates {(0,0) (1,1)};\addlegendentry{Random}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{ROC curves for two models. Higher AUC indicates better ranking quality.}
+  \label{fig:roc-curves}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,
+      height=0.36\textwidth,
+      xlabel={Recall}, ylabel={Precision},
+      xmin=0,xmax=1,ymin=0,ymax=1,
+      legend pos=south west, grid=both]
+      \addplot[very thick,bookpurple] coordinates {(0.0,1.0) (0.2,0.92) (0.4,0.88) (0.6,0.80) (0.8,0.65) (1.0,0.45)};\addlegendentry{Model A}
+      \addplot[very thick,bookred,dashed] coordinates {(0.0,1.0) (0.2,0.85) (0.4,0.78) (0.6,0.70) (0.8,0.55) (1.0,0.40)};\addlegendentry{Model B}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Precision--recall curves emphasize performance on the positive class under imbalance.}
+  \label{fig:pr-curves}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,
+      height=0.36\textwidth,
+      xlabel={Predicted probability}, ylabel={Observed frequency},
+      xmin=0,xmax=1,ymin=0,ymax=1, grid=both]
+      \addplot[bookpurple,very thick] coordinates{(0.0,0.0) (0.1,0.05) (0.2,0.10) (0.3,0.18) (0.4,0.28) (0.5,0.40) (0.6,0.55) (0.7,0.68) (0.8,0.80) (0.9,0.90) (1.0,1.0)};
+      \addplot[gray] coordinates{(0,0) (1,1)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Reliability diagram illustrating calibration. The diagonal is perfect calibration.}
+  \label{fig:calibration}
+\end{figure}
 
 \subsection{Regression Metrics}
 
-\textbf{Mean Squared Error (MSE):}
+Choose metrics that reflect business loss and robustness to outliers \index{regression metrics}. Mean squared error (MSE) penalizes large errors more heavily than mean absolute error (MAE). Root mean squared error (RMSE) is in the original units. Coefficient of determination $R^2$ measures variance explained.
+
+\begin{align}
+\text{MSE} &= \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2, &
+\text{MAE} &= \frac{1}{n} \sum_{i=1}^{n} \lvert y_i - \hat{y}_i \rvert, &
+\text{RMSE} &= \sqrt{\text{MSE}}.
+\end{align}
+
+For heavy-tailed noise, consider Huber loss and quantile losses for pinball objectives \textcite{Prince2023}.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,
+      height=0.36\textwidth,
+      xlabel={$\hat y - y$}, ylabel={Loss}, grid=both, legend pos=north west]
+      \addplot[bookpurple,very thick,domain=-3:3,samples=200]{x^2};\addlegendentry{Squared}
+      \addplot[bookred,very thick,domain=-3:3,samples=200]{abs(x)};\addlegendentry{Absolute}
+      \addplot[black,very thick,domain=-3:3,samples=200]{(abs(x)<=1)*0.5*x^2 + (abs(x)>1)*(abs(x)-0.5)};\addlegendentry{Huber($\delta{=}1$)}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Comparison of squared, absolute, and Huber losses.}
+  \label{fig:huber}
+\end{figure}
+
+\subsection{NLP and Sequence Metrics}
+
+Sequence generation quality is commonly measured by \gls{bleu} \index{BLEU} and \gls{rouge} \index{ROUGE} (n-gram overlap), while language models use \emph{perplexity} (negative log-likelihood in exponential form) \textcite{GoodfellowEtAl2016,D2LChapterRNN}:
 \begin{equation}
-\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
+\text{PPL} = \exp\left(-\frac{1}{N} \sum_{i=1}^{N} \log P(x_i)\right).
 \end{equation}
 
-\textbf{Mean Absolute Error (MAE):}
-\begin{equation}
-\text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
-\end{equation}
+For retrieval and ranking, report mean average precision (mAP), normalized discounted cumulative gain (nDCG), and recall@k.
 
-\textbf{R-squared ($R^2$):} Proportion of variance explained
+\subsection{Worked examples}
 
-\subsection{NLP Metrics}
+\paragraph{Imbalanced disease detection} In a 1\% prevalence setting, a classifier with 99\% accuracy can be worthless. Reporting PR-AUC and calibration surfaces early detection quality and absolute risk estimates valued by clinicians \textcite{Ronneberger2015}.
 
-\textbf{BLEU:} For machine translation (measures n-gram overlap)
+\paragraph{Threshold selection} Optimize thresholds against a cost matrix or utility function (e.g., false negative cost \(\gg\) false positive). Plot utility vs. threshold to choose operating points.
 
-\textbf{ROUGE:} For summarization
-
-\textbf{Perplexity:} For language models
-\begin{equation}
-\text{PPL} = \exp\left(-\frac{1}{N} \sum_{i=1}^{N} \log P(x_i)\right)
-\end{equation}
+\paragraph{Macro vs. micro averaging} For multi-class, macro-averaged F1 treats classes equally; micro-averaged F1 weights by support. Choose based on fairness vs. prevalence alignment \textcite{Prince2023}.
 

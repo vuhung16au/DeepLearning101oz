@@ -5,6 +5,8 @@
 
 \subsection{Establishing Baselines}
 
+Strong baselines de-risk projects by validating data quality, metrics, and feasibility \textcite{GoodfellowEtAl2016,Prince2023}. Establish multiple baselines and track them as immutable references. \index{baseline}
+
 Start with simple baselines:
 \begin{enumerate}
     \item \textbf{Random baseline:} Random predictions
@@ -13,7 +15,7 @@ Start with simple baselines:
     \item \textbf{Simple neural networks:} Small architectures
 \end{enumerate}
 
-Compare deep learning improvements against these baselines.
+Compare deep learning improvements against these baselines. Use \emph{data leakage} \index{data leakage} checks (e.g., time-based splits, patient-level splits) and ensure identical preprocessing across baselines.
 
 \subsection{Debugging Strategy}
 
@@ -21,7 +23,7 @@ Compare deep learning improvements against these baselines.
 \begin{itemize}
     \item Take 10-100 examples
     \item Turn off regularization
-    \item If can't overfit, model has bugs
+    \item If can't overfit, suspect implementation, data, or optimization bugs
 \end{itemize}
 
 \textbf{Step 2: Check intermediate outputs}
@@ -29,6 +31,7 @@ Compare deep learning improvements against these baselines.
     \item Visualize activations
     \item Check gradient magnitudes
     \item Verify loss decreases on training set
+    \item Plot learning-rate vs. loss; test different seeds
 \end{itemize}
 
 \textbf{Step 3: Diagnose underfitting vs. overfitting}
@@ -44,6 +47,7 @@ Compare deep learning improvements against these baselines.
     \item Use batch normalization
     \item Gradient clipping
     \item Better initialization
+    \item Consider residual connections
 \end{itemize}
 
 \textbf{Dead ReLUs:}
@@ -57,5 +61,61 @@ Compare deep learning improvements against these baselines.
     \item Check learning rate (too high or too low)
     \item Verify gradient computation
     \item Check data preprocessing
+    \item Confirm label alignment and class indexing
 \end{itemize}
+
+\subsection{Ablation and sanity checks}
+
+Perform \emph{ablation studies} \index{ablation study} to quantify the contribution of each component (augmentation, architecture blocks, regularizers). Use \emph{label shuffling} to verify the pipeline cannot learn when labels are randomized. Train with \emph{frozen features} to isolate head capacity.
+
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (debugging)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,
+      height=0.36\textwidth,
+      xlabel={Epoch}, ylabel={Loss}, grid=both, legend pos=north east]
+      \addplot[bookpurple,very thick] coordinates{(0,1.0) (1,0.8) (2,0.65) (3,0.55) (4,0.50) (5,0.48)};\addlegendentry{Train}
+      \addplot[bookred,very thick,dashed] coordinates{(0,1.1) (1,0.95) (2,0.90) (3,0.92) (4,1.00) (5,1.10)};\addlegendentry{Val}
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Typical overfitting: training loss decreases while validation loss bottoms out and rises.}
+  \label{fig:overfit-curve}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,
+      height=0.36\textwidth,
+      ymode=log,
+      xlabel={Layer depth}, ylabel={$\lVert g \rVert_2$}, grid=both]
+      \addplot[bookpurple,very thick] coordinates{(1,1e-1) (2,8e-2) (3,5e-2) (4,2e-2) (5,8e-3) (6,3e-3)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Gradient norms vanishing with depth; motivates normalization and residual connections.}
+  \label{fig:vanishing-grad}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,
+      height=0.36\textwidth,
+      xlabel={Learning rate}, ylabel={Final loss}, grid=both]
+      \addplot[bookpurple,very thick] coordinates{(1e-5,1.2) (5e-5,0.9) (1e-4,0.7) (5e-4,0.55) (1e-3,0.54) (5e-3,1.3) (1e-2,3.0)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Learning-rate sweep to identify a stable training regime.}
+  \label{fig:lr-sweep}
+\end{figure}
+
+\subsection{Historical notes and references}
+
+Debugging by overfitting a tiny subset and systematic ablations has roots in classical ML practice and was emphasized in early deep learning methodology \textcite{GoodfellowEtAl2016}. Modern best practices are also surveyed in open textbooks \textcite{Prince2023,D2LChapterOptimization}.
 

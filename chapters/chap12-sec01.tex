@@ -5,25 +5,56 @@
 
 \subsection{Image Classification}
 
-Assign labels to images:
+Assign labels to images; modern benchmarks like ImageNet catalyzed deep CNN adoption \index{ImageNet} \textcite{Krizhevsky2012,He2016,GoodfellowEtAl2016,Prince2023}.
 \begin{itemize}
     \item \textbf{ImageNet:} 1000-class object recognition
     \item \textbf{Fine-grained classification:} Bird species, car models
     \item \textbf{Medical imaging:} Disease classification from X-rays, CT scans
 \end{itemize}
 
-\textbf{Architecture:} CNN backbone (ResNet, EfficientNet) + classification head
+\textbf{Architecture:} CNN backbone (e.g., ResNet) + classification head; transfer learning from pretrained weights is standard practice.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[>=stealth]
+    \tikzstyle{block}=[draw,rounded corners,align=center,minimum width=2.2cm,minimum height=0.9cm]
+    \node[block,fill=bookpurple!10] at (0,0) (img) {Input Image};
+    \node[block,fill=bookpurple!15] at (3.2,0) (conv) {Conv\,/\,BN\,/\,ReLU $\times N$};
+    \node[block,fill=bookpurple!20] at (6.4,0) (pool) {Global Avg Pool};
+    \node[block,fill=bookpurple!25] at (9.6,0) (fc) {Fully Connected};
+    \node[block,fill=bookpurple!30] at (12.8,0) (softmax) {Softmax};
+    \draw[->] (img) -- (conv);
+    \draw[->] (conv) -- (pool);
+    \draw[->] (pool) -- (fc);
+    \draw[->] (fc) -- (softmax);
+  \end{tikzpicture}
+  \caption{Typical CNN classification pipeline.}
+  \label{fig:cnn-pipeline}
+\end{figure}
 
 \subsection{Object Detection}
 
-Locate and classify objects in images:
+Locate and classify objects in images; real-time variants (YOLO) emphasize speed, while two-stage models (Faster R-CNN) emphasize accuracy.
 \begin{itemize}
     \item \textbf{Autonomous driving:} Pedestrians, vehicles, traffic signs
     \item \textbf{Surveillance:} Person detection and tracking
     \item \textbf{Retail:} Product recognition
 \end{itemize}
 
-\textbf{Methods:} YOLO, Faster R-CNN, RetinaNet
+\textbf{Methods:} YOLO, Faster R-CNN, RetinaNet; focal loss handles class imbalance in dense detectors.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,height=0.36\textwidth,
+      xlabel={IoU threshold}, ylabel={mAP}, grid=both]
+      \addplot[bookpurple,very thick] coordinates{(0.5,0.60) (0.55,0.58) (0.6,0.55) (0.65,0.52) (0.7,0.48) (0.75,0.43)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Detector performance (mAP) vs. IoU threshold schematic.}
+  \label{fig:map-iou}
+\end{figure}
 
 \subsection{Semantic Segmentation}
 
@@ -36,6 +67,31 @@ Classify every pixel:
 
 \textbf{Architectures:} U-Net, DeepLab, Mask R-CNN
 
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \tikzstyle{enc}=[draw,rounded corners,fill=bookpurple!10,minimum width=1.2cm,minimum height=0.7cm]
+    \tikzstyle{dec}=[draw,rounded corners,fill=bookred!10,minimum width=1.2cm,minimum height=0.7cm]
+    % Encoder blocks
+    \node[enc] at (0,0) (e1) {E1};
+    \node[enc] at (2.0,0) (e2) {E2};
+    \node[enc] at (4.0,0) (e3) {E3};
+    % Decoder blocks
+    \node[dec] at (3.0,1.4) (d2) {D2};
+    \node[dec] at (1.0,2.6) (d1) {D1};
+    % Connections
+    \draw[->] (e1) -- (e2);
+    \draw[->] (e2) -- (e3);
+    \draw[->] (e3) |- (d2);
+    \draw[->] (d2) |- (d1);
+    % Skip connections
+    \draw (e2.north) -- (d2.south);
+    \draw (e1.north) -- (d1.south);
+  \end{tikzpicture}
+  \caption{U-Net style encoder-decoder with skip connections.}
+  \label{fig:unet-schematic}
+\end{figure}
+
 \subsection{Face Recognition}
 
 Identify or verify individuals:
@@ -45,7 +101,7 @@ Identify or verify individuals:
     \item Payment authentication
 \end{itemize}
 
-\textbf{Approach:} Face detection + embedding (FaceNet, ArcFace) + similarity matching
+\textbf{Approach:} Face detection + embedding (FaceNet, ArcFace) + similarity matching; report ROC/PR, false accept/reject at target FAR/FRR.
 
 \subsection{Image Generation and Manipulation}
 
@@ -56,3 +112,6 @@ Identify or verify individuals:
     \item \textbf{Deepfakes:} Face swapping (ethical concerns)
 \end{itemize}
 
+\subsection{Historical context and references}
+
+Modern CV breakthroughs stem from CNNs popularized by ImageNet-scale training \textcite{Krizhevsky2012}, deeper residual networks \textcite{He2016}, and specialized architectures for segmentation \textcite{Ronneberger2015}. See \textcite{GoodfellowEtAl2016,Prince2023} for broader context.

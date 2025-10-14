@@ -30,7 +30,7 @@ x' = \frac{x - x_{\min}}{x_{\max} - x_{\min}}
 x' = \frac{x - \mu}{\sigma}
 \end{equation}
 
-Always compute statistics on training set only!
+Always compute statistics on training set only! \index{data leakage}
 
 \subsection{Handling Imbalanced Data}
 
@@ -44,5 +44,41 @@ Always compute statistics on training set only!
 
 \subsection{Data Augmentation}
 
-Generate additional training examples through transformations (see Chapter 7).
+Generate additional training examples through transformations (see Chapter 7). For images: flips, crops, color jitter; for text: back-translation; for audio: time stretch, noise. Calibrate augmentation strength to avoid distribution shift \textcite{Prince2023}.
+
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (data)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,height=0.36\textwidth,
+      ybar, bar width=10pt, grid=both,
+      xlabel={Class}, ylabel={Count}, xtick=data,
+      xticklabels={A,B,C,D,E}]
+      \addplot[bookpurple,fill=bookpurple!40] coordinates{(1,1000) (2,800) (3,120) (4,80) (5,40)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Imbalanced dataset example motivating class weights or resampling.}
+  \label{fig:imbalance-bar}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,height=0.36\textwidth,
+      xlabel={$x$}, ylabel={$x'$}, grid=both]
+      \addplot[bookpurple,very thick,domain=0:1]{x};
+      \addplot[bookred,very thick,domain=-3:3]({(x+3)/6},{(x-0)/2});
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Min-max scaling (purple) vs. standardization (red) schematic.}
+  \label{fig:scaling}
+\end{figure}
+
+\subsection{Historical notes}
+
+Careful dataset design (train/val/test segregation, leakage prevention) has long underpinned reliable evaluation in ML and remains essential at scale in deep learning \textcite{Bishop2006,GoodfellowEtAl2016}.
 
