@@ -47,19 +47,48 @@ Let $\vect{\theta}_0$ be the initial parameters.
 \subsection{Benefits}
 
 \begin{itemize}
-    \item Simple and effective
-    \item Automatically determines training duration
-    \item Acts as regularization without changing the model
-    \item Reduces computational cost
+    \item \textbf{Simple and effective:} Requires only tracking validation performance and a patience parameter; widely used in practice \cite{GoodfellowEtAl2016,Prince2023}.
+    \item \textbf{Automatically determines training duration:} Finds a good stopping time without a pre-fixed epoch budget, often saving substantial compute.
+    \item \textbf{Implicit regularization:} Halting before convergence limits effective capacity by keeping weights smaller and preventing memorization; in some regimes it mimics an L2 constraint under gradient descent \cite{GoodfellowEtAl2016}.
+    \item \textbf{Compatible with many settings:} Works with any loss, architecture (MLPs, CNNs, Transformers), and optimizer.
+    \item \textbf{Reduces computational cost:} Training stops as soon as overfitting begins, reducing energy/time.
+    \item \textbf{Improves generalization stability:} Curbs validation variance late in training when overfitting spikes.
 \end{itemize}
 
 \subsection{Considerations}
 
 \begin{itemize}
-    \item Requires separate validation set
-    \item Choice of patience hyperparameter
-    \item Can interact with learning rate schedules
+    \item \textbf{Validation protocol:} Requires a reliable validation set and evaluation cadence; noisy metrics may trigger premature stops. Use smoothing or require monotone improvements.
+    \item \textbf{Patience and frequency:} Patience $p$ and evaluation interval $n$ interact with LR schedules; too small $p$ can stop before a scheduled LR drop helps.
+    \item \textbf{Checkpointing:} Always restore the best model (not the last); keep track of the weights at the best validation step.
+    \item \textbf{Warmup and plateaus:} With warmup or long plateaus, consider larger patience or metric smoothing.
+    \item \textbf{Multi-metric objectives:} For tasks with multiple metrics (e.g., accuracy and calibration), pick the primary metric or a composite.
+    \item \textbf{Distributed training:} Ensure validation statistics are aggregated consistently across devices to avoid spurious decisions.
+    \item \textbf{Historical context:} Early stopping predates modern deep learning and was popular in classical neural nets and boosting as a strong regularizer; it remains a standard baseline \cite{GoodfellowEtAl2016,Bishop2006}.
 \end{itemize}
+
+\begin{example}
+\textbf{Example (vision):} Train a ResNet on CIFAR-10 with validation accuracy checked each epoch; use patience $p=20$. Accuracy peaks at epoch 142; training halts at 162 without improvement, and the checkpoint from 142 is used for testing.
+\end{example}
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.85]
+    % axes
+    \draw[->] (0,0) -- (9,0) node[right] {Epochs};
+    \draw[->] (0,0) -- (0,4.5) node[above] {Loss};
+    % training loss curve
+    \draw[draw=red, thick] plot[smooth] coordinates {(0.3,4) (1,3.2) (2,2.6) (3,2.2) (4,1.9) (5,1.7) (6,1.5) (7,1.4) (8,1.35)};
+    % validation loss curve (U-shaped)
+    \draw[draw=blue, thick] plot[smooth] coordinates {(0.3,3.9) (1,3.1) (2,2.5) (3,2.15) (4,1.95) (5,1.92) (6,1.95) (7,2.05) (8,2.2)};
+    % vertical line at best epoch
+    \draw[dashed] (4,0) -- (4,4.5) node[above] {Best epoch};
+    \node[text=blue] at (6.9,2.3) {Validation};
+    \node[text=red] at (7.3,1.35) {Training};
+\end{tikzpicture}
+\caption{Early stopping: validation loss reaches a minimum before training loss; the best checkpoint is saved and restored.}
+\label{fig:early-stopping-curve}
+\end{figure}
 
 % Index entries
 \index{early stopping}

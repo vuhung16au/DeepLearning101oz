@@ -33,22 +33,48 @@ At test time, scale outputs by dropout probability:
 
 Or equivalently, scale weights during training by $\frac{1}{p}$ (inverted dropout).
 
+In practice, modern frameworks implement \emph{inverted dropout}: during training, activations are scaled by $\tfrac{1}{p}$ after masking so that the expected activation matches test-time activations, and no scaling is needed at inference \cite{Srivastava2014,GoodfellowEtAl2016}. For convolutional layers, use the same $p$ per feature map to avoid distribution shift.
+
 \subsection{Interpretation}
 
 Dropout can be viewed as:
 \begin{itemize}
-    \item Training an ensemble of $2^n$ subnetworks
-    \item Adding noise to hidden activations
-    \item Approximate Bayesian inference
+    \item \textbf{Implicit ensemble:} Sampling masks trains an ensemble of $2^n$ subnetworks whose shared weights yield a form of model averaging \cite{Srivastava2014}.
+    \item \textbf{Noise injection:} Multiplicative Bernoulli noise on activations acts like data-dependent regularization analogous to adding Gaussian noise for linear models \cite{GoodfellowEtAl2016}.
+    \item \textbf{Approximate Bayesian inference:} With appropriate priors, dropout relates to variational inference; applying dropout at test time with multiple passes (MC dropout) estimates predictive uncertainty \cite{Gal2016MCDropout}.
 \end{itemize}
+
+\begin{example}
+\textbf{Example (uncertainty):} Run $T=20$ stochastic forward passes with dropout enabled at test time and average predictions to obtain mean and variance; high variance flags low-confidence inputs.
+\end{example}
 
 \subsection{Variants}
 
-\textbf{DropConnect:} drop weights instead of activations
+\textbf{DropConnect:} Drop individual weights instead of activations, promoting sparsity at the parameter level.
 
-\textbf{Spatial Dropout:} drop entire feature maps in CNNs
+\textbf{Spatial Dropout:} Drop entire feature maps in CNNs to preserve spatial coherence and regularize channel reliance.
 
-\textbf{Variational Dropout:} use same mask across time steps in RNNs
+\textbf{Variational Dropout:} Use the same dropout mask across time steps in RNNs to avoid injecting different noise per step that can harm temporal consistency.
+
+\textbf{MC Dropout:} Keep dropout active at inference and average predictions to quantify epistemic uncertainty \cite{Gal2016MCDropout}, useful in safety-critical applications.
+
+\textbf{Concrete/Alpha Dropout:} Continuous relaxations or distributions tailored for specific activations (e.g., SELU) to maintain self-normalizing properties.
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[scale=0.9]
+    % simple schematic: three subnetworks averaged
+    \node[draw, rectangle, fill=purple!15] (s1) at (0,0) {Subnetwork 1};
+    \node[draw, rectangle, fill=purple!15] (s2) at (3,0) {Subnetwork 2};
+    \node[draw, rectangle, fill=purple!15] (s3) at (6,0) {Subnetwork 3};
+    \node[draw, circle, fill=blue!20] (avg) at (3,-1.8) {Average};
+    \draw[->] (s1) -- (avg);
+    \draw[->] (s2) -- (avg);
+    \draw[->] (s3) -- (avg);
+\end{tikzpicture}
+\caption{Dropout as implicit model averaging over many subnetworks.}
+\label{fig:dropout-ensemble}
+\end{figure}
 
 \begin{figure}[htbp]
 \centering

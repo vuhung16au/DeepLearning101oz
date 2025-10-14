@@ -14,7 +14,11 @@ Replace hard targets with smoothed distributions:
 y'_k = (1 - \epsilon) y_k + \frac{\epsilon}{K}
 \end{equation}
 
-Prevents overconfident predictions.
+Prevents overconfident predictions and improves calibration by discouraging saturated logits; commonly used in large-scale classification (e.g., ImageNet) and sequence models. Choose $\epsilon$ in $[0.05, 0.2]$ depending on class count $K$ and desired calibration. It can also mitigate overfitting to annotator noise.
+
+\begin{example}
+\textbf{Example (ImageNet):} With $K=1000$ and $\epsilon=0.1$, the target for the correct class becomes $0.9$ while others receive $0.0001$ each; top-1 accuracy and ECE often improve.
+\end{example}
 
 \subsection{Gradient Clipping}
 
@@ -26,13 +30,24 @@ g \leftarrow \max(\min(g, \theta), -\theta)
 \end{equation}
 
 \textbf{Clipping by norm:}
+Clipping stabilizes training in RNNs and very deep nets by preventing exploding gradients, especially with large learning rates or noisy batches. Norm clipping with threshold $\theta$ is preferred as it preserves direction while scaling magnitude. Excessive clipping can bias updates and slow convergence; tune $\theta$ w.r.t. optimizer and batch size.
+
+\begin{example}
+\textbf{Example (NLP):} Train a GRU with global norm clip $\theta=1.0$; without clipping, gradients occasionally explode causing loss spikes.
+\end{example}
 \begin{equation}
 g \leftarrow \frac{g}{\max(1, \|g\| / \theta)}
 \end{equation}
 
 \subsection{Stochastic Depth}
 
-Randomly skip layers during training (for very deep networks).
+Randomly skip residual blocks during training with survival probability $p_l$ per layer $l$, while using the full network depth at test time. This shortens expected depth during training, improving gradient flow and reducing overfitting in very deep networks \cite{Huang2016StochasticDepth}.
+
+Let $p_l$ decrease with depth (e.g., linearly from 1.0 to $p_{\min}$). During training, with probability $1-p_l$ a residual block is bypassed; otherwise it is applied and its output is scaled to match test-time expectation.
+
+\begin{example}
+\textbf{Example (ResNets):} In a 110-layer ResNet, set $p_l$ from 1.0 to 0.8 across depth; training converges faster and generalizes better on CIFAR-10.
+\end{example}
 
 \subsection{Mixup}
 
@@ -44,12 +59,26 @@ Train on convex combinations of examples:
 
 where $\lambda \sim \text{Beta}(\alpha, \alpha)$.
 
+Mixup encourages linear behavior between classes, reduces memorization of spurious correlations, and improves robustness to label noise \cite{Zhang2018Mixup}. Typical $\alpha$ values are in $[0.2, 1.0]$. Variants include CutMix (patch-level mixing) \cite{Yun2019CutMix} and Manifold Mixup (mix at hidden layers).
+
+\begin{example}
+\textbf{Example (vision):} With $\alpha=0.4$, randomly pair images in a batch and form convex combinations; train using the mixed targets. Improves top-1 accuracy and calibration.
+\end{example}
+
 \subsection{Adversarial Training}
 
 Add adversarially perturbed examples to training:
 \begin{equation}
 \vect{x}_{\text{adv}} = \vect{x} + \epsilon \cdot \text{sign}(\nabla_{\vect{x}} L(\vect{x}, y))
 \end{equation}
+
+This FGSM objective can be extended to multi-step PGD adversaries. Adversarial training improves worst-case robustness but often reduces clean accuracy and increases compute \cite{Goodfellow2014}. Robust features learned can transfer across tasks; careful tuning of $\epsilon$, steps, and randomness is crucial.
+
+\begin{example}
+\textbf{Example (robust CIFAR-10):} Use $\epsilon=8/255$, $k=7$ PGD steps, step size $2/255$; train with a 1:1 mix of clean and adversarial samples.
+\end{example}
+
+\paragraph{Historical context and applications} Label smoothing and dropout popularized regularization at scale; gradient clipping stabilized early RNNs; stochastic depth enabled training very deep residual networks; mixup and CutMix improved data-efficient generalization; adversarial training established the modern paradigm for robustness. Applications span medical imaging, autonomous driving, speech recognition, and large-scale language models where calibration and robustness are critical \cite{GoodfellowEtAl2016,He2016,Ioffe2015}.
 
 % Index entries
 \index{label smoothing}
