@@ -42,3 +42,24 @@ Learn from few examples per class:
     \item \textbf{Matching networks:} Attention-based comparison
 \end{itemize}
 
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (transfer)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[>=stealth]
+    \tikzstyle{b}=[draw,rounded corners,align=center,minimum width=2.2cm,minimum height=0.9cm]
+    \node[b,fill=bookpurple!10] at (0,0) (src) {Source model};
+    \node[b,fill=bookpurple!15] at (3.2,0) (freeze) {Freeze early layers};
+    \node[b,fill=bookpurple!20] at (6.4,0) (ft) {Fine-tune head};
+    \draw[->] (src) -- (freeze);
+    \draw[->] (freeze) -- (ft);
+  \end{tikzpicture}
+  \caption{Common transfer pipeline: initialize, freeze, fine-tune.}
+  \label{fig:transfer}
+\end{figure}
+
+\subsection{References}
+
+See \textcite{Prince2023,GoodfellowEtAl2016} for practical recipes and pitfalls in transfer and domain adaptation.
+
