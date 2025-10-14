@@ -37,6 +37,27 @@
 
 \subsection{Genomics}
 
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (healthcare)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,height=0.36\textwidth,
+      xlabel={False Positive Rate}, ylabel={True Positive Rate},
+      xmin=0,xmax=1,ymin=0,ymax=1, grid=both]
+      \addplot[very thick,bookpurple] coordinates{(0,0) (0.1,0.7) (0.2,0.85) (0.4,0.92) (1,1)};
+      \addplot[gray] coordinates{(0,0) (1,1)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{ROC curve schematic for a medical classifier.}
+  \label{fig:med-roc}
+\end{figure}
+
+\subsection{Historical context and references}
+
+CNNs enabled breakthroughs in segmentation and classification, notably U-Net in biomedical imaging \textcite{Ronneberger2015}. Clinical deployment emphasizes calibration and monitoring \textcite{Prince2023}.
 \begin{itemize}
     \item DNA sequence analysis
     \item Variant calling

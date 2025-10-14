@@ -6,7 +6,7 @@
 
 \subsection{Game Playing}
 
-Superhuman performance:
+Superhuman performance using deep reinforcement learning and self-play \textcite{Silver2016,Prince2023}:
 \begin{itemize}
     \item \textbf{AlphaGo:} Defeated world champion in Go
     \item \textbf{AlphaZero:} Mastered chess, shogi, and Go
@@ -40,6 +40,25 @@ Superhuman performance:
 
 \subsection{Resource Management}
 
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (RL)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[>=stealth]
+    \tikzstyle{b}=[draw,rounded corners,align=center,minimum width=2.6cm,minimum height=0.9cm]
+    \node[b,fill=bookpurple!10] at (0,0) (env) {Environment};
+    \node[b,fill=bookpurple!20] at (4,0) (agent) {Agent (Policy)};
+    \draw[->] (agent) -- node[above]{Action $a_t$} (env);
+    \draw[->] (env) -- node[below]{State $s_{t+1}$, Reward $r_{t+1}$} (agent);
+  \end{tikzpicture}
+  \caption{Agent–environment interaction loop in RL.}
+  \label{fig:rl-loop}
+\end{figure}
+
+\subsection{Historical context and references}
+
+Self-play with deep networks and tree search led to landmark results in games \textcite{Silver2016}. RL also powers practical optimization in data centers and networks \textcite{Prince2023}.
 \begin{itemize}
     \item Data center cooling optimization (DeepMind)
     \item Traffic light control

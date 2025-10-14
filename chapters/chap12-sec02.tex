@@ -6,25 +6,61 @@
 
 \subsection{Text Classification}
 
-Categorize text documents:
+Categorize text documents using pretrained transformers and task heads; fine-tuning is data-efficient and standard \textcite{Devlin2018,Prince2023,D2LChapterAttention}.
 \begin{itemize}
     \item \textbf{Sentiment analysis:} Positive/negative reviews
     \item \textbf{Spam detection:} Email filtering
     \item \textbf{Topic classification:} News categorization
 \end{itemize}
 
-\textbf{Models:} BERT, RoBERTa, DistilBERT
+\textbf{Models:} BERT, RoBERTa, DistilBERT; report accuracy, F1, calibration for risk-sensitive domains.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \tikzstyle{b}=[draw,rounded corners,align=center,minimum width=2.3cm,minimum height=0.9cm]
+    \node[b,fill=bookpurple!10] at (0,0) (tok) {Tokenize +\newline Embed};
+    \node[b,fill=bookpurple!15] at (3.0,0) (enc) {Transformer\newline Encoder ($L$ layers)};
+    \node[b,fill=bookpurple!20] at (6.0,0) (cls) {[CLS] pooled};
+    \node[b,fill=bookpurple!30] at (9.0,0) (head) {Softmax head};
+    \draw[->] (tok) -- (enc);
+    \draw[->] (enc) -- (cls);
+    \draw[->] (cls) -- (head);
+  \end{tikzpicture}
+  \caption{Transformer fine-tuning for text classification.}
+  \label{fig:nlp-class}
+\end{figure}
 
 \subsection{Machine Translation}
 
-Translate between languages:
+Translate between languages; attention and Transformers supplanted earlier seq2seq RNNs \textcite{Bahdanau2014,Vaswani2017,GoodfellowEtAl2016,D2LChapterAttention}.
 \begin{itemize}
     \item Google Translate, DeepL
     \item Sequence-to-sequence with attention
     \item Transformer models
 \end{itemize}
 
-\textbf{Architecture:} Encoder-decoder transformers
+\textbf{Architecture:} Encoder-decoder transformers with subword tokenization; report BLEU/chrF and human eval.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \tikzstyle{e}=[draw,rounded corners,fill=bookpurple!10,minimum width=1.8cm,minimum height=0.7cm]
+    \tikzstyle{d}=[draw,rounded corners,fill=bookred!10,minimum width=1.8cm,minimum height=0.7cm]
+    \node[e] at (0,0) (e1) {Enc 1};
+    \node[e] at (2.1,0) (e2) {Enc 2};
+    \node[e] at (4.2,0) (e3) {Enc 3};
+    \node[d] at (2.1,1.6) (d1) {Dec 1};
+    \node[d] at (4.2,1.6) (d2) {Dec 2};
+    \draw[->] (e1) -- (e2);
+    \draw[->] (e2) -- (e3);
+    \draw[->] (e3) -- (d2);
+    \draw[->] (d1) -- (d2);
+    \draw (e2.north) -- (d1.south);
+  \end{tikzpicture}
+  \caption{Encoder–decoder Transformer schematic with cross-attention.}
+  \label{fig:mt-transformer}
+\end{figure}
 
 \subsection{Question Answering}
 
@@ -37,7 +73,7 @@ Answer questions based on context:
 
 \subsection{Language Models and Text Generation}
 
-Generate coherent text:
+Generate coherent text with large language models (LLMs) \textcite{Radford2019,Prince2023}. Evaluate with task-specific metrics and human preferences; ensure safety and grounding.
 \begin{itemize}
     \item GPT models for general text generation
     \item Code generation (GitHub Copilot)
@@ -47,10 +83,14 @@ Generate coherent text:
 
 \subsection{Named Entity Recognition}
 
-Extract entities from text:
+Extract entities from text; use BIO tagging, CRF heads on top of encoders; report token/entity F1.
 \begin{itemize}
     \item Person, organization, location names
     \item Dates, quantities, technical terms
     \item Applications in information extraction
 \end{itemize}
+
+\subsection{Historical context and references}
+
+Transformers \textcite{Vaswani2017} and pretrained models \textcite{Devlin2018,Radford2019} dramatically improved NLP performance and data efficiency. See \textcite{GoodfellowEtAl2016,Prince2023,D2LChapterAttention} for broader context and tutorials.
 
