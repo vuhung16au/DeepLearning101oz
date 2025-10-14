@@ -22,14 +22,17 @@ y_i &= \gamma \hat{x}_i + \beta
 
 where $\gamma$ and $\beta$ are learnable parameters.
 
+Implementation details: maintain running averages $\mu_{\text{running}}, \sigma^2_{\text{running}}$ updated with momentum $\rho$ per iteration; apply per-feature normalization for fully connected layers and per-channel per-spatial-location statistics for CNNs \cite{Ioffe2015,GoodfellowEtAl2016}.
+
 \subsection{Benefits}
 
 \begin{itemize}
-    \item Reduces internal covariate shift
-    \item Allows higher learning rates
-    \item Reduces sensitivity to initialization
-    \item Acts as regularization
-    \item Enables deeper networks
+    \item \textbf{Stabilizes distributions:} Mitigates internal covariate shift, keeping activations in a stable range \cite{Ioffe2015}.
+    \item \textbf{Enables larger learning rates:} Better-conditioned optimization allows faster training.
+    \item \textbf{Less sensitive initialization:} Wider set of workable initializations \cite{GoodfellowEtAl2016}.
+    \item \textbf{Regularization effect:} Mini-batch noise in statistics acts as stochastic regularization, improving generalization.
+    \item \textbf{Supports deeper nets:} Facilitates training very deep architectures (e.g., ResNets) \cite{He2016}.
+    \item \textbf{Improves gradient flow:} Normalized scales yield healthier signal-to-noise ratios in backprop.
 \end{itemize}
 
 \subsection{Inference}
@@ -39,13 +42,21 @@ At test time, use running averages computed during training:
 y = \gamma \frac{x - \mu_{\text{running}}}{\sqrt{\sigma^2_{\text{running}} + \epsilon}} + \beta
 \end{equation}
 
+Be careful when batch sizes are small at inference or differ from training: do not recompute batch statistics at test time; use the stored running averages. For distribution shift, consider recalibrating $\mu_{\text{running}}, \sigma^2_{\text{running}}$ with a small unlabeled buffer.
+
 \subsection{Variants}
 
-\textbf{Layer Normalization:} normalize across features (useful for RNNs)
+\textbf{Layer Normalization:} Normalize across features for each sample; effective in RNNs and Transformers where batch statistics are less stable.
 
-\textbf{Group Normalization:} normalize within groups of channels
+\textbf{Group Normalization:} Normalize within groups of channels; robust to small batch sizes common in detection/segmentation.
 
-\textbf{Instance Normalization:} normalize each sample independently (used in style transfer)
+\textbf{Instance Normalization:} Normalize each sample independently; prominent in style transfer where contrast/style per instance varies.
+
+\textbf{Batch Renormalization / Ghost BatchNorm:} Adjust for mismatch between batch and population statistics or simulate small batches inside large ones for regularization.
+
+\begin{example}
+\textbf{Example (vision):} In a CNN with batch size 128, use per-channel BN after each convolution with momentum $\rho=0.9$ and $\epsilon=10^{-5}$. During inference, freeze $\gamma,\beta$ and use stored running statistics.
+\end{example}
 
 % Index entries
 \index{batch normalization}
