@@ -13,3 +13,20 @@ where $\boldsymbol{\Psi}$ is diagonal. Each observed dimension has its own noise
 
 \textbf{Applications:} Psychology, social sciences, finance
 
+\subsection{Learning via EM}
+
+EM alternates between inferring posteriors over factors and updating loadings $\mat{W}$ and noise $\boldsymbol{\Psi}$. Diagonal noise permits modeling idiosyncratic measurement error per dimension \textcite{Bishop2006}.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,height=0.36\textwidth,
+      xlabel={Latent dim}, ylabel={Explained variance}, ymode=linear, grid=both]
+      \addplot[bookpurple,very thick] coordinates{(1,0.55) (2,0.7) (3,0.78) (4,0.82) (5,0.84)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Explained variance as a function of latent dimensionality (illustrative).}
+  \label{fig:fa-variance}
+\end{figure}
+

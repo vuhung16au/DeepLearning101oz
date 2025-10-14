@@ -24,3 +24,24 @@ ICA exploits that independent signals are typically non-Gaussian.
     \item Feature extraction
 \end{itemize}
 
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (ICA)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,height=0.36\textwidth,
+      xlabel={$s_1$}, ylabel={$s_2$}, grid=both]
+      \addplot+[only marks,mark=*,mark size=0.9pt,bookpurple!70] coordinates{(-1,0) (-0.8,0) (0.8,0) (1,0)};
+      \addplot+[only marks,mark=*,mark size=0.9pt,bookred!70] coordinates{(0,-1) (0,-0.8) (0,0.8) (0,1)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Independent sparse sources aligned with axes (illustrative).}
+  \label{fig:ica-sources}
+\end{figure}
+
+\subsection{Historical context and references}
+
+ICA popularized as a blind source separation tool and applied widely in signal processing and neuroscience \textcite{Bishop2006,GoodfellowEtAl2016}.
+
