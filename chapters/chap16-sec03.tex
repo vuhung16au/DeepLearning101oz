@@ -37,3 +37,21 @@ Compose neural modules based on program structure for visual reasoning.
 
 \subsection{Graph Neural Networks}
 
+Graph neural networks (GNNs) operate on graphs via message passing and permutation-invariant aggregations; useful for molecules, social networks, and scene graphs \textcite{Prince2023}.
+
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (structured models)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[>=stealth]
+    \tikzstyle{b}=[draw,rounded corners,align=center,minimum width=2.2cm,minimum height=0.9cm]
+    \node[b,fill=bookpurple!10] at (0,0) (cnn) {CNN features};
+    \node[b,fill=bookpurple!15] at (3.2,0) (crf) {CRF layer};
+    \node[b,fill=bookpurple!20] at (6.4,0) (mask) {Segmentation mask};
+    \draw[->] (cnn) -- (crf);
+    \draw[->] (crf) -- (mask);
+  \end{tikzpicture}
+  \caption{CNN features feeding a CRF layer for structured output.}
+  \label{fig:cnn-crf}
+\end{figure}
