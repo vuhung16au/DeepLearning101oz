@@ -54,3 +54,28 @@ Alternate updates:
 
 \textbf{CycleGAN:} Unpaired image-to-image translation
 
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (GANs)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[>=stealth]
+    \tikzstyle{b}=[draw,rounded corners,align=center,minimum width=2.4cm,minimum height=1.0cm]
+    \node[b,fill=bookpurple!10] at (0,0) (z) {Noise $\vect{z}$};
+    \node[b,fill=bookpurple!15] at (3.2,0) (g) {Generator $G$};
+    \node[b,fill=bookpurple!10] at (6.4,0.9) (x) {Real $\vect{x}$};
+    \node[b,fill=bookpurple!10] at (6.4,-0.9) (gx) {$G(\vect{z})$};
+    \node[b,fill=bookpurple!20] at (9.6,0) (d) {Discriminator $D$};
+    \draw[->] (z) -- (g);
+    \draw[->] (g) -- (gx);
+    \draw[->] (x) -- (d);
+    \draw[->] (gx) -- (d);
+  \end{tikzpicture}
+  \caption{GAN training: generator produces samples to fool discriminator.}
+  \label{fig:gan-diagram}
+\end{figure}
+
+\subsection{Notes and references}
+
+See \textcite{Goodfellow2014,GoodfellowEtAl2016,Prince2023} for GAN fundamentals and variants.
+
