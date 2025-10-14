@@ -96,6 +96,15 @@ This is a comprehensive LaTeX book on Deep Learning with advanced features inclu
 - Include practical examples and applications
 - Maintain consistent notation throughout
 
+### Deep Learning Chapters Requirements
+- **All deep learning chapters (6-20) must include a "Real World Applications" section**
+- This section should:
+  - Use `\difficulty{beginner}` to make it accessible
+  - Provide at least 3 concrete, practical examples
+  - Focus on less technical, easy-to-understand explanations
+  - Show how techniques solve real-world problems
+  - Include proper index entries for applications
+
 ### Mathematical Content
 - Provide step-by-step derivations for complex concepts
 - Use appropriate mathematical notation

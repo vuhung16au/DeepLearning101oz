@@ -1,0 +1,61 @@
+% Chapter 18: Real World Applications
+
+\section{Real World Applications}
+\label{sec:partition-real-world}
+\difficulty{beginner}
+
+Confronting the partition function—computing normalizing constants in probabilistic models—is a fundamental challenge. Practical applications require approximations and specialized techniques to make inference tractable in complex models.
+
+\subsection{Recommender Systems at Scale}
+
+Efficient scoring of millions of items:
+
+\begin{itemize}
+    \item \textbf{YouTube video recommendations:} YouTube must score millions of videos for each user. Computing exact probabilities requires evaluating partition functions over all possible videos—computationally infeasible. Instead, systems use approximate methods like negative sampling and importance sampling, providing good recommendations efficiently. These approximations enable real-time personalization for billions of users.
+    
+    \item \textbf{E-commerce product ranking:} Online retailers face similar challenges ranking products. Models learn to score product-user compatibility, but exact probability computations are intractable. Contrastive learning methods approximate partition functions by sampling negative examples, enabling practical deployment at scale while maintaining recommendation quality.
+    
+    \item \textbf{Music playlist generation:} Streaming services create personalized playlists by modeling sequential song compatibility. Full probabilistic models would require intractable partition functions over all possible song sequences. Practical systems use locally normalized models and sampling-based approximations, generating engaging playlists efficiently.
+\end{itemize}
+
+\subsection{Natural Language Processing}
+
+Handling large vocabularies efficiently:
+
+\begin{itemize}
+    \item \textbf{Language model training:} Modern language models predict next words from vocabularies of 50,000+ tokens. Computing partition functions over all possible next words for every training example is expensive. Techniques like noise contrastive estimation and self-normalization make training practical, enabling language models that power translation, autocomplete, and conversational AI.
+    
+    \item \textbf{Neural machine translation:} Translation models generate target sentences word by word, considering vast numbers of possible continuations. Exact probability computation would require intractable partition functions. Beam search with approximate scoring enables practical translation systems, producing high-quality translations in real-time.
+    
+    \item \textbf{Named entity recognition:} Identifying people, places, and organizations in text involves structured prediction over exponentially many possible tag sequences. Conditional random fields require computing partition functions efficiently. The forward-backward algorithm provides exact computation for chain structures, enabling accurate entity extraction in applications from news analysis to medical record processing.
+\end{itemize}
+
+\subsection{Computer Vision}
+
+Structured prediction in image understanding:
+
+\begin{itemize}
+    \item \textbf{Semantic segmentation:} Labeling every pixel in images requires modeling dependencies between neighboring pixels. Fully modeling these dependencies involves intractable partition functions over pixel labelings. Practical systems use approximate inference (mean field approximation, pseudo-likelihood) or structured models with tractable partition functions (chain or tree structures).
+    
+    \item \textbf{Pose estimation:} Estimating human body poses involves predicting joint locations with anatomical constraints (arms connect to shoulders, legs have limited range). Models encoding these constraints have complex partition functions. Approximate inference techniques enable real-time pose estimation for applications from gaming to physical therapy.
+    
+    \item \textbf{Object detection:} Detecting objects requires scoring countless possible bounding boxes. Models learning to rank boxes face partition function challenges similar to recommendation systems. Techniques like contrastive learning and hard negative mining make training practical, enabling accurate detection in applications from autonomous driving to retail analytics.
+\end{itemize}
+
+\subsection{Practical Solutions}
+
+Key strategies for handling partition functions:
+\begin{itemize}
+    \item \textbf{Approximation methods:} Monte Carlo sampling, variational inference
+    \item \textbf{Negative sampling:} Approximate partition functions using sampled negatives
+    \item \textbf{Structured models:} Design models with tractable partition functions
+    \item \textbf{Unnormalized models:} Use score-based approaches avoiding normalization
+\end{itemize}
+
+These applications show how confronting the partition function is not just a theoretical concern—it's a practical challenge requiring clever approximations to deploy probabilistic models at scale.
+
+% Index entries
+\index{applications!recommender systems}
+\index{applications!language models}
+\index{applications!computer vision}
+\index{partition function!applications}
