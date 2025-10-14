@@ -48,6 +48,23 @@ Flat regions with small gradients slow convergence. Adaptive methods and learnin
 
 \textbf{Recommended approach:}
 \begin{enumerate}
-    \item Start with Adam optimizer \cite{Kingma2014}
-    \item Learning rate: try 0.001, 0.0003, 0.0001
+    \item Start with Adam \cite{Kingma2014} for rapid progress; tune $\alpha$ in $\{10^{-3},3\cdot10^{-4},10^{-4}\}$.
+    \item Use cosine decay with warmup for transformer-like models; step decay for CNNs with SGD+momentum \cite{WebOptimizationDLBook,D2LChapterOptimization,He2016}.
+    \item If validation accuracy saturates, consider switching from Adam to SGD+Nesterov with tuned $\alpha$ and $\beta$ to improve generalization.
+    \item Apply gradient clipping in recurrent models and when training becomes unstable.\index{gradient clipping}
+    \item Monitor training/validation loss, accuracy, and learning-rate schedule. Use early stopping when needed.\index{early stopping}
 \end{enumerate}
+
+Applications and heuristics:
+\begin{itemize}
+    \item Vision: SGD+momentum or Nesterov often yields state-of-the-art with careful schedules and augmentations \cite{He2016}.
+    \item NLP/Transformers: Adam/AdamW with warmup+cosine is a strong default; clip global norm in seq2seq models.
+    \item Reinforcement learning: Adam with small $\alpha$ stabilizes non-stationary objectives.
+\end{itemize}
+
+Common failure modes:
+\begin{itemize}
+    \item Divergence at start: reduce $\alpha$, add warmup, or increase \(\epsilon\) for Adam.
+    \item Plateau: try larger batch with warmup, use cosine schedule, or add momentum.
+    \item Overfitting: increase regularization (weight decay, dropout), add data augmentation.
+\end{itemize}
