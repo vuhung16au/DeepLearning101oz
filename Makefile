@@ -33,7 +33,7 @@ main-a4.pdf: main.tex chapters/*.tex
 	@echo "Pass 5: Resolving references..."
 	@pdflatex -interaction=nonstopmode -halt-on-error -jobname=main-a4 "\def\papersize{a4paper}\input{main.tex}" > /dev/null || (cat main-a4.log && exit 1)
 	@echo "Pass 6: Final compilation..."
-	@pdflatex -interaction=nonstopmode -halt-on-error -jobname=main-a4 "\def\papersize{a4paper}\input{main.tex}" > /dev/null || (cat main-a4.log && exit 1)
+	@pdflatex -interaction=nonstopmode -halt-on-error -jobname=main-a4 "\def\papersize{a4paper}\input{main.tex}}" > /dev/null || (cat main-a4.log && exit 1)
 	@echo "Book compiled successfully: main-a4.pdf"
 
 # A5 paper version

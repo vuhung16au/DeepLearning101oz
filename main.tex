@@ -12,11 +12,37 @@
 \usepackage{setspace}
 \onehalfspacing
 
-% --- Essential Packages ---
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{lmodern}
+% --- Essential Packages and Unicode Support ---
+\usepackage{iftex}
+\ifPDFTeX
+  % pdfLaTeX path
+  \usepackage[utf8]{inputenc}
+  % Enable Latin (T1) and Vietnamese (T5) encodings
+  \usepackage[T1,T5]{fontenc}
+  \usepackage{lmodern}
+  % Vietnamese font support
+  \usepackage{vntex}
+  % CJK support for Chinese characters in pdfLaTeX
+  \usepackage{CJKutf8}
+\else
+  % XeLaTeX/LuaLaTeX path with native Unicode and CJK support
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=TeX}
+  % Use TeX Gyre fonts which ship with TeX Live
+  \setmainfont{TeX Gyre Termes}
+  \setsansfont{TeX Gyre Heros}
+  \setmonofont{TeX Gyre Cursor}
+  % CJK fonts (choose commonly available macOS font)
+  \RequirePackage{xeCJK}
+  \setCJKmainfont{PingFang SC}
+  \setCJKsansfont{PingFang SC}
+  \setCJKmonofont{PingFang SC}
+\fi
 \usepackage{microtype}
+% Language and date formatting
+\usepackage[english]{babel}
+\usepackage[en-GB]{datetime2}
+\DTMsetstyle{en-GB}
 
 % --- Math Packages ---
 \usepackage{amsmath,amssymb,amsfonts,amsthm}
@@ -41,7 +67,7 @@
 \usepackage{enumitem}
 
 % --- References and Links ---
-\usepackage{hyperref}
+\usepackage[unicode]{hyperref}
 \hypersetup{
     colorlinks=true,
     linkcolor=bookpurple,
@@ -103,14 +129,15 @@
 
 % --- Title and Author Information ---
 \title{\textbf{Deep Learning 101}}
-\author{Vu Hung Nguyen}
-\date{\today}
+\author{Vũ Hưng Nguyễn}
+\date{\DTMtoday}
 
 % ======================================================================
 % BEGIN DOCUMENT
 % ======================================================================
 
 \begin{document}
+\selectlanguage{english}
 
 % --- Front Matter ---
 \frontmatter
@@ -123,7 +150,7 @@
     {\Huge\bfseries Deep Learning 101\par}
     \vspace{1.5cm}
     
-    {\Large Vu Hung Nguyen\par}
+    {\Large Vũ Hưng Nguyễn -- \begin{CJK*}{UTF8}{gbsn} 阮武兴 \end{CJK*} \par}
     \vspace{2cm}
     
     {\large A Comprehensive Guide to\\
@@ -131,7 +158,7 @@
     
     \vfill
     
-    {\large \today\par}
+    {\large \DTMtoday\par}
     \vspace{0.5cm}
     
     {\small License: Creative Commons Attribution 4.0 International (CC BY 4.0)\par}
@@ -146,7 +173,7 @@
 Copyright \copyright~\the\year~Vu Hung Nguyen\\[0.5em]
 This work is licensed under the Creative Commons Attribution 4.0 International License.\\
 To view a copy of this license, visit \url{http://creativecommons.org/licenses/by/4.0/}\\[0.5em]
-First Edition: \today
+First Edition: \DTMtoday
 \end{flushleft}
 \vspace*{\fill}
 \clearpage
