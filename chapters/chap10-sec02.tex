@@ -18,16 +18,30 @@ The backpropagation algorithm \cite{Rumelhart1986} enabled efficient training of
 
 \subsection{BPTT Algorithm}
 
-Gradients are computed by unrolling the network and applying backpropagation:
+Gradients are computed by unrolling the network and applying backpropagation through the temporal graph. Let $L=\sum_{t=1}^{T} L_t$ and $\vect{h}_t = f(\vect{h}_{t-1}, \vect{x}_t; \vect{\theta})$, $\vect{y}_t = g(\vect{h}_t; \vect{\theta}_y)$. The total derivative w.r.t. hidden states satisfies the recurrence:
 
 \begin{equation}
 \frac{\partial L}{\partial \vect{h}_t} = \frac{\partial L}{\partial \vect{y}_t} \frac{\partial \vect{y}_t}{\partial \vect{h}_t} + \frac{\partial L}{\partial \vect{h}_{t+1}} \frac{\partial \vect{h}_{t+1}}{\partial \vect{h}_t}
 \end{equation}
 
-For weight matrix $\mat{W}$:
+For any parameter block $\mat{W} \in \vect{\theta}$ appearing at each time step:
 \begin{equation}
 \frac{\partial L}{\partial \mat{W}} = \sum_{t=1}^{T} \frac{\partial L_t}{\partial \mat{W}}
 \end{equation}
+
+\paragraph{Algorithm (BPTT).}
+\begin{enumerate}[nosep]
+    \item Forward pass: for $t=1,\dots,T$, compute $\vect{h}_t$, $\vect{y}_t$, and $L_t$.
+    \item Initialize temporal gradients: $\frac{\partial L}{\partial \vect{h}_{T+1}}=\vect{0}$.
+    \item Backward pass: for $t=T,\dots,1$:
+    \begin{align*}
+        \delta_t &\leftarrow \frac{\partial L}{\partial \vect{y}_t} \frac{\partial \vect{y}_t}{\partial \vect{h}_t} + \left(\frac{\partial L}{\partial \vect{h}_{t+1}}\right) \frac{\partial \vect{h}_{t+1}}{\partial \vect{h}_t} \\
+        \frac{\partial L}{\partial \mat{W}} &\mathrel{+}= \delta_t \frac{\partial \vect{h}_t}{\partial \mat{W}} \quad (\text{or add contributions for all parameters at time } t)
+    \end{align*}
+    \item Apply gradient clipping if needed and update parameters.
+\end{enumerate}
+
+This view aligns with the computational-graph treatment in \cite{GoodfellowEtAl2016} and standard expositions \cite{WebDLBRNN,D2LChapterRNN}.
 
 \subsection{Vanishing and Exploding Gradients}
 
@@ -53,10 +67,20 @@ If eigenvalues of $\mat{W}$ are:
 
 \subsection{Truncated BPTT}
 
-For very long sequences, truncate gradient computation:
+For very long sequences, truncate gradient computation by limiting backpropagation to a sliding window of $k$ steps \cite{GoodfellowEtAl2016}:
 \begin{itemize}
-    \item Only backpropagate through $k$ time steps (window size $k$)
-    \item Reduces memory and computation
-    \item Trade-off: cannot capture long-term dependencies
+    \item Process inputs in segments of length $k$ (possibly overlapping with stride $s$).
+    \item Backpropagate gradients only within each segment to reduce memory and time.
+    \item Hidden state is carried forward between segments but treated as a constant during the truncated backward step.
 \end{itemize}
+
+\paragraph{Algorithm (Truncated BPTT).}
+\begin{enumerate}[nosep]
+    \item For $t=1,1+s,1+2s,\dots$, take the chunk $[t,\, t+k-1]$.
+    \item Run forward pass over the chunk using the current hidden state as initialization.
+    \item Backpropagate losses only within the chunk; accumulate gradients.
+    \item Optionally detach the final hidden state from the graph before the next chunk to bound gradient length.
+\end{enumerate}
+
+\textbf{Trade-offs:} Lower memory and latency versus potentially missing very long-range dependencies. Increasing $k$ improves dependency length coverage but increases cost. Hybrids with dilated RNNs or attention can mitigate the trade-off.
 

@@ -17,7 +17,7 @@ Introduced in the 1990s to address vanishing gradients \cite{Hochreiter1997}, LS
 
 \subsection{Architecture}
 
-LSTM uses \textbf{gating mechanisms} to control information flow:
+LSTM uses \textbf{gating mechanisms} to control information flow and maintain a persistent cell state that supports long-range credit assignment \cite{Hochreiter1997,GoodfellowEtAl2016}:
 
 \begin{align}
 \vect{f}_t &= \sigma(\mat{W}_f [\vect{h}_{t-1}, \vect{x}_t] + \vect{b}_f) \quad \text{(forget gate)} \\
