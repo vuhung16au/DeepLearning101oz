@@ -23,3 +23,24 @@ Reduce variance of estimators:
 
 \textbf{Antithetic sampling:} Use negatively correlated samples
 
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (MC estimators)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,height=0.36\textwidth,
+      xmode=log, log basis x=10,
+      xlabel={$N$ samples}, ylabel={RMSE}, grid=both]
+      \addplot[bookpurple,very thick,domain=10:10000,samples=100]{1/sqrt(x)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Monte Carlo error decreases as $\mathcal{O}(N^{-1/2})$ (illustrative).}
+  \label{fig:mc-rate}
+\end{figure}
+
+\subsection{Notes and references}
+
+See \textcite{Bishop2006,GoodfellowEtAl2016,Prince2023} for Monte Carlo estimators and variance reduction techniques.
+
