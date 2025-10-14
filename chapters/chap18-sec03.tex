@@ -31,3 +31,24 @@ h(\vect{x}) = \frac{p_{\text{model}}(\vect{x})}{p_{\text{model}}(\vect{x}) + k \
     \item Energy-based models
 \end{itemize}
 
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (NCE)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,height=0.36\textwidth,
+      xlabel={Score $h(x)$}, ylabel={Density}, grid=both]
+      \addplot[bookpurple,very thick,domain=0:1,samples=100]{4*x*(1-x)};
+      \addplot[bookred,very thick,dashed,domain=0:1,samples=100]{2*(1-x)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Schematic of classifier scores for data (solid) vs. noise (dashed).}
+  \label{fig:nce-scores}
+\end{figure}
+
+\subsection{Notes and references}
+
+NCE as a technique to bypass partition functions is discussed in \textcite{GoodfellowEtAl2016,Prince2023}.
+

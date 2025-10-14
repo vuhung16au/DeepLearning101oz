@@ -29,3 +29,23 @@ Cannot directly:
     \item Compare models
 \end{itemize}
 
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (partition function)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,height=0.36\textwidth,
+      xlabel={Dimension $d$}, ylabel={Configurations $\sim 2^d$}, ymode=log, grid=both]
+      \addplot[bookpurple,very thick] coordinates{(4,16) (6,64) (8,256) (10,1024) (12,4096)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Configuration count grows exponentially with dimension, making $Z$ intractable (illustrative).}
+  \label{fig:pf-exp}
+\end{figure}
+
+\subsection{Notes and references}
+
+See \textcite{GoodfellowEtAl2016,Prince2023} for treatments of partition functions in energy-based models and practical workarounds.
+
