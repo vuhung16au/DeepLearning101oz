@@ -18,7 +18,7 @@ Adapts learning rate per parameter based on historical gradients:
 \vect{\theta}_{t+1} &= \vect{\theta}_t - \frac{\alpha}{\sqrt{\vect{r}_t + \epsilon}} \odot \vect{g}_t
 \end{align}
 
-where $\epsilon$ (e.g., $10^{-8}$) prevents division by zero.
+where $\epsilon$ (e.g., $10^{-8}$) prevents division by zero. AdaGrad is well-suited to sparse features: infrequent parameters receive larger effective steps, accelerating learning in NLP and recommender settings \cite{Duchi2011,WebOptimizationDLBook,D2LChapterOptimization}. A drawback is the ever-growing accumulator \(\vect{r}_t\), which can shrink steps too aggressively over long runs.
 
 \subsection{RMSProp}
 
@@ -27,6 +27,8 @@ Addresses AdaGrad's aggressive decay using exponential moving average:
 \vect{r}_t &= \rho \vect{r}_{t-1} + (1-\rho) \vect{g}_t \odot \vect{g}_t \\
 \vect{\theta}_{t+1} &= \vect{\theta}_t - \frac{\alpha}{\sqrt{\vect{r}_t + \epsilon}} \odot \vect{g}_t
 \end{align}
+
+Add a small \(\epsilon\) for numerical stability and tune decay \(\rho\in[0.9,0.99]\). RMSProp prevents the learning rate from decaying to zero as in AdaGrad, making it effective for non-stationary objectives typical in deep networks \cite{Tieleman2012,WebOptimizationDLBook,D2LChapterOptimization}.
 
 \subsection{Adam (Adaptive Moment Estimation)}
 
@@ -39,7 +41,7 @@ Combines momentum and adaptive learning rates:
 \vect{\theta}_{t+1} &= \vect{\theta}_t - \frac{\alpha \hat{\vect{m}}_t}{\sqrt{\hat{\vect{v}}_t} + \epsilon}
 \end{align}
 
-Default hyperparameters: $\beta_1 = 0.9$, $\beta_2 = 0.999$, $\epsilon = 10^{-8}$, $\alpha = 0.001$ \cite{Kingma2014}.
+Default hyperparameters: $\beta_1 = 0.9$, $\beta_2 = 0.999$, $\epsilon = 10^{-8}$, $\alpha = 0.001$ \cite{Kingma2014}. Adam often converges quickly and is robust to poorly scaled gradients. For best generalization in some vision tasks, SGD with momentum can still outperform Adam; consider switching optimizers during fine-tuning \cite{GoodfellowEtAl2016,D2LChapterOptimization,He2016}.
 
 \subsection{Learning Rate Schedules}\index{learning rate schedule}
 
@@ -57,4 +59,12 @@ Default hyperparameters: $\beta_1 = 0.9$, $\beta_2 = 0.999$, $\epsilon = 10^{-8}
 \begin{equation}
 \alpha_t = \alpha_{\min} + \frac{1}{2}(\alpha_{\max} - \alpha_{\min})\left(1 + \cos\left(\frac{t}{T}\pi\right)\right)
 \end{equation}
+
+Other useful schedules:\index{learning-rate-schedule}
+\begin{itemize}
+    \item Warmup: start from a small \(\alpha\) and increase linearly over the first \(T_w\) steps to reduce early instabilities in large-batch training.
+    \item One-cycle policy: increase then anneal \(\alpha\), often paired with momentum decay, to speed convergence and improve generalization.
+\end{itemize}
+
+Practical recipe: Combine cosine decay with warmup for transformer-like models, step decay for CNNs trained with SGD, and exponential decay for simple baselines \cite{WebOptimizationDLBook,D2LChapterOptimization}.
 

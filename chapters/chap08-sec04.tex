@@ -16,7 +16,27 @@ Uses second-order Taylor expansion:
 \vect{\theta}_{t+1} = \vect{\theta}_t - \mat{H}^{-1} \nabla_{\vect{\theta}} L(\vect{\theta}_t)
 \end{equation}
 
-where $\mat{H}$ is the Hessian matrix.
+where $\mat{H}$ is the Hessian matrix. Intuitively, the Hessian rescales the gradient by local curvature, yielding steps invariant to axis scaling in quadratic bowls (see Figure~\ref{fig:newton-bowl}).
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1.0]
+  % Quadratic bowl as concentric ellipses
+  \foreach \a/\b in {2.2/1.3, 1.8/1.05, 1.4/0.85, 1.0/0.65, 0.6/0.45} {
+    \draw[gray!60] (0,0) ellipse ({\a} and {\b});
+  }
+  % Current point
+  \fill[blue] (-1.2,0.7) circle (1.5pt);
+  % Gradient step (steepest descent, unscaled)
+  \draw[->, thick, blue!60] (-1.2,0.7) -- ++(0.35,-0.85) node[below right, xshift=1pt, yshift=-2pt] {\small gradient step};
+  % Newton step (curvature scaled)
+  \draw[->, thick, red!70] (-1.2,0.7) -- ++(0.95,-0.35) node[right, xshift=2pt] {\small Newton step};
+  % Optimum
+  \fill[black] (0,0) circle (1.2pt) node[below right] {\small $\theta^*$};
+\end{tikzpicture}
+\caption{Newton's method rescales the gradient by curvature, taking longer steps along shallow directions and shorter steps along steep directions.}
+\label{fig:newton-bowl}
+\end{figure}
 
 Challenges:\index{Newton's method}
 \begin{itemize}
@@ -36,6 +56,8 @@ Approximate the Hessian inverse:
     \item Used for smaller networks or specific applications
 \end{itemize}
 
+Historical note: Quasi-Newton methods, notably BFGS and its limited-memory variant L-BFGS \cite{LiuNocedal1989}, performed well on moderate-sized networks and remain valuable for fine-tuning smaller models or optimizing differentiable components inside larger systems \cite{GoodfellowEtAl2016,Bishop2006}.
+
 \subsection{Natural Gradient}\index{natural gradient}
 
 Uses Fisher information matrix instead of Hessian:
@@ -43,5 +65,25 @@ Uses Fisher information matrix instead of Hessian:
 \vect{\theta}_{t+1} = \vect{\theta}_t - \alpha \mat{F}^{-1} \nabla_{\vect{\theta}} L(\vect{\theta}_t)
 \end{equation}
 
-Provides parameter updates invariant to reparameterization.
+Provides parameter updates invariant to reparameterization. In probabilistic models, \(\mat{F}\) is the Fisher information, defining a Riemannian metric on the parameter manifold; stepping along \(\mat{F}^{-1}\nabla L\) follows the steepest descent in information geometry \cite{Amari1998}. Approximations (e.g., K-FAC) make natural gradient practical in deep nets by exploiting layer structure (see Figure~\ref{fig:natural-gradient}).
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[scale=1.0]
+  % Anisotropic contours (level sets)
+  \foreach \a/\b in {2.2/0.9, 1.8/0.75, 1.4/0.62, 1.0/0.5, 0.6/0.38} {
+    \draw[gray!60, rotate=25] (0,0) ellipse ({\a} and {\b});
+  }
+  % Current point
+  \fill[blue] (-1.0,0.3) circle (1.5pt);
+  % Euclidean gradient step (blue)
+  \draw[->, thick, blue!70] (-1.0,0.3) -- ++(0.25,-0.55) node[below right, xshift=1pt, yshift=-1pt] {\small Euclidean};
+  % Natural gradient step (green), rotates/scales toward true steepest path under metric
+  \draw[->, thick, green!60!black] (-1.0,0.3) -- ++(0.6,-0.25) node[right, xshift=2pt] {\small Natural};
+  % Optimum
+  \fill[black] (0,0) circle (1.2pt) node[below right] {\small $\theta^*$};
+\end{tikzpicture}
+\caption{Natural gradient accounts for the local geometry (Fisher metric), often directing updates more orthogonally to level sets than Euclidean gradient.}
+\label{fig:natural-gradient}
+\end{figure}
 

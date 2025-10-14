@@ -18,10 +18,20 @@ Computes gradient using entire training set:
 
 Characteristics:\index{gradient descent!batch}
 \begin{itemize}
-    \item Guaranteed convergence to global minimum (convex) or local minimum (non-convex)
-    \item Very slow for large datasets
-    \item Deterministic updates
+    \item Deterministic and low-variance updates; well-suited for convex problems.
+    \item Each step uses all \(n\) examples, incurring high computation and memory costs for large datasets.
+    \item In deep, non-convex landscapes, stable but often too slow to respond to curvature changes.
 \end{itemize}
+
+Example (convex quadratic): Let \(L(\theta)=\tfrac{1}{2}a\theta^2\) with gradient \(a\theta\). Batch GD with step size \(\alpha\) yields \(\theta_{t+1}=(1-\alpha a)\theta_t\). Convergence occurs if \(0<\alpha<\tfrac{2}{a}\), illustrating the learning-rate–curvature interaction.\index{learning rate}\glsadd{gradient-descent}
+
+When to use:
+\begin{itemize}
+    \item Small datasets that fit comfortably in memory.
+    \item Convex or nearly convex objectives (e.g., linear/logistic regression) when precise convergence is desired.
+\end{itemize}
+
+Historical context: Full-batch methods trace back to classical numerical optimization. For massive datasets, stochastic approximations dating to \cite{RobbinsMonro1951} became essential; modern deep learning typically favors mini-batches \cite{GoodfellowEtAl2016,WebOptimizationDLBook,D2LChapterOptimization}.
 
 \subsection{Stochastic Gradient Descent (SGD)}\index{SGD@stochastic gradient descent}
 
@@ -30,13 +40,20 @@ Uses a single random example per update:
 \vect{\theta}_{t+1} = \vect{\theta}_t - \alpha \nabla_{\vect{\theta}} L(\vect{\theta}, \vect{x}^{(i)}, y^{(i)})
 \end{equation}
 
-Characteristics:
+Characteristics:\glsadd{stochastic-gradient-descent}
 \begin{itemize}
-    \item Much faster per iteration
-    \item Noisy updates can escape shallow local minima
-    \item High variance in updates
-    \item May not converge to exact minimum
+    \item Very fast, streaming-friendly updates; one pass can begin learning immediately.
+    \item Noisy gradients add exploration, helping traverse saddle points and plateaus.\index{saddle point}\index{plateau}
+    \item High variance can hamper precise convergence; diminishing \(\alpha_t\) helps stabilize \cite{RobbinsMonro1951}.
 \end{itemize}
+
+Practical tips:
+\begin{itemize}
+    \item Use a decaying schedule (e.g., \(\alpha_t = \alpha_0/(1+\lambda t)\)) or switch to momentum/Adam later for fine-tuning \cite{WebOptimizationDLBook,D2LChapterOptimization}.
+    \item Shuffle examples every epoch to avoid periodic bias.
+\end{itemize}
+
+Applications: Early CNN training and many online/streaming scenarios employ SGD due to its simplicity and ability to handle large-scale data. In large vision models, SGD with momentum remains competitive \cite{He2016}.
 
 \subsection{Mini-Batch Gradient Descent}\index{gradient descent!mini-batch}
 
@@ -45,7 +62,7 @@ Balances batch and stochastic approaches:
 \vect{\theta}_{t+1} = \vect{\theta}_t - \alpha \nabla_{\vect{\theta}} \frac{1}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} L(\vect{\theta}, \vect{x}^{(i)}, y^{(i)})
 \end{equation}
 
-where $\mathcal{B}$ is a mini-batch (typically 32-256 examples).
+where $\mathcal{B}$ is a mini-batch (typically 32–1024 examples depending on model and hardware).\glsadd{mini-batch}
 
 Benefits:
 \begin{itemize}
@@ -53,4 +70,12 @@ Benefits:
     \item Efficient GPU utilization
     \item Good balance of speed and stability
 \end{itemize}
+
+Further guidance:
+\begin{itemize}
+    \item Larger batches yield smoother estimates but may require proportionally larger learning rates; the ``linear scaling rule'' is a useful heuristic in some regimes.\index{mini-batch}
+    \item Very large batches can hurt generalization unless paired with warmup and appropriate regularization. See \cite{WebOptimizationDLBook,D2LChapterOptimization}.
+\end{itemize}
+
+Illustrative example (variance vs. batch size): For a fixed \(\alpha\), increasing \(|\mathcal{B}|\) reduces the variance of the stochastic gradient approximately as \(\mathcal{O}(1/|\mathcal{B}|)\), improving stability but diminishing returns once hardware is saturated.
 

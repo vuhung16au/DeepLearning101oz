@@ -26,6 +26,16 @@ Benefits:\index{optimization!momentum}
     \item Helps escape local minima and saddle points
 \end{itemize}
 
+Interpretation: Momentum is equivalent to an exponentially weighted moving average of past gradients, implementing a low-pass filter that suppresses high-frequency noise. In anisotropic valleys, it allows larger effective step along the shallow curvature direction while reducing zig-zag across the sharp direction \cite{Polyak1964,WebOptimizationDLBook,D2LChapterOptimization}.
+
+Choice of hyperparameters:
+\begin{itemize}
+    \item \(\beta\in[0.8,0.99]\); larger values increase smoothing and memory.
+    \item Couple with a tuned \(\alpha\); too-large \(\alpha\) can still diverge.
+\end{itemize}
+
+Example (ravine function): For \(L(\theta_1,\theta_2)=100\theta_1^2+\theta_2^2\), momentum reduces oscillations in the steep \(\theta_1\) direction and speeds travel along the gentle \(\theta_2\) direction.
+
 \subsection{Nesterov Accelerated Gradient (NAG)}\index{optimization!Nesterov}
 
 "Look-ahead" version of momentum:
@@ -35,4 +45,12 @@ Benefits:\index{optimization!momentum}
 \end{align}
 
 Evaluates gradient at anticipated future position, often providing better updates.
+
+Rationale: By computing the gradient at the look-ahead point \(\theta_t+\beta v_{t-1}\), NAG corrects the course earlier, which reduces overshoot in curved valleys and can improve convergence rates in convex settings \cite{Nesterov1983,WebOptimizationDLBook,GoodfellowEtAl2016}.
+
+Practice notes:
+\begin{itemize}
+    \item Common defaults: \(\beta=0.9\), initial \(\alpha\in[10^{-3},10^{-1}]\) depending on scale.
+    \item Widely used with SGD in large-scale vision models \cite{He2016}.
+\end{itemize}
 
