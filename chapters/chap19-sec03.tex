@@ -31,3 +31,24 @@ On graphs with cycles:
     \item Used in error-correcting codes, computer vision
 \end{itemize}
 
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (loopy BP)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,height=0.36\textwidth,
+      xlabel={Iteration}, ylabel={Residual}, ymode=log, grid=both]
+      \addplot[bookpurple,very thick] coordinates{(1,1.0) (2,0.5) (3,0.3) (4,0.2) (5,0.18)};
+      \addplot[bookred,very thick,dashed] coordinates{(1,1.0) (2,1.2) (3,1.4) (4,1.7) (5,2.0)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Loopy BP: a convergent case (solid) vs. a divergent case (dashed), illustrative.}
+  \label{fig:lbp-conv}
+\end{figure}
+
+\subsection{Notes and references}
+
+For background and practical considerations, see \textcite{Bishop2006,GoodfellowEtAl2016,Prince2023}.
+
