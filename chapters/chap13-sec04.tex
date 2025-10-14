@@ -15,3 +15,20 @@ Learn overcomplete dictionary where data has sparse representation:
     \item Feature learning
     \item Compression
 \end{itemize}
+
+\subsection{Optimization and interpretation}
+
+The $\ell_1$ penalty promotes sparsity, yielding parts-based representations and robust denoising. Alternating minimization over dictionary $\mat{D}$ and codes $\vect{z}$ is common; convolutional variants are used in images \textcite{GoodfellowEtAl2016}.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,height=0.36\textwidth,
+      xlabel={$z_1$}, ylabel={$z_2$}, grid=both]
+      \addplot[bookpurple,very thick,domain=-2:2]{1.0 - abs(x)}; % diamond-like L1 contour (schematic)
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Schematic illustrating $\ell_1$-induced sparsity geometry.}
+  \label{fig:l1-geometry}
+\end{figure}
