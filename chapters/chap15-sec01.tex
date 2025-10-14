@@ -40,3 +40,23 @@ Deep learning learns to:
     \item Map data to meaningful coordinates on manifold
 \end{itemize}
 
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (representations)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,height=0.36\textwidth,
+      xlabel={$x_1$}, ylabel={$x_2$}, grid=both]
+      \addplot[bookpurple,very thick,domain=-2:2] {sin(deg(x))/1.5};
+      \addplot[bookred,very thick,domain=-2:2] {0.0};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Complex data manifold (purple) and a learned linearized coordinate (red) locally.}
+  \label{fig:manifold}
+\end{figure}
+
+\subsection{Notes and references}
+
+Desirable properties are discussed in modern DL texts; disentanglement and invariance connect to inductive biases and data augmentation \textcite{GoodfellowEtAl2016,Prince2023}.

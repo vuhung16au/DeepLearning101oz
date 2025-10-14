@@ -30,3 +30,27 @@ If $\dim(\vect{h}) < \dim(\vect{x})$, the autoencoder learns compressed represen
 
 Acts as dimensionality reduction (similar to PCA but non-linear).
 
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (autoencoder)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[>=stealth]
+    \tikzstyle{b}=[draw,rounded corners,align=center,minimum width=2.0cm,minimum height=0.8cm]
+    \node[b,fill=bookpurple!10] at (0,0) (x) {Input $\vect{x}$};
+    \node[b,fill=bookpurple!15] at (2.8,0) (enc) {Encoder $f$};
+    \node[b,fill=bookpurple!20] at (5.6,0) (h) {Latent $\vect{h}$};
+    \node[b,fill=bookpurple!15] at (8.4,0) (dec) {Decoder $g$};
+    \node[b,fill=bookpurple!10] at (11.2,0) (xh) {Reconstruction $\hat{\vect{x}}$};
+    \draw[->] (x) -- (enc);
+    \draw[->] (enc) -- (h);
+    \draw[->] (h) -- (dec);
+    \draw[->] (dec) -- (xh);
+  \end{tikzpicture}
+  \caption{Undercomplete autoencoder with a low-dimensional bottleneck.}
+  \label{fig:ae-arch}
+\end{figure}
+
+\subsection{Notes and references}
+
+Undercomplete autoencoders learn non-linear compressions beyond PCA; see \textcite{GoodfellowEtAl2016,Prince2023} for guidance on architectures and pitfalls (e.g., identity shortcuts).

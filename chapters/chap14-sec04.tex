@@ -30,3 +30,23 @@ DAEs remove noise from:
     \item Audio signals
     \item Sensor data
 \end{itemize}
+
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (AE applications)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,height=0.36\textwidth,
+      xlabel={Input sample}, ylabel={Reconstruction error}, grid=both]
+      \addplot[bookpurple,very thick] coordinates{(1,0.02) (2,0.03) (3,0.02) (4,0.45) (5,0.04) (6,0.03)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Spike in reconstruction error indicating an anomaly (illustrative).}
+  \label{fig:ae-anomaly}
+\end{figure}
+
+\subsection{References}
+
+For autoencoder variants and use-cases, see \textcite{GoodfellowEtAl2016,Prince2023}.
