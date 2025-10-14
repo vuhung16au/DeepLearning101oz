@@ -1,12 +1,12 @@
 % Chapter 9, Section 2
 
-\section{Pooling}
+\section{Pooling\index{pooling}\index{max pooling}\index{average pooling}}
 \label{sec:pooling}
 
 \textbf{Pooling} reduces spatial dimensions and provides translation invariance.
 
 \subsection*{Intuition}
-Pooling summarizes nearby activations so that small translations of the input do not significantly change the summary. Max pooling keeps the strongest response, while average pooling smooths responses. Modern designs sometimes prefer strided convolutions to make downsampling learnable \cite{GoodfellowEtAl2016}.
+Pooling summarizes nearby activations so that small translations of the input do not significantly change the summary. Max pooling keeps the strongest response, while average pooling smooths responses. It provides a degree of translation \emph{invariance} complementary to convolution's translation \emph{equivariance} \index{invariance}\index{equivariance}. Modern designs sometimes prefer strided convolutions to make downsampling learnable \cite{GoodfellowEtAl2016,He2016}.
 
 \subsection{Max Pooling}
 
@@ -16,6 +16,8 @@ Takes maximum value in each pooling region:
 \end{equation}
 
 Common: $2 \times 2$ max pooling with stride 2 (halves spatial dimensions).
+
+\paragraph{Example.} For input of size $H\times W=32\times32$ and a $2\times2$ window with stride $2$, the output is $16\times16$. Channels are pooled independently.
 
 \subsection{Average Pooling}
 
@@ -34,7 +36,40 @@ Pools over entire spatial dimensions:
 
 Useful for reducing parameters before fully connected layers and for connecting convolutional backbones to classification heads (e.g., GAP before softmax).
 
-\subsection{Alternative: Strided Convolutions}
+\paragraph{Note.} Global average pooling (GAP) can replace large fully connected layers by averaging each feature map to a single scalar, reducing overfitting and parameter count \cite{GoodfellowEtAl2016}.
 
-Modern architectures sometimes replace pooling with strided convolutions to learn downsampling (e.g., in ResNet stages) \cite{He2016}.
+\subsection{Alternative: Strided Convolutions\index{strided convolution}}
+\label{subsec:strided-convs}
+
+Instead of a non-learned pooling operator, a convolution with stride $s>1$ performs \emph{learned downsampling}. For kernel size $k$, stride $s$, and padding $p$, the output spatial dimension per axis is
+\begin{equation}
+H' = \left\lfloor \frac{H - k + 2p}{s} \right\rfloor + 1,\quad W' = \left\lfloor \frac{W - k + 2p}{s} \right\rfloor + 1.
+\end{equation}
+Pros and cons:
+\begin{itemize}
+    \item \textbf{Pros:} learnable, can combine feature extraction and downsampling in one step; used in stage transitions of ResNet\index{ResNet} \cite{He2016}.
+    \item \textbf{Cons:} may introduce aliasing if high-frequency content is not low-pass filtered prior to sub-sampling; anti-aliasing variants blur before stride.
+\end{itemize}
+
+\paragraph{Example.} A $3\times3$ convolution with stride $2$ and padding $1$ keeps spatial size roughly halved (e.g., $32\to16$) while learning filters.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[x=0.25cm,y=0.25cm]
+        % input grid
+        \foreach \i in {0,...,15} {\draw (0,\i) -- (16,\i);} 
+        \foreach \j in {0,...,16} {\draw (\j,0) -- (\j,16);} 
+        % stride-2 sampling dots
+        \foreach \i in {1,3,5,7,9,11,13,15} {\foreach \j in {1,3,5,7,9,11,13,15} {\fill[bookpurple] (\j,\i) circle (0.12);} }
+        % arrow to output
+        \draw[->,thick] (8,-1) -- (24,-1) node[midway,below]{stride 2};
+        % output grid 8x8
+        \begin{scope}[shift={(24,-0)}]
+            \foreach \i in {0,...,8} {\draw (0,\i) -- (8,\i);} 
+            \foreach \j in {0,...,8} {\draw (\j,0) -- (\j,8);} 
+        \end{scope}
+    \end{tikzpicture}
+    \caption{Downsampling via stride 2: fewer spatial samples after a strided convolution compared to pooling.}
+    \label{fig:strided-conv}
+\end{figure}
 

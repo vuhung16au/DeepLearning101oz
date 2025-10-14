@@ -5,83 +5,160 @@
 
 \subsection*{Historical Context}
 CNNs evolved from early biologically inspired work to practical systems. \textbf{LeNet-5} established the template for digit recognition \cite{LeCun1989}. \textbf{AlexNet} showed large-scale training with ReLU, dropout, and data augmentation could dominate ImageNet \cite{Krizhevsky2012}. \textbf{VGG} emphasized simplicity via small filters, while \textbf{Inception} exploited multi-scale processing with $1\times1$ dimension reduction. \textbf{ResNet} enabled very deep networks via residual connections \cite{He2016}. Efficiency-driven families like \textbf{MobileNet} and \textbf{EfficientNet} target edge devices and compound scaling.
-\subsection{LeNet-5 (1998)}
+\subsection{LeNet-5 (1998)\index{LeNet-5}}
+\label{subsec:lenet}
 
-Early CNN for digit recognition \cite{LeCun1989}:
+LeNet-5 demonstrated the viability of CNNs for handwritten digit recognition (MNIST) \cite{LeCun1989}. It combined convolution, subsampling (pooling), and small fully connected layers.
 \begin{itemize}
-    \item Conv $\to$ Pool $\to$ Conv $\to$ Pool $\to$ FC $\to$ FC
-    \item Used sigmoid/tanh activations
-    \item ~60K parameters
+    \item \textbf{Topology:} \(\text{Conv}(6@5\times5)\to\text{Pool}(2\times2)\to\text{Conv}(16@5\times5)\to\text{Pool}(2\times2)\to\text{FC}(120)\to\text{FC}(84)\to\text{Softmax}(10)\).
+    \item \textbf{Activations:} sigmoid/tanh; later works often retrofit ReLU for pedagogy.
+    \item \textbf{Properties:} local receptive fields, parameter sharing, and early evidence of translation invariance via pooling.
+    \item \textbf{Impact:} established the core conv-pool pattern and end-to-end learning for vision \cite{GoodfellowEtAl2016}.
 \end{itemize}
 
-\subsection{AlexNet (2012)}
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[x=0.2cm,y=0.2cm]
+        % input
+        \draw[fill=bookpurple!10,draw=bookpurple] (0,0) rectangle (12,12);
+        \node at (6,13.5) {Input $32\times32$};
+        % conv1
+        \draw[->,thick] (12,6) -- (16,6);
+        \draw[fill=bookpurple!20,draw=bookpurple] (16,1) rectangle (24,11);
+        \node[align=center] at (20,12.8) {Conv1\\$6@5\times5$};
+        % pool1
+        \draw[->,thick] (24,6) -- (28,6);
+        \draw[fill=bookpurple!20,draw=bookpurple] (28,3) rectangle (34,9);
+        \node[align=center] at (31,10.8) {Pool $2\times2$};
+        % conv2
+        \draw[->,thick] (34,6) -- (38,6);
+        \draw[fill=bookpurple!20,draw=bookpurple] (38,2) rectangle (46,10);
+        \node[align=center] at (42,11.8) {Conv2\\$16@5\times5$};
+        % pool2
+        \draw[->,thick] (46,6) -- (50,6);
+        \draw[fill=bookpurple!20,draw=bookpurple] (50,4) rectangle (55,8);
+        \node[align=center] at (52.5,9.8) {Pool};
+        % fc
+        \draw[->,thick] (55,6) -- (59,6);
+        \draw[fill=bookpurple!10,draw=bookpurple] (59,4) rectangle (62,8);
+        \node at (60.5,9.8) {FC120};
+        \draw[->,thick] (62,6) -- (66,6);
+        \draw[fill=bookpurple!10,draw=bookpurple] (66,4) rectangle (69,8);
+        \node at (67.5,9.8) {FC84};
+        \draw[->,thick] (69,6) -- (73,6);
+        \draw[fill=bookpurple!10,draw=bookpurple] (73,4) rectangle (76,8);
+        \node at (74.5,9.8) {10};
+    \end{tikzpicture}
+    \caption{LeNet-5 architecture: alternating conv and pooling, followed by small fully connected layers.}
+    \label{fig:lenet5}
+\end{figure}
 
-Breakthrough on ImageNet \cite{Krizhevsky2012}:
+\subsection{AlexNet (2012)\index{AlexNet}}
+
+AlexNet won ILSVRC 2012 by a large margin, catalyzing deep learning in vision \cite{Krizhevsky2012}.
 \begin{itemize}
-    \item 8 layers (5 conv, 3 FC)
-    \item ReLU activation
-    \item Dropout regularization
-    \item Data augmentation
-    \item ~60M parameters
+    \item \textbf{Design:} 5 conv + 3 FC layers; local response normalization (LRN) and overlapping pooling.
+    \item \textbf{Optimization:} ReLU activations enabled faster training; heavy data augmentation; dropout in FC reduced overfitting.
+    \item \textbf{Systems:} trained on 2 GPUs with model parallelism; used large kernels early and stride for rapid downsampling.
+    \item \textbf{Impact:} established large-scale supervised pretraining on ImageNet as a standard.
 \end{itemize}
 
-\subsection{VGG Networks (2014)}
+\subsection{VGG Networks (2014)\index{VGG}}
 
-Simplified architecture with small filters:
+VGG emphasized depth with a simple recipe \cite{GoodfellowEtAl2016}: stacks of $3\times3$ convolutions with stride 1 and $2\times2$ max pooling for downsampling.
 \begin{itemize}
-    \item Only $3 \times 3$ convolutions
-    \item Deeper networks (VGG-16, VGG-19)
-    \item $2 \times 2$ max pooling
-    \item ~138M parameters (VGG-16)
+    \item \textbf{Uniform blocks:} replacing large kernels by multiple $3\times3$ layers increases nonlinearity and receptive field with fewer parameters.
+    \item \textbf{Models:} VGG-16 and VGG-19; very large parameter counts in dense layers.
+    \item \textbf{Trade-offs:} strong accuracy but memory/computation heavy; often used as feature extractors.
 \end{itemize}
 
-\subsection{ResNet (2015)}
+\subsection{ResNet (2015)\index{ResNet}}
+\label{subsec:resnet}
 
-Introduced \textbf{residual connections} \cite{He2016}:
-
+ResNet introduced \textbf{identity skip connections} to learn residual functions \cite{He2016}:
 \begin{equation}
-\vect{y} = \mathcal{F}(\vect{x}, \{\mat{W}_i\}) + \vect{x}
+\vect{y} = \mathcal{F}(\vect{x}, \{\mat{W}_i\}) + \vect{x},
 \end{equation}
+where $\mathcal{F}$ is typically a small stack of convolutions and normalization/activation.
 
-where $\mathcal{F}$ is the residual mapping.
-
-Benefits:
 \begin{itemize}
-    \item Enables very deep networks (50, 101, 152 layers)
-    \item Addresses vanishing gradient problem
-    \item Identity mappings facilitate optimization
-    \item Won ImageNet 2015
+    \item \textbf{Depth:} enabled 50/101/152-layer models with stable optimization.
+    \item \textbf{Gradient flow:} the Jacobian includes an identity term, mitigating vanishing gradients.
+    \item \textbf{Blocks:} basic (two $3\times3$) and bottleneck ($1\times1$-$3\times3$-$1\times1$) with projection shortcuts for dimension changes.
 \end{itemize}
 
-\textbf{Bottleneck block:}
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[x=0.25cm,y=0.25cm]
+        % input x
+        \draw[fill=bookpurple!10,draw=bookpurple] (0,4) rectangle (6,10);
+        \node at (3,11.7) {$\vect{x}$};
+        % conv block
+        \draw[->,thick] (6,7) -- (9,7);
+        \draw[fill=bookpurple!20,draw=bookpurple] (9,5.5) rectangle (15,8.5);
+        \node at (12,9.8) {$3\times3$};
+        \draw[->,thick] (15,7) -- (18,7);
+        \draw[fill=bookpurple!20,draw=bookpurple] (18,5.5) rectangle (24,8.5);
+        \node at (21,9.8) {$3\times3$};
+        % sum
+        \draw[->,thick] (24,7) -- (27,7);
+        % skip
+        \draw[thick] (3,10) to[out=90,in=180] (15,13) to[out=0,in=90] (27,7);
+        % output
+        \draw[fill=bookpurple!10,draw=bookpurple] (27,4) rectangle (33,10);
+        \node at (30,11.7) {$\vect{y}$};
+    \end{tikzpicture}
+    \caption{ResNet basic residual block with identity skip connection.}
+    \label{fig:resnet-block}
+\end{figure}
+
+\subsection{Inception/GoogLeNet (2014)\index{Inception}\index{GoogLeNet}}
+\label{subsec:inception}
+
+GoogLeNet popularized \textbf{Inception modules} with parallel multi-scale branches and $1\times1$ bottlenecks for efficiency.
 \begin{itemize}
-    \item $1 \times 1$ conv (reduce dimensions)
-    \item $3 \times 3$ conv
-    \item $1 \times 1$ conv (restore dimensions)
-    \item Skip connection
+    \item \textbf{Branches:} $1\times1$, $3\times3$, $5\times5$ convolutions and a pooled branch, then channel-wise concatenation.
+    \item \textbf{Efficiency:} $1\times1$ convolutions reduce channel dimensions before larger kernels, cutting FLOPs while preserving capacity.
+    \item \textbf{Impact:} competitive accuracy with fewer parameters than VGG; design influenced later hybrid networks.
 \end{itemize}
 
-\subsection{Inception/GoogLeNet (2014)}
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[x=0.25cm,y=0.25cm]
+        % input
+        \draw[fill=bookpurple!10,draw=bookpurple] (0,6) rectangle (6,12);
+        \node at (3,13.7) {Input};
+        % branches
+        \draw[->,thick] (6,9) -- (9,9);
+        % 1x1
+        \draw[fill=bookpurple!20,draw=bookpurple] (9,10.5) rectangle (15,12.5);
+        \node at (12,13.7) {$1\times1$};
+        % 3x3
+        \draw[fill=bookpurple!20,draw=bookpurple] (9,7.5) rectangle (15,9.5);
+        \node at (12,10.7) {$3\times3$};
+        % 5x5
+        \draw[fill=bookpurple!20,draw=bookpurple] (9,4.5) rectangle (15,6.5);
+        \node at (12,7.7) {$5\times5$};
+        % pool
+        \draw[fill=bookpurple!20,draw=bookpurple] (9,1.5) rectangle (15,3.5);
+        \node at (12,4.7) {Pool $3\times3$};
+        % concat
+        \draw[->,thick] (15,11.5) -- (18,11.5);
+        \draw[->,thick] (15,8.5) -- (18,8.5);
+        \draw[->,thick] (15,5.5) -- (18,5.5);
+        \draw[->,thick] (15,2.5) -- (18,2.5);
+        \draw[fill=bookpurple!10,draw=bookpurple] (18,1) rectangle (24,13);
+        \node at (21,14.7) {Concat};
+    \end{tikzpicture}
+    \caption{Inception module: parallel multi-scale branches concatenated along channels with $1\times1$ bottlenecks.}
+    \label{fig:inception-module}
+\end{figure}
 
-\textbf{Inception modules} apply multiple filter sizes in parallel:
-\begin{itemize}
-    \item $1 \times 1$, $3 \times 3$, $5 \times 5$ convolutions
-    \item $3 \times 3$ max pooling
-    \item Concatenate outputs
-    \item $1 \times 1$ convolutions for dimension reduction
-\end{itemize}
+\subsection{MobileNet and EfficientNet\index{MobileNet}\index{EfficientNet}}
 
-\subsection{MobileNet and EfficientNet}
+\textbf{MobileNet.} Prioritizes efficiency for edge devices using depthwise separable convolutions (depthwise $k\times k$ followed by pointwise $1\times1$), drastically reducing FLOPs and parameters while maintaining accuracy.
 
-\textbf{MobileNet:} Efficient architecture for mobile/edge devices
-\begin{itemize}
-    \item Depthwise separable convolutions
-    \item Reduces computation and parameters
-\end{itemize}
+\textbf{EfficientNet.} Introduces compound scaling to jointly scale depth, width, and resolution with a principled coefficient, yielding strong accuracy/efficiency trade-offs. Variants (B0--B7) demonstrate near-optimal Pareto fronts.
 
-\textbf{EfficientNet:} Compound scaling method
-\begin{itemize}
-    \item Balances depth, width, and resolution
-    \item State-of-the-art efficiency
-\end{itemize}
+For introductory treatment of these families, see \textit{D2L} \href{https://d2l.ai/chapter_convolutional-modern/index.html}{(modern CNNs)} and \textit{Deep Learning} \href{https://www.deeplearningbook.org/contents/convnets.html}{(convolutional networks)}.
 
