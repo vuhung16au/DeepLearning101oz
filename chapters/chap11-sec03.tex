@@ -6,12 +6,14 @@
 
 \subsection{Key Hyperparameters (Priority Order)}
 
+Effective tuning prioritizes learning rate, regularization, and capacity before fine details \index{hyperparameter tuning}. Treat the validation set as your instrumentation layer and control randomness via fixed seeds \textcite{GoodfellowEtAl2016,Prince2023,D2LChapterOptimization}.
+
 \begin{enumerate}
-    \item \textbf{Learning rate:} Most critical
-    \item \textbf{Network architecture:} Layers, neurons
-    \item \textbf{Batch size:} Affects training dynamics
-    \item \textbf{Regularization:} Dropout, weight decay
-    \item \textbf{Optimizer parameters:} Momentum, beta values
+    \item \textbf{Learning rate:} Most critical; consider warmup and cosine decay
+    \item \textbf{Network architecture:} Depth/width, normalization, residuals
+    \item \textbf{Batch size:} Affects noise scale and generalization
+    \item \textbf{Regularization:} Weight decay, dropout, label smoothing
+    \item \textbf{Optimizer parameters:} Momentum, $\beta$ values in Adam
 \end{enumerate}
 
 \subsection{Search Strategies}
@@ -47,10 +49,33 @@
 \subsection{Best Practices}
 
 \begin{itemize}
-    \item Use logarithmic scale for learning rate
-    \item Try learning rates: 0.1, 0.01, 0.001, 0.0001
-    \item Start with standard architectures
-    \item Use validation set for selection
-    \item Retrain with best hyperparameters on full train set
+    \item Use logarithmic scale for learning rate; sweep $[10^{-5},10^{-1}]$
+    \item Vary batch size and adjust learning rate proportionally
+    \item Track results with a consistent random seed and multiple repeats
+    \item Early-stop poor runs; allocate budget adaptively
+    \item Use a fixed validation protocol to avoid leakage
+    \item Retrain with best setting on train+val and report on held-out test
 \end{itemize}
+
+\subsection{Visual aids}
+\addcontentsline{toc}{subsubsection}{Visual aids (tuning)}
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[
+      width=0.48\textwidth,
+      height=0.36\textwidth,
+      xmode=log, log basis x=10,
+      xlabel={Learning rate}, ylabel={Val. loss}, grid=both]
+      \addplot[bookpurple,very thick] coordinates{(1e-5,0.90) (3e-5,0.80) (1e-4,0.70) (3e-4,0.62) (1e-3,0.60) (3e-3,0.95) (1e-2,2.0)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Learning-rate sweep identifies a stable operating region.}
+  \label{fig:lr-range-test}
+\end{figure}
+
+\subsection{Historical notes}
+
+Random search and Bayesian optimization rose to prominence as models and search spaces grew large; they offer better coverage than grid for high-dimensional spaces. Practical DL texts emphasize learning-rate schedules (step, cosine) and warmup for stability \textcite{GoodfellowEtAl2016,Prince2023,D2LChapterOptimization}.
 
