@@ -7,9 +7,14 @@
     \item \textbf{RNNs model temporal dependencies} by maintaining a hidden state that propagates through time; vanilla RNNs struggle with long-term dependencies due to vanishing/exploding gradients \cite{GoodfellowEtAl2016}.
     \item \textbf{BPTT and truncated BPTT} enable gradient-based training of sequence models; gradient clipping mitigates exploding gradients \cite{GoodfellowEtAl2016,Rumelhart1986}.
     \item \textbf{LSTM and GRU} use gating to preserve and control information flow, greatly improving learning of long-term dependencies \cite{Hochreiter1997,Cho2014}.
-    \item \textbf{Seq2seq with attention} overcomes fixed-bottleneck limitations by learning alignments and dynamic context vectors \cite{Bahdanau2014}.
-    \item \textbf{Advanced variants} such as bidirectional RNNs, teacher forcing, and beam search improve context utilization, training stability, and decoding quality.
-    \item \textbf{Practical considerations} include careful initialization, clipping, architecture choice (GRU vs. LSTM), and appropriate decoding strategies for the task.
+    \item \textbf{Seq2seq with attention} overcomes fixed-bottleneck limitations by learning soft alignments and per-step context vectors, enabling effective long-input transduction and reordering \cite{Bahdanau2014,Vaswani2017}.
+    \item \textbf{Attention scoring} can be additive (Bahdanau) or multiplicative/dot-product; both are trained end-to-end and yield interpretable weights \cite{Bahdanau2014,Vaswani2017}.
+    \item \textbf{Decoding strategies} matter: greedy is fast but myopic; beam search (with length normalization/coverage) improves quality at added cost.
+    \item \textbf{Model variants} expand capacity or context: bidirectional RNNs leverage future context (when available); deep/stacked RNNs add hierarchical abstraction.
+    \item \textbf{Training techniques} like teacher forcing speed convergence but induce exposure bias; mitigations include scheduled sampling and sequence-level objectives.
+    \item \textbf{Truncation trade-offs} in BPTT balance compute/memory with the ability to learn very long-range dependencies; choose window size to match task needs.
+    \item \textbf{Applications} span translation, summarization, QA, captioning, ASR/OCR, and code generation; encoder choices (CNN/RNN/Transformer) and decoding policies should reflect task constraints.
+    \item \textbf{Practical considerations} include initialization, clipping, architecture choice (GRU vs. LSTM), attention design, and decoding policy appropriate to data and latency requirements.
 \end{itemize}
 
 
