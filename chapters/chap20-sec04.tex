@@ -43,24 +43,24 @@ Start from noise and iteratively denoise:
     \item Can condition on text, images, etc.
 \end{itemize}
 
-\subsection{Visual aids}
-\addcontentsline{toc}{subsubsection}{Visual aids (diffusion)}
+% \subsection{Visual aids}
+% \addcontentsline{toc}{subsubsection}{Visual aids (diffusion)}
 
-\begin{figure}[h]
-  \centering
-  \begin{tikzpicture}
-    \begin{axis}[
-      width=0.48\textwidth,height=0.36\textwidth,
-      xlabel={Step $t$}, ylabel={Noise level}, grid=both]
-      \addplot[bookpurple,very thick] coordinates{(0,0.0) (10,0.2) (20,0.4) (30,0.6) (40,0.8) (50,1.0)};
-      \addplot[bookred,very thick,dashed] coordinates{(50,1.0) (40,0.8) (30,0.6) (20,0.4) (10,0.2) (0,0.0)};
-    \end{axis}
-  \end{tikzpicture}
-  \caption{Forward (solid) and reverse (dashed) diffusion noise schedules (illustrative).}
-  \label{fig:diffusion-schedule}
-\end{figure}
+% \begin{figure}[h]
+%   \centering
+%   \begin{tikzpicture}
+%     \begin{axis}[
+%       width=0.48\textwidth,height=0.36\textwidth,
+%       xlabel={Step $t$}, ylabel={Noise level}, grid=both]
+%       \addplot[bookpurple,very thick] coordinates{(0,0.0) (10,0.2) (20,0.4) (30,0.6) (40,0.8) (50,1.0)};
+%       \addplot[bookred,very thick,dashed] coordinates{(50,1.0) (40,0.8) (30,0.6) (20,0.4) (10,0.2) (0,0.0)};
+%     \end{axis}
+%   \end{tikzpicture}
+%   \caption{Forward (solid) and reverse (dashed) diffusion noise schedules (illustrative).}
+%   \label{fig:diffusion-schedule}
+% \end{figure}
 
-\subsection{Notes and references}
+% \subsection{Notes and references}
 
-See \textcite{Ho2020,Prince2023} for DDPM training and sampling.
+% See \textcite{Ho2020,Prince2023} for DDPM training and sampling.
 

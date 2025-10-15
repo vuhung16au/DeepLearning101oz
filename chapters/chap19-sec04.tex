@@ -13,23 +13,24 @@ Iteratively refine approximations to match moments.
 
 Better than mean field for multi-modal posteriors.
 
-\subsection{Visual aids}
-\addcontentsline{toc}{subsubsection}{Visual aids (EP)}
 
-\begin{figure}[h]
-  \centering
-  \begin{tikzpicture}
-    \begin{axis}[
-      width=0.48\textwidth,height=0.36\textwidth,
-      xlabel={$x$}, ylabel={Density}, grid=both]
-      \addplot[bookpurple,very thick,domain=-3:3,samples=100]{0.5*exp(-0.5*((x-1)^2)) + 0.5*exp(-0.5*((x+1)^2))};
-      \addplot[bookred,very thick,dashed,domain=-3:3,samples=100]{exp(-0.5*((x)^2))};
-    \end{axis}
-  \end{tikzpicture}
-  \caption{EP (solid) can better match multi-modal targets than simple mean-field Gaussian (dashed), illustrative.}
-  \label{fig:ep-modes}
-\end{figure}
+% \subsection{Visual aids}
+% \addcontentsline{toc}{subsubsection}{Visual aids (EP)}
 
-\subsection{Notes and references}
+% \begin{figure}[h]
+%   \centering
+%   \begin{tikzpicture}
+%     \begin{axis}[
+%       width=0.48\textwidth,height=0.36\textwidth,
+%       xlabel={$x$}, ylabel={Density}, grid=both]
+%       \addplot[bookpurple,very thick,domain=-3:3,samples=100]{0.5*exp(-0.5*((x-1)^2)) + 0.5*exp(-0.5*((x+1)^2))};
+%       \addplot[bookred,very thick,dashed,domain=-3:3,samples=100]{exp(-0.5*((x)^2))};
+%     \end{axis}
+%   \end{tikzpicture}
+%   \caption{EP (solid) can better match multi-modal targets than simple mean-field Gaussian (dashed), illustrative.}
+%   \label{fig:ep-modes}
+% \end{figure}
 
-See \textcite{Bishop2006,GoodfellowEtAl2016,Prince2023} for EP algorithms and comparisons to mean field.
+% \subsection{Notes and references}
+
+% See \textcite{Bishop2006,GoodfellowEtAl2016,Prince2023} for EP algorithms and comparisons to mean field.

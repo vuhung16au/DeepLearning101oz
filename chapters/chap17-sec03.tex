@@ -15,23 +15,24 @@ Sample from proposal $q(x)$ instead of target $p(x)$:
     \item $q$ has heavier tails than $p$
 \end{itemize}
 
-\subsection{Visual aids}
-\addcontentsline{toc}{subsubsection}{Visual aids (importance sampling)}
 
-\begin{figure}[h]
-  \centering
-  \begin{tikzpicture}
-    \begin{axis}[
-      width=0.48\textwidth,height=0.36\textwidth,
-      xlabel={Sample index}, ylabel={Normalized weight}, grid=both]
-      \addplot[bookpurple,very thick] coordinates{(1,0.05) (2,0.04) (3,0.03) (4,0.02) (5,0.30) (6,0.01) (7,0.01) (8,0.50) (9,0.03) (10,0.01)};
-    \end{axis}
-  \end{tikzpicture}
-  \caption{Weight degeneracy: a few samples dominate (illustrative).}
-  \label{fig:is-weights}
-\end{figure}
+% \subsection{Visual aids}
+% \addcontentsline{toc}{subsubsection}{Visual aids (importance sampling)}
 
-\subsection{Notes and references}
+% \begin{figure}[h]
+%   \centering
+%   \begin{tikzpicture}
+%     \begin{axis}[
+%       width=0.48\textwidth,height=0.36\textwidth,
+%       xlabel={Sample index}, ylabel={Normalized weight}, grid=both]
+%       \addplot[bookpurple,very thick] coordinates{(1,0.05) (2,0.04) (3,0.03) (4,0.02) (5,0.30) (6,0.01) (7,0.01) (8,0.50) (9,0.03) (10,0.01)};
+%     \end{axis}
+%   \end{tikzpicture}
+%   \caption{Weight degeneracy: a few samples dominate (illustrative).}
+%   \label{fig:is-weights}
+% \end{figure}
 
-See \textcite{Bishop2006,GoodfellowEtAl2016,Prince2023} for analyses of variance and effective sample size.
+% \subsection{Notes and references}
+
+% See \textcite{Bishop2006,GoodfellowEtAl2016,Prince2023} for analyses of variance and effective sample size.
 
