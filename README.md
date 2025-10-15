@@ -41,7 +41,7 @@ The book is organized into three main parts:
 
 ## Building the Book
 
-The book supports both A4 and A5 paper sizes with enhanced build automation:
+The book supports multiple paper sizes with enhanced build automation:
 
 ### Quick Build Commands
 
@@ -55,7 +55,7 @@ make pdf-a4
 # Build A5 version (explicit)
 make pdf-a5
 
-# Build both versions
+# Build all versions (A4, A5, Letter, A6, B5, Trade 6"x9")
 make all
 
 # Clean build artifacts
@@ -64,6 +64,26 @@ make clean
 # Publish PDFs to distribution folder
 make publish
 ```
+
+### Additional Paper Sizes and Targets
+
+Supported paper sizes and their dedicated targets:
+
+```bash
+# US Letter
+make pdf-letter
+
+# A6
+make pdf-a6
+
+# B5
+make pdf-b5
+
+# Trade (6"x9")
+make pdf-trade
+```
+
+Each target compiles the book with appropriate geometry and selects the matching full-bleed cover image.
 
 ### Enhanced Build Process
 
@@ -83,6 +103,38 @@ The build process uses a 6-pass compilation system:
 - makeglossaries (for glossary)
 - makeindex (for index)
 - Unicode and CJK support (XeLaTeX/LuaLaTeX recommended)
+
+### Cover Images
+
+Cover images are generated per paper size (300 DPI) and automatically selected during build:
+
+Generated files in `images/`:
+- `DeepLearning101-cover-A4.png` (2481×3507)
+- `DeepLearning101-cover-A5.png` (1748×2481)
+- `DeepLearning101-cover-letter.png` (2550×3300)
+- `DeepLearning101-cover-A6.png` (1240×1754)
+- `DeepLearning101-cover-B5.png` (2079×2953)
+- `DeepLearning101-cover-trade.png` (1800×2700)
+
+If you need to regenerate from the source `DeepLearning101-cover.png`, use ImageMagick:
+
+```bash
+# A4 / A5 (already created previously)
+convert images/DeepLearning101-cover.png -resize 2481x3507! images/DeepLearning101-cover-A4.png
+convert images/DeepLearning101-cover.png -resize 1748x2481! images/DeepLearning101-cover-A5.png
+
+# US Letter
+convert images/DeepLearning101-cover.png -resize 2550x3300! images/DeepLearning101-cover-letter.png
+
+# A6
+convert images/DeepLearning101-cover.png -resize 1240x1754! images/DeepLearning101-cover-A6.png
+
+# B5
+convert images/DeepLearning101-cover.png -resize 2079x2953! images/DeepLearning101-cover-B5.png
+
+# Trade (6"x9")
+convert images/DeepLearning101-cover.png -resize 1800x2700! images/DeepLearning101-cover-trade.png
+```
 
 ## Current Status
 
@@ -118,12 +170,12 @@ The build process uses a 6-pass compilation system:
 - ✅ AI assistant instruction policies (Copilot & Gemini)
 
 **Book Statistics:**
-- 📖 186 pages
+- 📖 Around 200 pages
 - 📝 20 chapters covering fundamentals to advanced topics
 - 🎓 Comprehensive coverage from basics to research frontiers
 - 🌍 Enhanced international support with Unicode and CJK characters
 - 📚 Advanced features: glossary, index, and difficulty level indicators
-- 🔧 Dual paper size support (A4 and A5)
+- 🔧 Dual paper size support (A4, A5, US Letter, A6, B5, and Trade (6"x9"))
 - 📖 Color-coded difficulty levels (Beginner/Intermediate/Advanced)
 
 ## File Structure
@@ -259,8 +311,6 @@ Deep-Learning-101/
     ├── chap20-sec04.tex       # Chapter 20, Section 4: Diffusion Models
     └── chap20-sec05.tex       # Chapter 20, Section 5: Applications and Future Directions
 ```
-```
-
 ## License
 
 This work is licensed under the Creative Commons Attribution 4.0 International License.  
@@ -280,7 +330,7 @@ This book draws inspiration from:
 - **Comprehensive Index**: Hierarchical subject indexing
 - **Difficulty Levels**: Color-coded indicators (Beginner/Intermediate/Advanced)
 - **International Support**: Unicode and CJK character support
-- **Dual Paper Sizes**: A4 and A5 formats with optimized layouts
+- **Multiple Paper Sizes**: A4, A5, US Letter, A6, B5, and Trade (6"x9") with optimized layouts
 
 ### Content Organization
 - **Structured Learning Path**: From fundamentals to advanced research

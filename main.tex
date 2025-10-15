@@ -7,14 +7,23 @@
 
 \documentclass[10pt,\papersize,twoside,openright]{book}
 
+% Load etoolbox for conditional commands
+\usepackage{etoolbox}
+
+% Custom paper size for trade (6"x9")
+\ifdefstring{\papersize}{trade}{%
+  \usepackage[paperwidth=6in,paperheight=9in,top=2cm,bottom=2cm,inner=1.8cm,outer=1.5cm]{geometry}%
+}{%
+  \usepackage[\papersize,top=2cm,bottom=2cm,inner=1.8cm,outer=1.5cm]{geometry}%
+}
+
 % --- Page Layout ---
-% Apply proper margins for both A4 and A5 papers
-\usepackage[\papersize, top=2cm, bottom=2cm, inner=1.8cm, outer=1.5cm]{geometry}
+% Geometry package is already loaded above with conditional sizing
 \usepackage{setspace}
 \onehalfspacing
 
 % --- Essential Packages and Unicode Support ---
-\usepackage{etoolbox}  % For conditional commands like \ifstrequal
+% etoolbox already loaded above
 \usepackage{iftex}
 \ifPDFTeX
   % pdfLaTeX path
@@ -182,32 +191,52 @@
 \setcounter{page}{0}
 \pagenumbering{gobble}
 
-% 
-% % DO NOT REMOVE THIS COMMENT:: Title Page - Cover Image Only (First Page)
-% \thispagestyle{empty}
-% \begingroup % Start a local scope for margin adjustments
-% \setlength{\topmargin}{0pt}
-% \setlength{\headsep}{0pt}
-% \setlength{\topskip}{0pt}
-% \setlength{\headheight}{0pt}
-% \setlength{\textheight}{\paperheight}
-% \setlength{\textwidth}{\paperwidth}
-% \setlength{\oddsidemargin}{0pt}
-% \setlength{\evensidemargin}{0pt}
-% \setlength{\marginparwidth}{0pt}
-% \setlength{\marginparsep}{0pt}
-% \setlength{\hoffset}{-1in}
-% \setlength{\voffset}{-1in}
+% Title Page - Cover Image Only (First Page)
+\thispagestyle{empty}
+\begingroup % Start a local scope for margin adjustments
+\setlength{\topmargin}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\textheight}{\paperheight}
+\setlength{\textwidth}{\paperwidth}
+\setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt}
+\setlength{\marginparwidth}{0pt}
+\setlength{\marginparsep}{0pt}
+\setlength{\hoffset}{-1in}
+\setlength{\voffset}{-1in}
 
-% % Full-page cover image - stretch to fill entire page edge-to-edge
-% % Conditionally select cover image based on paper size
-% \ifdefstring{\papersize}{a4paper}{%
-%   \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A4.png}%
-% }{%
-%   \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A5.png}%
-% }
-% \endgroup % End the local scope, restoring previous margin settings
-% \clearpage
+% Full-page cover image - stretch to fill entire page edge-to-edge
+% Conditionally select cover image based on paper size
+\ifdefstring{\papersize}{a4paper}{%
+  \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A4.png}%
+}{%
+  \ifdefstring{\papersize}{a5paper}{%
+    \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A5.png}%
+  }{%
+    \ifdefstring{\papersize}{letterpaper}{%
+      \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-letter.png}%
+    }{%
+      \ifdefstring{\papersize}{a6paper}{%
+        \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A6.png}%
+      }{%
+        \ifdefstring{\papersize}{b5paper}{%
+          \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-B5.png}%
+        }{%
+          \ifdefstring{\papersize}{trade}{%
+            \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-trade.png}%
+          }{%
+            % Default fallback to A5
+            \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A5.png}%
+          }%
+        }%
+      }%
+    }%
+  }%
+}
+\endgroup % End the local scope, restoring previous margin settings
+\clearpage
 
 % Title Page - Text Content (Second Page)
 \begin{titlepage}
