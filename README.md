@@ -95,6 +95,31 @@ The build process uses a 6-pass compilation system:
 5. **Pass 5**: Reference resolution
 6. **Pass 6**: Final compilation
 
+### Single-Chapter Build Targets (testing/debugging only)
+
+These targets compile a single chapter for faster iteration. They are intended for testing/debugging and not for publishing the final book.
+
+Supported sizes: `a4`, `a5`, `letter`, `a6`, `b5`, `trade`.
+
+```bash
+# Examples (chapter number can be 1 or 01; output is zero-padded)
+make a4-chapter-1
+make a5-chapter-02
+make letter-chapter-3
+make a6-chapter-4
+make b5-chapter-12
+make trade-chapter-7
+```
+
+Output files are written to:
+
+- `Deep-Learning101-PDF-Books/<paper-size>/chapter-<NN>.pdf`
+
+Notes:
+- Only the specified chapter is compiled (internally uses `\includeonly`).
+- Uses the same 6-pass build (biber, glossary, index) as full builds.
+- For final distributions, prefer the full-book targets (`pdf-*`) or `make publish`.
+
 ### Requirements
 
 - LaTeX distribution (TeX Live, MiKTeX, or similar)
