@@ -155,6 +155,46 @@ This is a comprehensive LaTeX book on Deep Learning with advanced features inclu
 3. Include both technical and conceptual topics
 4. Test compilation to verify index generation
 
+## Changelog Management
+
+### CHANGELOG.md Requirements
+- **Mandatory**: Every significant change must be documented in `CHANGELOG.md`
+- **Format**: Follow the established format with date, changes, and technical details
+- **Categories**: Use Added/Changed/Fixed/Removed for categorising changes
+- **Technical Details**: Include version, author, license, source, destination, dependencies, instructions, notes, references, acknowledgements, glossary, index, table of contents, and bibliography information
+
+### When to Update CHANGELOG.md
+- Every content change (chapters, sections, glossary, index)
+- Structural changes to LaTeX files
+- Build process modifications
+- New dependencies or package updates
+- Bibliography or reference updates
+- Cross-reference or label changes
+
+### Changelog Entry Format
+```markdown
+## [YYYY-MM-DD]
+
+### Added/Changed/Fixed/Removed
+- Brief description of change
+
+### Technical Details
+- **Version**: X.Y.Z
+- **Author**: Contributor name
+- **License**: License information
+- **Source**: Modified files
+- **Destination**: Output files affected
+- **Dependencies**: Updated dependencies
+- **Instructions**: Special build instructions
+- **Notes**: Additional context
+- **References**: Related bibliography entries
+- **Acknowledgements**: Credits for contributions
+- **Glossary**: New or modified glossary entries
+- **Index**: New or modified index entries
+- **Table of Contents**: Structural changes
+- **Bibliography**: New or updated references
+```
+
 ## Quality Assurance
 
 ### Before Committing
@@ -163,6 +203,7 @@ This is a comprehensive LaTeX book on Deep Learning with advanced features inclu
 - Check that index entries are meaningful and hierarchical
 - Confirm difficulty levels are appropriate for content
 - Test that all cross-references work correctly
+- **Update CHANGELOG.md with all changes made**
 
 ### Content Review
 - Technical accuracy of mathematical content
@@ -194,6 +235,7 @@ make pdf
 - Add glossary entries for technical terms
 - Include relevant index entries
 - Test compilation before submitting
+- **Update CHANGELOG.md for all changes made**
 
 ### For Reviewers
 - Verify technical accuracy
@@ -201,5 +243,6 @@ make pdf
 - Ensure proper glossary and index usage
 - Test build process
 - Validate cross-references
+- **Verify CHANGELOG.md entries are complete and accurate**
 
 This instruction set ensures consistent, high-quality contributions to the Deep Learning 101 book while maintaining the advanced features of glossary, index, and difficulty levels.
