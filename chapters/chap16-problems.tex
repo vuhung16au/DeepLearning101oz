@@ -4,86 +4,56 @@
 \addcontentsline{toc}{section}{Problems}
 
 \subsection*{Easy}
-\begin{problem}[DAG vs. MRF]
-List differences between directed and undirected models.
-\textbf{Hint:} Factorization, semantics of edges.
+
+\begin{problem}[Generator Role]
+Describe the generator's objective in GANs.
+
+\textbf{Hint:} Fool the discriminator.
 \end{problem}
 
-\begin{problem}[d-separation]
-Give an example of conditional independence via d-separation.
-\textbf{Hint:} Chain, fork, collider.
+\begin{problem}[Discriminator Role]
+Describe the discriminator's objective in GANs.
+
+\textbf{Hint:} Distinguish real from fake.
 \end{problem}
 
-\begin{problem}[CRF Use-cases]
-Name two tasks where CRFs are helpful.
-\textbf{Hint:} Sequence labeling, segmentation.
+\begin{problem}[Mode Collapse]
+Define mode collapse and its symptoms.
+
+\textbf{Hint:} Generator produces limited variety.
 \end{problem}
 
-\begin{problem}[Message Passing]
-What is belief propagation computing?
-\textbf{Hint:} Marginals on trees.
-\end{problem}
+\begin{problem}[Training Instability]
+Name two causes of GAN training instability.
 
-\begin{problem}[Graph Design]
-Why add edges in a graphical model?
-\textbf{Hint:} Capture dependencies.
-\end{problem}
-
-\begin{problem}[Neural Potentials]
-How do neural nets parameterize potentials?
-\textbf{Hint:} Learnable feature maps.
+\textbf{Hint:} Oscillation; gradient vanishing.
 \end{problem}
 
 \subsection*{Medium}
-\begin{problem}[BP on Trees]
-Prove BP is exact on trees.
-\textbf{Hint:} Induction on leaves.
+
+\begin{problem}[Nash Equilibrium]
+Explain why GAN training seeks a Nash equilibrium.
+
+\textbf{Hint:} Minimax game; no unilateral improvement.
 \end{problem}
 
-\begin{problem}[Loopy BP]
-Discuss when loopy BP works in practice.
-\textbf{Hint:} Weak loops, damping.
-\end{problem}
+\begin{problem}[Wasserstein Distance]
+State the advantage of Wasserstein distance over JS divergence.
 
-\begin{problem}[Structured Prediction]
-Formulate loss-augmented inference for a CRF.
-\textbf{Hint:} Add task loss to potentials.
-\end{problem}
-
-\begin{problem}[Neural-CRF Training]
-Outline end-to-end training with backprop through inference.
-\textbf{Hint:} Unrolled iterations or implicit gradients.
-\end{problem}
-
-\begin{problem}[Approximation]
-Compare mean-field with BP in accuracy and speed.
-\textbf{Hint:} Factorization vs. messages.
+\textbf{Hint:} Gradient behaviour with non-overlapping distributions.
 \end{problem}
 
 \subsection*{Hard}
-\begin{problem}[Convexity]
-Show conditions under which CRF parameter learning is convex.
-\textbf{Hint:} Log-linear models.
+
+\begin{problem}[Optimal Discriminator]
+Derive the optimal discriminator for fixed generator.
+
+\textbf{Hint:} Maximise expected log-likelihood.
 \end{problem}
 
-\begin{problem}[Higher-order Factors]
-Design a factor for long-range consistency.
-\textbf{Hint:} Pattern-based or pooled potentials.
-\end{problem}
+\begin{problem}[Spectral Normalisation]
+Analyse how spectral normalisation stabilises GAN training.
 
-\begin{problem}[Implicit Differentiation]
-Differentiate through MAP inference.
-\textbf{Hint:} KKT or envelope theorem.
+\textbf{Hint:} Lipschitz constraint; gradient norms.
 \end{problem}
-
-\begin{problem}[Amortized Inference]
-Propose amortized inference for a structured model.
-\textbf{Hint:} Neural proposal networks.
-\end{problem}
-
-\begin{problem}[Calibration]
-Evaluate calibration of marginal probabilities.
-\textbf{Hint:} Reliability diagrams, temperature scaling.
-\end{problem}
-
 

@@ -14,7 +14,7 @@ You are building a classifier for defect detection. Propose suitable metrics bey
 \begin{problem}[Sanity Checks]
 List three quick sanity checks to run before large-scale training and explain expected outcomes.
 
-\textbf{Hint:} Overfit a tiny subset; randomize labels; train with shuffled pixels.
+\textbf{Hint:} Overfit a tiny subset; randomise labels; train with shuffled pixels.
 \end{problem}
 
 \begin{problem}[Baseline First]
@@ -26,19 +26,7 @@ Explain why a strong non-deep baseline can accelerate iteration on a deep model.
 \begin{problem}[Data Leakage]
 Define data leakage and give two concrete examples.
 
-\textbf{Hint:} Temporal leakage; using normalized stats computed on the full dataset.
-\end{problem}
-
-\begin{problem}[Reproducibility]
-Name four factors that affect reproducibility and how to control them.
-
-\textbf{Hint:} Seeds, determinism flags, hardware, data versioning.
-\end{problem}
-
-\begin{problem}[Learning Curves]
-Describe what divergent training/validation curves indicate and possible remedies.
-
-\textbf{Hint:} Overfitting vs. underfitting; regularization, more data, capacity changes.
+\textbf{Hint:} Temporal leakage; using normalised stats computed on the full dataset.
 \end{problem}
 
 \subsection*{Medium}
@@ -55,24 +43,6 @@ Compare early stopping with cosine decay schedules under limited training budget
 \textbf{Hint:} Consider variance, bias, and checkpoint selection.
 \end{problem}
 
-\begin{problem}[Ablation Design]
-Design an ablation to quantify contribution of data augmentation vs. model depth.
-
-\textbf{Hint:} Hold one factor fixed while varying the other; balanced factorial design.
-\end{problem}
-
-\begin{problem}[Label Noise]
-You estimate 5% label noise. Propose mitigation steps and how to evaluate impact.
-
-\textbf{Hint:} Cleanlab-style relabeling, robust loss, strong regularization; compare clean vs. noisy subsets.
-\end{problem}
-
-\begin{problem}[Distribution Shift]
-Validation performance drops on a new domain. Outline a triage plan.
-
-\textbf{Hint:} Data profiling, covariate vs. label shift checks, targetted augmentation, domain adaptation.
-\end{problem}
-
 \subsection*{Hard}
 
 \begin{problem}[Confidence Intervals]
@@ -81,28 +51,10 @@ Derive a 95\% Wilson interval for a classifier with $n$ samples and accuracy $\h
 \textbf{Hint:} Use $\frac{\hat{p}+z^2/(2n) \pm z\sqrt{\frac{\hat{p}(1-\hat{p})}{n}+\frac{z^2}{4n^2}}}{1+z^2/n}$ with $z\approx1.96$.
 \end{problem}
 
-\begin{problem}[Power Analysis]
-Determine sample sizes needed to detect a 1-point accuracy improvement at $\alpha=0.05$, power 0.8.
-
-\textbf{Hint:} Use two-proportion power analysis approximations.
-\end{problem}
-
-\begin{problem}[Robustness Evaluation]
-Propose a robustness evaluation suite for small adversarial perturbations and corruptions.
-
-\textbf{Hint:} FGSM/PGD sweeps; common corruption benchmarks; calibration metrics.
-\end{problem}
-
-\begin{problem}[Fairness Monitoring]
-Design post-deployment monitoring for group fairness with delayed labels.
-
-\textbf{Hint:} Use proxy labels, delayed feedback correction, and thresholds per group with drift alarms.
-\end{problem}
-
 \begin{problem}[Causal Confounding]
 Your model uses a spurious feature. Propose an experimental protocol to detect and mitigate it.
 
-\textbf{Hint:} Counterfactual augmentation, environment splitting, invariant risk minimization.
+\textbf{Hint:} Counterfactual augmentation, environment splitting, invariant risk minimisation.
 \end{problem}
 
 

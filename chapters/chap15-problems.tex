@@ -4,86 +4,56 @@
 \addcontentsline{toc}{section}{Problems}
 
 \subsection*{Easy}
-\begin{problem}[Linear Probe]
-Define a linear probe and why it’s useful.
-\textbf{Hint:} Fixed features, simple classifier.
+
+\begin{problem}[Encoder-Decoder Symmetry]
+Why share architecture between $q(z|x)$ and $p(x|z)$?
+
+\textbf{Hint:} Computation; conceptual symmetry.
 \end{problem}
 
-\begin{problem}[Invariance]
-Give two examples of desired invariances.
-\textbf{Hint:} Translation, color shifts.
+\begin{problem}[KL in ELBO]
+State the role of $D_{KL}(q||p)$ in VAE training.
+
+\textbf{Hint:} Regularisation; posterior matching.
 \end{problem}
 
-\begin{problem}[Negative Sampling]
-Why are negatives needed in contrastive learning?
-\textbf{Hint:} Avoid collapse.
+\begin{problem}[Reparameterisation Trick]
+Explain why reparameterisation enables gradient flow.
+
+\textbf{Hint:} Sampling vs. deterministic path.
 \end{problem}
 
-\begin{problem}[Augmentations]
-Name two augmentations that preserve labels in vision.
-\textbf{Hint:} Crops, flips.
-\end{problem}
+\begin{problem}[Prior Choice]
+Justify Gaussian prior for VAE latents.
 
-\begin{problem}[Embedding Norm]
-What does normalizing embeddings change?
-\textbf{Hint:} Cosine vs. Euclidean.
-\end{problem}
-
-\begin{problem}[Info Perspective]
-Relate MI maximization to contrastive losses.
-\textbf{Hint:} Lower bounds on MI.
+\textbf{Hint:} Tractability; simplicity; universality.
 \end{problem}
 
 \subsection*{Medium}
-\begin{problem}[NT-Xent]
-Derive gradient of contrastive loss for a positive pair.
-\textbf{Hint:} Softmax over similarities.
+
+\begin{problem}[ELBO Derivation]
+Derive the ELBO from Jensen's inequality.
+
+\textbf{Hint:} $\log \mathbb{E}[X] \geq \mathbb{E}[\log X]$.
 \end{problem}
 
-\begin{problem}[BYOL Collapse]
-Explain mechanisms preventing collapse without negatives.
-\textbf{Hint:} Predictor asymmetry, EMA target.
-\end{problem}
+\begin{problem}[Beta-VAE]
+Explain how $\beta$-VAE encourages disentanglement.
 
-\begin{problem}[Probe Protocol]
-Design a fair protocol to compare two representations.
-\textbf{Hint:} Same compute, seeds, hyperparameters.
-\end{problem}
-
-\begin{problem}[Transfer Gap]
-Probe accuracy high, downstream low. Diagnose.
-\textbf{Hint:} Domain mismatch, label granularity.
-\end{problem}
-
-\begin{problem}[Geometry]
-Show how temperature affects cluster tightness.
-\textbf{Hint:} Softmax sharpness.
+\textbf{Hint:} Weighted KL penalty; independence.
 \end{problem}
 
 \subsection*{Hard}
-\begin{problem}[Mutual Information]
-Relate InfoNCE to MI bounds and assumptions.
-\textbf{Hint:} Noise-contrastive estimation.
+
+\begin{problem}[Posterior Collapse]
+Analyse conditions causing posterior collapse and propose mitigation.
+
+\textbf{Hint:} Strong decoder; KL annealing; free bits.
 \end{problem}
 
-\begin{problem}[Adversarial Transfer]
-Analyze robustness of learned features to adversarial examples.
-\textbf{Hint:} Margin and local smoothness.
-\end{problem}
+\begin{problem}[Importance-Weighted ELBO]
+Derive the importance-weighted ELBO and show it tightens the bound.
 
-\begin{problem}[Cluster Assumptions]
-When do cluster-based methods fail?
-\textbf{Hint:} Non-clustered manifolds.
+\textbf{Hint:} Multiple samples; log-mean-exp.
 \end{problem}
-
-\begin{problem}[Probe Capacity]
-Study effect of probe depth on conclusions.
-\textbf{Hint:} Under/over-estimation of quality.
-\end{problem}
-
-\begin{problem}[Scaling Laws]
-Predict representation quality vs. data/model size.
-\textbf{Hint:} Empirical scaling trends.
-\end{problem}
-
 

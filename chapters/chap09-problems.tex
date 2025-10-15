@@ -1,0 +1,64 @@
+% Problems (Hands-On Exercises) for Chapter 9: Convolutional Networks
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+
+\begin{problem}[Receptive Field Calculation]
+A CNN has two convolutional layers with 3×3 kernels (no padding, stride 1). Calculate the receptive field of a neuron in the second layer.
+
+\textbf{Hint:} Each layer expands the receptive field. For the second layer, consider how many input pixels affect it.
+\end{problem}
+
+\begin{problem}[Parameter Counting]
+Calculate the number of parameters in a convolutional layer with 64 input channels, 128 output channels, and 3×3 kernels (including bias).
+
+\textbf{Hint:} Each output channel has a 3×3 kernel for each input channel, plus one bias term.
+\end{problem}
+
+\begin{problem}[Pooling Operations]
+Explain the difference between max pooling and average pooling. When would you prefer one over the other?
+
+\textbf{Hint:} Consider feature prominence, spatial information retention, and gradient flow.
+\end{problem}
+
+\begin{problem}[Translation Equivariance]
+Explain what translation equivariance means in the context of CNNs and why it is a desirable property for image processing.
+
+\textbf{Hint:} If the input is shifted, how does the output change? Consider the relationship $f(T(x)) = T(f(x))$.
+\end{problem}
+
+\subsection*{Medium}
+
+\begin{problem}[Output Shape Calculation]
+Given an input image of size 224×224×3, apply the following operations and calculate the output shape at each step:
+\begin{enumerate}
+    \item Conv2D: 64 filters, 7×7 kernel, stride 2, padding 3
+    \item MaxPool2D: 3×3, stride 2
+    \item Conv2D: 128 filters, 3×3 kernel, stride 1, padding 1
+\end{enumerate}
+
+\textbf{Hint:} Use the formula: $\text{output\_size} = \lfloor \frac{\text{input\_size} + 2 \times \text{padding} - \text{kernel\_size}}{\text{stride}} \rfloor + 1$.
+\end{problem}
+
+\begin{problem}[ResNet Skip Connections]
+Explain why residual connections (skip connections) help train very deep networks. Discuss the gradient flow through skip connections.
+
+\textbf{Hint:} Consider the identity mapping $\vect{y} = \vect{x} + F(\vect{x})$ and compute $\frac{\partial \vect{y}}{\partial \vect{x}}$.
+\end{problem}
+
+\subsection*{Hard}
+
+\begin{problem}[Dilated Convolutions]
+Derive the receptive field for a stack of dilated convolutions with dilation rates [1, 2, 4, 8]. Compare computational cost with standard convolutions achieving the same receptive field.
+
+\textbf{Hint:} Dilated convolution with rate $r$ introduces $(r-1)$ gaps between kernel elements. Track receptive field growth layer by layer.
+\end{problem}
+
+\begin{problem}[Depthwise Separable Convolutions]
+Analyse the computational savings of depthwise separable convolutions (as used in MobileNets) compared to standard convolutions. Derive the reduction factor for a layer with $C_{in}$ input channels, $C_{out}$ output channels, and $K×K$ kernel size.
+
+\textbf{Hint:} Depthwise separable splits into depthwise ($C_{in}$ groups) and pointwise (1×1) convolutions. Compare FLOPs.
+\end{problem}
+
