@@ -1,6 +1,6 @@
 # Makefile for Deep Learning 101 Book
 
-.PHONY: help pdf pdf-a4 pdf-a5 all clean glossary index
+.PHONY: help pdf pdf-a4 pdf-a5 all clean glossary index publish
 
 # Default target
 help:
@@ -10,6 +10,7 @@ help:
 	@echo "  make pdf-a4   - Build the complete book PDF (A4 paper)"
 	@echo "  make pdf-a5   - Build the complete book PDF (A5 paper)"
 	@echo "  make all      - Clean and build both A4 and A5 versions"
+	@echo "  make publish  - Copy A4 and A5 PDFs to Deep-Learning101-PDF-Books folder"
 	@echo "  make glossary - Update the glossary"
 	@echo "  make index    - Update the index"
 	@echo "  make clean    - Remove build artifacts"
@@ -72,6 +73,16 @@ index:
 # Build both versions
 all: clean pdf-a4 pdf-a5
 	@echo "All versions built successfully!"
+
+# Publish rule - copy PDFs to Deep-Learning101-PDF-Books folder
+publish: pdf-a4 pdf-a5
+	@echo "Publishing PDFs to Deep-Learning101-PDF-Books folder..."
+	@mkdir -p Deep-Learning101-PDF-Books
+	@cp main-a4.pdf Deep-Learning101-PDF-Books/Deep-Learning-101-A4.pdf
+	@cp main-a5.pdf Deep-Learning101-PDF-Books/Deep-Learning-101-A5.pdf
+	@echo "PDFs published successfully!"
+	@echo "  - Deep-Learning101-PDF-Books/Deep-Learning-101-A4.pdf"
+	@echo "  - Deep-Learning101-PDF-Books/Deep-Learning-101-A5.pdf"
 
 clean:
 	rm -f *.aux *.log *.out *.toc *.bbl *.blg *.bcf *.run.xml *.synctex.gz
