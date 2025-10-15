@@ -4,11 +4,15 @@
 
 % Define default paper size if not already defined
 \providecommand{\papersize}{a5paper}
+% Optional per-chapter build support: define a list of includes when building a single chapter
+\providecommand{\includelist}{}
 
 \documentclass[10pt,\papersize,twoside,openright]{book}
 
 % Load etoolbox for conditional commands
 \usepackage{etoolbox}
+% If includelist is provided externally (via Makefile), only include that chapter
+\ifdefempty{\includelist}{}{\includeonly{\includelist}}
 
 % Custom paper size for trade (6"x9")
 \ifdefstring{\papersize}{trade}{%
