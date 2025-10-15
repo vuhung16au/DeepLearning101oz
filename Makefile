@@ -14,7 +14,7 @@ help:
 	@echo "  make pdf-b5   - Build the complete book PDF (B5 paper)"
 	@echo "  make pdf-trade - Build the complete book PDF (6\"x9\" trade paper)"
 	@echo "  make all      - Clean and build all versions"
-	@echo "  make publish  - Copy A4 and A5 PDFs to Deep-Learning101-PDF-Books folder"
+	@echo "  make publish  - Copy all PDFs (A4, A5, Letter, A6, B5, Trade) to Deep-Learning101-PDF-Books folder"
 	@echo "  make glossary - Update the glossary"
 	@echo "  make index    - Update the index"
 	@echo "  make clean    - Remove build artifacts"
@@ -155,14 +155,22 @@ all: clean pdf-a4 pdf-a5 pdf-letter pdf-a6 pdf-b5 pdf-trade
 	@echo "All versions built successfully!"
 
 # Publish rule - copy PDFs to Deep-Learning101-PDF-Books folder
-publish: pdf-a4 pdf-a5
+publish: pdf-a4 pdf-a5 pdf-letter pdf-a6 pdf-b5 pdf-trade
 	@echo "Publishing PDFs to Deep-Learning101-PDF-Books folder..."
 	@mkdir -p Deep-Learning101-PDF-Books
 	@cp main-a4.pdf Deep-Learning101-PDF-Books/Deep-Learning-101-A4.pdf
 	@cp main-a5.pdf Deep-Learning101-PDF-Books/Deep-Learning-101-A5.pdf
+	@cp main-letter.pdf Deep-Learning101-PDF-Books/Deep-Learning-101-Letter.pdf
+	@cp main-a6.pdf Deep-Learning101-PDF-Books/Deep-Learning-101-A6.pdf
+	@cp main-b5.pdf Deep-Learning101-PDF-Books/Deep-Learning-101-B5.pdf
+	@cp main-trade.pdf Deep-Learning101-PDF-Books/Deep-Learning-101-Trade.pdf
 	@echo "PDFs published successfully!"
 	@echo "  - Deep-Learning101-PDF-Books/Deep-Learning-101-A4.pdf"
 	@echo "  - Deep-Learning101-PDF-Books/Deep-Learning-101-A5.pdf"
+	@echo "  - Deep-Learning101-PDF-Books/Deep-Learning-101-Letter.pdf"
+	@echo "  - Deep-Learning101-PDF-Books/Deep-Learning-101-A6.pdf"
+	@echo "  - Deep-Learning101-PDF-Books/Deep-Learning-101-B5.pdf"
+	@echo "  - Deep-Learning101-PDF-Books/Deep-Learning-101-Trade.pdf"
 
 clean:
 	rm -f *.aux *.log *.out *.toc *.bbl *.blg *.bcf *.run.xml *.synctex.gz
