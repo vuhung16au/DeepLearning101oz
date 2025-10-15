@@ -12,6 +12,10 @@
 \usepackage{setspace}
 \onehalfspacing
 
+% --- Text Alignment ---
+% Ensure default text alignment is left-aligned (not centered)
+\raggedright
+
 % --- Essential Packages and Unicode Support ---
 \usepackage{iftex}
 \ifPDFTeX
@@ -175,43 +179,48 @@
 % --- Front Matter ---
 \frontmatter
 
-% Title Page - Cover Image Only
-\begin{titlepage}
-    \thispagestyle{empty}
-    \centering
-    \vspace*{0pt}
-    \vfill
-    
-    % Full-page cover image
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{images/DeepLearning101-cover.png}
-    
-    \vfill
-    \vspace*{0pt}
-\end{titlepage}
+% Title Page - Cover Image Only (First Page)
+\thispagestyle{empty}
+\setlength{\topmargin}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\textheight}{\paperheight}
+\setlength{\textwidth}{\paperwidth}
+\setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt}
+\setlength{\marginparwidth}{0pt}
+\setlength{\marginparsep}{0pt}
+\setlength{\hoffset}{-1in}
+\setlength{\voffset}{-1in}
 
-% Title Page - Text Content
+% Full-page cover image - stretch to fill entire page edge-to-edge
+\noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A4.png}
+\newpage
+
+% Title Page - Text Content (Second Page)
 \begin{titlepage}
-    \thispagestyle{empty}
-    \centering
-    \vspace*{\fill}
-    
-    {\Huge\bfseries Deep Learning 101\par}
-    \vspace{2cm}
-    
-    {\Large Nguyễn Vũ Hưng -- 阮武興 \par}
-    \vspace{2cm}
-    
-    {\large A Comprehensive Guide to\\
-    Deep Learning Theory and Practice\par}
-    
-    \vspace{3cm}
-    
-    {\large \DTMtoday\par}
-    \vspace{1cm}
-    
-    {\small License: Creative Commons Attribution 4.0 International (CC BY 4.0)\par}
-    
-    \vspace*{\fill}
+\thispagestyle{empty}
+\centering
+\vspace*{\fill}
+
+{\Huge\bfseries Deep Learning 101\par}
+\vspace{2cm}
+
+{\Large Nguyễn Vũ Hưng -- 阮武興 \par}
+\vspace{2cm}
+
+{\large A Comprehensive Guide to\\
+Deep Learning Theory and Practice\par}
+
+\vspace{3cm}
+
+{\large \DTMtoday\par}
+\vspace{1cm}
+
+{\small License: Creative Commons Attribution 4.0 International (CC BY 4.0)\par}
+
+\vspace*{\fill}
 \end{titlepage}
 
 % Copyright Page
