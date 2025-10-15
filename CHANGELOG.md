@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- LaTeX boxed styling for Summary and Key Takeaways sections using tcolorbox package
+- Custom `summary` environment with pink title box, drop shadow, and auto-numbering
+- Custom `keytakeaways` environment with yellow title box, drop shadow, and auto-numbering
+- Key takeaways files for chapters 1-10 (chap01-key-takeaways.tex through chap10-key-takeaways.tex)
+- Requirements in Copilot instruction policies for boxed summaries and takeaways
 - Hands-On Exercises (Problems) for all chapters (minimum 4, maximum 10 per chapter)
   - Chapters 1-3: Created new problem files with 5-8 problems each
   - Chapters 6-10: Created new problem files with 8 problems each
@@ -20,22 +25,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - All problems include hints for students
 
 ### Changed
-- Updated `.github/copilot-instructions.md` with new chapter structure requirements
-- Updated `.github/instructions/gemini.instructions.md` with new chapter structure requirements
+- Converted all existing key-takeaways files (chapters 11-20) to use boxed keytakeaways environment
+- Updated chapter 8 section 6 (chap08-sec06.tex) to use keytakeaways environment
+- Updated all chapter files (chap01.tex through chap10.tex) to include key-takeaways before problems
+- Applied British English spelling throughout all new and modified content (optimisation, normalisation, etc.)
+- Updated `.github/copilot-instructions.md` with boxed summary and takeaways requirements
+- Updated `.github/instructions/gemini.instructions.md` with boxed summary and takeaways requirements
 - All chapter problem files now use British English spelling (e.g., "optimise", "categorise")
 - Problem format standardised across all chapters with consistent difficulty categorisation
 
 ### Technical Details
-- **Version**: 1.0.1
+- **Version**: 1.1.0 (Boxed Summaries) / 1.0.1 (Problems)
 - **Date**: 15 Oct 2025
 - **Modified Files**: 
-  - `.github/copilot-instructions.md`
-  - `.github/instructions/gemini.instructions.md`
-  - `chapters/chap01.tex`, `chap02.tex`, `chap03.tex` (added problem file inputs)
-  - `chapters/chap04.tex`, `chap05.tex` (reduced inline problems from 16 to 8)
-  - `chapters/chap06.tex` through `chap10.tex` (added problem file inputs)
-  - `chapters/chap01-problems.tex` through `chap10-problems.tex` (created new files)
-  - `chapters/chap11-problems.tex` through `chap20-problems.tex` (reduced from 16 to 8 problems)
+  - `main.tex` (added tcolorbox package and custom environments)
+  - `.github/copilot-instructions.md` (added boxed summary/takeaways requirements)
+  - `.github/instructions/gemini.instructions.md` (added boxed summary/takeaways requirements)
+  - `chapters/chap01.tex` through `chap10.tex` (added key-takeaways file inputs)
+  - `chapters/chap01-key-takeaways.tex` through `chap10-key-takeaways.tex` (created new files)
+  - `chapters/chap08-sec06.tex` (converted to use keytakeaways environment)
+  - `chapters/chap11-key-takeaways.tex` through `chap20-key-takeaways.tex` (converted to boxed format)
+- **Key Takeaways Summary**:
+  - Total chapters with key takeaways: 20/20 (100%)
+  - All use boxed `keytakeaways` environment with tcolorbox
+  - Styling: Yellow title box, drop shadow, auto-numbering
+  - Chapter 8 uses chap08-sec06.tex (kept as section due to chapter structure)
+- **Dependencies**: Added tcolorbox package with [most] option to main.tex
+- **Build Process**: No changes required; standard `make pdf` workflow
+- **LaTeX Environments**: 
+  - `\begin{summary}...\end{summary}` (pink title box)
+  - `\begin{keytakeaways}...\end{keytakeaways}` (yellow title box)
 - **Problem Count Summary**:
   - Total chapters with exercises: 20/20 (100%)
   - Chapters 1-10: 8 problems each (Easy: 4, Medium: 2, Hard: 2)

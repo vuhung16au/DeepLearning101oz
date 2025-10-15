@@ -117,6 +117,13 @@ make pdf      # Complete compilation process
   - Use `\begin{problem}[Title]...\end{problem}` environment
   - Include hints for each problem
   - Organise by difficulty level in subsections
+- **Each chapter must have a Key Takeaways section**: Use the boxed `keytakeaways` environment
+  - Create a file named `chapters/chapXX-key-takeaways.tex`
+  - Use `\begin{keytakeaways}...\end{keytakeaways}` with itemised key points
+  - Include this file at the end of the chapter before problems
+- **Summaries should use boxed format when present**: Use the `summary` environment
+  - Use `\begin{summary}...\end{summary}` for chapter or section summaries
+  - Both environments use tcolorbox for enhanced visual presentation
 
 ### Deep Learning Chapters Requirements
 - **All deep learning chapters (6-20) must include a "Real World Applications" section**
