@@ -65,6 +65,7 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
+\usepackage{eso-pic}
 
 % --- Custom Color Scheme ---
 \definecolor{bookpurple}{RGB}{60,16,83}
@@ -207,34 +208,37 @@
 \setlength{\hoffset}{-1in}
 \setlength{\voffset}{-1in}
 
-% Full-page cover image - stretch to fill entire page edge-to-edge
-% Conditionally select cover image based on paper size
-\ifdefstring{\papersize}{a4paper}{%
-  \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A4.png}%
-}{%
-  \ifdefstring{\papersize}{a5paper}{%
-    \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A5.png}%
-  }{%
-    \ifdefstring{\papersize}{letterpaper}{%
-      \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-letter.png}%
+% Draw image as exact full-page background on THIS page only
+\AddToShipoutPictureBG*{%
+  \AtPageLowerLeft{%
+    \ifdefstring{\papersize}{a4paper}{%
+      \includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A4.png}%
     }{%
-      \ifdefstring{\papersize}{a6paper}{%
-        \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A6.png}%
+      \ifdefstring{\papersize}{a5paper}{%
+        \includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A5.png}%
       }{%
-        \ifdefstring{\papersize}{b5paper}{%
-          \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-B5.png}%
+        \ifdefstring{\papersize}{letterpaper}{%
+          \includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-letter.png}%
         }{%
-          \ifdefstring{\papersize}{trade}{%
-            \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-trade.png}%
+          \ifdefstring{\papersize}{a6paper}{%
+            \includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A6.png}%
           }{%
-            % Default fallback to A5
-            \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A5.png}%
+            \ifdefstring{\papersize}{b5paper}{%
+              \includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-B5.png}%
+            }{%
+              \ifdefstring{\papersize}{trade}{%
+                \includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-trade.png}%
+              }{%
+                \includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A5.png}%
+              }%
+            }%
           }%
         }%
       }%
     }%
   }%
 }
+\mbox{}% ensure a shipout
 \endgroup % End the local scope, restoring previous margin settings
 \clearpage
 
