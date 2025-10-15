@@ -218,3 +218,5 @@ Prompt.md
 SUMMARY.txt
 *.pdf
 docs/
+
+!Deep-Learning101-PDF-Books/*.pdf
