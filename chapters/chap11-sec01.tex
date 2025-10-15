@@ -28,14 +28,14 @@ Robust model evaluation depends on selecting metrics aligned with task requireme
     \node[rotate=90] at (-0.3,1) {Actual};
     % Grid and cells (values: TP=100, FP=15, FN=10, TN=875)
     % Normalize colors roughly by mapping value/ max
-    \definecolor{cellA}{RGB}{50,120,200}  % TP
-    \definecolor{cellB}{RGB}{200,80,80}   % FP
-    \definecolor{cellC}{RGB}{200,80,80}   % FN
-    \definecolor{cellD}{RGB}{20,160,60}   % TN
+    \definecolor{cellA}{RGB}{60,16,83}    % TP - bookpurple
+    \definecolor{cellB}{RGB}{242,18,12}   % FP - bookred
+    \definecolor{cellC}{RGB}{242,18,12}   % FN - bookred
+    \definecolor{cellD}{RGB}{90,25,120}   % TN - lighter purple
     % Draw borders
-    \draw[black] (0,0) rectangle (2,2);
-    \draw[black] (1,0) -- (1,2);
-    \draw[black] (0,1) -- (2,1);
+    \draw[bookblack] (0,0) rectangle (2,2);
+    \draw[bookblack] (1,0) -- (1,2);
+    \draw[bookblack] (0,1) -- (2,1);
     % Fill cells
     \fill[cellA] (0,1) rectangle (1,2);
     \fill[cellB] (1,1) rectangle (2,2);
@@ -47,10 +47,10 @@ Robust model evaluation depends on selecting metrics aligned with task requireme
     \node at (-0.25,0.5) {$-$};
     \node at (-0.25,1.5) {$+$};
     % Counts
-    \node[white] at (0.5,1.5) {100};
-    \node[white] at (1.5,1.5) {15};
-    \node[white] at (0.5,0.5) {10};
-    \node[white] at (1.5,0.5) {875};
+    \node[bookwhite] at (0.5,1.5) {100};
+    \node[bookwhite] at (1.5,1.5) {15};
+    \node[bookwhite] at (0.5,0.5) {10};
+    \node[bookwhite] at (1.5,0.5) {875};
   \end{tikzpicture}
   \caption{Confusion matrix heatmap (example counts). High diagonal values indicate good performance.}
   \label{fig:confusion-heatmap}
@@ -95,7 +95,7 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
       legend pos=south east, grid=both]
       \addplot[very thick,bookpurple] coordinates {(0,0) (0.1,0.6) (0.2,0.78) (0.4,0.9) (1,1)};\addlegendentry{Model A}
       \addplot[very thick,bookred,dashed] coordinates {(0,0) (0.2,0.55) (0.5,0.8) (0.8,0.9) (1,1)};\addlegendentry{Model B}
-      \addplot[gray] coordinates {(0,0) (1,1)};\addlegendentry{Random}
+      \addplot[bookpurple!40] coordinates {(0,0) (1,1)};\addlegendentry{Random}
     \end{axis}
   \end{tikzpicture}
   \caption{ROC curves for two models. Higher AUC indicates better ranking quality.}
@@ -128,7 +128,7 @@ F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \te
       xlabel={Predicted probability}, ylabel={Observed frequency},
       xmin=0,xmax=1,ymin=0,ymax=1, grid=both]
       \addplot[bookpurple,very thick] coordinates{(0.0,0.0) (0.1,0.05) (0.2,0.10) (0.3,0.18) (0.4,0.28) (0.5,0.40) (0.6,0.55) (0.7,0.68) (0.8,0.80) (0.9,0.90) (1.0,1.0)};
-      \addplot[gray] coordinates{(0,0) (1,1)};
+      \addplot[bookpurple!50] coordinates{(0,0) (1,1)};
     \end{axis}
   \end{tikzpicture}
   \caption{Reliability diagram illustrating calibration. The diagonal is perfect calibration.}

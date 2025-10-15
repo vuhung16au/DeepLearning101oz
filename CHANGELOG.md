@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Updated all chapter colors to use standardised book color scheme
+- Replaced hard-coded colors (blue, green, yellow, orange, gray) with bookpurple and bookred variants
+- Updated neural network diagram colors in multiple chapters
+- Updated plot colors across all chapters for consistency
+
+## [2025-10-15]
+
 ### Added
 - CHANGELOG.md file for tracking book changes
 - Comprehensive changelog policy in copilot instructions
@@ -14,7 +22,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Updated copilot instructions to include changelog requirements
 
-## [2025-10-15]
+## [2025-10-15] - Color Theme Update
+
+### Changed
+- Standardised all colors throughout the book to use defined book color scheme:
+  - Purple: RGB(60,16,83) - `bookpurple`
+  - Red: RGB(242,18,12) - `bookred`
+  - Black: RGB(0,0,0) - `bookblack`
+  - White: RGB(255,255,255) - `bookwhite`
+- Updated neural network diagram colors:
+  - chap06-sec01.tex: Changed blue/green/red to bookpurple/bookred variants
+  - chap07-sec04.tex: Updated dropout diagrams with book colors
+- Updated plot colors:
+  - chap06-sec02.tex: Activation function plots (sigmoid, tanh, ReLU, etc.)
+  - chap11-sec01.tex: ROC curves, confusion matrix, loss functions
+  - chap03-sec01.tex, chap03-sec03.tex: Probability distributions
+  - chap04-sec01.tex, chap04-sec04.tex: Numerical computation plots
+- Updated diagram colors:
+  - chap07-sec02.tex: Data augmentation examples
+  - chap08-sec04.tex: Optimisation diagrams (Newton's method, Natural gradient)
+  - chap07-sec03.tex: Training/validation curves
+  - chap09-sec01.tex: Convolutional kernel highlights
+  - chap12-sec04.tex: Learning curves
+- Replaced gray colors with bookpurple opacity variants for better consistency
+- Replaced blue colors with bookpurple variants
+- Replaced green colors with bookpurple variants
+- Replaced red/yellow/orange colors with bookred variants
+
+### Technical Details
+- **Version**: 1.0.1
+- **Author**: Deep Learning 101 Contributors
+- **License**: Creative Commons License Version 4.0 (CC BY 4.0)
+- **Source**: Modified 13+ chapter files in chapters/ directory
+- **Destination**: PDF output (A4 and A5 formats)
+- **Dependencies**: No new dependencies added
+- **Instructions**: No changes to build process
+- **Notes**: 
+  - Only style/color changes, no content modifications
+  - Text visibility maintained with new colors
+  - All colors now use book color scheme defined in main.tex
+- **References**: No bibliography changes
+- **Acknowledgements**: No changes to acknowledgements
+- **Glossary**: No changes to glossary
+- **Index**: No changes to index
+- **Table of Contents**: No structural changes
+- **Bibliography**: No bibliography changes
+
+## [2025-10-15] - Initial Setup
 
 ### Added
 - Unicode and CJK support in main.tex
