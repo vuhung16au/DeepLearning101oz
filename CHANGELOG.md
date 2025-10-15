@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Enhanced Preface section in main.tex with four new key points:
+  - Personal motivation: Started as study notes due to lack of suitable books
+  - Book nature: Compressed version covering essential concepts and formulae
+  - Prerequisites: Assumes fair understanding of maths, algorithms, and programming
+  - Target audience: Those wanting to learn deep learning basics with focus on mathematics
 - Paper margin policy in Copilot and Gemini instruction files
   - Defined standardised margin specifications for A4 paper (top: 2cm, bottom: 2cm, inner: 1.8cm, outer: 1.5cm)
   - Defined standardised margin specifications for A5 paper (left: 1.8cm, right: 1.5cm, top: 2cm, bottom: 2cm)
@@ -42,7 +47,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Problem format standardised across all chapters with consistent difficulty categorisation
 
 ### Technical Details
-- **Version**: 1.1.0 (Boxed Summaries) / 1.0.1 (Problems)
+- **Version**: 1.1.1 (Improved Preface)
+- **Date**: 15 Oct 2025
+- **Modified Files**: 
+  - `main.tex` (enhanced Preface section with four new paragraphs)
+  - `CHANGELOG.md` (documented the changes)
+- **Changes to Preface**:
+  - Added personal motivation paragraph explaining book's origin
+  - Added description of book as "compressed version" with essential concepts
+  - Added prerequisites clarification (maths, algorithms, programming)
+  - Added target audience definition (deep learning basics with maths focus)
+- **Language**: British English maintained throughout (e.g., "realised", "formulae")
+- **Formatting**: Maintained existing LaTeX formatting with \\[0.5em] spacing
+- **Dependencies**: No new dependencies required
+- **Build Process**: Standard `make pdf` workflow remains unchanged
+- **Notes**: Addresses GitHub issue requesting improved Preface section with four specific points
+- **Previous Version**: 1.1.0 (Boxed Summaries) / 1.0.1 (Problems)
 - **Date**: 15 Oct 2025
 - **Modified Files**: 
   - `main.tex` (added tcolorbox package and custom environments)
