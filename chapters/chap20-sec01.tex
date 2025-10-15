@@ -27,23 +27,23 @@ Generate conditioned on class or attributes:
 \mathcal{L} = \mathbb{E}_{q}[\log p(\vect{x}|\vect{z})] - \beta D_{KL}(q(\vect{z}|\vect{x}) \| p(\vect{z}))
 \end{equation}
 
-\subsection{Visual aids}
-\addcontentsline{toc}{subsubsection}{Visual aids (VAE recap)}
+% \subsection{Visual aids}
+% \addcontentsline{toc}{subsubsection}{Visual aids (VAE recap)}
 
-\begin{figure}[h]
-  \centering
-  \begin{tikzpicture}
-    \begin{axis}[
-      width=0.48\textwidth,height=0.36\textwidth,
-      xlabel={$z_1$}, ylabel={$z_2$}, grid=both]
-      \addplot+[only marks,mark=*,mark size=0.9pt,bookpurple!70] coordinates{(-2,-2) (-1,0) (0,0) (1,1) (2,2)};
-    \end{axis}
-  \end{tikzpicture}
-  \caption{Latent samples from a learned VAE prior/posterior (illustrative).}
-  \label{fig:vae20-latent}
-\end{figure}
+% \begin{figure}[h]
+%   \centering
+%   \begin{tikzpicture}
+%     \begin{axis}[
+%       width=0.48\textwidth,height=0.36\textwidth,
+%       xlabel={$z_1$}, ylabel={$z_2$}, grid=both]
+%       \addplot+[only marks,mark=*,mark size=0.9pt,bookpurple!70] coordinates{(-2,-2) (-1,0) (0,0) (1,1) (2,2)};
+%     \end{axis}
+%   \end{tikzpicture}
+%   \caption{Latent samples from a learned VAE prior/posterior (illustrative).}
+%   \label{fig:vae20-latent}
+% \end{figure}
 
-\subsection{Notes and references}
+% \subsection{Notes and references}
 
-See \textcite{Kingma2013,GoodfellowEtAl2016,Prince2023} for VAE objectives, conditional VAEs, and disentanglement.
+% See \textcite{Kingma2013,GoodfellowEtAl2016,Prince2023} for VAE objectives, conditional VAEs, and disentanglement.
 

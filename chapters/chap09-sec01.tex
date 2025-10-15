@@ -81,18 +81,18 @@ For "same" padding with stride 1:
 p = \left\lfloor \frac{k-1}{2} \right\rfloor
 \end{equation}
 
-\subsection{Visual Aid}
-\begin{figure}[h]
-    \centering
-    % illustrative kernel sliding grid using TikZ
-    \begin{tikzpicture}[scale=0.5]
-        % input grid 5x5
-        \foreach \i in {0,...,5} {\draw (0,\i) -- (5,\i);}
-        \foreach \j in {0,...,5} {\draw (\j,0) -- (\j,5);}
-        % kernel window 3x3 at (1,1)
-        \draw[bookred,very thick] (1,1) rectangle (4,4);
-    \end{tikzpicture}
-    \caption{A $3\times3$ kernel sliding over a $5\times5$ input highlights local pattern extraction.}
-    \label{fig:conv-sliding-window}
-\end{figure}
+% \subsection{Visual Aid}
+% \begin{figure}[h]
+%     \centering
+%     % illustrative kernel sliding grid using TikZ
+%     \begin{tikzpicture}[scale=0.5]
+%         % input grid 5x5
+%         \foreach \i in {0,...,5} {\draw (0,\i) -- (5,\i);}
+%         \foreach \j in {0,...,5} {\draw (\j,0) -- (\j,5);}
+%         % kernel window 3x3 at (1,1)
+%         \draw[bookred,very thick] (1,1) rectangle (4,4);
+%     \end{tikzpicture}
+%     \caption{A $3\times3$ kernel sliding over a $5\times5$ input highlights local pattern extraction.}
+%     \label{fig:conv-sliding-window}
+% \end{figure}
 

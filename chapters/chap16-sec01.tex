@@ -37,47 +37,48 @@ where $\mathcal{C}$ are cliques and $Z$ is the partition function.
 
 \textbf{Example:} Ising model, Conditional Random Fields (CRFs)
 
-\subsection{Visual aids}
-\addcontentsline{toc}{subsubsection}{Visual aids (graphical models)}
 
-\begin{figure}[h]
-  \centering
-  \begin{tikzpicture}[>=stealth]
-    % Simple DAG: X1 -> X3 <- X2
-    \node[circle,draw] (x1) at (0,0) {$x_1$};
-    \node[circle,draw] (x2) at (2,0) {$x_2$};
-    \node[circle,draw] (x3) at (1,-1.2) {$x_3$};
-    \draw[->] (x1) -- (x3);
-    \draw[->] (x2) -- (x3);
-  \end{tikzpicture}
-  \caption{A simple Bayesian network (DAG) encoding conditional dependencies.}
-  \label{fig:bn-dag}
-\end{figure}
+% \subsection{Visual aids}
+% \addcontentsline{toc}{subsubsection}{Visual aids (graphical models)}
 
-\begin{figure}[h]
-  \centering
-  \begin{tikzpicture}
-    % 3x3 MRF grid (undirected)
-    \foreach \i in {0,1,2} {
-      \foreach \j in {0,1,2} {
-        \node[circle,draw,inner sep=1.5pt] (n\i\j) at (\i*0.9,-\j*0.9) {};
-      }
-    }
-    \foreach \i in {0,1,2} {
-      \foreach \j in {0,1} {
-        \draw (n\i\j) -- (n\i\the\numexpr\j+1\relax);
-      }
-    }
-    \foreach \i in {0,1} {
-      \foreach \j in {0,1,2} {
-        \draw (n\i\j) -- (n\the\numexpr\i+1\relax\j);
-      }
-    }
-  \end{tikzpicture}
-  \caption{Undirected MRF grid with pairwise potentials between neighbors.}
-  \label{fig:mrf-grid}
-\end{figure}
+% \begin{figure}[h]
+%   \centering
+%   \begin{tikzpicture}[>=stealth]
+%     % Simple DAG: X1 -> X3 <- X2
+%     \node[circle,draw] (x1) at (0,0) {$x_1$};
+%     \node[circle,draw] (x2) at (2,0) {$x_2$};
+%     \node[circle,draw] (x3) at (1,-1.2) {$x_3$};
+%     \draw[->] (x1) -- (x3);
+%     \draw[->] (x2) -- (x3);
+%   \end{tikzpicture}
+%   \caption{A simple Bayesian network (DAG) encoding conditional dependencies.}
+%   \label{fig:bn-dag}
+% \end{figure}
 
-\subsection{Notes and references}
+% \begin{figure}[h]
+%   \centering
+%   \begin{tikzpicture}
+%     % 3x3 MRF grid (undirected)
+%     \foreach \i in {0,1,2} {
+%       \foreach \j in {0,1,2} {
+%         \node[circle,draw,inner sep=1.5pt] (n\i\j) at (\i*0.9,-\j*0.9) {};
+%       }
+%     }
+%     \foreach \i in {0,1,2} {
+%       \foreach \j in {0,1} {
+%         \draw (n\i\j) -- (n\i\the\numexpr\j+1\relax);
+%       }
+%     }
+%     \foreach \i in {0,1} {
+%       \foreach \j in {0,1,2} {
+%         \draw (n\i\j) -- (n\the\numexpr\i+1\relax\j);
+%       }
+%     }
+%   \end{tikzpicture}
+%   \caption{Undirected MRF grid with pairwise potentials between neighbors.}
+%   \label{fig:mrf-grid}
+% \end{figure}
 
-Foundations and factorization properties are covered extensively in \textcite{Bishop2006,GoodfellowEtAl2016,Prince2023}.
+% \subsection{Notes and references}
+
+% Foundations and factorization properties are covered extensively in \textcite{Bishop2006,GoodfellowEtAl2016,Prince2023}.

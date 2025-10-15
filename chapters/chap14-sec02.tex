@@ -41,32 +41,32 @@ L = \|\vect{x} - \hat{\vect{x}}\|^2 + \lambda \left\|\frac{\partial f(\vect{x})}
 
 Encourages locally contractive mappings (robust to small perturbations).
 
-\subsection{Visual aids}
-\addcontentsline{toc}{subsubsection}{Visual aids (regularized AEs)}
+% \subsection{Visual aids}
+% \addcontentsline{toc}{subsubsection}{Visual aids (regularized AEs)}
 
-\begin{figure}[h]
-  \centering
-  \begin{tikzpicture}
-    \begin{axis}[
-      width=0.48\textwidth,height=0.36\textwidth,
-      xlabel={Noise level}, ylabel={Reconstruction error}, grid=both]
-      \addplot[bookpurple,very thick] coordinates{(0.0,0.05) (0.1,0.06) (0.2,0.08) (0.3,0.12) (0.4,0.20)};
-      \addplot[bookred,very thick,dashed] coordinates{(0.0,0.05) (0.1,0.07) (0.2,0.11) (0.3,0.20) (0.4,0.35)};
-    \end{axis}
-  \end{tikzpicture}
-  \caption{DAE (solid) vs. plain AE (dashed) under increasing input noise (illustrative).}
-  \label{fig:dae-robust}
-\end{figure}
+% \begin{figure}[h]
+%   \centering
+%   \begin{tikzpicture}
+%     \begin{axis}[
+%       width=0.48\textwidth,height=0.36\textwidth,
+%       xlabel={Noise level}, ylabel={Reconstruction error}, grid=both]
+%       \addplot[bookpurple,very thick] coordinates{(0.0,0.05) (0.1,0.06) (0.2,0.08) (0.3,0.12) (0.4,0.20)};
+%       \addplot[bookred,very thick,dashed] coordinates{(0.0,0.05) (0.1,0.07) (0.2,0.11) (0.3,0.20) (0.4,0.35)};
+%     \end{axis}
+%   \end{tikzpicture}
+%   \caption{DAE (solid) vs. plain AE (dashed) under increasing input noise (illustrative).}
+%   \label{fig:dae-robust}
+% \end{figure}
 
-\begin{figure}[h]
-  \centering
-  \begin{tikzpicture}
-    \begin{axis}[
-      width=0.48\textwidth,height=0.36\textwidth,
-      xlabel={$\Vert \nabla f(x) \Vert_F^2$ penalty $\lambda$}, ylabel={Val. error}, grid=both]
-      \addplot[bookpurple,very thick] coordinates{(0.0,0.15) (0.1,0.12) (0.2,0.11) (0.4,0.12) (0.8,0.16)};
-    \end{axis}
-  \end{tikzpicture}
-  \caption{Contractive penalty tuning vs. validation error (illustrative).}
-  \label{fig:cae-penalty}
-\end{figure}
+% \begin{figure}[h]
+%   \centering
+%   \begin{tikzpicture}
+%     \begin{axis}[
+%       width=0.48\textwidth,height=0.36\textwidth,
+%       xlabel={$\Vert \nabla f(x) \Vert_F^2$ penalty $\lambda$}, ylabel={Val. error}, grid=both]
+%       \addplot[bookpurple,very thick] coordinates{(0.0,0.15) (0.1,0.12) (0.2,0.11) (0.4,0.12) (0.8,0.16)};
+%     \end{axis}
+%   \end{tikzpicture}
+%   \caption{Contractive penalty tuning vs. validation error (illustrative).}
+%   \label{fig:cae-penalty}
+% \end{figure}
