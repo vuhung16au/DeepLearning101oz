@@ -12,11 +12,8 @@
 \usepackage{setspace}
 \onehalfspacing
 
-% --- Text Alignment ---
-% Ensure default text alignment is left-aligned (not centered)
-\raggedright
-
 % --- Essential Packages and Unicode Support ---
+\usepackage{etoolbox}  % For conditional commands like \ifstrequal
 \usepackage{iftex}
 \ifPDFTeX
   % pdfLaTeX path
@@ -33,14 +30,14 @@
   \usepackage{fontspec}
   \defaultfontfeatures{Ligatures=TeX}
   % Use commonly available fonts
-  \setmainfont{Times New Roman}
-  \setsansfont{Arial}
-  \setmonofont{Courier New}
+  \setmainfont{DejaVu Serif}
+  \setsansfont{DejaVu Sans}
+  \setmonofont{DejaVu Sans Mono}
   % CJK fonts (choose commonly available macOS font)
   \RequirePackage{xeCJK}
-  \setCJKmainfont{PingFang SC}
-  \setCJKsansfont{PingFang SC}
-  \setCJKmonofont{PingFang SC}
+  \setCJKmainfont{Noto Sans CJK SC}
+  \setCJKsansfont{Noto Sans CJK SC}
+  \setCJKmonofont{Noto Sans Mono CJK SC}
 \fi
 \usepackage{microtype}
 % Language and date formatting
@@ -180,7 +177,9 @@
 \frontmatter
 
 % Title Page - Cover Image Only (First Page)
+\clearpage
 \thispagestyle{empty}
+\begingroup
 \setlength{\topmargin}{0pt}
 \setlength{\headsep}{0pt}
 \setlength{\topskip}{0pt}
@@ -195,8 +194,14 @@
 \setlength{\voffset}{-1in}
 
 % Full-page cover image - stretch to fill entire page edge-to-edge
-\noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A4.png}
-\newpage
+% Conditionally select cover image based on paper size
+\ifdefstring{\papersize}{a4paper}{%
+  \includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A4.png}%
+}{%
+  \includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A5.png}%
+}
+\endgroup
+\clearpage
 
 % Title Page - Text Content (Second Page)
 \begin{titlepage}
@@ -252,6 +257,9 @@ First Edition: \DTMtoday
 
 % --- Main Matter ---
 \mainmatter
+
+% Apply left-aligned text for main content (chapters)
+\raggedright
 
 % Chapter 1: Introduction
 \include{chapters/chap01}
