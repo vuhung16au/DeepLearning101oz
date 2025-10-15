@@ -1,0 +1,59 @@
+% Problems (Hands-On Exercises) for Chapter 6: Deep Feedforward Networks
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+
+\begin{problem}[Activation Functions]
+Compare ReLU and sigmoid activation functions. List two advantages of ReLU over sigmoid for hidden layers in deep networks.
+
+\textbf{Hint:} Consider gradient flow, computational efficiency, and the vanishing gradient problem.
+\end{problem}
+
+\begin{problem}[Network Capacity]
+A feedforward network has an input layer with 10 neurons, two hidden layers with 20 neurons each, and an output layer with 3 neurons. Calculate the total number of parameters (weights and biases).
+
+\textbf{Hint:} For each layer transition, count weights and biases separately.
+\end{problem}
+
+\begin{problem}[Output Layer Design]
+For a binary classification task, what activation function and loss function would you use for the output layer? Justify your choice.
+
+\textbf{Hint:} Think about probability outputs and the relationship between binary cross-entropy and sigmoid activation.
+\end{problem}
+
+\begin{problem}[Backpropagation Basics]
+Explain in simple terms why backpropagation is more efficient than computing gradients using finite differences for each parameter.
+
+\textbf{Hint:} Consider the number of forward passes required and the chain rule of calculus.
+\end{problem}
+
+\subsection*{Medium}
+
+\begin{problem}[Gradient Computation]
+For a simple network with one hidden layer: $\vect{h} = \sigma(\mat{W}_1\vect{x} + \vect{b}_1)$ and $\vect{y} = \mat{W}_2\vect{h} + \vect{b}_2$, derive the gradient $\frac{\partial L}{\partial \mat{W}_1}$ for mean squared error loss.
+
+\textbf{Hint:} Apply the chain rule: $\frac{\partial L}{\partial \mat{W}_1} = \frac{\partial L}{\partial \vect{y}} \frac{\partial \vect{y}}{\partial \vect{h}} \frac{\partial \vect{h}}{\partial \mat{W}_1}$.
+\end{problem}
+
+\begin{problem}[Universal Approximation]
+The universal approximation theorem states that a feedforward network with a single hidden layer can approximate any continuous function. Discuss why we still use deep networks with multiple layers in practice.
+
+\textbf{Hint:} Consider efficiency of representation, number of neurons needed, and hierarchical feature learning.
+\end{problem}
+
+\subsection*{Hard}
+
+\begin{problem}[Xavier Initialisation]
+Derive the Xavier (Glorot) initialisation scheme for weights. Explain why it helps maintain variance of activations across layers.
+
+\textbf{Hint:} Start with the variance of layer outputs and the assumption that inputs and weights are independent.
+\end{problem}
+
+\begin{problem}[Residual Connections]
+Analyse how residual connections (skip connections) help with gradient flow in very deep networks. Derive the gradient through a residual block.
+
+\textbf{Hint:} Consider $\vect{y} = \vect{x} + F(\vect{x})$ and compute $\frac{\partial L}{\partial \vect{x}}$ where $F$ is a sub-network.
+\end{problem}
+

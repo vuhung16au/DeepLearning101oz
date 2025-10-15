@@ -31,9 +31,9 @@ After studying this chapter, you will be able to:
 \section{Problems}
 \label{sec:problems}
 
-This section contains exercises to reinforce your understanding of numerical computation concepts. Problems are categorized by difficulty level.
+This section contains exercises to reinforce your understanding of numerical computation concepts. Problems are categorised by difficulty level.
 
-\subsection{Easy Problems (6 problems)}
+\subsection{Easy Problems}
 
 \begin{problem}[Floating-Point Basics]
 \label{prob:float-basics}
@@ -56,13 +56,6 @@ Compute the gradient of $f(x, y) = x^2 + 3xy + y^2$ at the point $(2, 1)$.
 \textbf{Hint:} The gradient is $\nabla f = \left[\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right]$.
 \end{problem}
 
-\begin{problem}[Critical Points]
-\label{prob:critical-points}
-Find all critical points of $f(x, y) = x^3 - 3x + y^2 - 2y$ and classify them as local minima, local maxima, or saddle points.
-
-\textbf{Hint:} Set $\nabla f = \boldsymbol{0}$ and use the Hessian matrix to classify.
-\end{problem}
-
 \begin{problem}[Condition Number]
 \label{prob:condition-number}
 Calculate the condition number of the matrix $\mat{A} = \begin{bmatrix} 1 & 0.5 \\ 0.5 & 1 \end{bmatrix}$.
@@ -70,27 +63,13 @@ Calculate the condition number of the matrix $\mat{A} = \begin{bmatrix} 1 & 0.5 
 \textbf{Hint:} For a 2×2 matrix, $\kappa(\mat{A}) = \frac{\lambda_{\max}}{\lambda_{\min}}$ where $\lambda_{\max}$ and $\lambda_{\min}$ are the eigenvalues.
 \end{problem}
 
-\begin{problem}[Gradient Checking]
-\label{prob:gradient-checking}
-Implement gradient checking for the function $f(x) = x^3 + 2x^2 + x$ at $x = 1$ using finite differences with $\epsilon = 0.001$.
-
-\textbf{Hint:} Use the formula $\frac{\partial f}{\partial x} \approx \frac{f(x+\epsilon) - f(x-\epsilon)}{2\epsilon}$.
-\end{problem}
-
-\subsection{Medium Problems (5 problems)}
+\subsection{Medium Problems}
 
 \begin{problem}[Log-Sum-Exp Trick]
 \label{prob:log-sum-exp}
 Derive the log-sum-exp trick: $\log\left(\sum_{i=1}^n \exp(x_i)\right) = c + \log\left(\sum_{i=1}^n \exp(x_i - c)\right)$ where $c = \max_i x_i$.
 
 \textbf{Hint:} Start by factoring out $\exp(c)$ from the sum.
-\end{problem}
-
-\begin{problem}[Hessian Eigenvalues]
-\label{prob:hessian-eigenvalues}
-For the function $f(x, y) = x^4 + y^4 - 4xy$, find the Hessian matrix and its eigenvalues at the critical point $(0, 0)$. What does this tell you about the nature of this critical point?
-
-\textbf{Hint:} Compute $\mat{H} = \begin{bmatrix} \frac{\partial^2 f}{\partial x^2} & \frac{\partial^2 f}{\partial x \partial y} \\ \frac{\partial^2 f}{\partial y \partial x} & \frac{\partial^2 f}{\partial y^2} \end{bmatrix}$.
 \end{problem}
 
 \begin{problem}[Lagrange Multipliers]
@@ -100,26 +79,7 @@ Find the maximum value of $f(x, y) = xy$ subject to the constraint $x^2 + y^2 = 
 \textbf{Hint:} Set up the Lagrangian $\mathcal{L}(x, y, \lambda) = xy + \lambda(1 - x^2 - y^2)$ and solve the system of equations.
 \end{problem}
 
-\begin{problem}[Numerical Differentiation]
-\label{prob:numerical-differentiation}
-Compare the accuracy of forward difference, backward difference, and central difference formulas for approximating $f'(x)$ where $f(x) = \sin(x)$ at $x = \pi/4$. Use $\epsilon = 0.1, 0.01, 0.001$.
-
-\textbf{Hint:} The formulas are:
-\begin{itemize}
-    \item Forward: $f'(x) \approx \frac{f(x+\epsilon) - f(x)}{\epsilon}$
-    \item Backward: $f'(x) \approx \frac{f(x) - f(x-\epsilon)}{\epsilon}$
-    \item Central: $f'(x) \approx \frac{f(x+\epsilon) - f(x-\epsilon)}{2\epsilon}$
-\end{itemize}
-\end{problem}
-
-\begin{problem}[Matrix Conditioning]
-\label{prob:matrix-conditioning}
-Consider the matrix $\mat{A} = \begin{bmatrix} 1 & 1 \\ 1 & 1.01 \end{bmatrix}$. Compute its condition number and explain why this matrix is ill-conditioned. What happens when you solve $\mat{A}\vect{x} = \vect{b}$ for $\vect{b} = [2, 2.01]$?
-
-\textbf{Hint:} The condition number is $\kappa(\mat{A}) = \|\mat{A}\| \|\mat{A}^{-1}\|$. For 2×2 matrices, you can compute this directly.
-\end{problem}
-
-\subsection{Hard Problems (5 problems)}
+\subsection{Hard Problems}
 
 \begin{problem}[Numerical Stability of Matrix Inversion]
 \label{prob:matrix-inversion-stability}
@@ -128,16 +88,9 @@ Consider the matrix $\mat{A} = \begin{bmatrix} 1 & 1 \\ 1 & 1 + \epsilon \end{bm
 \textbf{Hint:} Use the formula $\kappa(\mat{A}) = \frac{\lambda_{\max}}{\lambda_{\min}}$ and compute the eigenvalues analytically.
 \end{problem}
 
-\begin{problem}[Gradient Descent Convergence]
-\label{prob:gradient-descent-convergence}
-Analyze the convergence of gradient descent on the function $f(x, y) = x^2 + 100y^2$ (Rosenbrock function). Derive the optimal learning rate and show that the convergence rate depends on the condition number of the Hessian.
-
-\textbf{Hint:} The Hessian is $\mat{H} = \begin{bmatrix} 2 & 0 \\ 0 & 200 \end{bmatrix}$. The condition number is $\kappa = 100$.
-\end{problem}
-
 \begin{problem}[KKT Conditions Application]
 \label{prob:kkt-conditions}
-Consider the optimization problem:
+Consider the optimisation problem:
 \begin{align}
 \min_{x, y} \quad & x^2 + y^2 \\
 \text{subject to} \quad & x + y \geq 1 \\
@@ -146,24 +99,4 @@ Consider the optimization problem:
 Find the optimal solution using the KKT conditions and verify that all conditions are satisfied.
 
 \textbf{Hint:} Set up the Lagrangian with multiple constraints and check the complementary slackness conditions.
-\end{problem}
-
-\begin{problem}[Mixed Precision Training]
-\label{prob:mixed-precision}
-Design a numerical experiment to demonstrate the benefits and limitations of mixed precision training. Compare the training dynamics of a simple neural network using FP32 vs FP16 vs mixed precision. Analyze the trade-offs between speed and numerical stability.
-
-\textbf{Hint:} Implement a simple 2-layer network and monitor gradient norms, loss values, and training time.
-\end{problem}
-
-\begin{problem}[Numerical Methods for Deep Learning]
-\label{prob:numerical-methods-dl}
-Implement and compare different numerical methods for computing gradients in a deep neural network:
-\begin{itemize}
-    \item Automatic differentiation (backpropagation)
-    \item Finite differences
-    \item Complex-step differentiation
-\end{itemize}
-Analyze the computational cost and numerical accuracy of each method for networks of different depths.
-
-\textbf{Hint:} Use a simple feedforward network with ReLU activations and compare the gradient computation time and accuracy.
 \end{problem}

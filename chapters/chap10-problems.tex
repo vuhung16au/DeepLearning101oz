@@ -1,0 +1,59 @@
+% Problems (Hands-On Exercises) for Chapter 10: Sequence Modeling
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+
+\begin{problem}[RNN vs Feedforward]
+Explain why standard feedforward networks are not suitable for sequence modeling tasks. What key capability do RNNs provide?
+
+\textbf{Hint:} Consider variable-length inputs and the need to maintain temporal context.
+\end{problem}
+
+\begin{problem}[LSTM Gates]
+Name the three gates in an LSTM cell and briefly describe the role of each.
+
+\textbf{Hint:} Think about what information needs to be forgotten, what new information to store, and what to output.
+\end{problem}
+
+\begin{problem}[Vanishing Gradients]
+Explain why vanilla RNNs suffer from the vanishing gradient problem when processing long sequences.
+
+\textbf{Hint:} Consider repeated matrix multiplication during backpropagation through time.
+\end{problem}
+
+\begin{problem}[Sequence-to-Sequence Tasks]
+Give three examples of sequence-to-sequence tasks and explain what makes them challenging.
+
+\textbf{Hint:} Consider machine translation, speech recognition, and video captioning.
+\end{problem}
+
+\subsection*{Medium}
+
+\begin{problem}[BPTT Implementation]
+Describe how truncated backpropagation through time (BPTT) works. What are the trade-offs compared to full BPTT?
+
+\textbf{Hint:} Consider memory requirements, gradient approximation quality, and the effective temporal window.
+\end{problem}
+
+\begin{problem}[Attention Mechanism]
+Explain the intuition behind attention mechanisms in sequence-to-sequence models. How does attention address the bottleneck of fixed-size context vectors?
+
+\textbf{Hint:} Consider how different parts of the input sequence should influence different parts of the output.
+\end{problem}
+
+\subsection*{Hard}
+
+\begin{problem}[GRU vs LSTM]
+Compare GRU (Gated Recurrent Unit) and LSTM architectures mathematically. Derive their update equations and analyse computational complexity.
+
+\textbf{Hint:} Count the number of parameters and operations per cell. GRU has fewer gates.
+\end{problem}
+
+\begin{problem}[Bidirectional RNN Gradient]
+Derive the gradient flow in a bidirectional RNN. Explain why bidirectional RNNs cannot be used for online prediction tasks.
+
+\textbf{Hint:} Consider that backward pass requires seeing the entire future sequence.
+\end{problem}
+

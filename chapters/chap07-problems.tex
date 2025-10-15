@@ -1,0 +1,59 @@
+% Problems (Hands-On Exercises) for Chapter 7: Regularization for Deep Learning
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+
+\begin{problem}[L1 vs L2 Regularisation]
+Explain the difference between L1 and L2 regularisation. Which one is more likely to produce sparse weights, and why?
+
+\textbf{Hint:} Consider the shape of the L1 and L2 penalty terms and their gradients.
+\end{problem}
+
+\begin{problem}[Data Augmentation Strategies]
+List three common data augmentation techniques for image classification tasks and explain how each helps improve generalisation.
+
+\textbf{Hint:} Think about geometric transformations, colour adjustments, and realistic variations.
+\end{problem}
+
+\begin{problem}[Early Stopping]
+Describe how early stopping works as a regularisation technique. What metric should you monitor, and when should you stop training?
+
+\textbf{Hint:} Consider validation set performance and the risk of overfitting to the training set.
+\end{problem}
+
+\begin{problem}[Dropout Interpretation]
+During training, dropout randomly sets activations to zero with probability $p$. During inference, all neurons are active but their outputs are scaled. Explain why this scaling is necessary.
+
+\textbf{Hint:} Think about the expected value of activations during training versus inference.
+\end{problem}
+
+\subsection*{Medium}
+
+\begin{problem}[Regularisation Trade-off]
+Given a model with both L2 regularisation and dropout, discuss how you would tune the regularisation strength $\lambda$ and dropout rate $p$. What signs would indicate too much or too little regularisation?
+
+\textbf{Hint:} Monitor training and validation loss curves, and consider the bias-variance trade-off.
+\end{problem}
+
+\begin{problem}[Batch Normalisation Effect]
+Explain how batch normalisation acts as a regulariser. Discuss its interaction with dropout.
+
+\textbf{Hint:} Consider the noise introduced by computing statistics on mini-batches and why dropout is often not needed with batch normalisation.
+\end{problem}
+
+\subsection*{Hard}
+
+\begin{problem}[Mixup Derivation]
+Mixup trains on convex combinations of examples: $\tilde{\vect{x}} = \lambda \vect{x}_i + (1-\lambda)\vect{x}_j$ where $\lambda \sim \text{Beta}(\alpha, \alpha)$. Derive how this affects the decision boundary and explain why it improves generalisation.
+
+\textbf{Hint:} Consider the effect on the loss surface and the implicit regularisation from interpolating between examples.
+\end{problem}
+
+\begin{problem}[Adversarial Training]
+Design an adversarial training procedure for a classification model. Explain how to generate adversarial examples using FGSM (Fast Gradient Sign Method) and why this improves robustness.
+
+\textbf{Hint:} Adversarial examples are $\vect{x}_{adv} = \vect{x} + \epsilon \cdot \text{sign}(\nabla_{\vect{x}} L)$. Discuss the trade-off between clean and adversarial accuracy.
+\end{problem}
+

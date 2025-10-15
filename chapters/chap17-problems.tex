@@ -4,86 +4,56 @@
 \addcontentsline{toc}{section}{Problems}
 
 \subsection*{Easy}
-\begin{problem}[MC Estimator]
-Write the MC estimator for $\mathbb{E}[f(X)]$ and its variance.
-\textbf{Hint:} Sample mean; variance scales as $1/n$.
+
+\begin{problem}[Self-Attention Intuition]
+Explain why self-attention captures long-range dependencies.
+
+\textbf{Hint:} Direct pairwise interactions.
 \end{problem}
 
-\begin{problem}[Importance Weights]
-Define normalized importance weights.
-\textbf{Hint:} $w_i \propto p(x_i)/q(x_i)$.
+\begin{problem}[Positional Encoding]
+Why do Transformers need positional encodings?
+
+\textbf{Hint:} Permutation invariance of self-attention.
 \end{problem}
 
-\begin{problem}[Autocorrelation]
-How does autocorrelation affect effective sample size?
-\textbf{Hint:} ESS decreases with correlation.
+\begin{problem}[Multi-Head Attention]
+State the benefit of multiple attention heads.
+
+\textbf{Hint:} Different representation subspaces.
 \end{problem}
 
-\begin{problem}[Burn-in]
-Why discard burn-in samples?
-\textbf{Hint:} Remove initialization bias.
-\end{problem}
+\begin{problem}[Masked Attention]
+Explain the role of masking in causal attention.
 
-\begin{problem}[Proposal Scale]
-Effect of proposal step size on MH acceptance?
-\textbf{Hint:} Trade-off between move size and acceptance.
-\end{problem}
-
-\begin{problem}[Gibbs]
-When is Gibbs sampling easy to implement?
-\textbf{Hint:} Conditional distributions tractable.
+\textbf{Hint:} Prevent future information leakage.
 \end{problem}
 
 \subsection*{Medium}
-\begin{problem}[AIS]
-Outline annealed importance sampling and its benefit.
-\textbf{Hint:} Bridging distributions reduce weight variance.
+
+\begin{problem}[Computational Complexity]
+Derive the computational complexity of self-attention.
+
+\textbf{Hint:} $O(n^2 d)$ for sequence length $n$, dimension $d$.
 \end{problem}
 
-\begin{problem}[HMC Intuition]
-Explain how Hamiltonian dynamics improve exploration.
-\textbf{Hint:} Momentum reduces random walk.
-\end{problem}
+\begin{problem}[LayerNorm vs. BatchNorm]
+Compare LayerNorm and BatchNorm in Transformers.
 
-\begin{problem}[Variance Reduction]
-Propose two variance reduction techniques.
-\textbf{Hint:} Control variates, antithetic sampling.
-\end{problem}
-
-\begin{problem}[Convergence]
-Suggest diagnostics to assess chain convergence.
-\textbf{Hint:} R-hat, ESS, trace plots.
-\end{problem}
-
-\begin{problem}[Gradient Estimates]
-How to estimate gradients with MC in latent-variable models?
-\textbf{Hint:} REINFORCE or reparameterization.
+\textbf{Hint:} Independence from batch; sequence-level statistics.
 \end{problem}
 
 \subsection*{Hard}
-\begin{problem}[Detailed Balance]
-Prove MH satisfies detailed balance.
-\textbf{Hint:} Show $\pi(x)T(x\to x')=\pi(x')T(x'\to x)$.
+
+\begin{problem}[Sparse Attention]
+Design a sparse attention pattern and analyse complexity savings.
+
+\textbf{Hint:} Local windows; strided patterns; $O(n \log n)$ or $O(n\sqrt{n})$.
 \end{problem}
 
-\begin{problem}[ESS Formula]
-Derive ESS for an AR(1) autocorrelation model.
-\textbf{Hint:} Sum of autocorrelations.
-\end{problem}
+\begin{problem}[Attention Visualisation]
+Propose methods to interpret attention weights and discuss limitations.
 
-\begin{problem}[Optimal Scaling]
-Derive optimal acceptance rate for random-walk MH in high dimensions.
-\textbf{Hint:} Asymptotic results near 0.234.
+\textbf{Hint:} Attention rollout; gradient-based; correlation vs. causation.
 \end{problem}
-
-\begin{problem}[Weight Degeneracy]
-Analyze degeneracy in importance sampling and remedies.
-\textbf{Hint:} Resampling, proposal adaptation.
-\end{problem}
-
-\begin{problem}[Pseudo-marginal]
-Explain pseudo-marginal MCMC and conditions for correctness.
-\textbf{Hint:} Unbiased likelihood estimates.
-\end{problem}
-
 
