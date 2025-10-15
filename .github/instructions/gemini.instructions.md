@@ -156,6 +156,44 @@ make pdf      # Complete compilation process
   - Use `\begin{summary}...\end{summary}` for chapter or section summaries
   - Both environments use tcolorbox for enhanced visual presentation
 
+### Problem Numbering Policy
+The `problem` environment is defined in `main.tex` as `\newtheorem{problem}[theorem]{Problem}`, which means problems share a counter with theorems, definitions, and examples. This creates automatic sequential numbering throughout the document.
+
+#### Problem File Structure
+- **File naming**: Create a separate file `chapters/chapXX-problems.tex` for each chapter's problems
+- **Section heading**: Start with `\section*{Problems}` followed by `\addcontentsline{toc}{section}{Problems}`
+- **Difficulty subsections**: Use `\subsection*{Easy}`, `\subsection*{Medium}`, and `\subsection*{Hard}` (unnumbered)
+- **Problem environment**: Each problem uses `\begin{problem}[Descriptive Title]...\end{problem}`
+
+#### Problem Numbering Guidelines
+- **Automatic numbering**: Problems are automatically numbered sequentially (e.g., Problem 6.1, Problem 6.2)
+- **Shared counter**: The counter is shared with theorems, definitions, and examples within the chapter
+- **Title format**: Always provide a descriptive title in square brackets: `\begin{problem}[Title]`
+- **Hint format**: Each problem must include a hint using `\textbf{Hint:}` followed by guidance
+- **No manual numbering**: Never manually number problems; rely on LaTeX automatic numbering
+
+#### Problem Content Requirements
+- **Clear problem statement**: Write the problem description immediately after `\begin{problem}[Title]`
+- **Mandatory hint**: Include `\textbf{Hint:}` with guidance for solving the problem
+- **Appropriate difficulty**: Ensure problem complexity matches the subsection (Easy/Medium/Hard)
+- **Self-contained**: Each problem should be understandable without referring to other problems
+- **Consistent formatting**: Maintain uniform structure across all problems
+
+#### Example Problem Template
+```latex
+\begin{problem}[Descriptive Title]
+Clear problem statement or question. Provide sufficient context and specify what is being asked.
+
+\textbf{Hint:} Helpful guidance that points students in the right direction without giving away the complete solution.
+\end{problem}
+```
+
+#### Distribution Guidelines
+- **Easy problems**: 2-4 per chapter, suitable for beginners with basic understanding
+- **Medium problems**: 2-4 per chapter, requiring intermediate knowledge and synthesis
+- **Hard problems**: 1-3 per chapter, involving advanced concepts and deeper analysis
+- **Total range**: 4-10 problems per chapter to provide adequate practice
+
 ### Deep Learning Chapters Requirements
 - **All deep learning chapters (6-20) must include a "Real World Applications" section**
 - This section should:
