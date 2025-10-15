@@ -38,6 +38,8 @@ The book uses standardised margins for both A4 and A5 paper sizes to ensure opti
 ### LaTeX Implementation
 The margins are configured using the geometry package in `main.tex`:
 ```latex
+% \papersize is a custom command defined earlier: \providecommand{\papersize}{a5paper}
+% It allows dynamic paper size selection (a4paper or a5paper)
 \usepackage[\papersize, top=2cm, bottom=2cm, inner=1.8cm, outer=1.5cm]{geometry}
 ```
 
