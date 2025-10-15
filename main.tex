@@ -28,10 +28,10 @@
   % XeLaTeX/LuaLaTeX path with native Unicode and CJK support
   \usepackage{fontspec}
   \defaultfontfeatures{Ligatures=TeX}
-  % Use TeX Gyre fonts which ship with TeX Live
-  \setmainfont{TeX Gyre Termes}
-  \setsansfont{TeX Gyre Heros}
-  \setmonofont{TeX Gyre Cursor}
+  % Use commonly available fonts
+  \setmainfont{Times New Roman}
+  \setsansfont{Arial}
+  \setmonofont{Courier New}
   % CJK fonts (choose commonly available macOS font)
   \RequirePackage{xeCJK}
   \setCJKmainfont{PingFang SC}
@@ -175,26 +175,43 @@
 % --- Front Matter ---
 \frontmatter
 
-% Title Page
+% Title Page - Cover Image Only
 \begin{titlepage}
+    \thispagestyle{empty}
     \centering
-    \vspace*{2cm}
+    \vspace*{0pt}
+    \vfill
+    
+    % Full-page cover image
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{images/DeepLearning101-cover.png}
+    
+    \vfill
+    \vspace*{0pt}
+\end{titlepage}
+
+% Title Page - Text Content
+\begin{titlepage}
+    \thispagestyle{empty}
+    \centering
+    \vspace*{\fill}
     
     {\Huge\bfseries Deep Learning 101\par}
-    \vspace{1.5cm}
+    \vspace{2cm}
     
-    {\Large Nguyễn Vũ Hưng -- \begin{CJK*}{UTF8}{gbsn} 阮武興 \end{CJK*} \par}
+    {\Large Nguyễn Vũ Hưng -- 阮武興 \par}
     \vspace{2cm}
     
     {\large A Comprehensive Guide to\\
     Deep Learning Theory and Practice\par}
     
-    \vfill
+    \vspace{3cm}
     
     {\large \DTMtoday\par}
-    \vspace{0.5cm}
+    \vspace{1cm}
     
     {\small License: Creative Commons Attribution 4.0 International (CC BY 4.0)\par}
+    
+    \vspace*{\fill}
 \end{titlepage}
 
 % Copyright Page

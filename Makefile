@@ -24,7 +24,7 @@ pdf-a4: main-a4.pdf
 main-a4.pdf: main.tex chapters/*.tex
 	@echo "Building Deep Learning 101 (A4 paper)..."
 	@echo "Pass 1: Initial compilation..."
-	@pdflatex -interaction=nonstopmode -halt-on-error -jobname=main-a4 "\def\papersize{a4paper}\input{main.tex}" > /dev/null || (cat main-a4.log && exit 1)
+	@xelatex -interaction=nonstopmode -halt-on-error -jobname=main-a4 "\def\papersize{a4paper}\input{main.tex}" > /dev/null || (cat main-a4.log && exit 1)
 	@echo "Pass 2: Processing bibliography..."
 	@biber main-a4 > /dev/null || true
 	@echo "Pass 3: Processing glossary..."
@@ -32,9 +32,9 @@ main-a4.pdf: main.tex chapters/*.tex
 	@echo "Pass 4: Processing index..."
 	@makeindex main-a4 > /dev/null || true
 	@echo "Pass 5: Resolving references..."
-	@pdflatex -interaction=nonstopmode -halt-on-error -jobname=main-a4 "\def\papersize{a4paper}\input{main.tex}" > /dev/null || (cat main-a4.log && exit 1)
+	@xelatex -interaction=nonstopmode -halt-on-error -jobname=main-a4 "\def\papersize{a4paper}\input{main.tex}" > /dev/null || (cat main-a4.log && exit 1)
 	@echo "Pass 6: Final compilation..."
-	@pdflatex -interaction=nonstopmode -halt-on-error -jobname=main-a4 "\def\papersize{a4paper}\input{main.tex}}" > /dev/null || (cat main-a4.log && exit 1)
+	@xelatex -interaction=nonstopmode -halt-on-error -jobname=main-a4 "\def\papersize{a4paper}\input{main.tex}" > /dev/null || (cat main-a4.log && exit 1)
 	@echo "Book compiled successfully: main-a4.pdf"
 
 # A5 paper version
@@ -43,7 +43,7 @@ pdf-a5: main-a5.pdf
 main-a5.pdf: main.tex chapters/*.tex
 	@echo "Building Deep Learning 101 (A5 paper)..."
 	@echo "Pass 1: Initial compilation..."
-	@pdflatex -interaction=nonstopmode -halt-on-error -jobname=main-a5 "\def\papersize{a5paper}\input{main.tex}" > /dev/null || (cat main-a5.log && exit 1)
+	@xelatex -interaction=nonstopmode -halt-on-error -jobname=main-a5 "\def\papersize{a5paper}\input{main.tex}" > /dev/null || (cat main-a5.log && exit 1)
 	@echo "Pass 2: Processing bibliography..."
 	@biber main-a5 > /dev/null || true
 	@echo "Pass 3: Processing glossary..."
@@ -51,9 +51,9 @@ main-a5.pdf: main.tex chapters/*.tex
 	@echo "Pass 4: Processing index..."
 	@makeindex main-a5 > /dev/null || true
 	@echo "Pass 5: Resolving references..."
-	@pdflatex -interaction=nonstopmode -halt-on-error -jobname=main-a5 "\def\papersize{a5paper}\input{main.tex}" > /dev/null || (cat main-a5.log && exit 1)
+	@xelatex -interaction=nonstopmode -halt-on-error -jobname=main-a5 "\def\papersize{a5paper}\input{main.tex}" > /dev/null || (cat main-a5.log && exit 1)
 	@echo "Pass 6: Final compilation..."
-	@pdflatex -interaction=nonstopmode -halt-on-error -jobname=main-a5 "\def\papersize{a5paper}\input{main.tex}" > /dev/null || (cat main-a5.log && exit 1)
+	@xelatex -interaction=nonstopmode -halt-on-error -jobname=main-a5 "\def\papersize{a5paper}\input{main.tex}" > /dev/null || (cat main-a5.log && exit 1)
 	@echo "Book compiled successfully: main-a5.pdf"
 
 # Update glossary
