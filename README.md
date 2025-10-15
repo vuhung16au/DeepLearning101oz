@@ -1,11 +1,13 @@
 # Deep Learning 101
 
-**Author:** Vu Hung Nguyen  
-**License:** Creative Commons Attribution 4.0 International (CC BY 4.0)
+**Author:** Vũ Hưng Nguyễn (阮武興)  
+**License:** Creative Commons Attribution 4.0 International (CC BY 4.0)  
+**Version:** 1.0.0  
+**Language:** British English (en-GB)
 
 ## Overview
 
-This book provides a comprehensive introduction to deep learning, covering fundamental mathematics, practical techniques, and advanced research topics.
+This book provides a comprehensive introduction to deep learning, covering fundamental mathematics, practical techniques, and advanced research topics. The book features enhanced international support with Unicode and CJK character support, making it accessible to a global audience.
 
 ## Book Structure
 
@@ -39,17 +41,39 @@ The book is organized into three main parts:
 
 ## Building the Book
 
-To compile the book to PDF:
+The book supports both A4 and A5 paper sizes with enhanced build automation:
+
+### Quick Build Commands
 
 ```bash
+# Build A5 version (default)
 make pdf
-```
 
-To clean build artifacts:
+# Build A4 version
+make pdf-a4
 
-```bash
+# Build A5 version (explicit)
+make pdf-a5
+
+# Build both versions
+make all
+
+# Clean build artifacts
 make clean
+
+# Publish PDFs to distribution folder
+make publish
 ```
+
+### Enhanced Build Process
+
+The build process uses a 6-pass compilation system:
+1. **Pass 1**: Initial LaTeX compilation
+2. **Pass 2**: Bibliography processing (biber)
+3. **Pass 3**: Glossary processing (makeglossaries)
+4. **Pass 4**: Index processing (makeindex)
+5. **Pass 5**: Reference resolution
+6. **Pass 6**: Final compilation
 
 ### Requirements
 
@@ -58,6 +82,7 @@ make clean
 - biber (for bibliography)
 - makeglossaries (for glossary)
 - makeindex (for index)
+- Unicode and CJK support (XeLaTeX/LuaLaTeX recommended)
 
 ## Current Status
 
@@ -96,18 +121,24 @@ make clean
 - 📖 186 pages
 - 📝 20 chapters covering fundamentals to advanced topics
 - 🎓 Comprehensive coverage from basics to research frontiers
+- 🌍 Enhanced international support with Unicode and CJK characters
+- 📚 Advanced features: glossary, index, and difficulty level indicators
+- 🔧 Dual paper size support (A4 and A5)
+- 📖 Color-coded difficulty levels (Beginner/Intermediate/Advanced)
 
 ## File Structure
 
 ```
 Deep-Learning-101/
-├── main.tex                    # Main book file
-├── Makefile                    # Build automation
+├── main.tex                    # Main book file with Unicode/CJK support
+├── Makefile                    # Enhanced build automation (A4/A5 support)
 ├── references.bib              # Bibliography (expanded with modern references)
 ├── README.md                   # This file
-├── SUMMARY.txt                 # Book summary
+├── CHANGELOG.md                # Comprehensive changelog tracking
 ├── SUMMARY.txt                 # Book summary
 ├── .gitignore                  # Build artifact exclusion
+├── .github/
+│   └── copilot-instructions.md # AI assistant guidelines
 └── chapters/                   # Chapter files
     ├── acknowledgements.tex    # Acknowledgements
     ├── notation.tex            # Notation guide
@@ -242,6 +273,42 @@ This book draws inspiration from:
 - "Understanding Deep Learning" by Simon J.D. Prince
 - The broader deep learning research community
 
+## Key Features
+
+### Advanced LaTeX Features
+- **Glossary System**: Technical terms with definitions and cross-references
+- **Comprehensive Index**: Hierarchical subject indexing
+- **Difficulty Levels**: Color-coded indicators (Beginner/Intermediate/Advanced)
+- **International Support**: Unicode and CJK character support
+- **Dual Paper Sizes**: A4 and A5 formats with optimized layouts
+
+### Content Organization
+- **Structured Learning Path**: From fundamentals to advanced research
+- **Real-World Applications**: Practical examples in every deep learning chapter
+- **Mathematical Rigor**: Proper notation and step-by-step derivations
+- **Cross-References**: Extensive internal linking between concepts
+
+### Build System
+- **6-Pass Compilation**: Ensures all references, glossary, and index entries are resolved
+- **Error Handling**: Comprehensive error reporting and logging
+- **Automated Publishing**: Direct PDF distribution to output folder
+- **Clean Builds**: Automated artifact cleanup
+
 ## Contributing
 
 Contributions, corrections, and suggestions are welcome. Please ensure any contributions align with the educational goals and style of the book.
+
+### Contribution Guidelines
+- Follow British English spelling conventions
+- Use appropriate difficulty level indicators
+- Include glossary entries for technical terms
+- Add relevant index entries
+- Test compilation before submitting
+- **Update CHANGELOG.md for all changes**
+
+### Changelog Requirements
+Every significant change must be documented in `CHANGELOG.md` following the established format with:
+- Date (ISO format)
+- Change categories (Added/Changed/Fixed/Removed)
+- Technical details (version, author, dependencies, etc.)
+- Impact on glossary, index, and bibliography
