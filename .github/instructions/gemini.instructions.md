@@ -166,11 +166,12 @@ The `problem` environment is defined in `main.tex` as `\newtheorem{problem}[theo
 - **Problem environment**: Each problem uses `\begin{problem}[Descriptive Title]...\end{problem}`
 
 #### Problem Numbering Guidelines
-- **Automatic numbering**: Problems are automatically numbered sequentially (e.g., Problem 6.1, Problem 6.2)
-- **Shared counter**: The counter is shared with theorems, definitions, and examples within the chapter
+- **Automatic numbering**: Problems are automatically numbered by LaTeX (e.g., Problem 6.1, Problem 6.3, etc.)
+- **Shared counter**: The counter is shared with theorems, definitions, and examples within the chapter. This means if a chapter has Theorem 6.1, Definition 6.2, the first problem would be Problem 6.3
 - **Title format**: Always provide a descriptive title in square brackets: `\begin{problem}[Title]`
 - **Hint format**: Each problem must include a hint using `\textbf{Hint:}` followed by guidance
 - **No manual numbering**: Never manually number problems; rely on LaTeX automatic numbering
+- **Numbering continuity**: In problem sections, problems typically appear consecutively (Problem 6.1, 6.2, 6.3...) since no theorems/definitions are interspersed
 
 #### Problem Content Requirements
 - **Clear problem statement**: Write the problem description immediately after `\begin{problem}[Title]`
