@@ -32,19 +32,19 @@ A feedforward network consists of layers:
 \begin{tikzpicture}[scale=0.8]
     % Input layer
     \foreach \i in {1,2,3}
-        \node[circle, draw, fill=blue!20, minimum size=0.8cm] (x\i) at (0,-\i*1.2) {$x_\i$};
+        \node[circle, draw, fill=bookpurple!20, minimum size=0.8cm] (x\i) at (0,-\i*1.2) {$x_\i$};
     
     % Hidden layer 1
     \foreach \i in {1,2,3,4}
-        \node[circle, draw, fill=green!20, minimum size=0.8cm] (h1\i) at (3,-\i*1.2) {$h_1^{(\i)}$};
+        \node[circle, draw, fill=bookpurple!30, minimum size=0.8cm] (h1\i) at (3,-\i*1.2) {$h_1^{(\i)}$};
     
     % Hidden layer 2
     \foreach \i in {1,2,3}
-        \node[circle, draw, fill=green!20, minimum size=0.8cm] (h2\i) at (6,-\i*1.2) {$h_2^{(\i)}$};
+        \node[circle, draw, fill=bookpurple!30, minimum size=0.8cm] (h2\i) at (6,-\i*1.2) {$h_2^{(\i)}$};
     
     % Output layer
     \foreach \i in {1,2}
-        \node[circle, draw, fill=red!20, minimum size=0.8cm] (y\i) at (9,-\i*1.2) {$\hat{y}_\i$};
+        \node[circle, draw, fill=bookred!20, minimum size=0.8cm] (y\i) at (9,-\i*1.2) {$\hat{y}_\i$};
     
     % Connections from input to hidden1
     \foreach \i in {1,2,3}

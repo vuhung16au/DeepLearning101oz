@@ -44,16 +44,16 @@ The IEEE 754 standard defines floating-point numbers. For 32-bit floats:
     ytick=\empty
 ]
 % Underflow region
-\addplot[red, thick, domain=1e-50:1e-38] {0.2};
-\node[red] at (axis cs: 1e-45, 0.3) {Underflow};
+\addplot[bookred, thick, domain=1e-50:1e-38] {0.2};
+\node[bookred] at (axis cs: 1e-45, 0.3) {Underflow};
 
 % Normal range
-\addplot[blue, thick, domain=1e-38:1e38] {0.5};
-\node[blue] at (axis cs: 1, 0.6) {Normal Range};
+\addplot[bookpurple, thick, domain=1e-38:1e38] {0.5};
+\node[bookpurple] at (axis cs: 1, 0.6) {Normal Range};
 
 % Overflow region
-\addplot[red, thick, domain=1e38:1e50] {0.8};
-\node[red] at (axis cs: 1e45, 0.9) {Overflow};
+\addplot[bookred, thick, domain=1e38:1e50] {0.8};
+\node[bookred] at (axis cs: 1e45, 0.9) {Overflow};
 \end{axis}
 \end{tikzpicture}
 \caption{Representable range for 32-bit floating-point numbers}
