@@ -19,6 +19,35 @@ Deep Learning 101 is a comprehensive LaTeX educational book with advanced featur
 - **Date Format**: Use English date format: `14 Oct 2025` (day-month-year with abbreviated month)
 - **LaTeX Configuration**: The document uses `\usepackage[en-GB]{datetime2}` and `\DTMsetstyle{en-GB}` for consistent date formatting
 
+## Paper Margin Policy
+
+The book uses standardised margins for both A4 and A5 paper sizes to ensure optimal readability and binding:
+
+### A4 Paper Margins
+- **Top margin**: 2cm (good for headers)
+- **Bottom margin**: 2cm (good for footers)
+- **Inner margin**: 1.8cm (left margin for binding)
+- **Outer margin**: 1.5cm (right margin)
+
+### A5 Paper Margins
+- **Left margin**: 1.8cm (inner margin for binding)
+- **Right margin**: 1.5cm (outer margin)
+- **Top margin**: 2cm (space for headers)
+- **Bottom margin**: 2cm (space for footers)
+
+### LaTeX Implementation
+The margins are configured using the geometry package in `main.tex`:
+```latex
+\usepackage[\papersize, top=2cm, bottom=2cm, inner=1.8cm, outer=1.5cm]{geometry}
+```
+
+### Important Notes
+- The same margin values are used for both A4 and A5 papers
+- `inner` margin refers to the binding edge (left on odd pages, right on even pages)
+- `outer` margin refers to the outer edge (right on odd pages, left on even pages)
+- These margins are optimised for two-sided printing with `twoside` document class option
+- Do not modify margin settings without explicit authorisation as they affect print quality and binding
+
 ## Core Architecture
 
 ### Document Structure

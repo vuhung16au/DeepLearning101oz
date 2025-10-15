@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Paper margin policy in Copilot and Gemini instruction files
+  - Defined standardised margin specifications for A4 paper (top: 2cm, bottom: 2cm, inner: 1.8cm, outer: 1.5cm)
+  - Defined standardised margin specifications for A5 paper (left: 1.8cm, right: 1.5cm, top: 2cm, bottom: 2cm)
+  - Added LaTeX implementation guidance using geometry package
+  - Included important notes about inner/outer margins for two-sided printing
+  - Policy ensures AI assistants maintain consistent margin settings
 - LaTeX boxed styling for Summary and Key Takeaways sections using tcolorbox package
 - Custom `summary` environment with pink title box, drop shadow, and auto-numbering
 - Custom `keytakeaways` environment with yellow title box, drop shadow, and auto-numbering
