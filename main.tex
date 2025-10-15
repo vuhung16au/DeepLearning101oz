@@ -88,6 +88,39 @@
 \makeglossaries
 \loadglsentries{chapters/glossary}
 
+% --- Summary and Takeaways Boxes ---
+\usepackage[most]{tcolorbox}
+
+% Define custom summary box
+\newtcolorbox[auto counter]{summary}[1][]{
+  title={\bfseries Summary~\thetcbcounter},
+  enhanced,
+  drop shadow={black!50!white},
+  coltitle=black,
+  top=0.3in,
+  attach boxed title to top left={
+    xshift=1.5em,
+    yshift=-\tcboxedtitleheight/2
+  },
+  boxed title style={size=small,colback=pink},
+  #1
+}
+
+% Define custom key takeaways box
+\newtcolorbox[auto counter]{keytakeaways}[1][]{
+  title={\bfseries Key Takeaways~\thetcbcounter},
+  enhanced,
+  drop shadow={black!50!white},
+  coltitle=black,
+  top=0.3in,
+  attach boxed title to top left={
+    xshift=1.5em,
+    yshift=-\tcboxedtitleheight/2
+  },
+  boxed title style={size=small,colback=yellow!50},
+  #1
+}
+
 % --- Theorem Environments ---
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{lemma}[theorem]{Lemma}
