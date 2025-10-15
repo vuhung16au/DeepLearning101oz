@@ -8,6 +8,7 @@
 \documentclass[10pt,\papersize,twoside,openright]{book}
 
 % --- Page Layout ---
+% Apply proper margins for both A4 and A5 papers
 \usepackage[\papersize, top=2cm, bottom=2cm, inner=1.8cm, outer=1.5cm]{geometry}
 \usepackage{setspace}
 \onehalfspacing
@@ -30,14 +31,14 @@
   \usepackage{fontspec}
   \defaultfontfeatures{Ligatures=TeX}
   % Use commonly available fonts
-  \setmainfont{DejaVu Serif}
-  \setsansfont{DejaVu Sans}
-  \setmonofont{DejaVu Sans Mono}
+  \setmainfont{Times New Roman}
+  \setsansfont{Arial}
+  \setmonofont{Courier New}
   % CJK fonts (choose commonly available macOS font)
   \RequirePackage{xeCJK}
-  \setCJKmainfont{Noto Sans CJK SC}
-  \setCJKsansfont{Noto Sans CJK SC}
-  \setCJKmonofont{Noto Sans Mono CJK SC}
+  \setCJKmainfont{PingFang SC}
+  \setCJKsansfont{PingFang SC}
+  \setCJKmonofont{PingFang SC}
 \fi
 \usepackage{microtype}
 % Language and date formatting
@@ -173,35 +174,40 @@
 \begin{document}
 \selectlanguage{english}
 
-% --- Front Matter ---
-\frontmatter
+% --- Cover and Title Pages (No Front Matter Yet) ---
+% Apply left-aligned text for all content
+\raggedright
 
-% Title Page - Cover Image Only (First Page)
-\clearpage
-\thispagestyle{empty}
-\begingroup
-\setlength{\topmargin}{0pt}
-\setlength{\headsep}{0pt}
-\setlength{\topskip}{0pt}
-\setlength{\headheight}{0pt}
-\setlength{\textheight}{\paperheight}
-\setlength{\textwidth}{\paperwidth}
-\setlength{\oddsidemargin}{0pt}
-\setlength{\evensidemargin}{0pt}
-\setlength{\marginparwidth}{0pt}
-\setlength{\marginparsep}{0pt}
-\setlength{\hoffset}{-1in}
-\setlength{\voffset}{-1in}
+% Suppress page numbering completely for cover and title pages
+\setcounter{page}{0}
+\pagenumbering{gobble}
 
-% Full-page cover image - stretch to fill entire page edge-to-edge
-% Conditionally select cover image based on paper size
-\ifdefstring{\papersize}{a4paper}{%
-  \includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A4.png}%
-}{%
-  \includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A5.png}%
-}
-\endgroup
-\clearpage
+% 
+% % DO NOT REMOVE THIS COMMENT:: Title Page - Cover Image Only (First Page)
+% \thispagestyle{empty}
+% \begingroup % Start a local scope for margin adjustments
+% \setlength{\topmargin}{0pt}
+% \setlength{\headsep}{0pt}
+% \setlength{\topskip}{0pt}
+% \setlength{\headheight}{0pt}
+% \setlength{\textheight}{\paperheight}
+% \setlength{\textwidth}{\paperwidth}
+% \setlength{\oddsidemargin}{0pt}
+% \setlength{\evensidemargin}{0pt}
+% \setlength{\marginparwidth}{0pt}
+% \setlength{\marginparsep}{0pt}
+% \setlength{\hoffset}{-1in}
+% \setlength{\voffset}{-1in}
+
+% % Full-page cover image - stretch to fill entire page edge-to-edge
+% % Conditionally select cover image based on paper size
+% \ifdefstring{\papersize}{a4paper}{%
+%   \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A4.png}%
+% }{%
+%   \noindent\includegraphics[width=\paperwidth,height=\paperheight]{images/DeepLearning101-cover-A5.png}%
+% }
+% \endgroup % End the local scope, restoring previous margin settings
+% \clearpage
 
 % Title Page - Text Content (Second Page)
 \begin{titlepage}
@@ -228,7 +234,7 @@ Deep Learning Theory and Practice\par}
 \vspace*{\fill}
 \end{titlepage}
 
-% Copyright Page
+% Copyright Page (Page 3)
 \newpage
 \thispagestyle{empty}
 \vspace*{\fill}
@@ -241,6 +247,39 @@ First Edition: \DTMtoday
 \end{flushleft}
 \vspace*{\fill}
 \clearpage
+
+% Preface Page (Page 4)
+\newpage
+\thispagestyle{empty}
+\vspace*{\fill}
+\begin{flushleft}
+\textbf{Preface}\\[1em]
+
+Dear ML/AI learners,\\[0.5em]
+
+Welcome to \textit{Deep Learning 101}, a comprehensive guide designed to take you from the fundamentals to advanced concepts in deep learning. This book is crafted for students, researchers, and practitioners who want to build a solid foundation in one of the most transformative fields of our time.\\[0.5em]
+
+Whether you're just beginning your journey into machine learning or looking to deepen your understanding of neural networks, this book provides the mathematical foundations, practical insights, and hands-on knowledge you need to succeed.\\[0.5em]
+
+I hope this resource serves you well in your learning journey.\\[1em]
+
+Best regards,\\
+Vu Hung Nguyen\\[1em]
+
+\textbf{Contact Information:}\\
+GitHub: \url{https://github.com/vuhung16au}\\
+LinkedIn: \url{https://www.linkedin.com/in/nguyenvuhung/}\\
+Website: \url{https://vuhung16au.github.io/}
+\end{flushleft}
+\vspace*{\fill}
+\clearpage
+
+% --- Front Matter ---
+% Now start front matter after cover and title pages
+% Reset page numbering for front matter
+\setcounter{page}{1}
+\pagenumbering{roman}
+\frontmatter
 
 % Table of Contents
 \tableofcontents
@@ -257,9 +296,6 @@ First Edition: \DTMtoday
 
 % --- Main Matter ---
 \mainmatter
-
-% Apply left-aligned text for main content (chapters)
-\raggedright
 
 % Chapter 1: Introduction
 \include{chapters/chap01}
