@@ -24,16 +24,16 @@ where $\mat{H}$ is the Hessian matrix. Intuitively, the Hessian rescales the gra
 \begin{tikzpicture}[scale=1.0]
   % Quadratic bowl as concentric ellipses
   \foreach \a/\b in {2.2/1.3, 1.8/1.05, 1.4/0.85, 1.0/0.65, 0.6/0.45} {
-    \draw[gray!60] (0,0) ellipse ({\a} and {\b});
+    \draw[bookpurple!60] (0,0) ellipse ({\a} and {\b});
   }
   % Current point
-  \fill[blue] (-1.2,0.7) circle (1.5pt);
+  \fill[bookpurple] (-1.2,0.7) circle (1.5pt);
   % Gradient step (steepest descent, unscaled)
-  \draw[->, thick, blue!60] (-1.2,0.7) -- ++(0.35,-0.85) node[below right, xshift=1pt, yshift=-2pt] {\small gradient step};
+  \draw[->, thick, bookpurple!60] (-1.2,0.7) -- ++(0.35,-0.85) node[below right, xshift=1pt, yshift=-2pt] {\small gradient step};
   % Newton step (curvature scaled)
-  \draw[->, thick, red!70] (-1.2,0.7) -- ++(0.95,-0.35) node[right, xshift=2pt] {\small Newton step};
+  \draw[->, thick, bookred!70] (-1.2,0.7) -- ++(0.95,-0.35) node[right, xshift=2pt] {\small Newton step};
   % Optimum
-  \fill[black] (0,0) circle (1.2pt) node[below right] {\small $\theta^*$};
+  \fill[bookblack] (0,0) circle (1.2pt) node[below right] {\small $\theta^*$};
 \end{tikzpicture}
 \caption{Newton's method rescales the gradient by curvature, taking longer steps along shallow directions and shorter steps along steep directions.}
 \label{fig:newton-bowl}
@@ -73,16 +73,16 @@ Provides parameter updates invariant to reparameterization. In probabilistic mod
 \begin{tikzpicture}[scale=1.0]
   % Anisotropic contours (level sets)
   \foreach \a/\b in {2.2/0.9, 1.8/0.75, 1.4/0.62, 1.0/0.5, 0.6/0.38} {
-    \draw[gray!60, rotate=25] (0,0) ellipse ({\a} and {\b});
+    \draw[bookpurple!60, rotate=25] (0,0) ellipse ({\a} and {\b});
   }
   % Current point
-  \fill[blue] (-1.0,0.3) circle (1.5pt);
+  \fill[bookpurple] (-1.0,0.3) circle (1.5pt);
   % Euclidean gradient step (blue)
-  \draw[->, thick, blue!70] (-1.0,0.3) -- ++(0.25,-0.55) node[below right, xshift=1pt, yshift=-1pt] {\small Euclidean};
+  \draw[->, thick, bookpurple!70] (-1.0,0.3) -- ++(0.25,-0.55) node[below right, xshift=1pt, yshift=-1pt] {\small Euclidean};
   % Natural gradient step (green), rotates/scales toward true steepest path under metric
-  \draw[->, thick, green!60!black] (-1.0,0.3) -- ++(0.6,-0.25) node[right, xshift=2pt] {\small Natural};
+  \draw[->, thick, bookred!80] (-1.0,0.3) -- ++(0.6,-0.25) node[right, xshift=2pt] {\small Natural};
   % Optimum
-  \fill[black] (0,0) circle (1.2pt) node[below right] {\small $\theta^*$};
+  \fill[bookblack] (0,0) circle (1.2pt) node[below right] {\small $\theta^*$};
 \end{tikzpicture}
 \caption{Natural gradient accounts for the local geometry (Fisher metric), often directing updates more orthogonally to level sets than Euclidean gradient.}
 \label{fig:natural-gradient}

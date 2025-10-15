@@ -105,28 +105,28 @@ where $\Phi$ is the Gaussian CDF. Used in modern transformers.
         ymin = -1.5, ymax = 2,
         legend pos = north west,
         grid = both,
-        grid style = {line width=.1pt, draw=gray!10},
-        major grid style = {line width=.2pt, draw=gray!50},
+        grid style = {line width=.1pt, draw=bookpurple!10},
+        major grid style = {line width=.2pt, draw=bookpurple!50},
     ]
     
     % Sigmoid
-    \addplot[domain=-4:4, samples=100, color=blue, thick] {1/(1+exp(-x))};
+    \addplot[domain=-4:4, samples=100, color=bookpurple, thick] {1/(1+exp(-x))};
     \addlegendentry{Sigmoid}
     
     % Tanh
-    \addplot[domain=-4:4, samples=100, color=red, thick] {tanh(x)};
+    \addplot[domain=-4:4, samples=100, color=bookred, thick] {tanh(x)};
     \addlegendentry{Tanh}
     
     % ReLU
-    \addplot[domain=-4:4, samples=100, color=green, thick] {max(0,x)};
+    \addplot[domain=-4:4, samples=100, color=bookpurple!70, thick] {max(0,x)};
     \addlegendentry{ReLU}
     
     % Leaky ReLU
-    \addplot[domain=-4:4, samples=100, color=orange, thick] {max(0.1*x, x)};
+    \addplot[domain=-4:4, samples=100, color=bookred!70, thick] {max(0.1*x, x)};
     \addlegendentry{Leaky ReLU}
     
     % Swish
-    \addplot[domain=-4:4, samples=100, color=purple, thick] {x/(1+exp(-x))};
+    \addplot[domain=-4:4, samples=100, color=bookpurple!50, thick] {x/(1+exp(-x))};
     \addlegendentry{Swish}
     
     \end{axis}

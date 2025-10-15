@@ -59,8 +59,8 @@ The expected value is 3.5, even though we can never actually roll 3.5!
     height=6cm
 ]
 \addplot coordinates {(1,1/6) (2,1/6) (3,1/6) (4,1/6) (5,1/6) (6,1/6)};
-\draw[red, thick] (axis cs:3.5,0) -- (axis cs:3.5,0.2);
-\node[red] at (axis cs:3.5,0.18) {$\mathbb{E}[X] = 3.5$};
+\draw[bookred, thick] (axis cs:3.5,0) -- (axis cs:3.5,0.2);
+\node[bookred] at (axis cs:3.5,0.18) {$\mathbb{E}[X] = 3.5$};
 \end{axis}
 \end{tikzpicture}
 \caption{Probability distribution of a fair die with expected value marked}
@@ -110,10 +110,10 @@ So $\sigma = \sqrt{2.92} \approx 1.71$.
     height=6cm
 ]
 \addplot coordinates {(1,1/6) (2,1/6) (3,1/6) (4,1/6) (5,1/6) (6,1/6)};
-\draw[red, thick] (axis cs:3.5,0) -- (axis cs:3.5,0.2);
-\node[red] at (axis cs:3.5,0.18) {$\mu = 3.5$};
-\draw[blue, thick, <->] (axis cs:1.79,0.1) -- (axis cs:5.21,0.1);
-\node[blue] at (axis cs:3.5,0.12) {$\sigma \approx 1.71$};
+\draw[bookred, thick] (axis cs:3.5,0) -- (axis cs:3.5,0.2);
+\node[bookred] at (axis cs:3.5,0.18) {$\mu = 3.5$};
+\draw[bookpurple, thick, <->] (axis cs:1.79,0.1) -- (axis cs:5.21,0.1);
+\node[bookpurple] at (axis cs:3.5,0.12) {$\sigma \approx 1.71$};
 \end{axis}
 \end{tikzpicture}
 \caption{Probability distribution showing mean and standard deviation}
