@@ -7,6 +7,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Hands-On Exercises (Problems) for all chapters (minimum 4, maximum 10 per chapter)
+  - Chapters 1-3: Created new problem files with 5-8 problems each
+  - Chapters 6-10: Created new problem files with 8 problems each
+  - Chapters 4-5: Reduced inline problems from 16 to 8 each
+  - Chapters 11-20: Reduced problems from 16 to 8 each
+- Chapter structure requirements in Copilot and Gemini instruction policies
+  - Requirement for brief chapter introductions (1-2 paragraphs)
+  - Requirement for 4-10 Hands-On Exercises per chapter
+  - Problems organised by difficulty (Easy/Medium/Hard)
+  - All problems include hints for students
+
+### Changed
+- Updated `.github/copilot-instructions.md` with new chapter structure requirements
+- Updated `.github/instructions/gemini.instructions.md` with new chapter structure requirements
+- All chapter problem files now use British English spelling (e.g., "optimise", "categorise")
+- Problem format standardised across all chapters with consistent difficulty categorisation
+
+### Technical Details
+- **Version**: 1.0.1
+- **Date**: 15 Oct 2025
+- **Modified Files**: 
+  - `.github/copilot-instructions.md`
+  - `.github/instructions/gemini.instructions.md`
+  - `chapters/chap01.tex`, `chap02.tex`, `chap03.tex` (added problem file inputs)
+  - `chapters/chap04.tex`, `chap05.tex` (reduced inline problems from 16 to 8)
+  - `chapters/chap06.tex` through `chap10.tex` (added problem file inputs)
+  - `chapters/chap01-problems.tex` through `chap10-problems.tex` (created new files)
+  - `chapters/chap11-problems.tex` through `chap20-problems.tex` (reduced from 16 to 8 problems)
+- **Problem Count Summary**:
+  - Total chapters with exercises: 20/20 (100%)
+  - Chapters 1-10: 8 problems each (Easy: 4, Medium: 2, Hard: 2)
+  - Chapters 11-20: 8 problems each (Easy: 4, Medium: 2, Hard: 2)
+  - All within required range of 4-10 problems per chapter
+- **LaTeX Environments**: Using `\begin{problem}[Title]...\end{problem}` with hints
+- **Difficulty Levels**: Easy (conceptual understanding), Medium (application/derivation), Hard (advanced theory/proof)
+
+## [2025-10-15] - Previous Changes
+
 ### Changed
 - Updated all chapter colors to use standardised book color scheme
 - Replaced hard-coded colors (blue, green, yellow, orange, gray) with bookpurple and bookred variants

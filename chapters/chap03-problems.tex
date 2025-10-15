@@ -1,0 +1,53 @@
+% Problems (Hands-On Exercises) for Chapter 3: Probability and Information Theory
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+
+\begin{problem}[Bayes' Theorem Application]
+Given that P(Disease) = 0.01, P(Positive Test | Disease) = 0.95, and P(Positive Test | No Disease) = 0.05, calculate P(Disease | Positive Test).
+
+\textbf{Hint:} Use Bayes' theorem: $P(A|B) = \frac{P(B|A)P(A)}{P(B)}$. Remember to compute P(Positive Test) first.
+\end{problem}
+
+\begin{problem}[Expectation and Variance]
+A discrete random variable $X$ takes values 1, 2, 3, 4 with probabilities 0.1, 0.2, 0.4, 0.3 respectively. Calculate $\mathbb{E}[X]$ and $\text{Var}(X)$.
+
+\textbf{Hint:} $\mathbb{E}[X] = \sum_i x_i P(X=x_i)$ and $\text{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$.
+\end{problem}
+
+\begin{problem}[Entropy Calculation]
+Calculate the entropy of a fair coin flip and compare it to the entropy of a biased coin with P(Heads) = 0.9.
+
+\textbf{Hint:} Entropy $H(X) = -\sum_i p_i \log_2 p_i$. Higher entropy means more uncertainty.
+\end{problem}
+
+\begin{problem}[Independence Test]
+Given P(A) = 0.3, P(B) = 0.4, and P(A $\cap$ B) = 0.12, determine if events A and B are independent.
+
+\textbf{Hint:} Events are independent if P(A $\cap$ B) = P(A)P(B).
+\end{problem}
+
+\subsection*{Medium}
+
+\begin{problem}[KL Divergence for Model Comparison]
+Explain why Kullback-Leibler (KL) divergence is not symmetric and discuss its implications when comparing probability distributions in machine learning.
+
+\textbf{Hint:} Consider $D_{KL}(P||Q)$ versus $D_{KL}(Q||P)$ and their behaviour when $P$ or $Q$ is close to zero.
+\end{problem}
+
+\begin{problem}[Cross-Entropy Loss]
+Show that minimising cross-entropy loss is equivalent to maximising the log-likelihood for classification tasks. Derive the relationship mathematically.
+
+\textbf{Hint:} Start with the cross-entropy $H(p,q) = -\sum_i p_i \log q_i$ where $p$ is the true distribution and $q$ is the predicted distribution.
+\end{problem}
+
+\subsection*{Hard}
+
+\begin{problem}[Information Theory in Neural Networks]
+Analyse how mutual information between layers in a neural network can be used to understand information flow during training. Discuss the information bottleneck principle.
+
+\textbf{Hint:} Consider $I(X;Y) = H(X) - H(X|Y)$ and how it relates to representation learning.
+\end{problem}
+

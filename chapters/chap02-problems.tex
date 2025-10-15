@@ -1,0 +1,53 @@
+% Problems (Hands-On Exercises) for Chapter 2: Linear Algebra
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+
+\begin{problem}[Matrix Multiplication]
+Given $\mat{A} = \begin{bmatrix} 2 & 1 \\ 0 & 3 \end{bmatrix}$ and $\mat{B} = \begin{bmatrix} 1 & 2 \\ 3 & 1 \end{bmatrix}$, compute $\mat{A}\mat{B}$.
+
+\textbf{Hint:} Remember that $(\mat{A}\mat{B})_{ij} = \sum_k a_{ik}b_{kj}$.
+\end{problem}
+
+\begin{problem}[Vector Norms]
+Calculate the L1, L2, and $L_\infty$ norms of the vector $\vect{v} = [3, -4, 0]$.
+
+\textbf{Hint:} L1 norm is sum of absolute values, L2 norm is Euclidean length, $L_\infty$ is maximum absolute value.
+\end{problem}
+
+\begin{problem}[Linear Independence]
+Determine whether the vectors $\vect{v}_1 = [1, 0, 1]$, $\vect{v}_2 = [0, 1, 0]$, and $\vect{v}_3 = [1, 1, 1]$ are linearly independent.
+
+\textbf{Hint:} Check if $c_1\vect{v}_1 + c_2\vect{v}_2 + c_3\vect{v}_3 = \boldsymbol{0}$ has only the trivial solution $c_1 = c_2 = c_3 = 0$.
+\end{problem}
+
+\begin{problem}[Matrix Transpose Properties]
+Prove that $(\mat{A}\mat{B})^\top = \mat{B}^\top\mat{A}^\top$ for any compatible matrices $\mat{A}$ and $\mat{B}$.
+
+\textbf{Hint:} Use the definition of transpose and matrix multiplication element-wise.
+\end{problem}
+
+\subsection*{Medium}
+
+\begin{problem}[Eigenvalues and Eigenvectors]
+Find the eigenvalues and eigenvectors of the matrix $\mat{A} = \begin{bmatrix} 4 & 2 \\ 1 & 3 \end{bmatrix}$.
+
+\textbf{Hint:} Solve $\det(\mat{A} - \lambda \mat{I}) = 0$ for eigenvalues, then find eigenvectors by solving $(\mat{A} - \lambda \mat{I})\vect{v} = \boldsymbol{0}$.
+\end{problem}
+
+\begin{problem}[SVD Application]
+Explain how Singular Value Decomposition (SVD) can be used for dimensionality reduction. Describe the relationship between SVD and Principal Component Analysis (PCA).
+
+\textbf{Hint:} Consider which singular values and vectors to keep, and how this relates to variance in the data.
+\end{problem}
+
+\subsection*{Hard}
+
+\begin{problem}[Matrix Decomposition for Neural Networks]
+Show how the weight matrix in a neural network layer can be decomposed using SVD to reduce the number of parameters. Analyse the computational and memory trade-offs.
+
+\textbf{Hint:} Consider low-rank approximation $\mat{W} \approx \mat{U}_k \mat{\Sigma}_k \mat{V}_k^\top$ where $k < \min(m,n)$.
+\end{problem}
+

@@ -4,86 +4,56 @@
 \addcontentsline{toc}{section}{Problems}
 
 \subsection*{Easy}
-\begin{problem}[VAE Objective]
-Write the VAE loss and explain its terms.
-\textbf{Hint:} Reconstruction + KL regularization.
+
+\begin{problem}[VAE vs. GAN]
+Compare the training objectives of VAEs and GANs.
+
+\textbf{Hint:} Likelihood-based vs. adversarial.
 \end{problem}
 
-\begin{problem}[GAN Instability]
-List two reasons GANs can be unstable.
-\textbf{Hint:} Gradient saturation, mode collapse.
+\begin{problem}[Normalising Flow Invertibility]
+Why must normalising flows be invertible?
+
+\textbf{Hint:} Exact likelihood computation via change of variables.
 \end{problem}
 
-\begin{problem}[Flow Jacobian]
-Why must flows use invertible transforms?
-\textbf{Hint:} Change of variables formula.
+\begin{problem}[Diffusion Process]
+Describe the forward diffusion process in diffusion models.
+
+\textbf{Hint:} Gradual addition of Gaussian noise.
 \end{problem}
 
-\begin{problem}[Diffusion Intuition]
-Describe forward and reverse processes in diffusion models.
-\textbf{Hint:} Noise addition then denoising.
-\end{problem}
+\begin{problem}[Sampling Speed]
+Compare sampling speed across VAEs, GANs, and diffusion models.
 
-\begin{problem}[Metrics]
-Name two metrics for generative models and caveats.
-\textbf{Hint:} FID, NLL; sensitivity, calibration.
-\end{problem}
-
-\begin{problem}[Conditioning]
-How to condition generative models on labels?
-\textbf{Hint:} Classifier guidance, conditional inputs.
+\textbf{Hint:} Single pass vs. iterative refinement.
 \end{problem}
 
 \subsection*{Medium}
-\begin{problem}[GAN Loss Variants]
-Compare non-saturating vs. Wasserstein losses.
-\textbf{Hint:} Gradient properties, Lipschitz constraints.
+
+\begin{problem}[Flow Jacobian]
+Derive the change-of-variables formula for a normalising flow.
+
+\textbf{Hint:} $\log p(x) = \log p(z) + \log|\det \frac{\partial f}{\partial z}|$.
 \end{problem}
 
-\begin{problem}[VAE Posterior]
-Discuss posterior collapse and remedies.
-\textbf{Hint:} KL annealing, expressive decoders.
-\end{problem}
+\begin{problem}[Denoising Score Matching]
+Explain how diffusion models learn the score function.
 
-\begin{problem}[Flow Design]
-Design an affine coupling layer and compute log-det.
-\textbf{Hint:} Block-splitting with triangular Jacobian.
-\end{problem}
-
-\begin{problem}[Diffusion Training]
-Derive simplified training objective for denoising score matching.
-\textbf{Hint:} Noise-prediction loss.
-\end{problem}
-
-\begin{problem}[Evaluation]
-Propose a robust evaluation suite for text generation.
-\textbf{Hint:} Diversity, factuality, human eval.
+\textbf{Hint:} Predict noise; connection to $\nabla_x \log p(x)$.
 \end{problem}
 
 \subsection*{Hard}
-\begin{problem}[ELBO Decomposition]
-Decompose ELBO into mutual information and marginal KL terms.
-\textbf{Hint:} Use expected KL identities.
+
+\begin{problem}[Coupling Layer Design]
+Design an invertible coupling layer and prove its properties.
+
+\textbf{Hint:} Affine transformations; partition dimensions.
 \end{problem}
 
-\begin{problem}[Mode Coverage]
-Analyze mode dropping in GANs and mitigation strategies.
-\textbf{Hint:} Minibatch discrimination, unrolled GANs.
-\end{problem}
+\begin{problem}[Guidance Trade-off]
+Analyse the trade-off between sample quality and diversity in classifier-free guidance.
 
-\begin{problem}[Flow Expressivity]
-Discuss expressivity vs. invertibility constraints.
-\textbf{Hint:} Trade-offs in architecture depth and coupling.
+\textbf{Hint:} Guidance scale; conditional vs. unconditional scores.
 \end{problem}
-
-\begin{problem}[Diffusion Samplers]
-Compare DDPM vs. DDIM sampling.
-\textbf{Hint:} Stochastic vs. deterministic paths.
-\end{problem}
-
-\begin{problem}[Safety]
-Outline safety considerations for image generation at scale.
-\textbf{Hint:} Content filters, misuse prevention, watermarking.
-\end{problem}
-
 

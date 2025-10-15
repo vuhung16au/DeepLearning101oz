@@ -1,0 +1,59 @@
+% Problems (Hands-On Exercises) for Chapter 8: Optimization for Training Deep Models
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+
+\begin{problem}[Batch Size Selection]
+Explain the trade-offs between using a large batch size versus a small batch size for training. Consider computation time, memory usage, and convergence properties.
+
+\textbf{Hint:} Think about GPU utilization, gradient noise, and generalization gap.
+\end{problem}
+
+\begin{problem}[Momentum Intuition]
+Describe how momentum helps accelerate optimization. Use the analogy of a ball rolling down a hill to explain the concept.
+
+\textbf{Hint:} Consider how previous gradients influence the current update and help overcome small local variations.
+\end{problem}
+
+\begin{problem}[Learning Rate Scheduling]
+List three common learning rate scheduling strategies and explain when each is most appropriate.
+
+\textbf{Hint:} Consider step decay, exponential decay, cosine annealing, and cyclical learning rates.
+\end{problem}
+
+\begin{problem}[Adam Hyperparameters]
+Adam optimizer has hyperparameters $\beta_1$ (typically 0.9) and $\beta_2$ (typically 0.999). Explain the role of each parameter.
+
+\textbf{Hint:} $\beta_1$ controls momentum (first moment), $\beta_2$ controls adaptive learning rates (second moment).
+\end{problem}
+
+\subsection*{Medium}
+
+\begin{problem}[Optimizer Comparison]
+Compare SGD with momentum, RMSProp, and Adam on a simple optimization problem. Discuss their convergence behavior and when to prefer one over another.
+
+\textbf{Hint:} Consider sparse gradients, non-stationary objectives, and computational cost.
+\end{problem}
+
+\begin{problem}[Gradient Clipping]
+Explain why gradient clipping is important for training recurrent neural networks. Derive the gradient clipping formula and discuss the choice of threshold.
+
+\textbf{Hint:} Consider exploding gradients and the norm $\|\nabla L\|$. Clip by value or by norm.
+\end{problem}
+
+\subsection*{Hard}
+
+\begin{problem}[Natural Gradient Descent]
+Derive the natural gradient update rule and explain why it is invariant to reparameterisations. Discuss the computational challenges of using natural gradient in deep learning.
+
+\textbf{Hint:} Consider the Fisher information matrix $\mat{F}$ and the update $\boldsymbol{\theta} \leftarrow \boldsymbol{\theta} - \eta \mat{F}^{-1} \nabla L$.
+\end{problem}
+
+\begin{problem}[Learning Rate Warmup]
+Analyse why learning rate warmup is beneficial when training with large batch sizes. Provide theoretical justification based on the optimization landscape.
+
+\textbf{Hint:} Consider the stability of gradients in early training and the sharpness of the loss landscape.
+\end{problem}
+
