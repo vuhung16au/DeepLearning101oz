@@ -214,6 +214,18 @@ miktex/
 !*.md
 
 
+# tex4ebook/tex4ht artifacts
+*-epub3/
+*.4ct
+*.4tc
+*.xdv
+*.xef
+*.xref
+
+# Optional: ignore general EPUB outputs except published ones
+*.epub
+!Deep-Learning101-PDF-Books/*.epub
+
 # Project specific files
 TODO/
 refs*/

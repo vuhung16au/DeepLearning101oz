@@ -13,6 +13,9 @@ help:
 	@echo "  make pdf-a6   - Build the complete book PDF (A6 paper)"
 	@echo "  make pdf-b5   - Build the complete book PDF (B5 paper)"
 	@echo "  make pdf-trade - Build the complete book PDF (6\"x9\" trade paper)"
+	@echo "  make epub     - Build EPUB (via tex4ebook)"
+	@echo "  make tex4ebook - Alias of 'make epub'"
+	@echo "  make epub-pandoc - Build EPUB (via Pandoc fallback)"
 	@echo "  make all      - Clean and build all versions"
 	@echo "  make publish  - Copy all PDFs (A4, A5, Letter, A6, B5, Trade) to Deep-Learning101-PDF-Books folder"
 	@echo "  make glossary - Update the glossary"
@@ -190,6 +193,36 @@ publish: pdf-a4 pdf-a5 pdf-letter pdf-a6 pdf-b5 pdf-trade
 	@echo "  - Deep-Learning101-PDF-Books/Deep-Learning-101-A6.pdf"
 	@echo "  - Deep-Learning101-PDF-Books/Deep-Learning-101-B5.pdf"
 	@echo "  - Deep-Learning101-PDF-Books/Deep-Learning-101-Trade.pdf"
+
+# ----------------------------------------------------------------------
+# EPUB build via tex4ebook
+# ----------------------------------------------------------------------
+
+# Prepare aux/bbl by building a full PDF first (A4)
+pdf-prepare: pdf-a4
+	@echo "PDF prepared for EPUB conversion."
+
+epub: pdf-prepare temp
+	@echo "Building EPUB via tex4ebook…"
+	@/Library/TeX/texbin/tex4ebook -f epub3 -x -s main.tex "mathjax,charset=utf-8" || (echo "tex4ebook failed" && exit 1)
+	@mkdir -p Deep-Learning101-PDF-Books
+	@mv -f main.epub Deep-Learning101-PDF-Books/Deep-Learning-101.epub
+	@echo "EPUB built: Deep-Learning101-PDF-Books/Deep-Learning-101.epub"
+
+tex4ebook: epub
+
+# Pandoc fallback EPUB
+epub-pandoc: temp
+	@echo "Building EPUB via Pandoc…"
+	@mkdir -p Deep-Learning101-PDF-Books
+	@pandoc --from=latex --to=epub3 \
+		--resource-path=".:chapters:images" \
+		--toc --toc-depth=2 \
+		--citeproc --bibliography=references.bib \
+		--mathjax \
+		--epub-cover-image=images/DeepLearning101-cover-trade.png \
+		-o Deep-Learning101-PDF-Books/Deep-Learning-101.epub main.tex || (echo "pandoc epub failed" && exit 1)
+	@echo "EPUB built (Pandoc): Deep-Learning101-PDF-Books/Deep-Learning-101.epub"
 
 # ----------------------------------------------------------------------
 # Single-chapter builds: <size>-chapter-<n>
