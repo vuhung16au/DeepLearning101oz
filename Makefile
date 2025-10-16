@@ -2,6 +2,9 @@
 
 .PHONY: help pdf pdf-a4 pdf-a5 pdf-letter pdf-a6 pdf-b5 pdf-trade all clean glossary index publish clean-temp clean-all temp
 
+# Avoid parallel races across full-book builds which share chapters/*.aux
+.NOTPARALLEL: pdf-a4 pdf-a5 pdf-letter pdf-a6 pdf-b5 pdf-trade
+
 # Default target
 help:
 	@echo "Deep Learning 101 Book - Build targets:"
@@ -173,7 +176,14 @@ index: temp
 	@echo "Index updated successfully!"
 
 # Build all versions
-all: clean pdf-a4 pdf-a5 pdf-letter pdf-a6 pdf-b5 pdf-trade
+# Serialize multi-size builds to be safe under parallel make (-j)
+all: clean
+	@$(MAKE) pdf-a4
+	@$(MAKE) pdf-a5
+	@$(MAKE) pdf-letter
+	@$(MAKE) pdf-a6
+	@$(MAKE) pdf-b5
+	@$(MAKE) pdf-trade
 	@echo "All versions built successfully!"
 
 # Publish rule - copy PDFs to Deep-Learning101-PDF-Books folder
