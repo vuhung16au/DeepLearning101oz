@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Enhanced Chapter Structure Requirements in both instruction files with explicit problem numbering details
 - Updated Creating Problem Sets section with verification steps for automatic numbering
+- Standardised problem quantity requirement to 5-10 problems per chapter in both instruction files for consistency
 
 ### Technical Details
 - **Version**: 1.1.2 (Problem Numbering Policy)

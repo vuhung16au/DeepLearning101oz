@@ -145,7 +145,8 @@ The margins are configured using the geometry package in `main.tex`:
 
 ### Chapter Structure Requirements
 - **Each chapter must have a brief introduction at the start**: A 1-2 paragraph overview that introduces the chapter's topic and provides context
-- **Each chapter must have 15-20 Hands-On Exercises**: Practical problems categorised by difficulty (Easy/Medium/Hard) to reinforce learning
+- **Each chapter must have 5-10 Hands-On Exercises**: Practical problems categorised by difficulty (Easy/Medium/Hard) to reinforce learning
+  - Aim for approximately 5-10 problems per chapter based on chapter complexity
   - Use `\begin{problem}[Title]...\end{problem}` environment
   - Problems are automatically numbered as "Problem X.Y" where X is the chapter number and Y is the sequential problem number
   - Problem numbering uses the shared theorem counter, maintaining consistency with other numbered environments (theorems, definitions, examples)
@@ -241,7 +242,7 @@ The margins are configured using the geometry package in `main.tex`:
    \end{problem}
    ```
 4. Include problems for each difficulty level (Easy, Medium, Hard)
-5. Aim for 15-20 problems per chapter, distributed across difficulty levels
+5. Aim for 5-10 problems per chapter, distributed across difficulty levels
 6. Include the problems file in the chapter file: `\input{chapters/chapXX-problems}`
 7. Test compilation to verify problem numbering is correct
 

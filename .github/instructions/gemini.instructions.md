@@ -142,9 +142,8 @@ make pdf      # Complete compilation process
 
 ### Chapter Structure Requirements
 - **Each chapter must have a brief introduction at the start**: A 1-2 paragraph overview that introduces the chapter's topic and provides context
-- **Each chapter must have 4-10 Hands-On Exercises**: Practical problems categorised by difficulty (Easy/Medium/Hard) to reinforce learning
-  - Minimum: 4 exercises per chapter
-  - Maximum: 10 exercises per chapter
+- **Each chapter must have 5-10 Hands-On Exercises**: Practical problems categorised by difficulty (Easy/Medium/Hard) to reinforce learning
+  - Aim for approximately 5-10 problems per chapter based on chapter complexity
   - Use `\begin{problem}[Title]...\end{problem}` environment
   - Problems are automatically numbered as "Problem X.Y" where X is the chapter number and Y is the sequential problem number
   - Problem numbering uses the shared theorem counter, maintaining consistency with other numbered environments (theorems, definitions, examples)
@@ -254,7 +253,7 @@ chapters/
    \end{problem}
    ```
 4. **Difficulty Distribution**: Include problems for Easy, Medium, and Hard levels
-5. **Quantity**: Aim for 4-10 problems per chapter, distributed across difficulty levels
+5. **Quantity**: Aim for 5-10 problems per chapter, distributed across difficulty levels
 6. **Integration**: Include problems file in chapter: `\input{chapters/chapXX-problems}`
 7. **Verification**: Test compilation to verify automatic problem numbering
 
