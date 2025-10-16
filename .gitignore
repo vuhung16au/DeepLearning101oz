@@ -158,6 +158,9 @@ $RECYCLE.BIN/
 *.swp
 *.swo
 
+# LaTeX temporary directory
+temp/
+
 # LaTeX specific temporary files
 *.nav
 *.snm
@@ -218,5 +221,6 @@ Prompt.md
 SUMMARY.txt
 *.pdf
 docs/
+styles/
 
 !Deep-Learning101-PDF-Books/*.pdf
