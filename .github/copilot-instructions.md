@@ -145,9 +145,7 @@ The margins are configured using the geometry package in `main.tex`:
 
 ### Chapter Structure Requirements
 - **Each chapter must have a brief introduction at the start**: A 1-2 paragraph overview that introduces the chapter's topic and provides context
-- **Each chapter must have 4-10 Hands-On Exercises**: Practical problems categorised by difficulty (Easy/Medium/Hard) to reinforce learning
-  - Minimum: 4 exercises per chapter
-  - Maximum: 10 exercises per chapter
+- **Each chapter must have 15-20 Hands-On Exercises**: Practical problems categorised by difficulty (Easy/Medium/Hard) to reinforce learning
   - Use `\begin{problem}[Title]...\end{problem}` environment
   - Include hints for each problem
   - Organise by difficulty level in subsections
@@ -162,7 +160,6 @@ The margins are configured using the geometry package in `main.tex`:
 ### Deep Learning Chapters Requirements
 - **All deep learning chapters (6-20) must include a "Real World Applications" section**
 - This section should:
-  - Use `\difficulty{beginner}` to make it accessible
   - Provide at least 3 concrete, practical examples
   - Focus on less technical, easy-to-understand explanations
   - Show how techniques solve real-world problems
@@ -171,7 +168,7 @@ The margins are configured using the geometry package in `main.tex`:
 ### Mathematical Content
 - Provide step-by-step derivations for complex concepts
 - Use appropriate mathematical notation
-- Include visual aids when helpful
+- Include visual aids (explanatory diagrams, plots, etc.) when helpful
 - Ensure mathematical accuracy
 
 ### Code Examples
