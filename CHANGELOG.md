@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Updated GitHub Copilot instruction policies with clear problem numbering guidance
+  - Added explicit documentation that problems are automatically numbered by LaTeX
+  - Clarified that problem numbering format is "Problem X.Y" (X = chapter, Y = sequential)
+  - Documented that problem counter is shared with theorems, definitions, and examples
+  - Added hint formatting requirement using `\textbf{Hint:}` style
+- Updated Gemini instruction policies with clear problem numbering guidance
+  - Added theorem-like environments section explaining shared counter system
+  - Included comprehensive problem environment pattern with full example
+  - Documented automatic numbering system for problems within chapters
+  - Clarified problem organisation by difficulty level (Easy/Medium/Hard subsections)
+
+### Technical Details
+- **Version**: 1.1.2 (Problem Numbering Instructions)
+- **Author**: GitHub Copilot
+- **Date**: 16 Oct 2025
+- **License**: CC BY 4.0
+- **Source**: `.github/copilot-instructions.md`, `.github/instructions/gemini.instructions.md`
+- **Dependencies**: No changes to LaTeX dependencies
+- **Instructions**: No build process changes required
+- **Notes**: These changes only affect instruction files for AI assistants; no changes to book content or LaTeX code
+- **References**: Related to problem environment defined in main.tex line 148
+- **Acknowledgements**: Issue requested clearer problem numbering policies
+- **Documentation**: Enhanced instruction clarity for both Copilot and Gemini assistants
+
+## [Unreleased - Previous Changes]
+
 ### Added
 - Enhanced Preface section in main.tex with four new key points:
   - Personal motivation: Started as study notes due to lack of suitable books

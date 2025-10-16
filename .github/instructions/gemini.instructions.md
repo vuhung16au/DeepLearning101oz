@@ -75,6 +75,13 @@ The margins are configured using the geometry package in `main.tex`:
 \usepackage{xcolor}            % Color support for difficulty levels
 ```
 
+### Theorem-Like Environments
+The book uses LaTeX's `\newtheorem` command to define numbered environments:
+- All theorem-like environments share the same counter per chapter
+- Definition: `\newtheorem{problem}[theorem]{Problem}`
+- Numbering format: "Environment X.Y" (X = chapter, Y = sequential number)
+- Environments include: theorem, lemma, proposition, corollary, definition, example, problem, remark, algorithm
+
 ### Build Dependencies
 - `pdflatex` - Primary LaTeX compiler
 - `biber` - Bibliography processing
@@ -144,8 +151,10 @@ make pdf      # Complete compilation process
 - **Each chapter must have a brief introduction at the start**: A 1-2 paragraph overview that introduces the chapter's topic and provides context
 - **Each chapter must have 15-20 Hands-On Exercises**: Practical problems categorised by difficulty (Easy/Medium/Hard) to reinforce learning
   - Use `\begin{problem}[Title]...\end{problem}` environment
-  - Include hints for each problem
-  - Organise by difficulty level in subsections
+  - Problems are automatically numbered by LaTeX (e.g., Problem 2.1, Problem 2.2)
+  - The numbering is shared with theorems, definitions, and examples within each chapter
+  - Include hints for each problem using `\textbf{Hint:}` formatting
+  - Organise by difficulty level in subsections (Easy, Medium, Hard)
 - **Each chapter must have a Key Takeaways section**: Use the boxed `keytakeaways` environment
   - Create a file named `chapters/chapXX-key-takeaways.tex`
   - Use `\begin{keytakeaways}...\end{keytakeaways}` with itemised key points
@@ -271,6 +280,47 @@ The \gls{technical-term} is a fundamental concept...
 \index{optimization!gradient descent}
 \index{applications!computer vision}
 \index{mathematics!linear algebra}
+```
+
+### Problem Environment Pattern
+```latex
+% Problems file: chapters/chapXX-problems.tex
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+
+\begin{problem}[Problem Title]
+Problem statement or question goes here.
+
+\textbf{Hint:} Helpful guidance for solving the problem.
+\end{problem}
+
+\begin{problem}[Another Problem]
+Second problem statement.
+
+\textbf{Hint:} Another hint.
+\end{problem}
+
+\subsection*{Medium}
+
+\begin{problem}[Intermediate Problem]
+More challenging problem statement.
+
+\textbf{Hint:} Hint for intermediate problem.
+\end{problem}
+
+\subsection*{Hard}
+
+\begin{problem}[Advanced Problem]
+Most challenging problem statement.
+
+\textbf{Hint:} Hint for advanced problem.
+\end{problem}
+
+% Note: Problems are automatically numbered as Problem X.1, X.2, X.3, etc.
+% where X is the chapter number. The counter is shared with theorems,
+% definitions, and examples within the chapter.
 ```
 
 ## Troubleshooting Guide

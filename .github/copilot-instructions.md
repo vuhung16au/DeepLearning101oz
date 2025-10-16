@@ -78,7 +78,9 @@ The margins are configured using the geometry package in `main.tex`:
 1. **Package Usage**: Use established packages (amsmath, hyperref, glossaries, makeidx)
 2. **Cross-references**: Use `\label{}` and `\ref{}` for internal references
 3. **Math**: Use proper mathematical notation with `\vect{}`, `\mat{}`, `\norm{}`
-4. **Theorems**: Use defined environments (theorem, definition, example, etc.)
+4. **Theorems**: Use defined environments (theorem, definition, example, problem, etc.)
+   - All theorem-like environments share the same counter per chapter
+   - Numbering format: "Environment X.Y" where X is chapter number, Y is sequential
 
 ### Content Structure
 ```latex
@@ -147,8 +149,10 @@ The margins are configured using the geometry package in `main.tex`:
 - **Each chapter must have a brief introduction at the start**: A 1-2 paragraph overview that introduces the chapter's topic and provides context
 - **Each chapter must have 15-20 Hands-On Exercises**: Practical problems categorised by difficulty (Easy/Medium/Hard) to reinforce learning
   - Use `\begin{problem}[Title]...\end{problem}` environment
-  - Include hints for each problem
-  - Organise by difficulty level in subsections
+  - Problems are automatically numbered by LaTeX (e.g., Problem 2.1, Problem 2.2)
+  - The numbering is shared with theorems, definitions, and examples within each chapter
+  - Include hints for each problem using `\textbf{Hint:}` formatting
+  - Organise by difficulty level in subsections (Easy, Medium, Hard)
 - **Each chapter must have a Key Takeaways section**: Use the boxed `keytakeaways` environment
   - Create a file named `chapters/chapXX-key-takeaways.tex`
   - Use `\begin{keytakeaways}...\end{keytakeaways}` with itemised key points
@@ -176,6 +180,21 @@ The margins are configured using the geometry package in `main.tex`:
 - Use clear, well-commented code
 - Provide expected outputs and explanations
 - Match difficulty level of surrounding content
+
+### Problem Formatting
+- **Environment**: Use `\begin{problem}[Title]...\end{problem}` for all exercises
+- **Numbering**: Problems are automatically numbered using the shared theorem counter
+  - Format: "Problem X.Y" where X is the chapter number and Y is the sequential number
+  - Example: Problem 2.1, Problem 2.2, Problem 2.3 (in Chapter 2)
+  - Numbering is shared with theorems, definitions, examples, and other theorem-like environments
+- **Structure**: Each problem should include:
+  - Optional title in square brackets: `\begin{problem}[Problem Title]`
+  - Problem statement or question
+  - Hint using `\textbf{Hint:}` followed by guidance
+- **Organisation**: Group problems by difficulty level using subsections:
+  - `\subsection*{Easy}` for beginner-level problems
+  - `\subsection*{Medium}` for intermediate problems
+  - `\subsection*{Hard}` for advanced problems
 
 ## Common Tasks
 
