@@ -146,8 +146,11 @@ make pdf      # Complete compilation process
   - Minimum: 4 exercises per chapter
   - Maximum: 10 exercises per chapter
   - Use `\begin{problem}[Title]...\end{problem}` environment
-  - Include hints for each problem
-  - Organise by difficulty level in subsections
+  - Problems are automatically numbered as "Problem X.Y" where X is the chapter number and Y is the sequential problem number
+  - Problem numbering uses the shared theorem counter, maintaining consistency with other numbered environments (theorems, definitions, examples)
+  - Each problem must have a descriptive title in square brackets: `\begin{problem}[Descriptive Title]`
+  - Include hints for each problem using `\textbf{Hint:}` format
+  - Organise by difficulty level in subsections (Easy/Medium/Hard)
 - **Each chapter must have a Key Takeaways section**: Use the boxed `keytakeaways` environment
   - Create a file named `chapters/chapXX-key-takeaways.tex`
   - Use `\begin{keytakeaways}...\end{keytakeaways}` with itemised key points
@@ -170,6 +173,25 @@ make pdf      # Complete compilation process
 - Create meaningful references: `\ref{sec:neural-networks}`
 - Ensure all references resolve correctly
 - Test compilation to verify reference integrity
+
+### Problem Numbering and Format
+- **Numbering System**: Problems use automatic numbering via the LaTeX `\newtheorem{problem}[theorem]{Problem}` environment
+  - Problems are numbered as "Problem X.Y" where X is the chapter number and Y is the sequential number
+  - The problem counter is shared with theorems, definitions, examples, and other theorem-like environments
+  - This ensures consistent cross-referencing throughout the book
+- **Problem Structure**:
+  ```latex
+  \begin{problem}[Descriptive Title]
+  Problem statement goes here. Provide clear instructions and context.
+  
+  \textbf{Hint:} Provide a helpful hint to guide problem-solving.
+  \end{problem}
+  ```
+- **Difficulty Organisation**:
+  - Problems are grouped under `\subsection*{Easy}`, `\subsection*{Medium}`, and `\subsection*{Hard}` headings
+  - Use unnumbered subsections (with asterisk) to avoid subsection numbering
+  - Distribute problems appropriately across difficulty levels
+- **Problem Titles**: Each problem must have a concise, descriptive title in square brackets that summarises the problem topic
 
 ## File Organization Patterns
 
@@ -211,6 +233,30 @@ chapters/
 2. **Hierarchical Structure**: Use `\index{main!subcategory}`
 3. **Comprehensive Coverage**: Include technical and conceptual topics
 4. **Test Generation**: Verify index appears in final PDF
+
+### Creating Problem Sets
+1. **Create Problems File**: `chapters/chapXX-problems.tex`
+2. **Section Header**:
+   ```latex
+   % Problems (Hands-On Exercises) for Chapter X: Chapter Title
+   
+   \section*{Problems}
+   \addcontentsline{toc}{section}{Problems}
+   ```
+3. **Organise by Difficulty**: Use unnumbered subsections for each difficulty level:
+   ```latex
+   \subsection*{Easy}
+   
+   \begin{problem}[Problem Title]
+   Problem statement with clear instructions.
+   
+   \textbf{Hint:} Helpful hint for solving the problem.
+   \end{problem}
+   ```
+4. **Difficulty Distribution**: Include problems for Easy, Medium, and Hard levels
+5. **Quantity**: Aim for 4-10 problems per chapter, distributed across difficulty levels
+6. **Integration**: Include problems file in chapter: `\input{chapters/chapXX-problems}`
+7. **Verification**: Test compilation to verify automatic problem numbering
 
 ## Quality Assurance
 
@@ -273,6 +319,44 @@ The \gls{technical-term} is a fundamental concept...
 \index{optimization!gradient descent}
 \index{applications!computer vision}
 \index{mathematics!linear algebra}
+```
+
+### Problem Set Template
+```latex
+% Problems (Hands-On Exercises) for Chapter X: Chapter Title
+
+\section*{Problems}
+\addcontentsline{toc}{section}{Problems}
+
+\subsection*{Easy}
+
+\begin{problem}[First Problem Title]
+Clear problem statement with specific instructions.
+
+\textbf{Hint:} A helpful hint that guides problem-solving without giving away the answer.
+\end{problem}
+
+\begin{problem}[Second Problem Title]
+Another problem at the easy difficulty level.
+
+\textbf{Hint:} Consider the basic concepts introduced in the chapter.
+\end{problem}
+
+\subsection*{Medium}
+
+\begin{problem}[Intermediate Problem]
+A more challenging problem requiring deeper understanding.
+
+\textbf{Hint:} Apply multiple concepts together or perform derivations.
+\end{problem}
+
+\subsection*{Hard}
+
+\begin{problem}[Advanced Problem]
+A challenging problem requiring synthesis and critical thinking.
+
+\textbf{Hint:} Consider edge cases or extend the theory presented in the chapter.
+\end{problem}
 ```
 
 ## Troubleshooting Guide

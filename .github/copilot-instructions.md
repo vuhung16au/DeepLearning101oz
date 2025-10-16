@@ -147,8 +147,11 @@ The margins are configured using the geometry package in `main.tex`:
 - **Each chapter must have a brief introduction at the start**: A 1-2 paragraph overview that introduces the chapter's topic and provides context
 - **Each chapter must have 15-20 Hands-On Exercises**: Practical problems categorised by difficulty (Easy/Medium/Hard) to reinforce learning
   - Use `\begin{problem}[Title]...\end{problem}` environment
-  - Include hints for each problem
-  - Organise by difficulty level in subsections
+  - Problems are automatically numbered as "Problem X.Y" where X is the chapter number and Y is the sequential problem number
+  - Problem numbering uses the shared theorem counter, maintaining consistency with other numbered environments (theorems, definitions, examples)
+  - Each problem must have a descriptive title in square brackets: `\begin{problem}[Descriptive Title]`
+  - Include hints for each problem using `\textbf{Hint:}` format
+  - Organise by difficulty level in subsections (Easy/Medium/Hard)
 - **Each chapter must have a Key Takeaways section**: Use the boxed `keytakeaways` environment
   - Create a file named `chapters/chapXX-key-takeaways.tex`
   - Use `\begin{keytakeaways}...\end{keytakeaways}` with itemised key points
@@ -177,6 +180,25 @@ The margins are configured using the geometry package in `main.tex`:
 - Provide expected outputs and explanations
 - Match difficulty level of surrounding content
 
+### Problem Numbering and Format
+- **Numbering System**: Problems use automatic numbering via the LaTeX `\newtheorem{problem}[theorem]{Problem}` environment
+  - Problems are numbered as "Problem X.Y" where X is the chapter number and Y is the sequential number
+  - The problem counter is shared with theorems, definitions, examples, and other theorem-like environments
+  - This ensures consistent cross-referencing throughout the book
+- **Problem Structure**:
+  ```latex
+  \begin{problem}[Descriptive Title]
+  Problem statement goes here. Provide clear instructions and context.
+  
+  \textbf{Hint:} Provide a helpful hint to guide problem-solving.
+  \end{problem}
+  ```
+- **Difficulty Organisation**:
+  - Problems are grouped under `\subsection*{Easy}`, `\subsection*{Medium}`, and `\subsection*{Hard}` headings
+  - Use unnumbered subsections (with asterisk) to avoid subsection numbering
+  - Distribute problems appropriately across difficulty levels
+- **Problem Titles**: Each problem must have a concise, descriptive title in square brackets that summarises the problem topic
+
 ## Common Tasks
 
 ### Adding New Content
@@ -198,6 +220,30 @@ The margins are configured using the geometry package in `main.tex`:
 2. Use hierarchical structure for related concepts
 3. Include both technical and conceptual topics
 4. Test compilation to verify index generation
+
+### Creating Problem Sets
+1. Create a problems file: `chapters/chapXX-problems.tex`
+2. Start with the section header:
+   ```latex
+   % Problems (Hands-On Exercises) for Chapter X: Chapter Title
+   
+   \section*{Problems}
+   \addcontentsline{toc}{section}{Problems}
+   ```
+3. Organise problems by difficulty level using unnumbered subsections:
+   ```latex
+   \subsection*{Easy}
+   
+   \begin{problem}[Problem Title]
+   Problem statement with clear instructions.
+   
+   \textbf{Hint:} Helpful hint for solving the problem.
+   \end{problem}
+   ```
+4. Include problems for each difficulty level (Easy, Medium, Hard)
+5. Aim for 15-20 problems per chapter, distributed across difficulty levels
+6. Include the problems file in the chapter file: `\input{chapters/chapXX-problems}`
+7. Test compilation to verify problem numbering is correct
 
 ## Changelog Management
 
