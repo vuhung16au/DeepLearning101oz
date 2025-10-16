@@ -142,9 +142,7 @@ make pdf      # Complete compilation process
 
 ### Chapter Structure Requirements
 - **Each chapter must have a brief introduction at the start**: A 1-2 paragraph overview that introduces the chapter's topic and provides context
-- **Each chapter must have 4-10 Hands-On Exercises**: Practical problems categorised by difficulty (Easy/Medium/Hard) to reinforce learning
-  - Minimum: 4 exercises per chapter
-  - Maximum: 10 exercises per chapter
+- **Each chapter must have 15-20 Hands-On Exercises**: Practical problems categorised by difficulty (Easy/Medium/Hard) to reinforce learning
   - Use `\begin{problem}[Title]...\end{problem}` environment
   - Include hints for each problem
   - Organise by difficulty level in subsections
