@@ -61,10 +61,11 @@ The margins are configured using the geometry package in `main.tex`:
 ### 2. Difficulty Levels
 - **Command**: Always use `\difficulty{level}` for sections
 - **Levels**: 
-  - `beginner` - Basic concepts, intuitive explanations
-  - `intermediate` - Technical details, some background assumed  
-  - `advanced` - Cutting-edge research, complex mathematics
-- **Visual**: Color-coded indicators (green/orange/red)
+  - `beginner` - Basic concepts, intuitive explanations (displays as 💫)
+  - `intermediate` - Technical details, some background assumed (displays as ⭐️)
+  - `advanced` - Cutting-edge research, complex mathematics (displays as 🌟)
+- **Visual**: Emoji indicators that appear next to section titles
+- **Implementation**: The `\difficulty{}` command automatically appends the appropriate emoji to the section title
 
 ### 3. LaTeX Structure
 - **Main File**: `main.tex` contains document structure and packages

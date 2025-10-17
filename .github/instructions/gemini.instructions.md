@@ -61,7 +61,7 @@ The margins are configured using the geometry package in `main.tex`:
 ### Advanced Features
 1. **Glossary Integration**: Automatic cross-referencing with `\gls{term}` command
 2. **Index Generation**: Hierarchical indexing with `\index{term!subterm}` syntax
-3. **Difficulty Levels**: Color-coded indicators using `\difficulty{beginner|intermediate|advanced}`
+3. **Difficulty Levels**: Emoji indicators using `\difficulty{beginner|intermediate|advanced}` (💫 Beginner, ⭐️ Intermediate, 🌟 Advanced)
 4. **Mathematical Notation**: Custom commands for vectors, matrices, norms
 
 ## LaTeX Package Dependencies
@@ -98,6 +98,11 @@ The book uses LaTeX's `\newtheorem` command to define numbered environments:
 
 % Content with appropriate complexity
 ```
+
+The `\difficulty{}` command automatically appends the appropriate emoji indicator to the section title:
+- `beginner` → 💫 (Basic concepts, intuitive explanations)
+- `intermediate` → ⭐️ (Technical details, some background assumed)
+- `advanced` → 🌟 (Cutting-edge research, complex mathematics)
 
 ### Glossary Usage Pattern
 ```latex
