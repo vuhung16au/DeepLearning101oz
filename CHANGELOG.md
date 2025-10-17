@@ -32,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Notes**: 
   - Implemented as reusable commands: `\difficultyBeginner`, `\difficultyIntermediate`, `\difficultyAdvanced`
   - No changes required to individual chapter files; all work automatically
-  - Cleaner, more maintainable code structure than previous color-coded text system
+  - Cleaner, more maintainable code structure than previous text-based label system
 - **References**: Issue requested emoji indicators for better visual accessibility
 - **Acknowledgements**: Original issue provided clear examples and requirements
 - **Glossary**: No glossary changes required
