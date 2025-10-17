@@ -151,21 +151,21 @@ Consider a small dataset of people:
 \begin{center}
 \begin{tabular}{|c|c|}
 \hline
-Height (inches) & Weight (lbs) \\
+Height (cm) & Weight (kg) \\
 \hline
-60 & 120 \\
-65 & 140 \\
-70 & 160 \\
-75 & 180 \\
+152 & 54 \\
+165 & 64 \\
+178 & 73 \\
+191 & 82 \\
 \hline
 \end{tabular}
 \end{center}
 
-The means are $\mu_X = 67.5$ and $\mu_Y = 150$. The covariance is:
+The means are $\mu_X = 171.5$ and $\mu_Y = 68.25$. The covariance is:
 \begin{align}
-\text{Cov}(X,Y) &= \frac{1}{4}\sum_{i=1}^{4}(x_i - 67.5)(y_i - 150) \\
-&= \frac{1}{4}[(-7.5)(-30) + (-2.5)(-10) + (2.5)(10) + (7.5)(30)] \\
-&= \frac{1}{4}[225 + 25 + 25 + 225] = \frac{500}{4} = 125
+\text{Cov}(X,Y) &= \frac{1}{4}\sum_{i=1}^{4}(x_i - 171.5)(y_i - 68.25) \\
+&= \frac{1}{4}[(-19.5)(-14.25) + (-6.5)(-4.25) + (6.5)(4.75) + (19.5)(13.75)] \\
+&= \frac{1}{4}[277.875 + 27.625 + 30.875 + 268.125] = \frac{604.5}{4} = 151.125
 \end{align}
 
 Positive covariance confirms that taller people tend to weigh more!
