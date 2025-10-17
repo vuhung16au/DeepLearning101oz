@@ -47,11 +47,28 @@
   \setmainfont{Times New Roman}
   \setsansfont{Arial}
   \setmonofont{Courier New}
-  % CJK fonts (choose commonly available macOS font)
-  \RequirePackage{xeCJK}
-  \setCJKmainfont{PingFang SC}
-  \setCJKsansfont{PingFang SC}
-  \setCJKmonofont{PingFang SC}
+  % Engine-specific CJK setup
+  \ifXeTeX
+    \RequirePackage{xeCJK}
+    \setCJKmainfont{PingFang SC}
+    \setCJKsansfont{PingFang SC}
+    \setCJKmonofont{PingFang SC}
+  \fi
+  \ifLuaTeX
+    % LuaLaTeX CJK support via luatexja with safe fallbacks
+    \usepackage{luatexja}
+    \usepackage{luatexja-fontspec}
+    \IfFontExistsTF{PingFang SC}{%
+      \setmainjfont{PingFang SC}
+      \setsansjfont{PingFang SC}
+      \setmonojfont{PingFang SC}
+    }{%
+      % TeX Live bundled Japanese fonts as fallback
+      \setmainjfont{HaranoAjiMincho}
+      \setsansjfont{HaranoAjiGothic}
+      \setmonojfont{HaranoAjiGothic}
+    }
+  \fi
 \fi
 \usepackage{microtype}
 % Language and date formatting
@@ -159,28 +176,47 @@
 \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
 \newcommand{\abs}[1]{\left|#1\right|}
 
-% --- Difficulty Level Commands ---
-% Define individual difficulty indicator commands for reusability
-\newcommand{\difficultyBeginner}{💫}
-\newcommand{\difficultyIntermediate}{⭐️}
-\newcommand{\difficultyAdvanced}{🌟}
-
-% Main difficulty command that appends the appropriate emoji indicator
-\newcommand{\difficulty}[1]{%
-    \ifstrequal{#1}{beginner}{%
-        ~\difficultyBeginner%
+% --- Emoji and Difficulty Level Commands ---
+% Provide a color emoji font and map common emoji code points.
+% Prefer Apple Color Emoji on macOS; fall back to Noto Color Emoji if available.
+\ifPDFTeX\else
+  \IfFontExistsTF{Apple Color Emoji}{%
+    \newfontfamily\emojifont{Apple Color Emoji}[Renderer=Harfbuzz,Scale=MatchUppercase]
+  }{%
+    \IfFontExistsTF{Noto Color Emoji}{%
+      \newfontfamily\emojifont{Noto Color Emoji}[Renderer=Harfbuzz,Scale=MatchUppercase]
     }{%
-        \ifstrequal{#1}{intermediate}{%
-            ~\difficultyIntermediate%
-        }{%
-            \ifstrequal{#1}{advanced}{%
-                ~\difficultyAdvanced%
-            }{%
-                \textbf{[#1]}%
-            }%
-        }%
-    }%
-}
+      % Last-resort monochrome fallback to Symbola
+      \newfontfamily\emojifont{Symbola}[Scale=MatchUppercase]
+    }}
+  \newcommand{\emoji}[1]{{\emojifont #1}}
+  % Handle variation selector U+FE0F (VS16) which often follows stars
+  \usepackage{newunicodechar}
+  \newunicodechar{️}{}
+  % Map specific emojis to the emoji font when typed inline
+  \newunicodechar{💫}{{\emojifont 💫}}
+  \newunicodechar{⭐}{{\emojifont ⭐}}
+  \newunicodechar{🌟}{{\emojifont 🌟}}
+\fi
+
+% Define individual difficulty indicator commands for reusability
+\newcommand{\difficultyBeginner}{\emoji{💫}}
+\newcommand{\difficultyIntermediate}{\emoji{⭐}}
+\newcommand{\difficultyAdvanced}{\emoji{🌟}}
+
+% Inline difficulty indicators with bookmark-safe fallbacks
+\newcommand{\difficultyInlineBeginner}{\texorpdfstring{\,\difficultyBeginner}{ [beginner] }}
+\newcommand{\difficultyInlineIntermediate}{\texorpdfstring{\,\difficultyIntermediate}{ [intermediate] }}
+\newcommand{\difficultyInlineAdvanced}{\texorpdfstring{\,\difficultyAdvanced}{ [advanced] }}
+\newcommand{\difficultyInlineOther}[1]{\texorpdfstring{\,\textbf{[#1]}}{ [#1] }}
+
+\newcommand{\difficultyInline}[1]{%
+  \ifstrequal{#1}{beginner}{\difficultyInlineBeginner}{%
+  \ifstrequal{#1}{intermediate}{\difficultyInlineIntermediate}{%
+  \ifstrequal{#1}{advanced}{\difficultyInlineAdvanced}{\difficultyInlineOther{#1}}}}}
+
+% Legacy \difficulty command used on its own line: make it a no-op now
+\newcommand{\difficulty}[1]{}
 
 % --- Title and Author Information ---
 \title{\textbf{Deep Learning 101}}

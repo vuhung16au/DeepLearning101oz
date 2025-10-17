@@ -61,7 +61,7 @@ The margins are configured using the geometry package in `main.tex`:
 ### Advanced Features
 1. **Glossary Integration**: Automatic cross-referencing with `\gls{term}` command
 2. **Index Generation**: Hierarchical indexing with `\index{term!subterm}` syntax
-3. **Difficulty Levels**: Emoji indicators using `\difficulty{beginner|intermediate|advanced}` (💫 Beginner, ⭐️ Intermediate, 🌟 Advanced)
+3. **Difficulty Levels**: Emoji indicators inline with headings using `\\difficultyInline{beginner|intermediate|advanced}` (💫 Beginner, ⭐ Intermediate, 🌟 Advanced)
 4. **Mathematical Notation**: Custom commands for vectors, matrices, norms
 
 ## LaTeX Package Dependencies
@@ -92,9 +92,8 @@ The book uses LaTeX's `\newtheorem` command to define numbered environments:
 
 ### Difficulty Level Implementation
 ```latex
-\section{Section Title}
+\section{Section Title \difficultyInline{beginner}} % or intermediate, advanced
 \label{sec:section-name}
-\difficulty{beginner}  % or intermediate, advanced
 
 % Content with appropriate complexity
 ```
@@ -171,7 +170,7 @@ make pdf      # Complete compilation process
 ### Deep Learning Chapters Requirements
 - **All deep learning chapters (6-20) must include a "Real World Applications" section**
 - This section should:
-  - Use `\difficulty{beginner}` to make it accessible
+  - Use inline beginner marker in its heading: `\difficultyInline{beginner}`
   - Provide at least 3 concrete, practical examples
   - Focus on less technical, easy-to-understand explanations
   - Show how techniques solve real-world problems
@@ -252,9 +251,8 @@ ls -la main.pdf
 ### Section Template
 ```latex
 % Chapter X, Section Y: Title
-\section{Section Title}
+\section{Section Title \difficultyInline{beginner|intermediate|advanced}}
 \label{sec:section-name}
-\difficulty{beginner|intermediate|advanced}
 
 % Introduction with glossary entries
 The \gls{technical-term} is a fundamental concept...

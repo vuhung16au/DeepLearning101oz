@@ -59,13 +59,15 @@ The margins are configured using the geometry package in `main.tex`:
 - **Build Process**: Glossary and index are automatically processed during compilation
 
 ### 2. Difficulty Levels
-- **Command**: Always use `\difficulty{level}` for sections
+- **Inline rule**: Difficulty markers (💫/⭐/🌟) MUST appear inline with the heading text, never on a new line.
+  - Example: `6.2 Activation Functions ⭐`
+- **Command**: Prefer `\\difficultyInline{level}` inside the section title; legacy `\\difficulty{level}` is deprecated.
 - **Levels**: 
   - `beginner` - Basic concepts, intuitive explanations (displays as 💫)
   - `intermediate` - Technical details, some background assumed (displays as ⭐️)
   - `advanced` - Cutting-edge research, complex mathematics (displays as 🌟)
-- **Visual**: Emoji indicators that appear next to section titles
-- **Implementation**: The `\difficulty{}` command automatically appends the appropriate emoji to the section title
+- **Visual**: Emoji indicators appear next to section titles on the same line
+- **Implementation**: The LaTeX preamble provides `\\difficultyInline{}` for headings; do not put difficulty on a separate line
 
 ### 3. LaTeX Structure
 - **Main File**: `main.tex` contains document structure and packages
@@ -85,9 +87,8 @@ The margins are configured using the geometry package in `main.tex`:
 
 ### Content Structure
 ```latex
-\section{Section Title}
+\section{Section Title \difficultyInline{beginner|intermediate|advanced}}
 \label{sec:section-name}
-\difficulty{beginner|intermediate|advanced}
 
 % Content with glossary entries
 \gls{neural-network} and \gls{backpropagation} are key concepts.
@@ -295,7 +296,7 @@ make pdf
 
 ### For Contributors
 - Follow difficulty level guidelines in `CONTRIBUTING.md`
-- Use appropriate `\difficulty{}` indicators
+- Use appropriate inline difficulty indicators in headings
 - Add glossary entries for technical terms
 - Include relevant index entries
 - Test compilation before submitting
