@@ -8,26 +8,28 @@ When contributing content to this book, please indicate the appropriate difficul
 
 ### Difficulty Levels
 
-- **Beginner** (`\difficulty{beginner}`): Content suitable for readers with little to no background in machine learning or deep learning. Includes basic concepts, intuitive explanations, and foundational mathematics.
+- **Beginner** (`\difficulty{beginner}`): Content suitable for readers with little to no background in machine learning or deep learning. Includes basic concepts, intuitive explanations, and foundational mathematics. Displays as 💫 next to the section title.
 
-- **Intermediate** (`\difficulty{intermediate}`): Content for readers with some background in machine learning or mathematics. Assumes familiarity with basic concepts and includes more technical details.
+- **Intermediate** (`\difficulty{intermediate}`): Content for readers with some background in machine learning or mathematics. Assumes familiarity with basic concepts and includes more technical details. Displays as ⭐️ next to the section title.
 
-- **Advanced** (`\difficulty{advanced}`): Content for readers with strong mathematical and machine learning backgrounds. Includes cutting-edge research, complex mathematical derivations, and specialized topics.
+- **Advanced** (`\difficulty{advanced}`): Content for readers with strong mathematical and machine learning backgrounds. Includes cutting-edge research, complex mathematical derivations, and specialized topics. Displays as 🌟 next to the section title.
 
 ### Usage Examples
+
+The `\difficulty{}` command automatically adds an emoji indicator next to the section title:
 
 ```latex
 \section{Introduction to Neural Networks}
 \difficulty{beginner}
-% Content for beginners...
+% Section title will display as "Introduction to Neural Networks 💫"
 
 \section{Backpropagation Algorithm}
 \difficulty{intermediate}
-% Content for intermediate readers...
+% Section title will display as "Backpropagation Algorithm ⭐️"
 
 \section{Advanced Optimization Techniques}
 \difficulty{advanced}
-% Content for advanced readers...
+% Section title will display as "Advanced Optimization Techniques 🌟"
 ```
 
 ## Content Guidelines

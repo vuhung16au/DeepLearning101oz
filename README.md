@@ -161,6 +161,20 @@ convert images/DeepLearning101-cover.png -resize 2079x2953! images/DeepLearning1
 convert images/DeepLearning101-cover.png -resize 1800x2700! images/DeepLearning101-cover-trade.png
 ```
 
+## Difficulty Level Indicators
+
+The book uses visual emoji indicators to denote the difficulty level of each section, making it easy for readers to gauge the complexity at a glance:
+
+- 💫 **Beginner**: Basic concepts with intuitive explanations, minimal prerequisites
+- ⭐️ **Intermediate**: Technical details with moderate mathematical background expected
+- 🌟 **Advanced**: Cutting-edge research topics with complex mathematics
+
+These indicators appear next to section titles throughout the book. For example:
+- "7.1 Parameter Norm Penalties ⭐️" indicates an intermediate-level section
+- "20.3 Normalizing Flows 🌟" indicates an advanced-level section
+
+The difficulty system is implemented using the `\difficulty{}` LaTeX command, which automatically appends the appropriate emoji to section titles based on the specified level (beginner, intermediate, or advanced).
+
 ## Current Status
 
 **Completed:**
@@ -190,7 +204,7 @@ convert images/DeepLearning101-cover.png -resize 1800x2700! images/DeepLearning1
 - ✅ Extended bibliography with modern references
 - ✅ Glossary with technical terms and definitions
 - ✅ Comprehensive subject index
-- ✅ Difficulty level indicators (Beginner/Intermediate/Advanced)
+- ✅ Difficulty level indicators (💫 Beginner / ⭐️ Intermediate / 🌟 Advanced)
 - ✅ Contributing guidelines with difficulty level policies
 - ✅ AI assistant instruction policies (Copilot & Gemini)
 

@@ -160,15 +160,21 @@
 \newcommand{\abs}[1]{\left|#1\right|}
 
 % --- Difficulty Level Commands ---
+% Define individual difficulty indicator commands for reusability
+\newcommand{\difficultyBeginner}{💫}
+\newcommand{\difficultyIntermediate}{⭐️}
+\newcommand{\difficultyAdvanced}{🌟}
+
+% Main difficulty command that appends the appropriate emoji indicator
 \newcommand{\difficulty}[1]{%
     \ifstrequal{#1}{beginner}{%
-        \textcolor{bookpurple}{\textbf{[Beginner]}}%
+        ~\difficultyBeginner%
     }{%
         \ifstrequal{#1}{intermediate}{%
-            \textcolor{bookpurple!70!bookblack}{\textbf{[Intermediate]}}%
+            ~\difficultyIntermediate%
         }{%
             \ifstrequal{#1}{advanced}{%
-                \textcolor{bookred}{\textbf{[Advanced]}}%
+                ~\difficultyAdvanced%
             }{%
                 \textbf{[#1]}%
             }%

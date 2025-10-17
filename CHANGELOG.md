@@ -8,6 +8,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- Updated difficulty indicators from text-based to emoji-based visual indicators
+  - Beginner sections now display 💫 emoji instead of [Beginner] text
+  - Intermediate sections now display ⭐️ emoji instead of [Intermediate] text
+  - Advanced sections now display 🌟 emoji instead of [Advanced] text
+  - Refactored `\difficulty{}` LaTeX command to use separate emoji commands for maintainability
+  - Emoji indicators appear automatically next to section titles (e.g., "7.1 Parameter Norm Penalties ⭐️")
+- Updated all documentation files to reflect new emoji-based difficulty system
+  - README.md: Added new "Difficulty Level Indicators" section with detailed explanation
+  - CONTRIBUTING.md: Updated difficulty level guidelines and usage examples
+  - .github/copilot-instructions.md: Updated with emoji mappings and implementation notes
+  - .github/instructions/gemini.instructions.md: Updated difficulty level sections with emojis
+
+### Technical Details
+- **Version**: 1.2.0 (Emoji Difficulty Indicators)
+- **Author**: GitHub Copilot
+- **Date**: 17 Oct 2025
+- **License**: CC BY 4.0
+- **Source**: `main.tex` (lines 162-183), `README.md`, `CONTRIBUTING.md`, `.github/copilot-instructions.md`, `.github/instructions/gemini.instructions.md`
+- **Destination**: All 137 difficulty indicators across 20 chapters automatically updated
+- **Dependencies**: No new dependencies required; uses native Unicode emoji support in XeLaTeX/LuaLaTeX
+- **Instructions**: No changes to build process; existing `make pdf` commands work unchanged
+- **Notes**: 
+  - Implemented as reusable commands: `\difficultyBeginner`, `\difficultyIntermediate`, `\difficultyAdvanced`
+  - No changes required to individual chapter files; all work automatically
+  - Cleaner, more maintainable code structure than previous text-based label system
+- **References**: Issue requested emoji indicators for better visual accessibility
+- **Acknowledgements**: Original issue provided clear examples and requirements
+- **Glossary**: No glossary changes required
+- **Index**: No index changes required
+- **Table of Contents**: Section titles now display with emoji indicators
+- **Bibliography**: No bibliography changes required
+
+## [Previous - Problem Numbering Instructions]
+
+### Changed
 - Updated GitHub Copilot instruction policies with clear problem numbering guidance
   - Added explicit documentation that problems are automatically numbered by LaTeX
   - Clarified that problem numbering format is "Problem X.Y" (X = chapter, Y = sequential)
