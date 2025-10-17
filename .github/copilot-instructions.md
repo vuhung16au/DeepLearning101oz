@@ -19,6 +19,15 @@ This is a comprehensive LaTeX book on Deep Learning with advanced features inclu
 - **Date Format**: Use English date format: `14 Oct 2025` (day-month-year with abbreviated month)
 - **LaTeX Configuration**: The document uses `\usepackage[en-GB]{datetime2}` and `\DTMsetstyle{en-GB}` for consistent date formatting
 
+### Units of Measurement
+- **Use metric units** for all measurements in examples and content (not imperial units)
+- **Length/Height**: Use centimetres (cm) or metres (m), not feet or inches
+  - Example: "170 cm, 170.5 cm, 170.52 cm" not "5.7 feet, 5.73 feet, 5.732 feet"
+- **Temperature**: Use degrees Celsius (°C), not Fahrenheit (°F)
+  - Example: "22.3°C, 22.34°C, 22.341°C" not "72.3°F, 72.34°F, 72.341°F"
+- **Weight/Mass**: Use kilograms (kg) or grams (g), not pounds or ounces
+- **Exception**: Metaphorical or idiomatic uses of imperial terms (e.g., "feel the slope under your feet") are acceptable as they are not measurements
+
 ## Paper Margin Policy
 
 The book uses standardised margins for both A4 and A5 paper sizes to ensure optimal readability and binding:
