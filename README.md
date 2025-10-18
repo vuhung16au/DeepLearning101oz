@@ -123,11 +123,11 @@ Notes:
 ### Requirements
 
 - LaTeX distribution (TeX Live, MiKTeX, or similar)
-- pdflatex
+- LuaLaTeX (default engine with native Unicode support)
 - biber (for bibliography)
 - makeglossaries (for glossary)
 - makeindex (for index)
-- Unicode and CJK support (XeLaTeX/LuaLaTeX recommended)
+- Unicode and CJK font support (automatically configured)
 
 ### Cover Images
 
