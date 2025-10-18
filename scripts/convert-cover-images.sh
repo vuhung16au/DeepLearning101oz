@@ -5,6 +5,7 @@ set -euo pipefail
 # Convert base cover image to multiple target sizes using ImageMagick.
 # Requirements: ImageMagick 7+ (magick) or 6 (convert) available in PATH.
 
+
 ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && cd .. && pwd)"
 IMG_DIR="$ROOT_DIR/images"
 BASE_NAME="DeepLearning101-cover.png"

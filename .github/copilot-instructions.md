@@ -1,5 +1,6 @@
 # GitHub Copilot Instructions for Deep Learning 101
 
+
 ## Project Overview
 This is a comprehensive LaTeX book on Deep Learning with advanced features including glossary, index, and difficulty levels. The book is structured as a complete educational resource with 20 chapters covering fundamentals to advanced research topics.
 

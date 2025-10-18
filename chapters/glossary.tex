@@ -515,3 +515,180 @@
     name={computational graph},
     description={A directed graph representing the flow of computations in a neural network, used for automatic differentiation.}
 }
+
+% Advanced Mathematical Terms
+\newglossaryentry{spectral-decomposition}{
+    name={spectral decomposition},
+    description={The factorization of a matrix into eigenvalues and eigenvectors, also known as eigendecomposition.}
+}
+
+\newglossaryentry{eigendecomposition}{
+    name={eigendecomposition},
+    description={The decomposition of a matrix into its eigenvalues and eigenvectors, fundamental in linear algebra.}
+}
+
+\newglossaryentry{singular-value-decomposition}{
+    name={singular value decomposition},
+    description={A factorization of a matrix into three matrices: U, Σ, and V, where Σ contains the singular values.}
+}
+
+\newglossaryentry{manifold}{
+    name={manifold},
+    description={A mathematical space that locally resembles Euclidean space, important in representation learning.}
+}
+
+\newglossaryentry{kl-divergence}{
+    name={KL divergence},
+    description={Kullback-Leibler divergence, a measure of difference between two probability distributions.}
+}
+
+\newglossaryentry{mutual-information}{
+    name={mutual information},
+    description={A measure of the mutual dependence between two random variables, used in information theory.}
+}
+
+\newglossaryentry{entropy}{
+    name={entropy},
+    description={A measure of uncertainty or information content in a probability distribution.}
+}
+
+\newglossaryentry{cross-entropy}{
+    name={cross-entropy},
+    description={A measure of the difference between two probability distributions, commonly used as a loss function.}
+}
+
+% Optimization Terms
+\newglossaryentry{nesterov-momentum}{
+    name={Nesterov momentum},
+    description={An improved version of momentum that looks ahead to the gradient at the predicted position.}
+}
+
+\newglossaryentry{adamw}{
+    name={AdamW},
+    description={A variant of Adam that decouples weight decay from gradient updates, often providing better generalization.}
+}
+
+\newglossaryentry{nadam}{
+    name={Nadam},
+    description={Nesterov-accelerated Adam, combining Nesterov momentum with Adam's adaptive learning rates.}
+}
+
+\newglossaryentry{cosine-annealing}{
+    name={cosine annealing},
+    description={A learning rate schedule that follows a cosine curve, often used with warmup for transformer training.}
+}
+
+\newglossaryentry{gradient-clipping}{
+    name={gradient clipping},
+    description={A technique to prevent exploding gradients by capping gradient magnitudes during training.}
+}
+
+% Advanced Neural Network Terms
+\newglossaryentry{residual-connection}{
+    name={residual connection},
+    description={A skip connection that adds the input to the output of a layer, enabling training of very deep networks.}
+}
+
+\newglossaryentry{attention-mechanism-advanced}{
+    name={attention mechanism (advanced)},
+    description={A mechanism that allows models to focus on different parts of the input sequence when making predictions.}
+}
+
+\newglossaryentry{transformer-architecture}{
+    name={transformer architecture},
+    description={A neural network architecture based entirely on attention mechanisms, without recurrent or convolutional layers.}
+}
+
+\newglossaryentry{self-attention}{
+    name={self-attention},
+    description={An attention mechanism where the query, key, and value all come from the same sequence.}
+}
+
+\newglossaryentry{multi-head-attention}{
+    name={multi-head attention},
+    description={An attention mechanism that runs multiple attention operations in parallel and concatenates the results.}
+}
+
+\newglossaryentry{positional-encoding}{
+    name={positional encoding},
+    description={A technique to inject information about the position of tokens in a sequence into transformer models.}
+}
+
+% Generative Model Terms
+\newglossaryentry{normalizing-flow}{
+    name={normalizing flow},
+    description={A generative model that learns invertible transformations to map between simple and complex distributions.}
+}
+
+\newglossaryentry{diffusion-model}{
+    name={diffusion model},
+    description={A generative model that learns to reverse a noise corruption process to generate new samples.}
+}
+
+\newglossaryentry{score-function}{
+    name={score function},
+    description={The gradient of the log-probability density function, used in score-based generative models.}
+}
+
+\newglossaryentry{energy-based-model}{
+    name={energy-based model},
+    description={A generative model that defines an energy function over the data space rather than a probability distribution.}
+}
+
+% Advanced Regularization Terms
+\newglossaryentry{spectral-normalization}{
+    name={spectral normalization},
+    description={A regularization technique that constrains the spectral norm of weight matrices to stabilize training.}
+}
+
+\newglossaryentry{weight-clipping}{
+    name={weight clipping},
+    description={A regularization technique that constrains the magnitude of weights to prevent them from becoming too large.}
+}
+
+\newglossaryentry{gradient-penalty}{
+    name={gradient penalty},
+    description={A regularization term added to the loss function to enforce Lipschitz constraints, commonly used in GANs.}
+}
+
+% Information Theory Terms
+\newglossaryentry{information-gain-advanced}{
+    name={information gain (advanced)},
+    description={The reduction in entropy achieved by observing a feature, used in decision trees and feature selection.}
+}
+
+\newglossaryentry{conditional-entropy}{
+    name={conditional entropy},
+    description={The entropy of a random variable given the value of another random variable.}
+}
+
+\newglossaryentry{joint-entropy}{
+    name={joint entropy},
+    description={The entropy of the joint distribution of two or more random variables.}
+}
+
+% Advanced Optimization Terms
+\newglossaryentry{natural-gradient}{
+    name={natural gradient},
+    description={A gradient descent method that accounts for the geometry of the parameter space using the Fisher information matrix.}
+}
+
+\newglossaryentry{second-order-optimization}{
+    name={second-order optimization},
+    description={Optimization methods that use second-order derivatives (Hessian) to improve convergence.}
+}
+
+\newglossaryentry{quasi-newton}{
+    name={quasi-Newton methods},
+    description={Optimization methods that approximate the Hessian matrix to achieve faster convergence than first-order methods.}
+}
+
+\newglossaryentry{bfgs}{
+    name={BFGS},
+    description={Broyden-Fletcher-Goldfarb-Shanno algorithm, a quasi-Newton method for unconstrained optimization.}
+}
+
+\newglossaryentry{l-bfgs}{
+    name={L-BFGS},
+    description={Limited-memory BFGS, a memory-efficient version of BFGS suitable for large-scale optimization.}
+}
