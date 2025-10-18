@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- Updated Requirements section in README.md to reflect current build system
+  - Replaced `pdflatex` with `LuaLaTeX` as the default engine
+  - Updated description to reflect LuaLaTeX as the primary engine with native Unicode support
+  - Simplified CJK support description to "automatically configured" since main.tex has comprehensive engine detection
 - Updated difficulty indicators from text-based to emoji-based visual indicators
   - Beginner sections now display 💫 emoji instead of [Beginner] text
   - Intermediate sections now display ⭐️ emoji instead of [Intermediate] text
@@ -21,6 +25,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - .github/instructions/gemini.instructions.md: Updated difficulty level sections with emojis
 
 ### Technical Details
+- **Version**: 1.2.1 (Requirements Update)
+- **Author**: AI Assistant
+- **Date**: 17 Oct 2025
+- **License**: CC BY 4.0
+- **Source**: `README.md` (Requirements section)
+- **Destination**: Updated documentation for build requirements
+- **Dependencies**: No changes to actual dependencies; documentation update only
+- **Instructions**: No changes to build process; existing `make pdf` commands work unchanged
+- **Notes**: 
+  - Documentation now accurately reflects that LuaLaTeX is the default engine (not pdflatex)
+  - Makefile clearly shows `LATEX ?= lualatex` as the default
+  - Unicode and CJK support is automatically configured through engine detection in main.tex
+  - Users now have correct information about what they need to build the book
+- **References**: No bibliography changes required
+- **Acknowledgements**: No changes to acknowledgements
+- **Glossary**: No glossary changes required
+- **Index**: No index changes required
+- **Table of Contents**: No structural changes
+- **Bibliography**: No bibliography changes required
+
+### Technical Details (Previous - Emoji Difficulty Indicators)
 - **Version**: 1.2.0 (Emoji Difficulty Indicators)
 - **Author**: GitHub Copilot
 - **Date**: 17 Oct 2025
