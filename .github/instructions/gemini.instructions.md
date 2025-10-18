@@ -1,5 +1,6 @@
 # Gemini Instructions for Deep Learning 101
 
+
 ## Project Context
 Deep Learning 101 is a comprehensive LaTeX educational book with advanced features including automated glossary, subject index, and difficulty level indicators. The project uses a sophisticated build system with multiple compilation passes.
 
